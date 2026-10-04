@@ -5,8 +5,10 @@ Pick a player and a scheduled game, ask plain-English questions, and get a full 
 receiving yards and receptions. Each forecast comes with milestone probabilities (25, 50, 75, 100, 125, 150 yards),
 uncertainty, an evidence-based explanation, and an honest record of how accurate comparable forecasts have been.
 
-There are no sportsbook integrations, betting lines, wager recommendations, stake sizing or bet placement.
-No API key is required, and no language model is used: every number comes from fitted models and simulation.
+The research dashboard uses no betting lines. A separate page, the **Receiving Line Checker** (below), scores
+pick'em lines that *you* supply from a screenshot. Nothing connects to PrizePicks, Underdog or Sleeper (no
+scraping, no account access, no bet placement). No API key is required; every probability comes from fitted
+models and simulation, never from a language model.
 
 ## Quick start (exact commands)
 
@@ -44,8 +46,37 @@ python -m nfl_agent.cli build --refresh      # re-download completed seasons too
 python -m nfl_agent.cli inventory            # regenerate docs/DATA_INVENTORY.md
 python -m nfl_agent.cli forecast --player "Ja'Marr Chase" --game 2026_05_CIN_MIA   # prints + journals
 python -m nfl_agent.cli record-results       # attach actual results to journal forecasts
-python -m pytest                             # 55 tests, ~15 s, no network needed
+python -m nfl_agent.cli slate                # export curves for the Receiving Line Checker page
+python -m pytest                             # 60 tests, ~40 s, no network needed
 ```
+
+## Receiving Line Checker (screenshot → scored picks)
+
+Live page: <https://claude.ai/artifact/AdVscj6DYUebaAxU9T3Q9W> (private to the owner until shared from its Share menu).
+
+1. Upload, drop or paste a screenshot from PrizePicks, Underdog or Sleeper, then press **Read lines**. Claude reads
+   the player names, stats and lines from the image on your own Claude account; it does not produce any
+   probabilities. You can also type lines by hand.
+2. Each WR/TE **receiving yards** or **receptions** line gets the model's chance of More and Less, a range
+   (how much that chance moves when the player's history is resampled), the workload baseline's chance, and an
+   evidence level. Other stats (rushing, passing, fantasy score, combos, first-half props) are listed as not covered.
+3. **Best entry** combines the most likely picks (2–6, at most one per player, optionally one per game) into the
+   chance that every pick hits. Enter your app's payout to compare that chance with break-even; when the edge is
+   smaller than the model's typical error the page says "too close to call".
+4. **Track record** shows how often forecasts in each probability range came true in the held-out 2025 season.
+
+Limits: the model was never tested against pick'em lines; forecasts assume the player plays; combined chances
+treat picks as independent; QB changes, injuries and weather are not inputs.
+
+**Refreshing the data** (the page carries a snapshot; it flags forecasts that miss a team's earlier game):
+
+```bash
+python -m nfl_agent.cli build     # pull the latest nflverse stats (nightly after game days)
+python -m nfl_agent.cli slate     # ~9 min: curves for every WR/TE kicking off in the next 9 days
+```
+
+Then republish `app/linechecker/index.html` with `data/processed/linechecker/slate.json` as `slate.json`
+(ask Claude Code to republish the Receiving Line Checker).
 
 ## What the dashboard does
 
@@ -89,8 +120,10 @@ nfl_agent/
   explain/narrative.py   plain-English explanations from computed numbers
   agent/router.py        question -> computed answer
   forecast/service.py    forecast assembly, probability ranges, journal save / results
+  forecast/slate.py      probability curves for upcoming games (Receiving Line Checker data)
   cli.py
 app/streamlit_app.py     dashboard (UI only)
+app/linechecker/         Receiving Line Checker page (published as a claude.ai artifact)
 tests/                   pytest suite (joins, leakage, simulation, journal, imports, metrics, router)
 docs/                    METHODOLOGY.md, DATA_DICTIONARY.md, DATA_INVENTORY.md, EVALUATION.md
 data/                    local cache, processed tables, SQLite (git-ignored)

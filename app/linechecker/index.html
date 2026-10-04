@@ -1,0 +1,722 @@
+<title>Receiving Line Checker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a scorer's sheet. Header strip, then the lines you are checking beside the entry builder
+   and the model's track record; one column on phones. */
+:root {
+  --bg: #f3f5ef;
+  --surface: #ffffff;
+  --ink: #15201a;
+  --muted: #5a675e;
+  --line: #dbe1d5;
+  --track: #e6ebe2;
+  --accent: #1d6a45;
+  --accent-ink: #ffffff;
+  --accent-soft: #e2f0e7;
+  --warn: #8a5300;
+  --warn-bg: #fbf0dc;
+  --bad: #b32e2e;
+  --bad-bg: #fae6e3;
+  --f-display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-num: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1410; --surface: #151d17; --ink: #e6ede7; --muted: #9ba99f; --line: #26312a; --track: #223027;
+    --accent: #4fbe86; --accent-ink: #06130c; --accent-soft: #15301f; --warn: #f0b552; --warn-bg: #2b2213;
+    --bad: #f28b84; --bad-bg: #2d1715; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1410; --surface: #151d17; --ink: #e6ede7; --muted: #9ba99f; --line: #26312a; --track: #223027;
+  --accent: #4fbe86; --accent-ink: #06130c; --accent-soft: #15301f; --warn: #f0b552; --warn-bg: #2b2213;
+  --bad: #f28b84; --bad-bg: #2d1715; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 40px; display: grid; gap: 20px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 800; letter-spacing: 0.01em; line-height: 1.05; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2rem, 6vw, 2.9rem); text-transform: uppercase; }
+h2 { font-size: 1.45rem; text-transform: uppercase; }
+h3 { font-size: 1.15rem; }
+p { margin: 0; }
+.num { font-family: var(--f-num); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.small { font-size: 0.85rem; }
+.label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+/* header */
+.top { display: grid; gap: 10px; padding-bottom: 16px; border-bottom: 3px solid var(--ink); position: relative; }
+.top::after { /* yard-line hash marks */
+  content: ""; position: absolute; left: 0; right: 0; bottom: -11px; height: 8px;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 22px);
+}
+.meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.88rem; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 9px; border-radius: 999px; font-size: 0.78rem; font-weight: 600;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink); white-space: nowrap; }
+.chip.good { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+.chip.warn { background: var(--warn-bg); border-color: transparent; color: var(--warn); }
+.chip.bad { background: var(--bad-bg); border-color: transparent; color: var(--bad); }
+
+.grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.col { display: grid; gap: 16px; min-width: 0; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: grid; gap: 12px; min-width: 0; }
+
+/* add lines */
+.add { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 640px) { .add { grid-template-columns: minmax(0, 1fr); } }
+.drop { border: 2px dashed var(--line); border-radius: var(--r); padding: 18px 14px; display: grid; gap: 8px; justify-items: center; text-align: center;
+  cursor: pointer; transition: border-color .15s, background .15s; }
+.drop:hover, .drop.over { border-color: var(--accent); background: var(--accent-soft); }
+.drop:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.drop { position: relative; }
+.drop img { max-height: 140px; border-radius: 6px; border: 1px solid var(--line); }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+label.f { display: grid; gap: 4px; font-size: 0.82rem; font-weight: 600; color: var(--muted); min-width: 0; }
+input, select, button { font: inherit; color: inherit; }
+input[type="text"], input[type="number"], input[type="search"], select {
+  background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; min-width: 0; width: 100%; }
+input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.form { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 8px; align-items: end; }
+.form .wide { grid-column: 1 / -1; }
+.btn { border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); border-radius: 8px; padding: 8px 14px; font-weight: 700; cursor: pointer; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn.quiet { background: transparent; border-color: var(--line); color: var(--ink); font-weight: 600; }
+.status { font-size: 0.88rem; min-height: 1.2em; }
+.status.err { color: var(--bad); }
+
+/* pick cards */
+.board { display: grid; gap: 10px; }
+.pick { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; display: grid; gap: 8px; min-width: 0; }
+.pick.ex { border-style: dashed; }
+.pick-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: start; }
+.who { display: grid; gap: 1px; min-width: 0; }
+.who b { font-size: 1.02rem; overflow-wrap: anywhere; }
+.lineval { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.lineval input { width: 5.6em; padding: 4px 6px; font-family: var(--f-num); }
+.lineval select { width: auto; padding: 4px 6px; }
+.x { border: 0; background: transparent; color: var(--muted); font-size: 1.3rem; line-height: 1; padding: 2px 6px; cursor: pointer; border-radius: 6px; }
+.x:hover { color: var(--ink); background: var(--track); }
+.verdict { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: center; }
+.big { font-family: var(--f-num); font-weight: 600; font-size: 1.55rem; line-height: 1; }
+.side { font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .02em; }
+.meter { position: relative; height: 10px; background: var(--track); border-radius: 4px; overflow: hidden; }
+.meter > span { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: 4px; }
+.meter > i { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--ink); left: 50%; opacity: .55; }
+.meter-legend { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.85rem; color: var(--muted); }
+.facts b { color: var(--ink); font-weight: 600; }
+details summary { cursor: pointer; font-size: 0.85rem; color: var(--muted); }
+details ul { margin: 6px 0 0; padding-left: 18px; font-size: 0.85rem; }
+.empty { border: 1px dashed var(--line); border-radius: var(--r); padding: 18px; text-align: center; color: var(--muted); }
+.note-ex { background: var(--warn-bg); color: var(--warn); border-radius: 8px; padding: 8px 12px; font-size: 0.88rem; }
+.unmatched { display: grid; gap: 8px; }
+.um { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto; gap: 8px; align-items: center; font-size: 0.9rem; }
+@media (max-width: 480px) { .um { grid-template-columns: minmax(0, 1fr) auto; } .um select { grid-column: 1 / -1; } }
+
+/* entry builder */
+.entry-picks { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.entry-picks li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; font-size: 0.92rem; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.entry-picks li:last-child { border-bottom: 0; }
+.hero { display: grid; gap: 2px; }
+.hero .big { font-size: 2.3rem; }
+.be { border-radius: 8px; padding: 8px 12px; font-size: 0.9rem; display: grid; gap: 2px; }
+.be.good { background: var(--accent-soft); color: var(--accent); }
+.be.bad { background: var(--bad-bg); color: var(--bad); }
+.be.warn { background: var(--warn-bg); color: var(--warn); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { border: 0; background: transparent; padding: 6px 11px; cursor: pointer; font-family: var(--f-num); font-weight: 600; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.check { display: inline-flex; gap: 6px; align-items: center; font-size: 0.88rem; }
+
+/* track record table */
+.tbl-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.86rem; }
+th, td { text-align: right; padding: 5px 6px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { font-size: 0.72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+td.hl { font-weight: 700; color: var(--accent); }
+
+footer { display: grid; gap: 6px; font-size: 0.84rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="label">NFL pick'em · receiving props</span>
+    <h1>Receiving Line Checker</h1>
+    <p class="muted" style="max-width: 62ch">Upload a screenshot from PrizePicks, Underdog or Sleeper. Each receiving line is
+      scored with our forecasting model, and the most likely picks are combined into an entry.</p>
+    <div class="meta" id="meta"><span>Loading model data…</span></div>
+    <div class="chips">
+      <span class="chip">Wide receivers &amp; tight ends</span>
+      <span class="chip">Receiving yards &amp; receptions only</span>
+      <span class="chip warn">Estimates, not guarantees</span>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="col">
+      <section class="panel" aria-labelledby="add-h">
+        <h2 id="add-h">Add lines</h2>
+        <div class="add">
+          <div style="display:grid; gap:8px; min-width:0">
+            <label class="drop" id="drop" for="file">
+              <span class="label">Screenshot</span>
+              <img id="thumb" alt="Selected screenshot" hidden>
+              <span id="dropText"><b>Choose or drop a screenshot</b><br><span class="small muted">You can also paste one</span></span>
+              <input type="file" id="file" class="sr" accept="image/png,image/jpeg,image/webp,image/gif">
+            </label>
+            <div class="row">
+              <button class="btn" id="readBtn" disabled>Read lines</button>
+              <button class="btn quiet" id="stopBtn" hidden>Stop</button>
+            </div>
+            <p class="status" id="readStatus" role="status"></p>
+          </div>
+          <form id="manual" style="display:grid; gap:8px; align-content:start; min-width:0">
+            <span class="label">Or type a line</span>
+            <div class="form">
+              <label class="f wide" for="mName">Player
+                <input type="search" id="mName" list="names" placeholder="e.g. CeeDee Lamb" autocomplete="off">
+              </label>
+              <label class="f" for="mStat">Stat
+                <select id="mStat"><option value="yds">Receiving yards</option><option value="rec">Receptions</option></select>
+              </label>
+              <label class="f" for="mLine">Line
+                <input type="number" id="mLine" step="0.5" min="0" inputmode="decimal" placeholder="64.5">
+              </label>
+            </div>
+            <div class="row"><button class="btn ghost" type="submit">Add line</button></div>
+            <p class="status" id="manualStatus" role="status"></p>
+            <datalist id="names"></datalist>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="board-h">
+        <div class="row" style="justify-content: space-between">
+          <h2 id="board-h">Your lines</h2>
+          <button class="btn quiet" id="clearBtn" type="button">Clear all</button>
+        </div>
+        <p class="note-ex" id="exNote" hidden>These are <b>examples</b>. The lines come from a simple baseline, not from any app.
+          Upload a screenshot or type a line to replace them.</p>
+        <div class="unmatched" id="unmatched" hidden></div>
+        <div class="board" id="board"></div>
+        <p class="small muted" id="skipped" hidden></p>
+      </section>
+    </div>
+
+    <aside class="col">
+      <section class="panel" aria-labelledby="entry-h">
+        <h2 id="entry-h">Best entry</h2>
+        <div class="row" style="justify-content: space-between">
+          <span class="small muted">Number of picks</span>
+          <div class="seg" id="nSeg" role="group" aria-label="Number of picks"></div>
+        </div>
+        <label class="check" for="onePerGame"><input type="checkbox" id="onePerGame" checked> At most one pick per game</label>
+        <label class="f" for="payout">Payout if every pick hits (from your app, e.g. 3 for 3×)
+          <input type="number" id="payout" step="0.05" min="1" inputmode="decimal" placeholder="3">
+        </label>
+        <div id="entry"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="track-h">
+        <h2 id="track-h">Track record</h2>
+        <p class="small muted" id="trackIntro">How often forecasts like these came true in a season the model never trained on.</p>
+        <div class="tbl-wrap"><table id="calTable"></table></div>
+        <p class="small muted" id="trackNote"></p>
+      </section>
+    </aside>
+  </div>
+
+  <footer id="foot">
+    <p><b>How to read this.</b> Each percentage is the model's chance that the stat finishes on that side of the line,
+      assuming the player plays (apps usually void a pick if he does not). The range shows how much that chance moves
+      when his own game history is resampled. Combined chances multiply the picks as if they were independent; picks
+      from the same game are not, so treat those numbers as rough.</p>
+    <p><b>Limits.</b> The model has never been tested against pick'em lines, which are set by sharp markets. In its
+      2025 held-out test it showed no demonstrated advantage over a simple workload baseline for 100+ yard outcomes.
+      Quarterback changes, injuries and weather are not inputs.</p>
+    <p id="footMeta"></p>
+    <p>Gambling problem? Call or text 1-800-GAMBLER.</p>
+  </footer>
+</div>
+
+<script>
+"use strict";
+const STORE_KEY = "rlc-picks-v2";
+const S = { data: null, byKey: new Map(), index: null, picks: [], skipped: [], unmatched: [], n: 2, onePerGame: true,
+            payout: "", sample: null, imageFile: null, ctl: null, isExample: false };
+
+// ---------- pure helpers (no DOM) ----------
+const SUFFIX = /\b(jr|sr|ii|iii|iv|v)\b/g;
+function norm(s) {
+  return String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
+    .replace(/[’'`.]/g, "").replace(/-/g, " ").replace(SUFFIX, " ").replace(/[^a-z ]/g, " ")
+    .replace(/\s+/g, " ").trim();
+}
+function statKind(raw) {
+  const s = String(raw || "");
+  if (/[+&]/.test(s)) return null;                                   // combos like Rush+Rec Yds
+  if (/(\b[12]h\b|1st|2nd|half|quarter|\b[1-4]q\b|\bq[1-4]\b)/i.test(s)) return null;   // partial-game props
+  const t = norm(s);
+  if (!t) return null;
+  if (/(rush|pass|fantasy|touchdown|\btds?\b|longest|\blong\b|kick|tackle|sack|interception|\bint\b|target|combo)/.test(t)) return null;
+  if (/(receiving|rec|recv) ?(yards|yds|yd)/.test(t) || t === "receiving" ) return "yds";
+  if (/^(receptions?|recs?|catches|total receptions)$/.test(t) || /\breceptions\b/.test(t)) return "rec";
+  return null;
+}
+function lev(a, b) {
+  if (a === b) return 0;
+  const m = a.length, n = b.length; if (!m || !n) return m + n;
+  let prev = Array.from({ length: n + 1 }, (_, j) => j), cur = new Array(n + 1);
+  for (let i = 1; i <= m; i++) {
+    cur[0] = i;
+    for (let j = 1; j <= n; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    [prev, cur] = [cur, prev];
+  }
+  return prev[n];
+}
+const keyOf = p => p.id + "|" + p.game;
+/** A player can have two upcoming games in the data: prefer the next one that has not kicked off. */
+function nextEntry(list, now = Date.now()) {
+  const byKick = list.slice().sort((a, b) => Date.parse(a.kickoff) - Date.parse(b.kickoff));
+  return byKick.find(p => Date.parse(p.kickoff) > now) || byKick[0];
+}
+function onePlayer(list) {           // the entries of exactly one player, else null
+  const ids = new Set(list.map(p => p.id));
+  return ids.size === 1 ? nextEntry(list) : null;
+}
+function uniquePlayers(list) {
+  const seen = new Map();
+  for (const p of list) if (!seen.has(p.id)) seen.set(p.id, nextEntry(list.filter(q => q.id === p.id)));
+  return [...seen.values()];
+}
+function buildIndex(players) {
+  const full = new Map(), initial = new Map();
+  for (const p of players) {
+    const n = norm(p.name), parts = n.split(" ");
+    (full.get(n) || full.set(n, []).get(n)).push(p);
+    if (parts.length > 1) {
+      const k = parts[0][0] + " " + parts.slice(1).join(" ");
+      (initial.get(k) || initial.set(k, []).get(k)).push(p);
+    }
+  }
+  return { full, initial, all: players.map(p => [norm(p.name), p]) };
+}
+function byTeam(list, team) {
+  if (!team || list.length < 2) return list;
+  const t = String(team).toUpperCase();
+  const f = list.filter(p => p.team === t);
+  return f.length ? f : list;
+}
+/** Returns {player} on a confident match, else {candidates}. */
+function matchName(index, name, team) {
+  const n = norm(name);
+  if (!n) return { candidates: [] };
+  let hit = index.full.get(n);
+  if (hit) { const one = onePlayer(byTeam(hit, team)); if (one) return { player: one }; }
+  const parts = n.split(" ");
+  if (parts.length > 1) {
+    const k = (parts[0].length === 1 ? parts[0] : parts[0][0]) + " " + parts.slice(1).join(" ");
+    const h2 = index.initial.get(k);
+    if (h2) { const one = onePlayer(byTeam(h2, team)); if (one) return { player: one }; }
+  }
+  const scored = index.all.map(([nn, p]) => [lev(n, nn), p]).sort((a, b) => a[0] - b[0]);
+  const close = scored.filter(([d]) => d <= 2).map(([, p]) => p);
+  const one = close.length ? onePlayer(byTeam(close, team)) : null;
+  if (one) return { player: one };
+  return { candidates: uniquePlayers(scored.slice(0, 12).map(([, p]) => p)).slice(0, 6) };
+}
+function at(curve, k) { return k <= 0 ? (k === 0 ? curve[0] ?? 1 : 1) : (k < curve.length ? curve[k] : 0); }
+/** P(more), P(less), P(push) for a line from a P(X >= k) curve. */
+function lineProbs(curve, line) {
+  if (Number.isInteger(line)) {
+    const more = at(curve, line + 1), push = Math.max(0, at(curve, line) - more);
+    return { more, less: Math.max(0, 1 - more - push), push };
+  }
+  const more = at(curve, Math.floor(line) + 1);
+  return { more, less: 1 - more, push: 0 };
+}
+function evaluatePick(pick, player) {
+  const c = player[pick.stat];
+  const mid = lineProbs(c.ge, pick.line), lo = lineProbs(c.lo, pick.line), hi = lineProbs(c.hi, pick.line);
+  const base = lineProbs(c.base, pick.line);
+  const side = mid.more >= mid.less ? "more" : "less";
+  const p = side === "more" ? mid.more : mid.less;
+  const range = side === "more" ? [lo.more, hi.more] : [hi.less, lo.less];
+  return { ...mid, side, p, range: [Math.min(...range), Math.max(...range)], base: side === "more" ? base.more : base.less };
+}
+function bestEntry(rows, n, onePerGame) {
+  const sorted = rows.slice().sort((a, b) => b.ev.p - a.ev.p);
+  const out = [], players = new Set(), games = new Set();
+  for (const r of sorted) {
+    if (out.length >= n) break;
+    if (players.has(r.player.id) || (onePerGame && games.has(r.player.game))) continue;
+    out.push(r); players.add(r.player.id); games.add(r.player.game);
+  }
+  const prod = arr => arr.reduce((a, b) => a * b, 1);
+  return { picks: out, p: prod(out.map(r => r.ev.p)), lo: prod(out.map(r => r.ev.range[0])), hi: prod(out.map(r => r.ev.range[1])) };
+}
+function pct(p) {
+  if (p == null || !isFinite(p)) return "–";
+  if (p < 0.01) return "<1%";
+  if (p > 0.99) return ">99%";
+  return Math.round(p * 100) + "%";
+}
+function pct1(p) { return (p * 100).toFixed(1) + "%"; }
+const STAT_LABEL = { yds: "Receiving yards", rec: "Receptions" };
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const uid = () => Math.random().toString(36).slice(2, 10);
+
+// ---------- persistence (per-viewer convenience only) ----------
+function save() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify({ picks: S.picks.filter(p => !p.example), n: S.n, onePerGame: S.onePerGame, payout: S.payout, gen: S.data?.generated_at })); } catch (e) { /* storage blocked */ }
+}
+function restore() {
+  try {
+    const v = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+    if (!v) return false;
+    S.n = v.n || 2; S.onePerGame = v.onePerGame !== false; S.payout = v.payout || "";
+    S.picks = (v.picks || []).filter(p => S.byKey.has(p.key));
+    return S.picks.length > 0;
+  } catch (e) { return false; }
+}
+
+// ---------- examples ----------
+function exampleLine(curve) {           // a baseline median, as a half-point line
+  let k = 0; while (k < curve.length && curve[k] >= 0.5) k++;
+  return Math.max(0.5, k - 0.5);
+}
+function seedExamples() {
+  const now = Date.now();
+  const ps = S.data.players.filter(p => p.evidence === "substantial" && Date.parse(p.kickoff) > now)
+    .sort((a, b) => b.exp_targets - a.exp_targets);
+  const games = new Set(), ids = new Set(), picked = [];
+  for (const p of ps) {
+    if (games.has(p.game) || ids.has(p.id)) continue;
+    games.add(p.game); ids.add(p.id); picked.push(p); if (picked.length === 3) break;
+  }
+  S.picks = picked.map((p, i) => ({ id: uid(), key: keyOf(p), stat: i === 1 ? "rec" : "yds", line: exampleLine(p[i === 1 ? "rec" : "yds"].base), side: null, example: true, onScreen: p.name }));
+  S.isExample = true;
+}
+
+// ---------- rendering ----------
+const $ = id => document.getElementById(id);
+function fmtKick(iso) {
+  try { return new Date(iso).toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }); }
+  catch (e) { return iso; }
+}
+function renderMeta() {
+  const d = S.data, games = d.games;
+  const through = new Date(d.data_through), gen = new Date(d.generated_at);
+  const days = Math.floor((Date.now() - gen.getTime()) / 864e5);
+  $("meta").innerHTML = [
+    `<span>Stats through <b>${esc(through.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" }))}</b></span>`,
+    `<span><b class="num">${d.players.length}</b> receivers in <b class="num">${games.length}</b> games, ${esc(fmtKick(games[0].kickoff))} – ${esc(fmtKick(games[games.length - 1].kickoff))}</span>`,
+    days >= 3 ? `<span class="chip bad">Forecasts are ${days} days old</span>` : `<span>Updated ${esc(gen.toLocaleDateString(undefined, { month: "short", day: "numeric" }))}</span>`,
+  ].join("");
+  $("footMeta").textContent = `Model ${d.model_version} · generated ${gen.toISOString().slice(0, 16).replace("T", " ")} UTC · data: nflverse (CC-BY 4.0).`;
+  const dl = $("names");
+  dl.innerHTML = uniquePlayers(d.players).map(p => `<option value="${esc(p.name)}">${esc(p.team)} ${esc(p.pos)}</option>`).join("");
+}
+function calBin(p, key) {
+  const t = S.data.calibration?.[key] || [];
+  return t.find(r => p >= r.bin_low && p < r.bin_high) || null;
+}
+function pickCard(row) {
+  const { pick, player, ev } = row;
+  const isMore = ev.side === "more";
+  const chips = [];
+  chips.push(`<span class="chip ${player.evidence === "limited" ? "warn" : ""}">${esc(player.evidence)} evidence</span>`);
+  if (player.stale) chips.push(`<span class="chip warn">${player.stale} earlier game${player.stale > 1 ? "s" : ""} not in the data yet</span>`);
+  if (pick.example) chips.push(`<span class="chip warn">Example line</span>`);
+  if (pick.side && pick.side !== ev.side) chips.push(`<span class="chip bad">You picked ${esc(pick.side)}; model leans ${esc(ev.side)}</span>`);
+  const cal = calBin(ev.more, pick.stat === "yds" ? "yards" : "rec");
+  const flags = player.flags || [];
+  const kick = fmtKick(player.kickoff);
+  const ge = player[pick.stat];
+  return `<article class="pick ${pick.example ? "ex" : ""}" data-id="${esc(pick.id)}">
+    <div class="pick-head">
+      <div class="who"><b>${esc(player.name)}</b>
+        <span class="small muted">${esc(player.pos)} · ${esc(player.team)} vs ${esc(player.opp)} · ${esc(kick)}</span></div>
+      <button class="x" data-act="rm" aria-label="Remove ${esc(player.name)}">×</button>
+    </div>
+    <div class="lineval">
+      <select data-act="stat" aria-label="Stat">${["yds", "rec"].map(k => `<option value="${k}" ${k === pick.stat ? "selected" : ""}>${STAT_LABEL[k]}</option>`).join("")}</select>
+      <input type="number" step="0.5" min="0" value="${esc(pick.line)}" data-act="line" aria-label="Line">
+    </div>
+    <div class="verdict">
+      <span class="big">${pct(ev.p)}</span>
+      <span><span class="side">${isMore ? "More" : "Less"}</span> <span class="small muted">· range ${pct(ev.range[0])}–${pct(ev.range[1])}</span></span>
+    </div>
+    <div>
+      <div class="meter" role="img" aria-label="Chance of more: ${pct(ev.more)}"><span style="width:${(ev.more * 100).toFixed(1)}%"></span><i></i></div>
+      <div class="meter-legend"><span>More ${pct(ev.more)}</span>${ev.push > 0.001 ? `<span>Push ${pct(ev.push)}</span>` : ""}<span>Less ${pct(ev.less)}</span></div>
+    </div>
+    <div class="facts">
+      <span>Model median <b class="num">${ge.median}</b></span>
+      <span>80% of games <b class="num">${ge.i80[0]}–${ge.i80[1]}</b></span>
+      <span>Baseline ${isMore ? "More" : "Less"} <b class="num">${pct(ev.base)}</b></span>
+      ${pick.stat === "yds" ? `<span>Expected targets <b class="num">${player.exp_targets.toFixed(1)}</b></span>` : ""}
+    </div>
+    <div class="chips">${chips.join("")}</div>
+    ${(flags.length || cal) ? `<details><summary>Why this number could be wrong</summary><ul>
+      ${cal ? `<li>In 2025, forecasts of ${Math.round(cal.bin_low * 100)}–${Math.round(Math.min(cal.bin_high, 1) * 100)}% for "more" came true ${pct1(cal.observed)} of the time (${cal.n.toLocaleString()} cases).</li>` : ""}
+      ${flags.map(f => `<li>${esc(f)}</li>`).join("")}
+      ${player.stale ? `<li>His team plays ${player.stale > 1 ? "games" : "a game"} before this one that ${player.stale > 1 ? "are" : "is"} not in the stats yet, so this forecast cannot include ${player.stale > 1 ? "them" : "it"}. Check again after the data refresh.</li>` : ""}
+    </ul></details>` : ""}
+  </article>`;
+}
+function rows() {
+  return S.picks.map(pick => {
+    const player = S.byKey.get(pick.key);
+    return player ? { pick, player, ev: evaluatePick(pick, player) } : null;
+  }).filter(Boolean).sort((a, b) => b.ev.p - a.ev.p);
+}
+function renderBoard() {
+  const rs = rows();
+  $("exNote").hidden = !S.picks.some(p => p.example);
+  $("board").innerHTML = rs.length ? rs.map(pickCard).join("")
+    : `<div class="empty">No lines yet. Upload a screenshot or type a line above.</div>`;
+  $("skipped").hidden = !S.skipped.length;
+  if (S.skipped.length) {
+    $("skipped").textContent = `Skipped ${S.skipped.length} line${S.skipped.length > 1 ? "s" : ""} the model does not cover: ` +
+      S.skipped.slice(0, 8).map(s => `${s.name} (${s.stat}${s.line != null ? " " + s.line : ""})`).join(", ") + (S.skipped.length > 8 ? "…" : "") +
+      ". This model only handles WR/TE receiving yards and receptions.";
+  }
+  const um = $("unmatched");
+  um.hidden = !S.unmatched.length;
+  um.innerHTML = S.unmatched.length ? `<span class="label">Pick the right player</span>` + S.unmatched.map(u => `
+    <div class="um" data-uid="${esc(u.id)}">
+      <span><b>${esc(u.onScreen)}</b> <span class="muted small">${esc(STAT_LABEL[u.stat])} ${esc(u.line)}</span></span>
+      <select data-act="resolve" aria-label="Match ${esc(u.onScreen)}"><option value="">Not in this week's WR/TE list</option>
+        ${u.candidates.map(c => `<option value="${esc(keyOf(c))}">${esc(c.name)} (${esc(c.team)})</option>`).join("")}</select>
+      <button class="x" data-act="drop" aria-label="Dismiss">×</button>
+    </div>`).join("") : "";
+  renderEntry(rs);
+  save();
+}
+function renderEntry(rs) {
+  const seg = $("nSeg");
+  seg.innerHTML = [2, 3, 4, 5, 6].map(n => `<button type="button" data-n="${n}" aria-pressed="${n === S.n}">${n}</button>`).join("");
+  $("onePerGame").checked = S.onePerGame;
+  if ($("payout").value !== S.payout) $("payout").value = S.payout;
+  const box = $("entry");
+  if (rs.length < 2) { box.innerHTML = `<p class="small muted">Add at least two lines to build an entry.</p>`; return; }
+  const e = bestEntry(rs, S.n, S.onePerGame);
+  const short = e.picks.length < S.n;
+  const pay = parseFloat(S.payout);
+  let be = "";
+  if (isFinite(pay) && pay > 1) {
+    const need = 1 / pay, perLeg = Math.pow(need, 1 / e.picks.length), modelLeg = Math.pow(e.p, 1 / e.picks.length);
+    const margin = modelLeg - perLeg;
+    const cls = margin >= 0.03 ? "good" : margin >= 0 ? "warn" : "bad";
+    const head = margin >= 0.03 ? "Above break-even by the model's estimate"
+      : margin >= 0 ? "Too close to call" : "Below break-even by the model's estimate";
+    const why = margin >= 0 && margin < 0.03 ? " The edge is smaller than the model's typical error (2–3 points per pick in 2025)." : "";
+    be = `<div class="be ${cls}"><b>${head}</b>
+      <span>At ${pay}× you need all ${e.picks.length} to hit ${pct1(need)} of the time (${pct1(perLeg)} per pick). Model: ${pct1(e.p)} (${pct1(modelLeg)} per pick).${why}</span></div>`;
+  }
+  box.innerHTML = `
+    ${short ? `<p class="small muted">Only ${e.picks.length} pick${e.picks.length === 1 ? "" : "s"} fit the rules; add more lines${S.onePerGame ? " or allow more than one pick per game" : ""}.</p>` : ""}
+    <ol class="entry-picks">${e.picks.map(r => `<li><span><b>${esc(r.player.name)}</b> <span class="muted">${r.ev.side === "more" ? "More" : "Less"} ${esc(r.pick.line)} ${r.pick.stat === "yds" ? "rec yds" : "rec"}</span></span><span class="num">${pct(r.ev.p)}</span></li>`).join("")}</ol>
+    <div class="hero"><span class="label">Chance every pick hits</span><span class="big">${pct1(e.p)}</span>
+      <span class="small muted">If every pick sat at the low or high end of its range: ${pct1(e.lo)}–${pct1(e.hi)}</span></div>
+    ${be}
+    <p class="small muted">Treats picks as independent. Teammates and players in the same game move together, so combined chances for them are rough.</p>`;
+}
+function renderTrack() {
+  const cal = S.data.calibration;
+  if (!cal || !cal.yards) { $("calTable").innerHTML = ""; $("trackIntro").textContent = "Track record unavailable."; return; }
+  const rowsHtml = cal.yards.map((r, i) => {
+    const rr = cal.rec[i];
+    const lab = `${Math.round(r.bin_low * 100)}–${Math.round(Math.min(r.bin_high, 1) * 100)}%`;
+    return `<tr><td>${lab}</td><td class="num">${pct1(r.observed)}</td><td class="num muted">${r.n.toLocaleString()}</td><td class="num">${rr ? pct1(rr.observed) : "–"}</td><td class="num muted">${rr ? rr.n.toLocaleString() : ""}</td></tr>`;
+  }).join("");
+  $("calTable").innerHTML = `<thead><tr><th>Forecast</th><th>Yards hit</th><th>n</th><th>Rec hit</th><th>n</th></tr></thead><tbody>${rowsHtml}</tbody>`;
+  $("trackNote").textContent = `${cal.test_season} season, ${Number(cal.n_player_games).toLocaleString()} player-games, pooled over several thresholds per game. ` +
+    "Mid-range forecasts ran about 2–3 points high that season; a correction fitted on earlier seasons did not fix it, so none is applied.";
+}
+
+// ---------- adding lines ----------
+function addLine({ name, team, stat, line, side, match, source }) {
+  const kind = statKind(stat) || (stat === "yds" || stat === "rec" ? stat : null);
+  const ln = (line === null || line === undefined || line === "") ? NaN : Number(line);
+  if (!kind) { S.skipped.push({ name, stat, line }); return "skipped"; }
+  if (!isFinite(ln) || ln < 0 || ln > 400) return "bad";
+  if (S.isExample) { S.picks = []; S.isExample = false; }
+  let player = null;
+  if (match) {
+    const last = s => norm(s).split(" ").pop();
+    const m = S.data.players.filter(p => p.name === match && last(p.name) === last(name) && (!team || String(team).toUpperCase() === p.team));
+    player = m.length ? onePlayer(m) : null;
+  }
+  let cands = [];
+  if (!player) { const m = matchName(S.index, name, team); player = m.player || null; cands = m.candidates || []; }
+  const sd = side === "more" || side === "less" ? side : null;
+  if (!player) { S.unmatched.push({ id: uid(), onScreen: name, team, stat: kind, line: ln, side: sd, candidates: cands }); return "unmatched"; }
+  const dup = S.picks.find(p => p.key === keyOf(player) && p.stat === kind);
+  if (dup) { dup.line = ln; dup.side = sd || dup.side; return "updated"; }
+  S.picks.push({ id: uid(), key: keyOf(player), stat: kind, line: ln, side: sd, example: false, onScreen: name, source });
+  return "added";
+}
+
+// ---------- screenshot reading ----------
+async function setupSample() {
+  const st = $("readStatus");
+  if (!window.claude || typeof window.claude.use !== "function") { st.textContent = "Screenshot reading works when this page is opened on claude.ai. You can type lines here."; return; }
+  try {
+    const sample = await window.claude.use("sample");
+    if (!sample) { st.textContent = "Screenshot reading isn't available in this view. You can type lines instead."; return; }
+    const lim = await sample.limits().catch(() => null);
+    if (!lim || !lim.images) { st.textContent = "This view can't send images to Claude. You can type lines instead."; return; }
+    S.sample = sample;
+    st.textContent = "";
+    $("file").accept = lim.images.mediaTypes.join(",");
+    updateReadBtn();
+  } catch (e) { st.textContent = "Screenshot reading isn't available here. You can type lines instead."; }
+}
+function updateReadBtn() { $("readBtn").disabled = !(S.sample && S.imageFile) || !!S.ctl; }
+function setImage(file) {
+  if (!file || !/^image\//.test(file.type)) { $("readStatus").textContent = "That file isn't an image. Use a PNG or JPEG screenshot."; return; }
+  S.imageFile = file;
+  const img = $("thumb"); img.src = URL.createObjectURL(file); img.hidden = false;
+  $("dropText").innerHTML = `<b>${esc(file.name || "Pasted image")}</b><br><span class="small muted">Choose a different screenshot</span>`;
+  $("readStatus").textContent = S.sample ? "Ready. Press Read lines." : $("readStatus").textContent;
+  $("readStatus").classList.remove("err");
+  updateReadBtn();
+}
+function buildPrompt() {
+  const roster = S.data.players.map(p => `${p.name} | ${p.team}`).join("\n");
+  return `This image is a screenshot from a daily-fantasy pick'em app such as PrizePicks, Underdog or Sleeper.
+List every player prop line you can read in it. For each line give:
+- "name": the player's name exactly as shown
+- "team": the team abbreviation if shown, else null
+- "stat": the stat type exactly as shown, e.g. "Receiving Yards", "Receptions", "Rush Yds", "Pass Yards"
+- "line": the line as a number, e.g. 64.5
+- "side": "more" if the image shows this pick selected as More/Higher/Over, "less" if selected as Less/Lower/Under, otherwise null
+- "match": the exact name from the player list below if this is clearly the same player, otherwise null
+Report only what is visible. Never estimate, round or invent a number; skip any line you cannot read clearly.
+Reply with only a JSON array, for example:
+[{"name":"J. Chase","team":"CIN","stat":"Receiving Yards","line":74.5,"side":null,"match":"Ja'Marr Chase"}]
+Reply [] if the image shows no prop lines.
+
+Player list (name | team):
+${roster}`;
+}
+const READ_ERRORS = {
+  not_granted: "Screenshot reading needs your permission to use Claude. You can still type lines.",
+  sampling_disabled: "Claude isn't available for this account here. You can type lines instead.",
+  rate_limited: "Too many requests right now. Wait a minute and try again.",
+  image_rejected: "That image couldn't be used. Try a PNG or JPEG under 20 MB.",
+  invalid_json: "Couldn't read the lines from that image. Try a sharper, uncropped screenshot.",
+  refused: "Claude couldn't read this image. Try another screenshot or type the lines.",
+  empty_completion: "No lines came back. Try a sharper screenshot.",
+  session_expired: "Your session expired. Sign in again and retry.",
+};
+async function readShot() {
+  if (!S.sample || !S.imageFile) return;
+  const st = $("readStatus"); st.classList.remove("err");
+  S.ctl = new AbortController(); updateReadBtn(); $("stopBtn").hidden = false;
+  st.textContent = "Reading your screenshot… this can take up to a minute.";
+  try {
+    const out = await S.sample.json(buildPrompt(), { images: S.imageFile, modelTier: "default", signal: S.ctl.signal });
+    const items = Array.isArray(out) ? out : (Array.isArray(out?.lines) ? out.lines : []);
+    S.skipped = []; let added = 0, um = 0, bad = 0;
+    for (const it of items) {
+      if (!it || typeof it !== "object") continue;
+      const r = addLine({ name: String(it.name ?? ""), team: it.team ?? null, stat: String(it.stat ?? ""), line: it.line,
+                          side: it.side ?? null, match: it.match ?? null, source: "screenshot" });
+      if (r === "added" || r === "updated") added++; else if (r === "unmatched") um++; else if (r === "bad") bad++;
+    }
+    st.textContent = items.length
+      ? `Read ${items.length} line${items.length === 1 ? "" : "s"}: ${added} scored${um ? `, ${um} need a player match` : ""}${S.skipped.length ? `, ${S.skipped.length} not covered` : ""}${bad ? `, ${bad} unreadable` : ""}. Check each line against your app.`
+      : "No prop lines found in that image.";
+    renderBoard();
+  } catch (e) {
+    if (e && e.code === "cancelled") { st.textContent = "Stopped."; }
+    else { st.textContent = READ_ERRORS[e?.code] || "Something went wrong reading the image. Try again, or type the lines."; st.classList.add("err"); }
+  } finally { S.ctl = null; $("stopBtn").hidden = true; updateReadBtn(); }
+}
+
+// ---------- events ----------
+function wire() {
+  $("file").addEventListener("change", e => setImage(e.target.files[0]));
+  const drop = $("drop");
+  ["dragenter", "dragover"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add("over"); }));
+  ["dragleave", "drop"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove("over"); }));
+  drop.addEventListener("drop", e => { const f = e.dataTransfer?.files?.[0]; if (f) setImage(f); });
+  document.addEventListener("paste", e => {
+    const f = [...(e.clipboardData?.files || [])].find(x => /^image\//.test(x.type));
+    if (f) { e.preventDefault(); setImage(f); }
+  });
+  $("readBtn").addEventListener("click", readShot);
+  $("stopBtn").addEventListener("click", () => S.ctl?.abort());
+  $("manual").addEventListener("submit", e => {
+    e.preventDefault();
+    const st = $("manualStatus"); st.classList.remove("err");
+    const name = $("mName").value.trim(), line = parseFloat($("mLine").value);
+    if (!name || !isFinite(line)) { st.textContent = "Enter a player and a line."; st.classList.add("err"); return; }
+    const exact = S.data.players.find(p => p.name === name);   // nextEntry() picks the game when names repeat
+    const r = addLine({ name, team: null, stat: $("mStat").value, line, side: null, match: exact ? exact.name : null, source: "manual" });
+    st.textContent = r === "added" ? `Added ${name}.` : r === "updated" ? `Updated ${name}.` : r === "unmatched" ? "Pick the right player in the list below." : "Couldn't add that line.";
+    if (r === "added" || r === "updated") { $("mName").value = ""; $("mLine").value = ""; }
+    renderBoard();
+  });
+  $("clearBtn").addEventListener("click", () => { S.picks = []; S.unmatched = []; S.skipped = []; S.isExample = false; renderBoard(); });
+  $("board").addEventListener("click", e => {
+    const b = e.target.closest("[data-act='rm']"); if (!b) return;
+    const id = b.closest(".pick").dataset.id; S.picks = S.picks.filter(p => p.id !== id); renderBoard();
+  });
+  $("board").addEventListener("change", e => {
+    const card = e.target.closest(".pick"); if (!card) return;
+    const p = S.picks.find(x => x.id === card.dataset.id); if (!p) return;
+    if (e.target.dataset.act === "line") { const v = parseFloat(e.target.value); if (isFinite(v) && v >= 0) { p.line = v; p.example = false; } }
+    if (e.target.dataset.act === "stat") { p.stat = e.target.value; p.example = false; }
+    renderBoard();
+  });
+  $("unmatched").addEventListener("change", e => {
+    if (e.target.dataset.act !== "resolve") return;
+    const box = e.target.closest(".um"), u = S.unmatched.find(x => x.id === box.dataset.uid);
+    if (!u || !e.target.value) return;
+    S.unmatched = S.unmatched.filter(x => x !== u);
+    if (!S.byKey.has(e.target.value)) return;
+    S.picks.push({ id: uid(), key: e.target.value, stat: u.stat, line: u.line, side: u.side, example: false, onScreen: u.onScreen, source: "screenshot" });
+    renderBoard();
+  });
+  $("unmatched").addEventListener("click", e => {
+    if (e.target.dataset.act !== "drop") return;
+    const box = e.target.closest(".um"); S.unmatched = S.unmatched.filter(x => x.id !== box.dataset.uid); renderBoard();
+  });
+  $("nSeg").addEventListener("click", e => { const b = e.target.closest("button[data-n]"); if (!b) return; S.n = +b.dataset.n; renderBoard(); });
+  $("onePerGame").addEventListener("change", e => { S.onePerGame = e.target.checked; renderBoard(); });
+  $("payout").addEventListener("input", e => { S.payout = e.target.value; renderEntry(rows()); save(); });
+}
+
+async function start() {
+  wire();
+  try {
+    const res = await fetch("slate.json");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    S.data = await res.json();
+  } catch (e) {
+    $("meta").innerHTML = `<span class="chip bad">Couldn't load the model data. Reload the page.</span>`;
+    return;
+  }
+  S.byKey = new Map(S.data.players.map(p => [keyOf(p), p]));
+  S.index = buildIndex(S.data.players);
+  if (!restore()) seedExamples();
+  renderMeta(); renderTrack(); renderBoard();
+  setupSample();
+}
+start();
+</script>

@@ -30,6 +30,10 @@ def main(argv: list[str] | None = None) -> None:
     f.add_argument("--game", required=True, help="nflverse game_id, e.g. 2026_05_CIN_MIA")
     f.add_argument("--no-save", action="store_true")
     sub.add_parser("record-results", help="attach actual results to journal forecasts for completed games")
+    sl = sub.add_parser("slate", help="export upcoming-game probability curves for the Receiving Line Checker page")
+    sl.add_argument("--days", type=float, default=9.0, help="include games kicking off within this many days")
+    sl.add_argument("--bootstrap", type=int, default=20, help="history resamples per player for probability ranges")
+    sl.add_argument("--out", default=None, help="output JSON path (default: <data>/processed/linechecker/slate.json)")
     args = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
@@ -64,6 +68,17 @@ def main(argv: list[str] | None = None) -> None:
         if not args.no_save:
             fid = svc.save(fc)
             print(f"journal snapshot: {fid}")
+    elif args.cmd == "slate":
+        from pathlib import Path
+
+        from . import config
+        from .forecast import service, slate
+        svc = service.ForecastService.load()
+        data = slate.build_slate(svc, days=args.days, bootstrap=args.bootstrap)
+        out = Path(args.out) if args.out else config.PROCESSED_DIR / "linechecker" / "slate.json"
+        slate.write_slate(data, out)
+        print(f"wrote {out}: {len(data['players'])} players in {len(data['games'])} games "
+              f"(data through {data['data_through']})")
     elif args.cmd == "record-results":
         from .forecast import service
         svc = service.ForecastService.load()
