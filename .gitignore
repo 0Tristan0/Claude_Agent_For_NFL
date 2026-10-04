@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+data/cache/
+data/processed/
+data/user_imports/
+data/*.sqlite
+data/*.sqlite-journal
+.streamlit/secrets.toml
+.env
