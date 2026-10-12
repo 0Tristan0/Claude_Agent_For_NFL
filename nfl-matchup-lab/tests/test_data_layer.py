@@ -128,17 +128,17 @@ def test_play_flags():
     assert p.loc[11, "designed_run"] and p.loc[11, "explosive"]
 
 
-def test_pace_excludes_two_minute_drill_and_caps():
+def test_pace_excludes_two_minute_drill_and_drops_long_gaps():
     rows = [_play(play_id=i, game_seconds_remaining=3000 - 30 * i, half_seconds_remaining=1200 - 30 * i)
             for i in range(1, 5)]
-    rows[2]["game_seconds_remaining"] = rows[1]["game_seconds_remaining"] - 90      # long gap gets capped
+    rows[2]["game_seconds_remaining"] = rows[1]["game_seconds_remaining"] - 90      # long gap (timeout) is dropped
     rows[3]["game_seconds_remaining"] = rows[2]["game_seconds_remaining"] - 30
     late = [_play(play_id=10 + i, fixed_drive=2, game_seconds_remaining=1900 - 20 * i, half_seconds_remaining=100 - 20 * i)
             for i in range(3)]
     p = pbp.prepare(pd.DataFrame(rows + late))
     pace = pbp.pace_seconds(p)
     got = pace.dropna().tolist()
-    assert got == [30.0, 45.0, 30.0]                      # capped at 45, two-minute plays excluded
+    assert got == [30.0, 30.0]                            # 90 s gap dropped, two-minute plays excluded
 
 
 # ---- tables on the synthetic league --------------------------------------------------------------
@@ -207,8 +207,8 @@ def test_context_travel_and_short_week():
 
 def test_weather_disabled_or_dome_returns_none():
     k = pd.Timestamp("2026-10-13 00:15", tz="UTC")
-    assert weather.kickoff_weather("BUF01", k, "outdoors") is None       # disabled by default
-    assert weather.kickoff_weather("LAX01", k, "dome") is None
+    assert weather.kickoff_weather("BUF01", k, "outdoors", asof=k) is None       # disabled by default
+    assert weather.kickoff_weather("LAX01", k, "dome", asof=k) is None
 
 
 # ---- props.csv -----------------------------------------------------------------------------------
