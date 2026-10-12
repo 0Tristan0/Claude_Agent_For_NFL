@@ -13,7 +13,16 @@ python3 src/props.py     # props board + 1-on-1 section
 python3 src/ev.py        # hit estimates, break-evens, lineup value -> src/ev.json
 python3 src/parlay.py    # payout check + lineups
 open output/bills-rams-mnf.html
+python3 src/site.py      # website: site/index.html + site/games/<slug>.html from games.json
 ```
+
+## Website
+Live at <https://claude.ai/artifact/758ZYBxwk8dX14ZXeM9Db1> (private to the owner until shared from its Share menu).
+The home page lists every game in `games.json` (upcoming with locked picks, graded results) plus a track record table;
+each game with a `report` gets its own page under `games/`.
+
+To add a game or grade one: edit `games.json`, run `python3 src/site.py`, then ask Claude Code to republish
+`nfl-matchup-lab/site/index.html` to that link with every file in `site/games/` attached under `games/`.
 No dependencies beyond Python 3.
 
 ## How the numbers work
@@ -27,7 +36,9 @@ No dependencies beyond Python 3.
 ## Layout
 ```
 src/        pipeline scripts + HTML template (data is currently hardcoded inside the scripts)
-output/     generated page
+output/     generated report pages
+site/       generated website (home page + one page per game)
+games.json  list of games shown on the website, with lock times and grades
 backtests/  SF at SEA prediction script, locked predictions, graded results
 ```
 

@@ -1,0 +1,126 @@
+<title>NFL Matchup Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: scoreboard header, then two unit-vs-unit tables, a coverage comparison, and player exploit cards. Rank pills run green (top 8) to red (bottom 8). */
+:root{
+  --bg:#F2F4F1; --surface:#FFFFFF; --fg:#16201B; --muted:#5A6A61; --line:#D8DFD9;
+  --buf:#C60C30; --lar:#B87E00; --lar-strong:#E5A100;
+  --t1:#1E8049; --t1bg:#DDF0E3; --t2:#4E7A2E; --t2bg:#EAF2DE; --t3:#9A6A00; --t3bg:#F7ECD3; --t4:#B33A25; --t4bg:#F8E0DA;
+  --track:#E6EBE7;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1512; --surface:#17201B; --fg:#E7EDE9; --muted:#97A69D; --line:#2B3730;
+  --buf:#FF5A70; --lar:#FFB52E; --lar-strong:#FFB52E;
+  --t1:#6FD796; --t1bg:#163323; --t2:#A9CF7E; --t2bg:#212E17; --t3:#F2C35E; --t3bg:#352A11; --t4:#FF8B74; --t4bg:#3A1B15;
+  --track:#25302A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1512; --surface:#17201B; --fg:#E7EDE9; --muted:#97A69D; --line:#2B3730;
+  --buf:#FF5A70; --lar:#FFB52E; --lar-strong:#FFB52E;
+  --t1:#6FD796; --t1bg:#163323; --t2:#A9CF7E; --t2bg:#212E17; --t3:#F2C35E; --t3bg:#352A11; --t4:#FF8B74; --t4bg:#3A1B15;
+  --track:#25302A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.05}
+h2{font-size:1.9rem;font-weight:700;letter-spacing:.01em;text-transform:uppercase}
+.sub{color:var(--muted);margin:6px 0 0;max-width:68ch}
+.eyebrow{font-family:var(--display);font-weight:600;font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+section{display:grid;gap:14px;min-width:0}
+
+/* scoreboard */
+.board{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;gap:16px}
+.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+.team{display:grid;gap:2px}
+.team.home{text-align:right}
+.team .ab{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,9vw,4.2rem);line-height:.9}
+.team.away .ab{color:var(--buf)} .team.home .ab{color:var(--lar-strong)}
+.team .nm{font-weight:600}
+.team .rec{color:var(--muted);font-variant-numeric:tabular-nums}
+.at{font-family:var(--display);font-size:1.4rem;color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 20px;border-top:1px solid var(--line);padding-top:14px;font-variant-numeric:tabular-nums}
+.facts div{display:grid}
+.facts dt{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:0;font-weight:600}
+.facts dl{display:contents}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums}
+caption{text-align:left;padding:14px 16px 4px;font-family:var(--display);font-weight:600;font-size:1.15rem;letter-spacing:.02em}
+thead th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;text-align:left;padding:10px 16px;border-bottom:1px solid var(--line)}
+tbody th{text-align:left;font-weight:600;padding:10px 16px;vertical-align:top;width:28%}
+tbody td{padding:10px 16px;vertical-align:middle}
+tbody tr+tr th,tbody tr+tr td{border-top:1px solid var(--line)}
+.vs-lbl{display:block;font-weight:400;font-size:.8rem;color:var(--muted)}
+.side{white-space:nowrap}
+.side .v{display:inline-block;min-width:4.6em;font-weight:600}
+.pill{display:inline-block;min-width:3.2em;text-align:center;font-size:.8rem;font-weight:700;padding:1px 8px;border-radius:999px;margin-right:10px}
+.t1{color:var(--t1);background:var(--t1bg)} .t2{color:var(--t2);background:var(--t2bg)}
+.t3{color:var(--t3);background:var(--t3bg)} .t4{color:var(--t4);background:var(--t4bg)}
+.bar{display:inline-block;width:72px;height:6px;background:var(--track);border-radius:3px;vertical-align:middle;overflow:hidden}
+.fill{display:block;height:100%;border-radius:3px}
+.fill.buf{background:var(--buf)} .fill.lar{background:var(--lar)}
+.edge{display:inline-block;font-family:var(--display);font-weight:700;font-size:.95rem;letter-spacing:.04em;text-transform:uppercase;padding:2px 10px;border-radius:4px;border:1.5px solid currentColor}
+.edge.buf{color:var(--buf)} .edge.lar{color:var(--lar)} .edge.even{color:var(--muted)}
+.tchip{font-family:var(--display);font-weight:700;letter-spacing:.04em}
+.tchip.buf{color:var(--buf)} .tchip.lar{color:var(--lar)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:.85rem;color:var(--muted);align-items:center}
+.legend .pill{margin-right:4px}
+
+/* takeaways */
+.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.take{border-left:4px solid var(--line);padding:4px 0 4px 14px;min-width:0}
+.take.buf{border-color:var(--buf)} .take.lar{border-color:var(--lar)}
+.take b{display:block;font-family:var(--display);font-size:1.15rem;letter-spacing:.02em;text-transform:uppercase}
+.take p{margin:4px 0 0}
+
+/* player cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.card header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card h3{font-size:1.45rem;font-weight:700}
+.card .pos{font-size:.8rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.line{font-variant-numeric:tabular-nums;font-weight:600;font-size:.95rem}
+.vsbox{display:grid;gap:2px;padding:10px 12px;border-radius:6px;background:var(--bg);font-size:.95rem}
+.vsbox .k{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.card p{margin:0}
+.verdict{font-family:var(--display);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.95rem}
+.verdict.big{color:var(--t1)} .verdict.mid{color:var(--t3)} .verdict.low{color:var(--t4)}
+
+.notes{color:var(--muted);font-size:.9rem;display:grid;gap:6px;max-width:75ch}
+.notes a{color:inherit}
+.notes ul{margin:0;padding-left:1.2em}
+:focus-visible{outline:2px solid var(--lar);outline-offset:2px}
+@media (max-width:520px){ .team .nm{font-size:.9rem} .bar{width:44px} }
+</style>
+
+<style>
+.hero{display:grid;gap:8px}
+.hero h1{font-size:clamp(2.6rem,8vw,4rem);font-weight:700;text-transform:uppercase;letter-spacing:.01em}
+.hero h1 span{color:var(--lar-strong)}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
+.game{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:8px;align-content:start;min-width:0}
+.game header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.game h3{font-size:2.2rem;font-weight:700}
+.game .tchip{color:var(--fg)}
+.game .nm{color:var(--muted);font-weight:600}
+.game p{margin:0}
+.fine{color:var(--muted);font-size:.85rem}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.tag.t2{color:var(--t1);background:var(--t1bg)} .tag.t3{color:var(--t3);background:var(--t3bg)} .tag.t4{color:var(--t4);background:var(--t4bg)}
+.open{justify-self:start;margin-top:4px;font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.05em;text-transform:uppercase;color:var(--surface);background:var(--fg);padding:6px 14px;border-radius:6px;text-decoration:none}
+.open:hover{background:var(--lar)}
+.rt{min-width:620px}
+.rt .num{font-weight:700;white-space:nowrap}
+.rt .muted{color:var(--muted)}
+.rt tr.tot th,.rt tr.tot td{border-top:2px solid var(--fg)}
+</style>
+<main class="wrap">
+<header class="hero"><span class="eyebrow">2026 season · Game reports and pick tracking</span><h1>NFL Matchup <span>Lab</span></h1><p class="sub">One page per game: unit ranks, coverage, 1-on-1 matchups, a props board and PrizePicks lineups. Picks are locked in git before kickoff and graded after the game.</p></header>
+<section aria-labelledby="h-U"><h2 id="h-U">Upcoming</h2><div class="games"><article class="game"><header><span class="eyebrow">Week 5 · Monday Night Football · Mon Oct 12</span><span class="tag t3">Picks locked</span></header><h3><span class="tchip">BUF</span> at <span class="tchip">LAR</span></h3><span class="nm">Buffalo Bills at Los Angeles Rams</span><p>Allen TD yes, Stafford over 274.5 pass yds, K. Williams over 19.5 rec yds (3-pick core)</p><p class="fine">Frozen 2026-10-12 17:56 UTC in commit 3068909, before kickoff.</p><a class="open" href="games/2026-w05-buf-lar.html">Open report</a></article></div></section><section aria-labelledby="h-G"><h2 id="h-G">Graded</h2><div class="games"><article class="game"><header><span class="eyebrow">Week 5 · Sunday · Sun Oct 11</span><span class="tag t2">Graded</span></header><h3><span class="tchip">SF</span> at <span class="tchip">SEA</span></h3><span class="nm">San Francisco 49ers at Seattle Seahawks</span><p>Final: SF 32, SEA 29. Props 4 of 7.</p><p class="fine">Not a blind test: stats loaded for it already included this game.</p><span class="fine">No full report page for this one</span></article></div></section><section aria-labelledby="h-rec"><div><h2 id="h-rec">Track record</h2><p class="sub">Units assume 1 unit per prop at the approximate price listed in each results file. A handful of picks says almost nothing yet about whether the method works.</p></div><div class="tbl-wrap"><table class="pt rt"><thead><tr><th scope="col">Game</th><th scope="col">Game lines</th><th scope="col">Props hit</th><th scope="col">Units</th><th scope="col">Test</th></tr></thead><tbody><tr><th scope="row">BUF at LAR<span class="vs-lbl">Mon Oct 12</span></th><td colspan="3" class="muted">Waiting on the game</td><td><span class="tag t3">Clean test</span></td></tr><tr><th scope="row">SF at SEA<span class="vs-lbl">Sun Oct 11</span></th><td class="num">2 of 3<span class="vs-lbl">Winner and spread hit, total missed by 15 (model 45.5, actual 61)</span></td><td class="num">4 of 7</td><td class="num">+1.5u</td><td><span class="tag t4">Not blind</span></td></tr><tr class="tot"><th scope="row">All graded</th><td></td><td class="num">4 of 7</td><td class="num">+1.5u</td><td></td></tr></tbody></table></div></section>
+<footer class="notes"><p>Built from <code>nfl-matchup-lab/games.json</code> by <code>src/site.py</code>. Each report lists its own sources at the bottom. These are estimates from small samples, not betting advice.</p></footer>
+</main>
