@@ -1,0 +1,25 @@
+{
+  "game": "2026_05_BUF_LA",
+  "kickoff_utc": "2026-10-13 00:15 UTC",
+  "frozen_at": "2026-10-12 23:44 UTC",
+  "bankroll": 20.0,
+  "reserve_not_bet": 10.0,
+  "paper_money": true,
+  "picks_source": "locked legacy picks, commit 3068909 (src/ev.py); 5- and 6-pick legacy lineups skipped because they repeat a player",
+  "payouts": "PrizePicks standard tables (config/payouts.toml); if the app offered lower same-game multipliers, grade at the standard table and note it",
+  "voids": "a leg whose player does not play is removed and the entry drops a size, per PrizePicks rules",
+  "entries": [
+    {"id": "A", "type": "flex", "stake": 6.0,
+     "legs": ["Josh Allen rush+rec TDs more 0.5", "Matthew Stafford pass yds more 274.5", "Kyren Williams rec yds more 19.5"],
+     "pays": {"3": 2.25, "2": 1.25}},
+    {"id": "B", "type": "power", "stake": 4.0,
+     "legs": ["Josh Allen rush+rec TDs more 0.5", "Matthew Stafford pass yds more 274.5", "Kyren Williams rec yds more 19.5", "Dalton Kincaid rec yds less 57.5"],
+     "pays": {"4": 10}}
+  ],
+  "expected_return_per_dollar": {
+    "A_flex3": {"legacy_estimates": 1.040, "market_no_vig": 0.825, "model_v0": 0.595},
+    "B_power4": {"legacy_estimates": 1.215, "market_no_vig": 0.766, "model_v0": 0.617},
+    "note": "legs treated as independent; market = no-vig prices listed in src/ev.py; v0 = calibrated model v0 chances from output/v0/2026-w05-buf-lar.html"
+  },
+  "result": null
+}
