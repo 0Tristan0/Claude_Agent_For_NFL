@@ -1,0 +1,2 @@
+game_id,source,captured_at,spread_line,total_line,home_moneyline,away_moneyline,home_spread_odds,away_spread_odds,over_odds,under_odds,notes
+2026_05_BUF_LA,nflverse_schedule_snapshot,2026-10-12T18:16:00Z,3.5,54.5,-175,145,-102,-118,-118,-102,spread_line is from the home team's view: positive = home (LA) favored

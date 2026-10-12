@@ -1,0 +1,68 @@
+stadium_id,stadium_name,lat,lon,altitude,tz,first_game_date,last_game_date,city,country
+ATL00,Georgia Dome,33.75763,-84.40116,303.6,America/New_York,1999-09-12,2017-01-22,Atlanta,United States
+ATL97,Mercedes-Benz Stadium,33.75551,-84.40085,307.4,America/New_York,2017-09-17,2027-01-03,Atlanta,United States
+BAL00,M&T Bank Stadium,39.27796,-76.62272,3.1,America/New_York,1999-09-19,2027-01-10,Baltimore,United States
+BOS00,Gillette Stadium,42.09092,-71.26433,78.0,America/New_York,2002-09-09,2027-01-10,Foxborough,United States
+BOS99,Foxboro Stadium,42.09258,-71.26747,94.1,America/New_York,1999-09-19,2002-01-19,Foxborough,United States
+BRG00,Tiger Stadium (LSU),30.41203,-91.18381,7.6,America/Chicago,2005-10-30,2005-12-18,Baton Rouge,United States
+BUF00,Highmark Stadium,42.77375,-78.78695,218.3,America/New_York,1999-09-19,2027-01-10,Orchard Park,United States
+BUF01,Rogers Centre,43.64166,-79.38909,82.0,America/Toronto,2008-12-07,2013-12-01,Toronto,Canada
+CAR00,Bank of America Stadium,35.22582,-80.85284,221.0,America/New_York,1999-09-19,2027-01-10,Charlotte,United States
+CHI98,Soldier Field,41.86246,-87.61678,177.3,America/Chicago,1999-09-12,2027-01-03,Chicago,United States
+CHI99,Memorial Stadium (Champaign),40.0993,-88.23595,223.2,America/Chicago,2002-09-08,2002-12-29,Champaign,United States
+CIN00,Paycor Stadium,39.09543,-84.51604,146.4,America/New_York,2000-09-10,2027-01-10,Cincinnati,United States
+CIN99,Cinergy Field,39.09655,-84.50842,149.7,America/New_York,1999-09-19,1999-12-12,Cincinnati,United States
+CLE00,Huntington Bank Field,41.50604,-81.69959,177.4,America/New_York,1999-09-12,2027-01-03,Cleveland,United States
+DAL00,AT&T Stadium,32.74797,-97.09285,242.5,America/Chicago,2009-09-20,2027-01-03,Arlington,United States
+DAL99,Texas Stadium,32.83981,-96.91089,135.3,America/Chicago,1999-09-20,2008-12-20,Irving,United States
+DEN00,Empower Field at Mile High,39.74394,-105.02011,1583.6,America/Denver,2001-09-10,2027-01-10,Denver,United States
+DEN99,Mile High Stadium,39.746,-105.02164,1588.2,America/Denver,1999-09-13,2000-12-23,Denver,United States
+DET00,Ford Field,42.34013,-83.04568,183.8,America/Detroit,2002-09-22,2026-12-28,Detroit,United States
+DET99,Pontiac Silverdome,42.64578,-83.25495,271.8,America/Detroit,1999-09-19,2002-01-06,Pontaic,United States
+FRA00,Deutsche Bank Park,50.06866,8.64542,109.6,Europe/Berlin,2023-11-05,2023-11-12,Langen,Germany
+GER00,Allianz Arena,48.21889,11.62472,492.6,Europe/Berlin,2022-11-13,2024-11-10,München,Germany
+GNB00,Lambeau Field,44.50148,-88.06216,188.9,America/Chicago,1999-09-12,2027-01-10,Green Bay,United States
+HOU00,Reliant Stadium,29.68492,-95.41082,15.2,America/Chicago,2002-09-08,2027-01-10,Houston,United States
+IND00,Lucas Oil Stadium,39.7602,-86.16381,216.4,America/Indiana/Indianapolis,2008-09-07,2027-01-10,Indianapolis,United States
+IND99,RCA Dome,39.76363,-86.16345,216.4,America/Indiana/Indianapolis,1999-09-12,2008-01-13,Indianapolis,United States
+JAX00,EverBank Stadium,30.32392,-81.63735,1.5,America/New_York,1999-09-12,2027-01-03,Jacksonville,United States
+KAN00,GEHA Field at Arrowhead Stadium,39.04893,-94.484,256.8,America/Chicago,1999-09-19,2027-01-10,Kansas City,United States
+LAX01,SoFi Stadium,33.95348,-118.33903,37.0,America/Los_Angeles,2020-09-13,2027-01-10,Inglewood,United States
+LAX97,StubHub Center,33.86432,-118.26112,14.6,America/Los_Angeles,2017-09-17,2019-12-22,Carson,United States
+LAX99,Los Angeles Memorial Coliseum,34.01404,-118.28786,41.6,America/Los_Angeles,2016-09-18,2019-12-29,Los Angeles,United States
+LON00,Wembley Stadium,51.55598,-0.27959,45.4,Europe/London,2007-10-28,2026-10-18,London,United Kingdom
+LON01,Twickenham Stadium,51.45604,-0.34154,9.9,Europe/London,2016-10-23,2017-10-29,London,United Kingdom
+LON02,Tottenham Hotspur Stadium,51.60422,-0.06622,13.1,Europe/London,2019-10-06,2026-10-04,London,United Kingdom
+MEX00,Estadio Banorte,19.30297,-99.15048,2236.7,America/Mexico_City,2005-10-02,2026-11-22,Ciudad de México,Mexico
+MIA00,Hard Rock Stadium,25.95796,-80.23884,2.6,America/New_York,1999-09-19,2027-01-03,Miami Gardens,United States
+MIN00,Mall of America Field,44.97383,-93.25804,260.5,America/Chicago,1999-09-19,2013-12-29,Minneapolis,United States
+MIN01,U.S. Bank Stadium,44.97363,-93.25741,260.8,America/Chicago,2016-09-18,2027-01-10,Minneapolis,United States
+MIN98,TCF Bank Stadium,44.97654,-93.22457,254.2,America/Chicago,2010-12-20,2016-01-10,Minneapolis,United States
+NAS00,Nissan Stadium,36.16648,-86.77129,121.1,America/Chicago,1999-09-12,2027-01-03,Nashville-Davidson,United States
+NOR00,Caesars Superdome,29.95114,-90.08108,0.5,America/Chicago,1999-09-12,2027-01-10,New Orleans,United States
+NYC00,Giants Stadium,40.81351,-74.07434,1.6,America/New_York,1999-09-12,2010-01-03,East Rutherford,United States
+NYC01,MetLife Stadium,40.81351,-74.07434,2.3,America/New_York,2010-09-12,2027-01-10,East Rutherford,United States
+OAK00,Ring Central Coliseum,37.75161,-122.2006,0.0,America/Los_Angeles,1999-09-26,2019-12-15,Oakland,United States
+PHI00,Lincoln Financial Field,39.90079,-75.16746,3.2,America/New_York,2003-09-08,2026-12-24,Philadelphia,United States
+PHI99,Veterans Stadium,39.90677,-75.17063,5.8,America/New_York,1999-09-12,2003-01-19,Philadelphia,United States
+PHO00,State Farm Stadium,33.52776,-112.26259,325.7,America/Phoenix,2006-09-10,2027-01-10,Glendale,United States
+PHO99,Sun Devil Stadium,33.42643,-111.93258,360.1,America/Phoenix,1999-09-27,2005-12-24,Tempe,United States
+PIT00,Acrisure Stadium,40.44679,-80.01577,220.6,America/New_York,2001-10-07,2026-12-27,Pittsburgh,United States
+PIT99,Three Rivers Stadium,40.44655,-80.01261,222.8,America/New_York,1999-09-26,2000-12-16,Pittsburgh,United States
+SAN00,Alamo Dome,29.41697,-98.47889,200.8,America/Chicago,2005-10-02,2005-12-24,San Antonio,United States
+SAO00,Arena Corinthians,-23.54532,-46.47423,781.3,America/Sao_Paulo,2024-09-06,2024-09-06,São Paulo,Brazil
+SDG00,Qualcomm Stadium,32.78322,117.11959,16.2,America/Los_Angeles,1999-09-26,2017-01-01,San Diego,United States
+SEA00,Lumen Field,47.59515,-122.33163,5.2,America/Los_Angeles,2002-09-15,2026-12-25,Seattle,United States
+SEA98,Seattle Kingdome,47.59563,-122.33144,5.2,America/Los_Angeles,1999-09-12,2000-01-09,Seattle,United States
+SEA99,Husky Stadium,47.65029,-122.30163,11.6,America/Los_Angeles,2000-09-10,2002-01-06,Seattle,United States
+SFO00,Candlestick Park,37.71343,-122.38623,7.6,America/Los_Angeles,1999-09-19,2013-12-23,San Francisco,United States
+SFO01,Levi's Stadium,37.40318,-121.96981,4.2,America/Los_Angeles,2014-09-14,2027-01-03,Santa Clara,United States
+STL00,Edward Jones Dome,38.63293,-90.18853,141.9,America/Chicago,1999-09-12,2015-12-17,St. Louis,United States
+TAM00,Raymond James Stadium,27.97597,-82.50336,11.3,America/New_York,1999-09-12,2027-01-03,Tampa,United States
+VEG00,Allegiant Stadium,36.09085,-115.18334,665.4,America/Los_Angeles,2020-09-21,2026-12-27,Paradise,United States
+WAS00,Northwest Stadium,38.9077,-76.86451,59.6,America/New_York,1999-09-12,2027-01-10,Landover,United States
+MEL00,Melbourne Cricket Ground,-37.81994,144.98345,13.0,Australia/Melbourne,2026-09-10,2026-09-10,Melbourne,Australia
+RIO00,Maracana Stadium,-22.91222,-43.23028,15.0,America/Sao_Paulo,2026-09-27,2026-09-27,Rio de Janeiro,Brazil
+PAR00,Stade de France,48.92444,2.36,33.0,Europe/Paris,2026-10-25,2026-10-25,Saint-Denis,France
+MAD01,Bernabeu,40.45306,-3.68835,714.0,Europe/Madrid,2026-11-08,2026-11-08,Madrid,Spain
+MUN01,FC Bayern Munich Stadium,48.21889,11.62472,492.6,Europe/Berlin,2026-11-15,2026-11-15,München,Germany

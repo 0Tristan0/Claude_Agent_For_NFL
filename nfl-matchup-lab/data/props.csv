@@ -1,0 +1,16 @@
+player,team,stat,line,source,over_odds,under_odds,odds_kind,line_type,payout_multiplier,captured_at,game_id,notes
+Josh Allen,BUF,anytime_td,0.5,legacy_ev_py,0.52,,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,"+100 to -124 at books, 52c Polymarket"
+Matthew Stafford,LAR,pass_yds,274.5,legacy_ev_py,0.545,,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,"54c Polymarket, 55% Kalshi"
+Kyren Williams,LAR,rec_yds,19.5,legacy_ev_py,0.52,,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,-114 FanDuel
+Dalton Kincaid,BUF,rec_yds,57.5,legacy_ev_py,,0.52,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,-115 bet365 (under)
+Josh Allen,BUF,pass_yds,249.5,legacy_ev_py,,0.52,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,48% over on Kalshi
+Kyren Williams,LAR,rush_yds,69.5,legacy_ev_py,0.475,,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,under 52-53% on Kalshi/Polymarket
+Kyren Williams,LAR,anytime_td,0.5,legacy_ev_py,0.60,,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,-170 at books
+Puka Nacua,LAR,rec_yds,94.5,prizepicks,,,,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,PrizePicks line published outside the app
+James Cook,BUF,rush_yds,75.5,prizepicks,,,,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,PrizePicks line published outside the app
+Puka Nacua,LAR,rec_yds,94.5,legacy_ev_py,0.52,,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,o90 at -140 Predictem
+James Cook,BUF,rush_yds,75.5,legacy_ev_py,0.50,,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,Covers projects 66
+Khalil Shakir,BUF,rec_yds,49.5,legacy_ev_py,,0.55,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,45% over on Kalshi
+James Cook,BUF,receptions,1.5,legacy_ev_py,0.53,,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,53% on Kalshi
+Matthew Stafford,LAR,rush_yds,9.5,legacy_ev_py,,0.50,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,no price found
+Colby Parkinson,LAR,rec_yds,14.5,legacy_ev_py,0.56,,legacy_blend,standard,,2026-10-12T17:56:32Z,2026_05_BUF_LA,56% on Kalshi

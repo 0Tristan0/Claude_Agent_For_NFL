@@ -1,0 +1,33 @@
+# How picks qualify and how lineups are sized.
+
+margin = 0.03                 # model must beat break-even AND the devigged market by this much
+devig_methods = ["multiplicative", "power", "shin"]   # qualify on the smallest edge across these
+display_devig = "power"
+breakeven_basis = "entry"     # a leg must clear the break-even of the entry size it goes into
+
+# One-sided prices (only an Over or only a Yes is posted) carry hidden hold. These overrounds are
+# assumed per stat and the leg is flagged "one-sided". Anytime TD yes-only markets carry far more hold.
+[one_sided_overround]
+default = 0.045
+anytime_td = 0.20
+pass_tds = 0.08
+
+[line_mismatch]
+max_sd = 0.5                  # refuse to shift a book price to a PrizePicks line more than 0.5 SD away
+refuse_integer_cross = true   # for count stats, refuse when the two lines straddle an integer
+
+[info_gap]
+flag_sd = 1.5                 # model vs market gaps beyond this are flagged "check news", not "edge"
+
+[lineups]
+sizes = [3, 4, 5, 6]
+max_exhaustive = 50000        # combinations; above this a beam search is used
+beam_width = 64
+min_ev_se = 2.0               # keep a lineup only if EV - 2 Monte Carlo SE > 1
+shrink_to_reference = 0.25    # shrink leg probs 25% toward max(market, break-even) before ranking
+negative_corr_block = -0.05   # never pair legs whose sim correlation is below this
+
+[kelly]
+enabled = false               # off until live CLV is positive with a CI that excludes 0
+fraction = 0.25
+cap = 0.02                    # max share of bankroll per entry
