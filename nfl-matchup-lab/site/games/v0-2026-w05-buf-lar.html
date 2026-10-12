@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BUF at LAR v0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: scoreboard header, then two unit-vs-unit tables, a coverage comparison, and player exploit cards. Rank pills run green (top 8) to red (bottom 8). */
+:root{
+  --bg:#F2F4F1; --surface:#FFFFFF; --fg:#16201B; --muted:#5A6A61; --line:#D8DFD9;
+  --buf:#C60C30; --lar:#B87E00; --lar-strong:#E5A100;
+  --t1:#1E8049; --t1bg:#DDF0E3; --t2:#4E7A2E; --t2bg:#EAF2DE; --t3:#9A6A00; --t3bg:#F7ECD3; --t4:#B33A25; --t4bg:#F8E0DA;
+  --track:#E6EBE7;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1512; --surface:#17201B; --fg:#E7EDE9; --muted:#97A69D; --line:#2B3730;
+  --buf:#FF5A70; --lar:#FFB52E; --lar-strong:#FFB52E;
+  --t1:#6FD796; --t1bg:#163323; --t2:#A9CF7E; --t2bg:#212E17; --t3:#F2C35E; --t3bg:#352A11; --t4:#FF8B74; --t4bg:#3A1B15;
+  --track:#25302A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1512; --surface:#17201B; --fg:#E7EDE9; --muted:#97A69D; --line:#2B3730;
+  --buf:#FF5A70; --lar:#FFB52E; --lar-strong:#FFB52E;
+  --t1:#6FD796; --t1bg:#163323; --t2:#A9CF7E; --t2bg:#212E17; --t3:#F2C35E; --t3bg:#352A11; --t4:#FF8B74; --t4bg:#3A1B15;
+  --track:#25302A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.05}
+h2{font-size:1.9rem;font-weight:700;letter-spacing:.01em;text-transform:uppercase}
+.sub{color:var(--muted);margin:6px 0 0;max-width:68ch}
+.eyebrow{font-family:var(--display);font-weight:600;font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+section{display:grid;gap:14px;min-width:0}
+
+/* scoreboard */
+.board{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;gap:16px}
+.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+.team{display:grid;gap:2px}
+.team.home{text-align:right}
+.team .ab{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,9vw,4.2rem);line-height:.9}
+.team.away .ab{color:var(--buf)} .team.home .ab{color:var(--lar-strong)}
+.team .nm{font-weight:600}
+.team .rec{color:var(--muted);font-variant-numeric:tabular-nums}
+.at{font-family:var(--display);font-size:1.4rem;color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 20px;border-top:1px solid var(--line);padding-top:14px;font-variant-numeric:tabular-nums}
+.facts div{display:grid}
+.facts dt{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:0;font-weight:600}
+.facts dl{display:contents}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums}
+caption{text-align:left;padding:14px 16px 4px;font-family:var(--display);font-weight:600;font-size:1.15rem;letter-spacing:.02em}
+thead th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;text-align:left;padding:10px 16px;border-bottom:1px solid var(--line)}
+tbody th{text-align:left;font-weight:600;padding:10px 16px;vertical-align:top;width:28%}
+tbody td{padding:10px 16px;vertical-align:middle}
+tbody tr+tr th,tbody tr+tr td{border-top:1px solid var(--line)}
+.vs-lbl{display:block;font-weight:400;font-size:.8rem;color:var(--muted)}
+.side{white-space:nowrap}
+.side .v{display:inline-block;min-width:4.6em;font-weight:600}
+.pill{display:inline-block;min-width:3.2em;text-align:center;font-size:.8rem;font-weight:700;padding:1px 8px;border-radius:999px;margin-right:10px}
+.t1{color:var(--t1);background:var(--t1bg)} .t2{color:var(--t2);background:var(--t2bg)}
+.t3{color:var(--t3);background:var(--t3bg)} .t4{color:var(--t4);background:var(--t4bg)}
+.bar{display:inline-block;width:72px;height:6px;background:var(--track);border-radius:3px;vertical-align:middle;overflow:hidden}
+.fill{display:block;height:100%;border-radius:3px}
+.fill.buf{background:var(--buf)} .fill.lar{background:var(--lar)}
+.edge{display:inline-block;font-family:var(--display);font-weight:700;font-size:.95rem;letter-spacing:.04em;text-transform:uppercase;padding:2px 10px;border-radius:4px;border:1.5px solid currentColor}
+.edge.buf{color:var(--buf)} .edge.lar{color:var(--lar)} .edge.even{color:var(--muted)}
+.tchip{font-family:var(--display);font-weight:700;letter-spacing:.04em}
+.tchip.buf{color:var(--buf)} .tchip.lar{color:var(--lar)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:.85rem;color:var(--muted);align-items:center}
+.legend .pill{margin-right:4px}
+
+/* takeaways */
+.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.take{border-left:4px solid var(--line);padding:4px 0 4px 14px;min-width:0}
+.take.buf{border-color:var(--buf)} .take.lar{border-color:var(--lar)}
+.take b{display:block;font-family:var(--display);font-size:1.15rem;letter-spacing:.02em;text-transform:uppercase}
+.take p{margin:4px 0 0}
+
+/* player cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.card header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card h3{font-size:1.45rem;font-weight:700}
+.card .pos{font-size:.8rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.line{font-variant-numeric:tabular-nums;font-weight:600;font-size:.95rem}
+.vsbox{display:grid;gap:2px;padding:10px 12px;border-radius:6px;background:var(--bg);font-size:.95rem}
+.vsbox .k{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.card p{margin:0}
+.verdict{font-family:var(--display);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.95rem}
+.verdict.big{color:var(--t1)} .verdict.mid{color:var(--t3)} .verdict.low{color:var(--t4)}
+
+.notes{color:var(--muted);font-size:.9rem;display:grid;gap:6px;max-width:75ch}
+.notes a{color:inherit}
+.notes ul{margin:0;padding-left:1.2em}
+:focus-visible{outline:2px solid var(--lar);outline-offset:2px}
+@media (max-width:520px){ .team .nm{font-size:.9rem} .bar{width:44px} }
+</style>
+
+<style>
+.v0tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:999px;color:var(--t3);background:var(--t3bg)}
+.pt td,.pt th{white-space:nowrap}
+.pt .num{font-variant-numeric:tabular-nums;text-align:right}
+.rng{color:var(--muted);font-size:.85rem}
+.q-yes{color:var(--t1);font-weight:700}.q-no{color:var(--muted)}
+.small{font-size:.85rem;color:var(--muted)}
+</style>
+<style>body{margin:0}.back a{font-family:var(--display);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}</style>
+</head>
+<body>
+<main class="wrap">
+<nav class="back"><a href="../index.html">All games</a></nav>
+<div class="board"><span class="eyebrow">Week 5 · Mon Oct 12, 8:15 PM ET · <span class="v0tag">Model v0</span></span>
+<div class="teams"><div class="team away"><span class="ab">BUF</span><span class="nm">Buffalo Bills</span>
+<span class="rec">Implied 25.5 pts · sim win 40%</span></div><span class="at">at</span>
+<div class="team home"><span class="ab">LAR</span><span class="nm">Los Angeles Rams</span>
+<span class="rec">Implied 29.0 pts · sim win 60%</span></div></div>
+<div class="facts"><dl><div><dt>Spread / total</dt><dd>LAR -3.5 / 54.5 (latest market line)</dd></div>
+<div><dt>Sim median score</dt><dd>BUF 26, LAR 29</dd></div>
+<div><dt>Plays / pass rate</dt><dd>BUF 62 / 58% · LAR 64 / 61%</dd></div>
+<div><dt>Sims</dt><dd>20,000</dd></div></dl></div></div>
+
+<section aria-labelledby="h-proj"><div><h2 id="h-proj">Projections</h2>
+<p class="sub">Medians with the 10th to 90th percentile range from 20,000 simulated games. Targets and carries come from each
+player's recent share of team volume (shrunk toward what his snap share predicts), team volume from the market total and
+spread, and efficiency shrunk toward position averages.</p></div>
+<div class='tbl-wrap'><table class='pt'><caption>Buffalo Bills</caption><thead><tr><th scope='col'>Player</th><th scope='col'>Targets</th><th scope='col'>Catches</th><th scope='col'>Rec yds (10th to 90th)</th><th scope='col'>Rushes</th><th scope='col'>Rush yds</th><th scope='col'>Pass yds</th><th scope='col'>Any TD</th></tr></thead><tbody><tr><th scope='row'>Josh Allen<span class='vs-lbl'>QB</span></th><td class='num'>0.0</td><td class='num'>0.0</td><td class='num'></td><td class='num'>6.5</td><td class='num'>25<span class='rng'> (4 to 56)</span></td><td class='num'>228<span class='rng'> (136 to 347)</span></td><td class='num'>26%</td></tr><tr><th scope='row'>James Cook<span class='vs-lbl'>RB</span></th><td class='num'>2.6</td><td class='num'>1.9</td><td class='num'>8<span class='rng'> (0 to 36)</span></td><td class='num'>16.3</td><td class='num'>79<span class='rng'> (37 to 133)</span></td><td></td><td class='num'>53%</td></tr><tr><th scope='row'>Khalil Shakir<span class='vs-lbl'>WR</span></th><td class='num'>6.3</td><td class='num'>4.2</td><td class='num'>42<span class='rng'> (9 to 100)</span></td><td class='num'>0.1</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>35%</td></tr><tr><th scope='row'>Ty Johnson<span class='vs-lbl'>RB</span></th><td class='num'>2.6</td><td class='num'>2.1</td><td class='num'>10<span class='rng'> (0 to 43)</span></td><td class='num'>3.1</td><td class='num'>9<span class='rng'> (0 to 34)</span></td><td></td><td class='num'>23%</td></tr><tr><th scope='row'>D.J. Moore<span class='vs-lbl'>WR</span></th><td class='num'>5.0</td><td class='num'>3.1</td><td class='num'>32<span class='rng'> (2 to 88)</span></td><td class='num'>0.5</td><td class='num'>0<span class='rng'> (0 to 10)</span></td><td></td><td class='num'>26%</td></tr><tr><th scope='row'>Dalton Kincaid<span class='vs-lbl'>TE</span></th><td class='num'>4.4</td><td class='num'>3.2</td><td class='num'>32<span class='rng'> (2 to 85)</span></td><td class='num'>0.0</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>18%</td></tr><tr><th scope='row'>Keon Coleman<span class='vs-lbl'>WR</span></th><td class='num'>4.2</td><td class='num'>2.8</td><td class='num'>30<span class='rng'> (0 to 88)</span></td><td class='num'>0.1</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>20%</td></tr><tr><th scope='row'>Dawson Knox<span class='vs-lbl'>TE</span></th><td class='num'>2.5</td><td class='num'>1.8</td><td class='num'>12<span class='rng'> (0 to 45)</span></td><td class='num'>0.1</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>14%</td></tr><tr><th scope='row'>Ray Davis<span class='vs-lbl'>RB</span></th><td class='num'>0.6</td><td class='num'>0.5</td><td class='num'>0<span class='rng'> (0 to 12)</span></td><td class='num'>1.7</td><td class='num'>3<span class='rng'> (0 to 23)</span></td><td></td><td class='num'>4%</td></tr><tr><th scope='row'>Greg Dortch<span class='vs-lbl'>WR</span></th><td class='num'>1.0</td><td class='num'>0.6</td><td class='num'>0<span class='rng'> (0 to 27)</span></td><td class='num'>0.2</td><td class='num'>0<span class='rng'> (0 to 1)</span></td><td></td><td class='num'>3%</td></tr></tbody></table></div><div class='tbl-wrap'><table class='pt'><caption>Los Angeles Rams</caption><thead><tr><th scope='col'>Player</th><th scope='col'>Targets</th><th scope='col'>Catches</th><th scope='col'>Rec yds (10th to 90th)</th><th scope='col'>Rushes</th><th scope='col'>Rush yds</th><th scope='col'>Pass yds</th><th scope='col'>Any TD</th></tr></thead><tbody><tr><th scope='row'>Matthew Stafford<span class='vs-lbl'>QB</span></th><td class='num'>0.0</td><td class='num'>0.0</td><td class='num'></td><td class='num'>3.1</td><td class='num'>7<span class='rng'> (-2 to 27)</span></td><td class='num'>259<span class='rng'> (159 to 387)</span></td><td class='num'>6%</td></tr><tr><th scope='row'>Kyren Williams<span class='vs-lbl'>RB</span></th><td class='num'>4.0</td><td class='num'>3.2</td><td class='num'>18<span class='rng'> (0 to 57)</span></td><td class='num'>15.2</td><td class='num'>68<span class='rng'> (30 to 120)</span></td><td></td><td class='num'>66%</td></tr><tr><th scope='row'>Blake Corum<span class='vs-lbl'>RB</span></th><td class='num'>1.2</td><td class='num'>0.9</td><td class='num'>0<span class='rng'> (0 to 21)</span></td><td class='num'>7.6</td><td class='num'>30<span class='rng'> (7 to 65)</span></td><td></td><td class='num'>26%</td></tr><tr><th scope='row'>Puka Nacua<span class='vs-lbl'>WR</span></th><td class='num'>8.1</td><td class='num'>5.3</td><td class='num'>62<span class='rng'> (17 to 137)</span></td><td class='num'>0.7</td><td class='num'>0<span class='rng'> (0 to 15)</span></td><td></td><td class='num'>39%</td></tr><tr><th scope='row'>Davante Adams<span class='vs-lbl'>WR</span></th><td class='num'>6.4</td><td class='num'>3.8</td><td class='num'>46<span class='rng'> (7 to 112)</span></td><td class='num'>0.1</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>37%</td></tr><tr><th scope='row'>Tyler Higbee<span class='vs-lbl'>TE</span></th><td class='num'>3.2</td><td class='num'>2.3</td><td class='num'>18<span class='rng'> (0 to 57)</span></td><td class='num'>0.0</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>18%</td></tr><tr><th scope='row'>Terrance Ferguson<span class='vs-lbl'>TE</span></th><td class='num'>2.6</td><td class='num'>1.7</td><td class='num'>11<span class='rng'> (0 to 45)</span></td><td class='num'>0.0</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>11%</td></tr><tr><th scope='row'>Colby Parkinson<span class='vs-lbl'>TE</span></th><td class='num'>2.4</td><td class='num'>1.7</td><td class='num'>11<span class='rng'> (0 to 46)</span></td><td class='num'>0.0</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>16%</td></tr><tr><th scope='row'>Konata Mumpfield<span class='vs-lbl'>WR</span></th><td class='num'>2.3</td><td class='num'>1.3</td><td class='num'>9<span class='rng'> (0 to 50)</span></td><td class='num'>0.0</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>9%</td></tr><tr><th scope='row'>Davis Allen<span class='vs-lbl'>TE</span></th><td class='num'>1.2</td><td class='num'>0.8</td><td class='num'>0<span class='rng'> (0 to 27)</span></td><td class='num'>0.0</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>3%</td></tr><tr><th scope='row'>Tutu Atwell<span class='vs-lbl'>WR</span></th><td class='num'>1.0</td><td class='num'>0.6</td><td class='num'>0<span class='rng'> (0 to 28)</span></td><td class='num'>0.0</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>2%</td></tr><tr><th scope='row'>Jordan Whittington<span class='vs-lbl'>WR</span></th><td class='num'>0.8</td><td class='num'>0.5</td><td class='num'>0<span class='rng'> (0 to 23)</span></td><td class='num'>0.1</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>1%</td></tr><tr><th scope='row'>Xavier Smith<span class='vs-lbl'>WR</span></th><td class='num'>0.7</td><td class='num'>0.4</td><td class='num'>0<span class='rng'> (0 to 20)</span></td><td class='num'>0.0</td><td class='num'>0<span class='rng'> (0 to 0)</span></td><td></td><td class='num'>2%</td></tr></tbody></table></div></section>
+
+<section aria-labelledby="h-props"><div><h2 id="h-props">Your lines</h2>
+<p class="sub">From data/props.csv. Model chances are calibrated on 2023 (raw sim chances were too confident at the
+extremes). When the model is very far from a real line (72% or more on one side), the line probably reflects news the
+model doesn't have, so those legs never qualify. Break-even per leg: 3-pick 58.5%, 4-pick 56.2%,
+5-pick 54.3%, 6-pick 54.2%. A leg qualifies only if the model beats that and the
+no-vig market price by 3 points.</p></div><div class='tbl-wrap'><table class='pt'><thead><tr><th scope='col'>Player</th><th scope='col'>Stat</th><th scope='col'>Line</th><th scope='col'>Side</th><th scope='col'>Model</th><th scope='col'>Market (no vig)</th><th scope='col'>Qualifies</th></tr></thead><tbody><tr><th scope='row'>Dalton Kincaid<span class='vs-lbl'>BUF · legacy_ev_py</span></th><td>rec yds</td><td class='num'>57.5</td><td>under</td><td class='num'>71%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Puka Nacua<span class='vs-lbl'>LAR · prizepicks</span></th><td>rec yds</td><td class='num'>94.5</td><td>under</td><td class='num'>69%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Puka Nacua<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>rec yds</td><td class='num'>94.5</td><td>under</td><td class='num'>69%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Kyren Williams<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>anytime td</td><td class='num'>0.5</td><td>over</td><td class='num'>63%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Josh Allen<span class='vs-lbl'>BUF · legacy_ev_py</span></th><td>pass yds</td><td class='num'>249.5</td><td>under</td><td class='num'>58%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Matthew Stafford<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>rush yds</td><td class='num'>9.5</td><td>under</td><td class='num'>57%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Khalil Shakir<span class='vs-lbl'>BUF · legacy_ev_py</span></th><td>rec yds</td><td class='num'>49.5</td><td>under</td><td class='num'>56%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Matthew Stafford<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>pass yds</td><td class='num'>274.5</td><td>under</td><td class='num'>55%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Colby Parkinson<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>rec yds</td><td class='num'>14.5</td><td>under</td><td class='num'>55%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>James Cook<span class='vs-lbl'>BUF · legacy_ev_py</span></th><td>rush yds</td><td class='num'>75.5</td><td>over</td><td class='num'>53%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>James Cook<span class='vs-lbl'>BUF · prizepicks</span></th><td>rush yds</td><td class='num'>75.5</td><td>over</td><td class='num'>53%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Kyren Williams<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>rec yds</td><td class='num'>19.5</td><td>under</td><td class='num'>52%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Kyren Williams<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>rush yds</td><td class='num'>69.5</td><td>under</td><td class='num'>51%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>James Cook<span class='vs-lbl'>BUF · legacy_ev_py</span></th><td>receptions</td><td class='num'>1.5</td><td>over</td><td class='num'>51%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>James Cook<span class='vs-lbl'>BUF · legacy_ev_py</span></th><td>receptions</td><td class='num'>1.5</td><td>under</td><td class='num'>49%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Kyren Williams<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>rush yds</td><td class='num'>69.5</td><td>over</td><td class='num'>49%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Kyren Williams<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>rec yds</td><td class='num'>19.5</td><td>over</td><td class='num'>48%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>James Cook<span class='vs-lbl'>BUF · legacy_ev_py</span></th><td>rush yds</td><td class='num'>75.5</td><td>under</td><td class='num'>47%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>James Cook<span class='vs-lbl'>BUF · prizepicks</span></th><td>rush yds</td><td class='num'>75.5</td><td>under</td><td class='num'>47%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Colby Parkinson<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>rec yds</td><td class='num'>14.5</td><td>over</td><td class='num'>45%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Matthew Stafford<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>pass yds</td><td class='num'>274.5</td><td>over</td><td class='num'>45%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Khalil Shakir<span class='vs-lbl'>BUF · legacy_ev_py</span></th><td>rec yds</td><td class='num'>49.5</td><td>over</td><td class='num'>44%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Matthew Stafford<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>rush yds</td><td class='num'>9.5</td><td>over</td><td class='num'>43%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Josh Allen<span class='vs-lbl'>BUF · legacy_ev_py</span></th><td>pass yds</td><td class='num'>249.5</td><td>over</td><td class='num'>42%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Puka Nacua<span class='vs-lbl'>LAR · legacy_ev_py</span></th><td>rec yds</td><td class='num'>94.5</td><td>over</td><td class='num'>31%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Puka Nacua<span class='vs-lbl'>LAR · prizepicks</span></th><td>rec yds</td><td class='num'>94.5</td><td>over</td><td class='num'>31%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Josh Allen<span class='vs-lbl'>BUF · legacy_ev_py</span></th><td>anytime td</td><td class='num'>0.5</td><td>over</td><td class='num'>31%</td><td class='num'></td><td class='q-no'>No market price</td></tr><tr><th scope='row'>Dalton Kincaid<span class='vs-lbl'>BUF · legacy_ev_py</span></th><td>rec yds</td><td class='num'>57.5</td><td>over</td><td class='num'>29%</td><td class='num'></td><td class='q-no'>No market price</td></tr></tbody></table></div></section>
+
+<section aria-labelledby="h-lu"><div><h2 id="h-lu">Lineups</h2>
+<p class="sub">Hit chance comes from the simulated games, so legs that move together (a QB and his receiver) are counted together.
+Same-game lineups can get lower multipliers in the app: skip a lineup if the app shows less than the listed minimum.</p></div><p class='sub'>No lineup qualifies yet. A leg needs the model to beat both the payout break-even and the no-vig market price by 3 points.</p></section>
+<section aria-labelledby="h-trust"><div><h2 id="h-trust">How much to trust this</h2>
+<p class="sub">Checked on every 2024 regular-season game from week 3 (240.0 games, 15,854.0 graded props) using
+fits from 2021 to 2023 only. Lines in that check are stand-ins (each player's recent median), not PrizePicks lines, so real
+hit rates will be lower. Brier score 0.185 vs 0.202 for the old method (lower is better;
+difference -0.0176, 95% range -0.0195 to -0.0160). When the model says X%, here is how often it happened:</p></div>
+<div class="tbl-wrap"><table class="pt"><thead><tr><th scope="col">Model said</th><th scope="col">Happened</th>
+<th scope="col">95% range</th><th scope="col">Props</th></tr></thead><tbody><tr><td class='num'>14%</td><td class='num'>13%</td><td class='num'>12% to 14%</td><td class='num'>6,098</td></tr><tr><td class='num'>35%</td><td class='num'>32%</td><td class='num'>31% to 34%</td><td class='num'>3,450</td></tr><tr><td class='num'>42%</td><td class='num'>42%</td><td class='num'>40% to 44%</td><td class='num'>1,806</td></tr><tr><td class='num'>47%</td><td class='num'>51%</td><td class='num'>48% to 53%</td><td class='num'>1,556</td></tr><tr><td class='num'>52%</td><td class='num'>53%</td><td class='num'>51% to 56%</td><td class='num'>1,227</td></tr><tr><td class='num'>57%</td><td class='num'>58%</td><td class='num'>55% to 62%</td><td class='num'>766</td></tr><tr><td class='num'>62%</td><td class='num'>64%</td><td class='num'>59% to 68%</td><td class='num'>470</td></tr><tr><td class='num'>67%</td><td class='num'>63%</td><td class='num'>57% to 69%</td><td class='num'>230</td></tr><tr><td class='num'>80%</td><td class='num'>77%</td><td class='num'>72% to 82%</td><td class='num'>251</td></tr></tbody></table></div></section>
+<footer class="notes"><p>Model v0: a simplified first version (team-level simulation, fixed shrinkage strengths). Data: nflverse
+play-by-play, snap counts, rosters, injuries and schedules (CC-BY 4.0); stadium time zones from the greerreNFL/Stadiums dataset;
+PrizePicks payouts from its help center. Lines in the schedule are closing lines. These are estimates with real uncertainty,
+not betting advice.</p></footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+ "a": 0.7763,
+ "b": 0.0,
+ "fitted_on": 2023,
+ "validated_on": 2024,
+ "form": "symmetric shrink toward 50% (no shift)",
+ "note": "2024 Brier change -0.00004 (95% CI -0.0005 to +0.0005): kept as unproven; improves high-confidence calibration"
+}

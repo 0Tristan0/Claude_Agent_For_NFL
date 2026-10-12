@@ -1,0 +1,6 @@
+exp_id,date,change,eval,brier_before,brier_after,logloss_after,result,note
+v0-00,2026-10-12,v0 baseline (team-level sim; share prior linear in snap share; K_target 60; other floor 4%; kappa none),"2024 quick check, stand-in lines, 2k sims",,0.18767,,baseline,"rec yds bias -3.2, rush yds -4.1; overconfident at extremes"
+v0-01,2026-10-12,share prior from snap-share curve; renormalize active shares so vacated volume is redistributed; K_target 60->20; other floor 4%->1.5%; kappa 80/60,2024 quick check,0.18767,0.18486,,kept,"several changes at once (time); rec yds bias -0.2, rush yds -0.6; QB pass yds +9.8"
+v0-02,2026-10-12,role-noise kappa 80/60 -> 40/30,2024 quick check,0.18486,0.18477,,kept (unproven),within Monte Carlo noise; mid-high calibration slightly better
+v0-03,2026-10-12,"logit recalibration a,b fitted on 2023","fit 2023, test 2024",0.18477,0.18515,,rejected,"Brier worse (+0.00037, CI -0.0001 to +0.0009); under-predicted 45-60% bins"
+v0-04,2026-10-12,symmetric logit shrink a=0.776 (b=0) fitted on 2023,"fit 2023, test 2024",0.18477,0.18474,,kept (unproven),"Brier change -0.00004 (CI spans 0); calls >=60% raw claimed 69.5% hit 64.9%, calibrated claim 65.9%"

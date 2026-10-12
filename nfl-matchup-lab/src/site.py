@@ -94,8 +94,45 @@ STYLE = """<style>
 .rt .num{font-weight:700;white-space:nowrap}
 .rt .muted{color:var(--muted)}
 .rt tr.tot th,.rt tr.tot td{border-top:2px solid var(--fg)}
+.v0week{display:grid;gap:8px}
+.v0grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:8px}
+.v0link{display:block;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;color:var(--fg);text-decoration:none;font-family:var(--display);font-size:1.15rem;letter-spacing:.02em}
+.v0link:hover,.v0link:focus-visible{border-color:var(--lar)}
 </style>
 """
+
+
+V0_DIR = os.path.join(ROOT, "output", "v0")
+
+
+def v0_pages():
+    """Model v0 game pages (output/v0/<season>-w<week>-<away>-<home>.html), newest week first."""
+    if not os.path.isdir(V0_DIR):
+        return []
+    out = []
+    for name in sorted(os.listdir(V0_DIR)):
+        m = re.match(r"(\d{4})-w(\d{2})-([a-z]+)-([a-z]+)\.html$", name)
+        if m:
+            out.append(dict(file=name, season=int(m[1]), week=int(m[2]), away=m[3].upper(), home=m[4].upper()))
+    return sorted(out, key=lambda d: (-d["season"], -d["week"], d["file"]))
+
+
+def v0_section():
+    pages = v0_pages()
+    if not pages:
+        return ""
+    weeks = {}
+    for p in pages:
+        weeks.setdefault((p["season"], p["week"]), []).append(p)
+    blocks = []
+    for (season, week), ps in weeks.items():
+        links = "".join(f'<a class="v0link" href="games/v0-{p["file"]}"><b>{e(p["away"])}</b> at <b>{e(p["home"])}</b></a>'
+                        for p in ps)
+        blocks.append(f'<div class="v0week"><span class="eyebrow">{season} · Week {week}</span><div class="v0grid">{links}</div></div>')
+    return ('<section aria-labelledby="h-v0"><div><h2 id="h-v0">Model v0 projections</h2>'
+            '<p class="sub">The new simulation model (first version): projections with ranges for every player, model '
+            'chances for the lines in data/props.csv, and lineups built from simulated games. Checked on the 2024 season '
+            'before use; each page shows how well calibrated it was.</p></div>' + "".join(blocks) + '</section>\n')
 
 
 def index_page():
@@ -108,7 +145,7 @@ def index_page():
             '<h1>NFL Matchup <span>Lab</span></h1>'
             '<p class="sub">One page per game: unit ranks, coverage, 1-on-1 matchups, a props board and PrizePicks '
             'lineups. Picks are locked in git before kickoff and graded after the game.</p></header>\n'
-            + sec("Upcoming", upcoming) + sec("Graded", graded) +
+            + v0_section() + sec("Upcoming", upcoming) + sec("Graded", graded) +
             '<section aria-labelledby="h-rec"><div><h2 id="h-rec">Track record</h2>'
             '<p class="sub">Units assume 1 unit per prop at the approximate price listed in each results file. '
             'A handful of picks says almost nothing yet about whether the method works.</p></div>'
@@ -126,5 +163,7 @@ if __name__ == "__main__":
     for g in G:
         if g.get("report"):
             open(os.path.join(SITE, "games", g["slug"] + ".html"), "w").write(game_page(g))
+    for p in v0_pages():
+        shutil.copy(os.path.join(V0_DIR, p["file"]), os.path.join(SITE, "games", "v0-" + p["file"]))
     open(os.path.join(SITE, "index.html"), "w").write(index_page())
     print("wrote", SITE)

@@ -35,7 +35,13 @@ def build_tables(raw: dict[str, pd.DataFrame], first_season: int | None = None) 
     p = p[p["game_id"].isin(set(games["game_id"]))]
     dr = pbp.drives(p)
 
-    tg = _stamp(team_games.build(p, dr, tv), "pbp")
+    tg = team_games.build(p, dr, tv)
+    # Final score per team-game (history only: rows become readable 16 h after kickoff like the rest)
+    sc = results[["game_id", "home_score", "away_score"]].merge(games[["game_id", "home_team", "away_team"]], on="game_id")
+    pts = pd.concat([sc.rename(columns={"home_team": "team", "home_score": "off_points", "away_score": "def_points"}),
+                     sc.rename(columns={"away_team": "team", "away_score": "off_points", "home_score": "def_points"})])
+    tg = tg.merge(pts[["game_id", "team", "off_points", "def_points"]], on=["game_id", "team"], how="left")
+    tg = _stamp(tg, "pbp")
     pressure = team_games.pfr_pressure(raw.get("pfr_pass", pd.DataFrame()))
     if not pressure.empty:
         dbk = tg[["game_id", "team", "off_dropbacks"]].rename(columns={"off_dropbacks": "pressure_dropbacks"})

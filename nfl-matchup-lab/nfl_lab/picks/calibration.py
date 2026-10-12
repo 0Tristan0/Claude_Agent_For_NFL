@@ -1,0 +1,50 @@
+"""Probability recalibration for v0: p_cal = logistic(a * logit(p) + b).
+
+Fitted on one validation season's quick check (2023) and judged on another (2024), never on 2025.
+v0's raw sim probabilities are too confident at the extremes (its 79% calls hit about 72% in 2024), so
+this layer pulls them in. Lineup hit chances keep the sim's correlation: the joint probability is scaled
+by the product of each leg's calibrated / raw ratio.
+"""
+from __future__ import annotations
+
+import json
+
+import numpy as np
+from scipy.optimize import minimize
+
+from .. import config
+
+PATH = config.BACKTESTS_DIR / "eval" / "v0_calibration.json"
+
+
+def _logit(p):
+    p = np.clip(np.asarray(p, float), 1e-4, 1 - 1e-4)
+    return np.log(p / (1 - p))
+
+
+def fit(p, y) -> dict:
+    x, y = _logit(p), np.asarray(y, float)
+
+    def nll(theta):
+        a, b = theta
+        q = 1 / (1 + np.exp(-(a * x + b)))
+        q = np.clip(q, 1e-6, 1 - 1e-6)
+        return -np.mean(y * np.log(q) + (1 - y) * np.log(1 - q))
+
+    r = minimize(nll, x0=[1.0, 0.0], method="Nelder-Mead")
+    return dict(a=float(r.x[0]), b=float(r.x[1]), n=int(len(y)))
+
+
+def apply(p, params: dict | None):
+    if not params:
+        return np.asarray(p, float)
+    return 1 / (1 + np.exp(-(params["a"] * _logit(p) + params["b"])))
+
+
+def load() -> dict | None:
+    return json.loads(PATH.read_text()) if PATH.exists() else None
+
+
+def save(params: dict, **meta) -> None:
+    PATH.parent.mkdir(parents=True, exist_ok=True)
+    PATH.write_text(json.dumps({**params, **meta}, indent=1))

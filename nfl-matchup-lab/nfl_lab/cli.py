@@ -6,6 +6,9 @@
   features   pregame features for one game, e.g. features --home LAR --away BUF --week 5 --season 2026
   devig      fair probabilities from a price pair, e.g. devig -- -175 +145
   props      parse data/props.csv and show fair probabilities
+  project    v0 model for one game, e.g. project --home LAR --away BUF --week 5 --season 2026
+  slate      v0 model for a whole week, e.g. slate --week 6
+  check      v0 calibration check on 2024 (validation season)
 """
 from __future__ import annotations
 
@@ -128,6 +131,71 @@ def cmd_props(a):
     return 0
 
 
+def _print_run(res, show_players=True):
+    from .sim import v0 as S
+    pd.set_option("display.width", 220)
+    for gid, r in res["results"].items():
+        g = r["proj"]["game"]
+        print(f"\n=== {gid}  ({g.get('line_source', 'schedule')} lines: spread {g['spread_line']:+g} home, total {g['total_line']:g})")
+        for t, tp in r["proj"]["teams"].items():
+            pts = r["sim"].teams[t]["points"]
+            print(f"  {teams.display(t):4s} implied {tp.implied_points:.1f}  sim mean {pts.mean():.1f}  plays {tp.plays:.0f}  pass rate {tp.pass_rate:.0%}")
+        if show_players:
+            sm = S.summary(r["sim"])
+            keep = sm[sm["stat"].isin(["rec_yds", "receptions", "rush_yds", "pass_yds", "anytime_td"]) & (sm["mean"] > 0.3)]
+            print(keep.sort_values(["team", "stat", "mean"], ascending=[True, True, False])
+                  [["team", "player", "position", "stat", "mean", "q10", "median", "q90"]].round(2).to_string(index=False))
+    legs = res["legs"]
+    if len(legs):
+        print("\nYour lines (model probability vs no-vig market):")
+        print(legs[["player", "stat", "line", "side", "p_model", "p_market", "market_edge", "qualified_any", "source"]]
+              .sort_values("p_model", ascending=False).round(3).to_string(index=False))
+    for n, lst in sorted(res["best"].items()):
+        for L in lst[:1]:
+            legs_txt = "; ".join(f"{x['player']} {x['stat']} {x['side']} {x['line']:g} ({x['p_model']:.0%})" for x in L["legs"])
+            print(f"\n{n}-pick: all hit {L['p_all']:.1%} (independent {L['p_independent']:.1%}), Power ${L['power_ev']:.2f}, "
+                  f"Flex ${(L['flex_ev'] or 0):.2f}, skip under {L['min_power_mult']:.1f}x\n  {legs_txt}")
+    if not any(res["best"].values()):
+        print("\nNo qualified lineups (a leg needs to beat break-even AND a no-vig market price by 3 points).")
+    for p in res["pages"]:
+        print("page:", p)
+
+
+def cmd_project(a):
+    from . import v0run
+    from .data import pipeline
+    gid = find_game(pipeline.load_table("games"), a.season, a.week, a.home, a.away)
+    if gid is None:
+        print(f"No {a.season} week {a.week} game between {a.home} and {a.away} in the schedule.")
+        return 1
+    _print_run(v0run.run_games([gid], a.sims))
+    return 0
+
+
+def cmd_slate(a):
+    from . import v0run
+    gids = v0run.week_games(a.season, a.week)
+    if not gids:
+        print(f"No {a.season} week {a.week} games with market lines yet.")
+        return 1
+    _print_run(v0run.run_games(gids, a.sims), show_players=False)
+    return 0
+
+
+def cmd_check(a):
+    from . import v0run
+    from .backtest import quick
+    T = v0run.load_tables()
+    df = quick.run(T, a.season, n_sims=a.sims, progress=print)
+    rep = quick.report(df)
+    v0run.save_check(rep)
+    pd.set_option("display.width", 220)
+    print(rep["overall"])
+    print(rep["by_stat"].round(4).to_string(index=False))
+    print(rep["calibration"].round(3).to_string(index=False))
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="nfl_lab", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("-v", "--verbose", action="store_true")
@@ -147,6 +215,22 @@ def main(argv=None) -> int:
     s.add_argument("prices", nargs="+")
     s.set_defaults(fn=cmd_devig)
     sub.add_parser("props").set_defaults(fn=cmd_props)
+    s = sub.add_parser("project", help="v0 model for one game: projections, your lines, lineups, page")
+    for k in ("home", "away"):
+        s.add_argument(f"--{k}", required=True)
+    s.add_argument("--week", type=int, required=True)
+    s.add_argument("--season", type=int, default=config.LIVE_SEASON)
+    s.add_argument("--sims", type=int, default=20000)
+    s.set_defaults(fn=cmd_project)
+    s = sub.add_parser("slate", help="v0 model for every game of a week, with cross-game lineups")
+    s.add_argument("--week", type=int, required=True)
+    s.add_argument("--season", type=int, default=config.LIVE_SEASON)
+    s.add_argument("--sims", type=int, default=20000)
+    s.set_defaults(fn=cmd_slate)
+    s = sub.add_parser("check", help="calibration check of v0 on a validation season (2024 or earlier)")
+    s.add_argument("--season", type=int, default=2024)
+    s.add_argument("--sims", type=int, default=2000)
+    s.set_defaults(fn=cmd_check)
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO if a.verbose else logging.WARNING, format="%(message)s")
     return a.fn(a)
