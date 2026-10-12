@@ -38,7 +38,9 @@ def dropback_participation(participation: pd.DataFrame, p: pd.DataFrame) -> pd.D
 
 def ratios(pg: pd.DataFrame, dbp: pd.DataFrame, valid_seasons) -> pd.DataFrame:
     """Route ratio per (player_id, valid_season) using participation seasons < valid_season only."""
-    x = pg.merge(dbp, on=["game_id", "player_id"], how="inner")
+    # Games with participation data: a player with snaps but no dropback on the field is a real zero.
+    x = pg[pg["game_id"].isin(set(dbp["game_id"]))].merge(dbp, on=["game_id", "player_id"], how="left")
+    x["db_on_field"] = x["db_on_field"].fillna(0.0)
     x = x[(x["offense_snaps"] > 0) & (x["team_dropbacks"] > 0) & (x["team_offense_snaps"] > 0)]
     per = x.groupby(["player_id", "season"]).agg(
         position=("position", "last"), db_on=("db_on_field", "sum"), team_db=("team_dropbacks", "sum"),
@@ -75,7 +77,10 @@ def ratios(pg: pd.DataFrame, dbp: pd.DataFrame, valid_seasons) -> pd.DataFrame:
 
 
 def attach_routes(pg: pd.DataFrame, rr: pd.DataFrame) -> pd.DataFrame:
-    """Add route_ratio and routes_est to player-games (QB ratio is not meaningful and set to 0)."""
+    """Add route_ratio and routes_est to player-games (QB ratio is not meaningful and set to 0).
+
+    Seasons with no earlier participation data get routes_est = NaN (unknown), never 0, so route-based
+    rates are computed only over games where routes could be estimated."""
     pg = pg.copy()
     key = rr[~rr["player_id"].str.startswith("__POS__")][["player_id", "valid_season", "route_ratio"]]
     pg = pg.merge(key.rename(columns={"valid_season": "season"}), on=["player_id", "season"], how="left")
@@ -83,7 +88,12 @@ def attach_routes(pg: pd.DataFrame, rr: pd.DataFrame) -> pd.DataFrame:
     fill = pd.Series([pos.get((s, p), np.nan) for s, p in zip(pg["season"], pg["position"])], index=pg.index)
     pg["route_ratio_source"] = np.where(pg["route_ratio"].notna(), "player", "position")
     pg["route_ratio"] = pg["route_ratio"].fillna(fill)
+    pg["route_ratio_source"] = np.where(pg["route_ratio"].isna(), "none", pg["route_ratio_source"])
     pg.loc[pg["position"] == "QB", "route_ratio"] = 0.0
-    part = np.minimum(1.0, pg["snap_share"].fillna(0) * pg["route_ratio"].fillna(0))
-    pg["routes_est"] = part * pg["team_dropbacks"].fillna(0)
+    part = np.minimum(1.0, pg["snap_share"].fillna(0) * pg["route_ratio"])
+    pg["routes_est"] = part * pg["team_dropbacks"].fillna(0)        # NaN where the ratio is unknown
+    pg["routes_known"] = pg["routes_est"].notna()
+    # Numerators/denominators restricted to games where routes are known, for route-based rates.
+    for c in ("targets", "rec_yds", "team_dropbacks"):
+        pg[f"rk_{c}"] = np.where(pg["routes_known"], pg[c].fillna(0), 0.0)
     return pg

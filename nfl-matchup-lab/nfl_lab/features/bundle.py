@@ -9,7 +9,8 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from ..data.games import BLOCKED_COLUMNS
+from ..data import lines as L
+from ..data.games import BLOCKED_COLUMNS, LINE_COLUMNS
 from . import opponent
 from .asof import visible
 from .player import PlayerFeatures
@@ -53,7 +54,22 @@ def game_features(tables: dict[str, pd.DataFrame], game_id: str, asof: pd.Timest
     eng = eng or engines(tables)
     sides = [g["home_team"], g["away_team"]]
     tv = tables["team_view"]
-    view = tv[tv["game_id"] == game_id].drop(columns=[c for c in BLOCKED_COLUMNS if c in tv.columns])
+    view = tv[tv["game_id"] == game_id].drop(columns=[c for c in BLOCKED_COLUMNS if c in tv.columns]).copy()
+    game_row = g.drop(labels=[c for c in BLOCKED_COLUMNS if c in g.index]).copy()
+    line_source = "schedule (closing)"
+    if asof < g["kickoff_utc"]:
+        # Closing lines are not known yet: use the latest manually captured line before asof, else nothing.
+        snap = L.latest_game_line(tables.get("game_lines", pd.DataFrame()), game_id, asof)
+        for c in LINE_COLUMNS:
+            if c in game_row.index:
+                game_row[c] = snap[c] if snap is not None and c in snap.index else float("nan")
+        line_source = f"captured {snap['captured_at']}" if snap is not None else "none before asof"
+        spread, total = game_row.get("spread_line", float("nan")), game_row.get("total_line", float("nan"))
+        home = view["team"] == g["home_team"]
+        view["spread_line"], view["total_line"] = spread, total
+        view["team_spread"] = [spread if h else -spread for h in home]
+        view["implied_points"] = [(total + spread) / 2 if h else (total - spread) / 2 for h in home]
+    game_row["line_source"] = line_source
     ctx = tables["context"][tables["context"]["game_id"] == game_id]
     team_f = eng.team.features(sides, asof, season)
     adj = opponent.ratings(tables["team_games"], asof, season)
@@ -61,7 +77,7 @@ def game_features(tables: dict[str, pd.DataFrame], game_id: str, asof: pd.Timest
     cands = pd.concat([candidates(tables["player_games"], t, asof, season) for t in sides], ignore_index=True)
     pf = eng.player.features(cands["player_id"].tolist(), asof, season)
     players = cands.merge(pf, on="player_id", how="left")
-    return {"game": g.drop(labels=[c for c in BLOCKED_COLUMNS if c in g.index]).to_frame().T.reset_index(drop=True),
+    return {"game": game_row.to_frame().T.reset_index(drop=True),
             "team_view": view.reset_index(drop=True), "context": ctx.reset_index(drop=True),
             "team": team_f, "opponent_adjusted": adj.reset_index(drop=True), "players": players,
             "asof": pd.DataFrame({"asof": [asof]})}

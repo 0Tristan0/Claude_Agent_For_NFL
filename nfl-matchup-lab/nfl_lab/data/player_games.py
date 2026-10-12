@@ -17,10 +17,44 @@ from .. import teams
 SKILL = {"QB", "RB", "FB", "WR", "TE"}
 
 
-def pfr_to_gsis(players: pd.DataFrame) -> dict[str, str]:
-    m = players.dropna(subset=["pfr_id", "gsis_id"])
+def pfr_to_gsis(players: pd.DataFrame, rosters: pd.DataFrame | None = None) -> dict[str, str]:
+    """PFR id -> GSIS id from the players table, plus pairs from weekly rosters for ids the table lacks."""
+    frames = [players[["pfr_id", "gsis_id"]]]
+    if rosters is not None and {"pfr_id", "gsis_id"} <= set(rosters.columns):
+        frames.append(rosters[["pfr_id", "gsis_id"]])
+    m = pd.concat(frames).dropna().drop_duplicates()
     m = m[~m["pfr_id"].duplicated(keep=False)]
     return dict(zip(m["pfr_id"], m["gsis_id"]))
+
+
+def _name_key(s: pd.Series) -> pd.Series:
+    return (s.astype(str).str.lower().str.replace(r"[.'`\-]", "", regex=True)
+            .str.replace(r"\b(jr|sr|ii|iii|iv|v)\b", "", regex=True).str.split().str.join(" "))
+
+
+def _match_by_name(sn: pd.DataFrame, rosters: pd.DataFrame) -> pd.Series:
+    """For snap rows whose PFR id is unknown, find the GSIS id on that team's same-week roster by name."""
+    need = sn["player_id"].isna()
+    if not need.any() or rosters is None or rosters.empty or "full_name" not in rosters.columns:
+        return sn["player_id"]
+    r = teams.normalize(rosters.dropna(subset=["gsis_id", "full_name"]), ["team"])
+    r = r.assign(key=_name_key(r["full_name"]))[["season", "week", "team", "key", "gsis_id"]]
+    r = r.drop_duplicates(["season", "week", "team", "key"], keep=False)
+    q = sn.loc[need, ["season", "week", "team", "player"]].assign(key=lambda d: _name_key(d["player"]))
+    hit = q.reset_index().merge(r, on=["season", "week", "team", "key"], how="left").set_index("index")["gsis_id"]
+    out = sn["player_id"].copy()
+    out.loc[hit.index] = hit
+    return out
+
+
+def assign_position(pg: pd.DataFrame) -> pd.Series:
+    """Position as of that week: the weekly roster if it is a skill position, else the snap-count position,
+    else the role the stats show. The players-table snapshot (today's position) is never used."""
+    def skill(x):
+        return x.where(x.isin(SKILL))
+    role = pd.Series(np.select([pg["pass_att"].fillna(0) > 0, pg["designed_carries"].fillna(0) > pg["targets"].fillna(0),
+                                pg["targets"].fillna(0) > 0], ["QB", "RB", "WR"], default=""), index=pg.index)
+    return skill(pg["roster_position"]).fillna(skill(pg["snap_position"])).fillna(role.replace("", np.nan))
 
 
 def _player_sums(p: pd.DataFrame) -> pd.DataFrame:
@@ -45,12 +79,15 @@ def _player_sums(p: pd.DataFrame) -> pd.DataFrame:
     rush = r.assign(
         carries=1.0, designed_carries=r["designed_run"].astype(float), scrambles=r["scramble"].astype(float),
         kneels=r["kneel"].astype(float), rush_yds=r["rushing_yards"].fillna(0).astype(float),
+        designed_rush_yds=np.where(r["designed_run"], r["rushing_yards"].fillna(0), 0.0),
+        scramble_yds=np.where(r["scramble"], r["rushing_yards"].fillna(0), 0.0),
         rush_tds=((r["rush_touchdown"].fillna(0) == 1) & (r["td_player_id"] == r["rusher_player_id"])).astype(float),
         rz_carries=(r["rz"] & r["designed_run"]).astype(float), i10_carries=(r["i10"] & r["designed_run"]).astype(float),
         garbage_carries=(r["garbage"] & r["designed_run"]).astype(float),
     ).groupby(["game_id", "rusher_player_id"]).agg(
         team_r=("posteam", "first"), carries=("carries", "sum"), designed_carries=("designed_carries", "sum"),
         scrambles=("scrambles", "sum"), kneels=("kneels", "sum"), rush_yds=("rush_yds", "sum"),
+        designed_rush_yds=("designed_rush_yds", "sum"), scramble_yds=("scramble_yds", "sum"),
         rush_tds=("rush_tds", "sum"), rz_carries=("rz_carries", "sum"), i10_carries=("i10_carries", "sum"),
         garbage_carries=("garbage_carries", "sum"))
     rush.index = rush.index.set_names(["game_id", "player_id"])
@@ -71,6 +108,8 @@ def _player_sums(p: pd.DataFrame) -> pd.DataFrame:
 
     out = rec.join(rush, how="outer").join(pas, how="outer")
     out["team"] = out["team"].fillna(out.pop("team_r")).fillna(out.pop("team_q"))
+    # A scramble is a dropback (nflfastR credits it to the rusher, not the passer).
+    out["dropbacks"] = out["dropbacks"].fillna(0) + out["scrambles"].fillna(0)
     return out.reset_index()
 
 
@@ -91,18 +130,20 @@ def _team_denoms(p: pd.DataFrame) -> pd.DataFrame:
     return d.groupby(["game_id", "posteam"], as_index=False)[cols].sum().rename(columns={"posteam": "team"})
 
 
-def _positions(rosters: pd.DataFrame, players: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
+def _positions(rosters: pd.DataFrame) -> pd.DataFrame:
+    if rosters is None or rosters.empty:
+        return pd.DataFrame(columns=["season", "week", "player_id", "roster_position"])
     r = rosters.dropna(subset=["gsis_id"])
     r = r[["season", "week", "gsis_id", "position"]].drop_duplicates(["season", "week", "gsis_id"])
-    static = players.dropna(subset=["gsis_id"]).set_index("gsis_id")["position"].to_dict()
-    return r.rename(columns={"gsis_id": "player_id", "position": "roster_position"}), static
+    return r.rename(columns={"gsis_id": "player_id", "position": "roster_position"})
 
 
 def build(p: pd.DataFrame, snaps: pd.DataFrame, players: pd.DataFrame, rosters: pd.DataFrame,
           tv: pd.DataFrame) -> pd.DataFrame:
-    xwalk = pfr_to_gsis(players)
+    xwalk = pfr_to_gsis(players, rosters)
     sn = teams.normalize(snaps, ["team", "opponent"]).copy()
     sn["player_id"] = sn["pfr_player_id"].map(xwalk)
+    sn["player_id"] = _match_by_name(sn, rosters)
     for c in ("offense_snaps", "defense_snaps", "st_snaps", "offense_pct"):
         sn[c] = sn[c].fillna(0).astype(float)
     sn["any_snaps"] = sn["offense_snaps"] + sn["defense_snaps"] + sn["st_snaps"]
@@ -118,17 +159,16 @@ def build(p: pd.DataFrame, snaps: pd.DataFrame, players: pd.DataFrame, rosters: 
     pg["team"] = pg["team"].fillna(pg["snap_team"])
     pg = pg[pg["team"].notna()]
 
-    pos, static = _positions(rosters, players)
     pg = pg.merge(tv[["game_id", "team", "opponent", "season", "week", "season_type", "kickoff_utc", "is_home"]],
                   on=["game_id", "team"], how="inner")
-    pg = pg.merge(pos, on=["season", "week", "player_id"], how="left")
-    pg["position"] = pg["roster_position"].fillna(pg["snap_position"]).fillna(pg["player_id"].map(static))
+    pg = pg.merge(_positions(rosters), on=["season", "week", "player_id"], how="left")
+    pg["position"] = assign_position(pg)
     pg = pg[pg["position"].isin(SKILL)].copy()
     pg.loc[pg["position"] == "FB", "position"] = "RB"
 
     count_cols = ["targets", "receptions", "rec_yds", "air_yards", "yac", "rec_tds", "rz_targets", "i10_targets",
                   "deep_targets", "garbage_targets", "carries", "designed_carries", "scrambles", "kneels",
-                  "rush_yds", "rush_tds", "rz_carries", "i10_carries", "garbage_carries", "dropbacks", "pass_att",
+                  "rush_yds", "designed_rush_yds", "scramble_yds", "rush_tds", "rz_carries", "i10_carries", "garbage_carries", "dropbacks", "pass_att",
                   "completions", "pass_yds", "pass_tds", "ints", "sacks_taken"]
     snap_games = set(sn["game_id"])
     pg["snaps_published"] = pg["game_id"].isin(snap_games)

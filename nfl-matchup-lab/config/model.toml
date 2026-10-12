@@ -19,7 +19,7 @@ depth = 76
 wp_low = 0.10
 wp_high = 0.90
 pace_min_half_seconds = 120
-pace_cap_seconds = 45
+pace_max_gap_seconds = 60    # longer gaps are timeouts/reviews/injuries and are dropped
 
 [explosive]
 pass_yards = 20

@@ -46,7 +46,7 @@ class TeamFeatures:
         self.idx = AsofIndex(team_games, "team", cols, half_life=half_life, season_discount=season_discount)
         self.p_idx = None
         if pressure is not None and len(pressure):
-            pc = ["off_pressures", "off_pfr_dropbacks", "def_pressures", "def_pfr_dropbacks"]
+            pc = ["off_pressures", "off_pressure_dropbacks", "def_pressures", "def_pressure_dropbacks"]
             self.p_idx = AsofIndex(pressure, "team", pc, half_life=half_life, season_discount=season_discount)
 
     def features(self, teams_, asof: pd.Timestamp, season: int) -> pd.DataFrame:
@@ -57,6 +57,7 @@ class TeamFeatures:
                 f[k] = v
         if self.p_idx is not None:
             q = self.p_idx.frame(teams_, asof, season)
-            f["off_pressure_rate_pfr"] = _ratio(q.off_pressures, q.off_pfr_dropbacks)
-            f["def_pressure_rate_pfr"] = _ratio(q.def_pressures, q.def_pfr_dropbacks)
+            # all situations (PFR game totals); the 10-90% win-probability pressure metric is *_hit_sack_rate
+            f["off_pressure_rate_pfr"] = _ratio(q.off_pressures, q.off_pressure_dropbacks)
+            f["def_pressure_rate_pfr"] = _ratio(q.def_pressures, q.def_pressure_dropbacks)
         return f

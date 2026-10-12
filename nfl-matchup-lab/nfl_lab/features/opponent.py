@@ -2,7 +2,7 @@
 
 For a per-play metric m (EPA per dropback, success rate, ...) on team-game rows visible at `asof`:
 
-    m_g = mu + off[team] + def[opp] + h * is_home + noise
+    m_g = mu + off[team] + def[opp] + h * (is_home - 0.5) + noise
 
 weights = neutral plays x recency (half-life in days, extra discount per season back). The ridge
 penalty pulls every rating toward 0 (league average), so teams with few games stay near average.
@@ -43,7 +43,8 @@ def fit(team_games: pd.DataFrame, asof: pd.Timestamp, season: int, metric: str, 
     n, k = len(d), len(teams_)
     X = np.zeros((n, 2 + 2 * k))
     X[:, 0] = 1.0
-    X[:, 1] = d["is_home"].to_numpy(float) if "is_home" in d else 0.0
+    # centered so mu is the neutral-site level (home +h/2, away -h/2)
+    X[:, 1] = (d["is_home"].to_numpy(float) - 0.5) if "is_home" in d else 0.0
     X[np.arange(n), 2 + d["team"].map(ix).to_numpy()] = 1.0
     X[np.arange(n), 2 + k + d["opponent"].map(ix).to_numpy()] = 1.0
     # ridge in "per-play" units: lam pseudo-plays at 0 for each rating, intercept/home unpenalized

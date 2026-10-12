@@ -68,30 +68,38 @@ def prepare(raw: pd.DataFrame) -> pd.DataFrame:
 
 
 def pace_seconds(p: pd.DataFrame) -> pd.Series:
-    """Seconds from each neutral snap to the team's next snap on the same drive and quarter.
+    """Seconds from each neutral snap to the team's next snap (any snap, penalties included) on the same drive.
 
-    Plays with under 2 minutes left in the half are excluded (clock rules change), and gaps are
-    capped at 45 s (timeouts, reviews and injuries otherwise dominate)."""
+    Snaps with 2 minutes or less left in the half, at either end, are excluded (clock rules change), and gaps
+    over pace_max_gap_seconds are dropped as timeouts, reviews or injuries rather than clipped."""
     m = config.model()["neutral"]
-    s = p[p["scrimmage"]].sort_values(["game_id", "play_id"])
-    nxt = s.groupby(["game_id", "fixed_drive"])[["game_seconds_remaining", "qtr"]].shift(-1)
-    gap = s["game_seconds_remaining"] - nxt["game_seconds_remaining"]
-    ok = (s["neutral"] & (s["half_seconds_remaining"] > m["pace_min_half_seconds"]) & nxt["qtr"].eq(s["qtr"])
-          & gap.gt(0))
-    return gap.where(ok).clip(upper=m["pace_cap_seconds"]).reindex(p.index)
+    snaps = p[p["play_type"].isin(["pass", "run", "qb_kneel", "qb_spike", "no_play"]) &
+              p["posteam"].notna()].sort_values(["game_id", "play_id"])
+    nxt = snaps.groupby(["game_id", "fixed_drive", "posteam"])[["game_seconds_remaining", "qtr",
+                                                               "half_seconds_remaining"]].shift(-1)
+    gap = snaps["game_seconds_remaining"] - nxt["game_seconds_remaining"]
+    lim = m["pace_min_half_seconds"]
+    ok = (snaps["neutral"] & (snaps["half_seconds_remaining"] > lim) & (nxt["half_seconds_remaining"] > lim)
+          & nxt["qtr"].eq(snaps["qtr"]) & gap.gt(0) & gap.le(m["pace_max_gap_seconds"]))
+    return gap.where(ok).reindex(p.index)
 
 
 def drives(p: pd.DataFrame) -> pd.DataFrame:
+    """One row per possession. A red-zone trip is any snap (field goal tries included) at the 20 or closer;
+    possessions with no offensive snap at all (return TDs, kneel-only end of half) are flagged has_snap = False."""
     s = p[p["posteam"].notna() & p["fixed_drive"].notna()].sort_values(["game_id", "play_id"])
     key = ["game_id", "fixed_drive", "posteam"]
+    two_pt = s["two_point_attempt"].fillna(0).eq(1)
+    snap = (s["scrimmage"] | s["play_type"].eq("field_goal")) & ~two_pt
+    rz_snap = snap & (s["yardline_100"] <= 20)
+    s = s.assign(_snap=snap, _rz_snap=rz_snap)
     first = s.groupby(key).head(1).set_index(key)
     agg = s.groupby(key).agg(
-        n_plays=("scrimmage", "sum"), result=("fixed_drive_result", "first"),
-        reached_rz=("rz", "max"), score_pre=("posteam_score", "min"), score_post=("posteam_score_post", "max"))
+        n_plays=("scrimmage", "sum"), has_snap=("_snap", "max"), result=("fixed_drive_result", "first"),
+        reached_rz=("_rz_snap", "max"), score_pre=("posteam_score", "min"), score_post=("posteam_score_post", "max"))
     agg["start_yardline"] = first["yardline_100"]
     agg["start_wp"] = first["wp"]
-    rz_first = s[s["rz"]].groupby(key)["wp"].first()
-    agg["rz_entry_wp"] = rz_first
+    agg["rz_entry_wp"] = s[s["_rz_snap"]].groupby(key)["wp"].first()
     agg["points"] = (agg["score_post"] - agg["score_pre"]).clip(lower=0)
     agg["td"] = agg["result"].eq("Touchdown")
     return agg.reset_index()

@@ -11,10 +11,12 @@ import pandas as pd
 
 from .asof import AsofIndex
 
-SUMS = ["offense_snaps", "team_offense_snaps", "routes_est", "team_dropbacks", "targets", "team_targets",
+SUMS = ["offense_snaps", "team_offense_snaps", "routes_est", "rk_targets", "rk_rec_yds", "rk_team_dropbacks",
+        "team_dropbacks", "targets", "team_targets",
         "air_yards", "team_air_yards", "receptions", "rec_yds", "yac", "rec_tds", "rz_targets", "team_rz_targets",
         "i10_targets", "deep_targets", "designed_carries", "team_designed_carries", "i10_carries",
-        "team_i10_carries", "rz_carries", "team_rz_carries", "carries", "scrambles", "kneels", "rush_yds",
+        "team_i10_carries", "rz_carries", "team_rz_carries", "carries", "scrambles", "kneels", "rush_yds", "designed_rush_yds",
+        "scramble_yds",
         "rush_tds", "dropbacks", "pass_att", "completions", "pass_yds", "pass_tds", "ints", "sacks_taken",
         "team_plays"]
 PFR_SUMS = ["pfr_carries", "ybc", "yaco", "broken_tackles"]
@@ -43,20 +45,23 @@ class PlayerFeatures:
         f["eff_games"] = s["eff_games"].to_numpy()
         f["games_this_season"] = cur["eff_games"].to_numpy()
         f["snap_share"] = _ratio(s.offense_snaps, s.team_offense_snaps)
-        f["route_part_est"] = _ratio(s.routes_est, s.team_dropbacks)
+        # route-based rates use only games where routes could be estimated (rk_ = routes known)
+        f["route_part_est"] = _ratio(s.routes_est, s.rk_team_dropbacks)
         f["target_share"] = _ratio(s.targets, s.team_targets)
-        f["tprr_est"] = _ratio(s.targets, s.routes_est)
+        f["tprr_est"] = _ratio(s.rk_targets, s.routes_est)
         f["air_yards_share"] = _ratio(s.air_yards, s.team_air_yards)
         f["adot"] = _ratio(s.air_yards, s.targets)
         f["rz_target_share"] = _ratio(s.rz_targets, s.team_rz_targets)
         f["carry_share"] = _ratio(s.designed_carries, s.team_designed_carries)
         f["i10_carry_share"] = _ratio(s.i10_carries, s.team_i10_carries)
         f["rz_carry_share"] = _ratio(s.rz_carries, s.team_rz_carries)
-        f["yprr_est"] = _ratio(s.rec_yds, s.routes_est)
+        f["yprr_est"] = _ratio(s.rk_rec_yds, s.routes_est)
         f["catch_rate"] = _ratio(s.receptions, s.targets)
         f["yds_per_catch"] = _ratio(s.rec_yds, s.receptions)
         f["yac_per_catch"] = _ratio(s.yac, s.receptions)
-        f["yds_per_carry"] = _ratio(s.rush_yds - 0.0, s.carries)
+        f["yds_per_carry"] = _ratio(s.designed_rush_yds, s.designed_carries)     # same carry set as carries_pg
+        f["scrambles_pg"] = _ratio(s.scrambles, s.eff_games)
+        f["yds_per_scramble"] = _ratio(s.scramble_yds, s.scrambles)
         f["targets_pg"] = _ratio(s.targets, s.eff_games)
         f["carries_pg"] = _ratio(s.designed_carries, s.eff_games)
         f["dropbacks_pg"] = _ratio(s.dropbacks, s.eff_games)

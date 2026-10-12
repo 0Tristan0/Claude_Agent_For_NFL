@@ -36,7 +36,12 @@ def build_tables(raw: dict[str, pd.DataFrame], first_season: int | None = None) 
     dr = pbp.drives(p)
 
     tg = _stamp(team_games.build(p, dr, tv), "pbp")
-    pressure = team_games.build_side(team_games.pfr_pressure(raw.get("pfr_pass", pd.DataFrame())), tv)
+    pressure = team_games.pfr_pressure(raw.get("pfr_pass", pd.DataFrame()))
+    if not pressure.empty:
+        dbk = tg[["game_id", "team", "off_dropbacks"]].rename(columns={"off_dropbacks": "pressure_dropbacks"})
+        pressure = pressure.merge(dbk, on=["game_id", "team"], how="inner")
+        pressure = pressure[pressure["charted"]].drop(columns="charted")
+    pressure = team_games.build_side(pressure, tv)
     ftn = team_games.build_side(team_games.ftn_team(raw.get("ftn", pd.DataFrame()), p), tv)
 
     pg = player_games.build(p, raw["snap_counts"], raw["players"], raw.get("rosters", pd.DataFrame()), tv)
@@ -46,8 +51,9 @@ def build_tables(raw: dict[str, pd.DataFrame], first_season: int | None = None) 
     dbp = routes.dropback_participation(part, p) if not part.empty else pd.DataFrame(
         columns=["game_id", "player_id", "db_on_field"])
     rr = routes.ratios(pg, dbp, [s for s in seasons] + [max(seasons) + 1])
-    pg = routes.attach_routes(pg, rr) if not rr.empty else pg.assign(route_ratio=float("nan"), routes_est=0.0,
-                                                                      route_ratio_source="none")
+    pg = routes.attach_routes(pg, rr) if not rr.empty else pg.assign(
+        route_ratio=float("nan"), routes_est=float("nan"), route_ratio_source="none", routes_known=False,
+        rk_targets=0.0, rk_rec_yds=0.0, rk_team_dropbacks=0.0)
     pg = _stamp(pg, "snaps")
 
     out = {
@@ -60,13 +66,13 @@ def build_tables(raw: dict[str, pd.DataFrame], first_season: int | None = None) 
     }
     pfr_rush = raw.get("pfr_rush", pd.DataFrame())
     if not pfr_rush.empty:
-        out["player_pfr_rush"] = _stamp(_pfr_rush(pfr_rush, raw["players"], tv), "pfr")
+        out["player_pfr_rush"] = _stamp(_pfr_rush(pfr_rush, raw["players"], raw.get("rosters"), tv), "pfr")
     return out
 
 
-def _pfr_rush(pfr_rush: pd.DataFrame, players: pd.DataFrame, tv: pd.DataFrame) -> pd.DataFrame:
+def _pfr_rush(pfr_rush: pd.DataFrame, players: pd.DataFrame, rosters, tv: pd.DataFrame) -> pd.DataFrame:
     x = pfr_rush.copy()
-    x["player_id"] = x["pfr_player_id"].map(player_games.pfr_to_gsis(players))
+    x["player_id"] = x["pfr_player_id"].map(player_games.pfr_to_gsis(players, rosters))
     x = x[x["player_id"].notna()]
     keep = x[["game_id", "player_id", "carries", "rushing_yards_before_contact", "rushing_yards_after_contact",
               "rushing_broken_tackles"]].rename(columns={"carries": "pfr_carries", "rushing_yards_before_contact": "ybc",

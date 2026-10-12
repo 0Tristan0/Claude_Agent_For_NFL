@@ -58,12 +58,24 @@ def cmd_inventory(a):
     return 0
 
 
+def find_game(games: pd.DataFrame, season: int, week: int, home: str, away: str) -> str | None:
+    """Game id for two teams in a week, whichever of them is listed at home."""
+    pair = {teams.code(home), teams.code(away)}
+    g = games[(games["season"] == season) & (games["week"] == week)]
+    hit = g[g.apply(lambda r: {r["home_team"], r["away_team"]} == pair, axis=1)] if len(g) else g
+    return None if hit.empty else str(hit["game_id"].iloc[0])
+
+
 def cmd_features(a):
-    from .data import pipeline
+    from .data import lines, pipeline
     from .features import bundle
-    gid = _game_id(a.season, a.week, a.away, a.home)
     names = ["games", "team_view", "context", "team_games", "team_pressure", "player_games", "player_pfr_rush"]
     T = {n: pipeline.load_table(n) for n in names}
+    T["game_lines"] = lines.load_game_lines()
+    gid = find_game(T["games"], a.season, a.week, a.home, a.away)
+    if gid is None:
+        print(f"No {a.season} week {a.week} game between {a.home} and {a.away} in the schedule.")
+        return 1
     f = bundle.game_features(T, gid)
     pd.set_option("display.width", 220)
     pd.set_option("display.max_columns", 40)
@@ -74,6 +86,8 @@ def cmd_features(a):
             "off_sec_per_play", "off_sack_rate", "off_pressure_rate_pfr", "def_pressure_rate_pfr", "off_rz_td_rate",
             "off_giveaway_rate"]
     print(f["team"][[c for c in cols if c in f["team"]]].round(3).to_string(index=False))
+    print("\nOpponent-adjusted (ridge; def = what the defense allows after adjusting for offenses faced)")
+    print(f["opponent_adjusted"].round(3).to_string(index=False))
     print()
     p = f["players"]
     p = p[(p["games_this_season"] > 0) & (p["position"] != "QB")]
@@ -87,7 +101,19 @@ def cmd_features(a):
 
 def cmd_devig(a):
     from .features import market
-    q = [market.parse_price(x)[0] for x in a.prices]
+    if len(a.prices) < 2:
+        print("Give every side of the market, e.g. devig -- -175 +145 (one-sided prices: see props.csv).")
+        return 1
+    try:
+        q = [market.parse_price(x)[0] for x in a.prices]
+    except ValueError as exc:
+        print(exc)
+        return 1
+    if any(v is None for v in q):
+        print("Every side needs a price.")
+        return 1
+    if sum(q) <= 1.0:
+        print(f"Prices sum to {sum(q):.4f} (no vig), so every method just normalizes them.")
     for m in ("multiplicative", "additive", "power", "shin"):
         print(f"{m:15s}", " ".join(f"{v:.4f}" for v in market.devig(q, m)))
     return 0

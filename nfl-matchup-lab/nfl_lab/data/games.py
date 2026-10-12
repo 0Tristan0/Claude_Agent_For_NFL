@@ -21,13 +21,17 @@ POST_TYPES = {"WC", "DIV", "CON", "SB"}
 
 PREGAME_COLUMNS = [
     "game_id", "season", "week", "game_type", "season_type", "kickoff_utc", "home_team", "away_team",
-    "location", "div_game", "home_rest", "away_rest", "stadium_id", "stadium", "roof", "roof_pregame",
+    "location", "div_game", "home_rest", "away_rest", "stadium_id", "stadium", "roof_pregame",
     "surface", "spread_line", "total_line", "home_moneyline", "away_moneyline", "home_spread_odds",
     "away_spread_odds", "over_odds", "under_odds",
 ]
+# Market columns: the schedule's values are the closing snapshot, known only at kickoff. Before kickoff,
+# features read data/game_lines.csv rows captured before asof instead (features/bundle.py).
+LINE_COLUMNS = ["spread_line", "total_line", "home_moneyline", "away_moneyline", "home_spread_odds",
+                "away_spread_odds", "over_odds", "under_odds"]
 RESULT_COLUMNS = ["game_id", "home_score", "away_score", "result", "total", "overtime"]
 # Columns that must never reach features, projections, sims or picks.
-BLOCKED_COLUMNS = {"home_score", "away_score", "result", "total", "overtime", "temp", "wind",
+BLOCKED_COLUMNS = {"home_score", "away_score", "result", "total", "overtime", "temp", "wind", "roof",
                    "home_qb_name", "away_qb_name", "home_qb_id", "away_qb_id", "home_coach",
                    "away_coach", "referee"}
 
@@ -52,10 +56,10 @@ def build_games(schedules: pd.DataFrame, first_season: int | None = None) -> tup
     g = g.copy()
     g["season_type"] = np.where(g["game_type"].isin(POST_TYPES), "POST", "REG")
     g["kickoff_utc"] = kickoff_utc(g["gameday"], g["gametime"])
-    # Only a fixed dome is known well before kickoff; retractable open/closed is a game-day call.
-    g["roof_pregame"] = np.where(g["roof"].eq("dome"), "dome",
-                                 np.where(g["roof"].eq("outdoors"), "outdoors",
-                                          np.where(g["roof"].isin(["open", "closed"]), "retractable", "unknown")))
+    # Roof type is a stadium property (config/stadiums.csv). The schedule's per-game roof value is a
+    # game-day call for retractable roofs (blank until the game), so it is never used.
+    from .context import stadiums
+    g["roof_pregame"] = g["stadium_id"].map(stadiums()["roof_type"]).replace("", np.nan).fillna("unknown")
     games = g[[c for c in PREGAME_COLUMNS if c in g.columns]].sort_values(["kickoff_utc", "game_id"],
                                                                          ignore_index=True)
     results = g[[c for c in RESULT_COLUMNS if c in g.columns]].copy()

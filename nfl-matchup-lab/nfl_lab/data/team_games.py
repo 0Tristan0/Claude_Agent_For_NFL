@@ -13,7 +13,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from .. import teams
+from .. import config, teams
 from .pbp import pace_seconds
 
 
@@ -53,8 +53,9 @@ def offense(p: pd.DataFrame, drives: pd.DataFrame) -> pd.DataFrame:
     df["game_id"], df["team"] = s["game_id"].to_numpy(), s["posteam"].to_numpy()
     out = df.groupby(["game_id", "team"], as_index=False).sum()
 
-    d = drives[drives["posteam"].notna()].copy()
-    rz_n = d["reached_rz"].astype(bool) & d["rz_entry_wp"].between(0.10, 0.90)
+    d = drives[drives["posteam"].notna() & drives["has_snap"].astype(bool)].copy()
+    nt = config.model()["neutral"]
+    rz_n = d["reached_rz"].astype(bool) & d["rz_entry_wp"].between(nt["wp_low"], nt["wp_high"])
     d = d.assign(drives=1.0, td_drives=d["td"].astype(float), rz_trips=d["reached_rz"].astype(float),
                  rz_tds=(d["reached_rz"].astype(bool) & d["td"]).astype(float),
                  rz_trips_n=rz_n.astype(float), rz_tds_n=(rz_n & d["td"]).astype(float),
@@ -65,14 +66,24 @@ def offense(p: pd.DataFrame, drives: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+CHARTING = ["times_pressured", "times_blitzed", "times_hurried", "times_hit", "passing_bad_throws", "passing_drops"]
+
+
 def pfr_pressure(pfr_pass: pd.DataFrame) -> pd.DataFrame:
-    """Pressures allowed per team-game from PFR passer rows (one row per QB, so no double counting)."""
+    """Pressures allowed per team-game from PFR passer rows (one row per QB, so no double counting).
+
+    `charted` is False when every PFR charting field is 0 for the team-game: PFR did not chart that game
+    (seen on Thanksgiving, Christmas and some playoff games), so it is dropped rather than read as 0 pressures.
+    The denominator is play-by-play dropbacks, attached in the pipeline. PFR counts are game totals and cannot
+    be limited to 10-90% win-probability plays; the neutral pressure metric is hit_sack_rate."""
     if pfr_pass.empty:
-        return pd.DataFrame(columns=["game_id", "team", "pressures", "pfr_dropbacks"])
+        return pd.DataFrame(columns=["game_id", "team", "pressures", "charted"])
     q = teams.normalize(pfr_pass, ["team", "opponent"])
-    q = q.assign(pressures=q["times_pressured"].fillna(0),
-                 pfr_dropbacks=(q["times_pressured"] / (q["times_pressured_pct"].replace(0, np.nan))).fillna(0))
-    return q.groupby(["game_id", "team"], as_index=False)[["pressures", "pfr_dropbacks"]].sum()
+    cols = [c for c in CHARTING if c in q.columns]
+    q = q.assign(pressures=q["times_pressured"].fillna(0), _chart=q[cols].fillna(0).abs().sum(axis=1))
+    g = q.groupby(["game_id", "team"], as_index=False).agg(pressures=("pressures", "sum"), _chart=("_chart", "sum"))
+    g["charted"] = g.pop("_chart") > 0
+    return g
 
 
 def ftn_team(ftn: pd.DataFrame, p: pd.DataFrame) -> pd.DataFrame:

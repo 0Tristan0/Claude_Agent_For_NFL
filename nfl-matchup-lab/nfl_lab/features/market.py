@@ -38,18 +38,30 @@ def parse_price(x) -> tuple[float | None, str]:
     if x is None or (isinstance(x, float) and math.isnan(x)):
         return None, "none"
     s = str(x).strip().lower().replace(" ", "")
+    for dash in ("\u2212", "\u2013", "\u2014"):          # minus sign and dashes pasted from apps
+        s = s.replace(dash, "-")
     if not s:
         return None, "none"
-    if s.endswith("c") or s.endswith("¢"):
-        return float(s[:-1]) / 100.0, "exchange"
-    if s.endswith("%"):
-        return float(s[:-1]) / 100.0, "prob"
-    v = float(s)
-    if 0 < v < 1:
-        return v, "prob"
-    if re.fullmatch(r"[+-]?\d+(\.\d+)?", s) and abs(v) >= 100:
-        return american_to_prob(v), "american"
-    raise ValueError(f"cannot parse price {x!r}")
+    if s in ("even", "evs", "ev", "pk", "pick"):
+        s = "+100"
+    try:
+        if s.endswith("c") or s.endswith("\u00a2"):
+            p, kind = float(s[:-1]) / 100.0, "exchange"
+        elif s.endswith("%"):
+            p, kind = float(s[:-1]) / 100.0, "prob"
+        else:
+            v = float(s)
+            if 0 < v < 1:
+                p, kind = v, "prob"
+            elif re.fullmatch(r"[+-]?\d+(\.\d+)?", s) and abs(v) >= 100:
+                return american_to_prob(v), "american"
+            else:
+                raise ValueError
+    except ValueError:
+        raise ValueError(f"cannot parse price {x!r}") from None
+    if not 0 < p < 1:
+        raise ValueError(f"price {x!r} is not a probability between 0 and 1")
+    return p, kind
 
 
 def devig(probs, method: str = "power") -> np.ndarray:
@@ -58,6 +70,8 @@ def devig(probs, method: str = "power") -> np.ndarray:
     if np.any(q <= 0) or np.any(q >= 1):
         raise ValueError("implied probabilities must be in (0, 1)")
     total = q.sum()
+    if total <= 1.0 + 1e-12:              # no vig to remove (exchange prices): normalize for every method
+        return q / total
     if method == "multiplicative":
         return q / total
     if method == "additive":

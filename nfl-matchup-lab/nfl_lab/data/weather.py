@@ -25,10 +25,17 @@ def enabled() -> bool:
     return bool(config.model().get("weather", {}).get("enabled", False))
 
 
-def kickoff_weather(stadium_id: str, kickoff_utc: pd.Timestamp, roof_pregame: str, historical: bool = False,
+def kickoff_weather(stadium_id: str, kickoff_utc: pd.Timestamp, roof_pregame: str, asof: pd.Timestamp,
                     timeout: int = 15) -> dict | None:
+    """Forecast for the kickoff hour as it could be known at `asof`.
+
+    Past kickoffs use the historical-forecast archive (forecasts issued close to the time, never observed
+    weather); future kickoffs use the live forecast. Returns None when disabled, for domes, or on any error."""
     if not enabled() or roof_pregame == "dome":
         return None
+    historical = pd.Timestamp(kickoff_utc) <= pd.Timestamp.now(tz="UTC")
+    if historical and pd.Timestamp(asof) < pd.Timestamp(kickoff_utc) - pd.Timedelta(hours=6):
+        return None    # archived forecasts are from runs within hours of kickoff: not known this early
     try:
         st = stadiums().loc[stadium_id]
         day = kickoff_utc.strftime("%Y-%m-%d")

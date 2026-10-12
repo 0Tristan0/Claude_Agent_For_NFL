@@ -46,6 +46,11 @@ def stat_key(s: str) -> str:
     raise ValueError(f"unknown stat {s!r}; add it to config/stats.toml [aliases]")
 
 
+def parse_times(s: pd.Series) -> pd.Series:
+    """UTC timestamps from ISO strings in any mix of formats; blanks become NaT."""
+    return pd.to_datetime(s.replace("", np.nan), utc=True, format="ISO8601")
+
+
 def load_props(path: Path | None = None) -> pd.DataFrame:
     path = Path(path or PROPS_PATH)
     if not path.exists():
@@ -62,12 +67,16 @@ def load_props(path: Path | None = None) -> pd.DataFrame:
     df["line"] = df["line"].astype(float)
     df["line_type"] = df["line_type"].replace("", "standard").str.lower()
     df["odds_kind"] = df["odds_kind"].str.lower()
-    mtime = datetime.fromtimestamp(path.stat().st_mtime, tz=timezone.utc)
+    mtime = pd.Timestamp(datetime.fromtimestamp(path.stat().st_mtime, tz=timezone.utc))
     df["captured_at_assumed"] = df["captured_at"].eq("")
-    df["captured_at"] = pd.to_datetime(df["captured_at"].replace("", mtime.isoformat()), utc=True).astype(
-        "datetime64[us, UTC]")
-    over = df["over_odds"].map(market.parse_price)
-    under = df["under_odds"].map(market.parse_price)
+    df["captured_at"] = parse_times(df["captured_at"]).fillna(mtime).astype("datetime64[us, UTC]")
+    over, under = [], []
+    for i, r in df.iterrows():
+        for col, out in (("over_odds", over), ("under_odds", under)):
+            try:
+                out.append(market.parse_price(r[col]))
+            except ValueError as exc:
+                raise ValueError(f"{path.name} row {i + 2}, column {col}: {exc}") from None
     df["p_over_implied"] = [o[0] for o in over]
     df["p_under_implied"] = [u[0] for u in under]
     kinds = [o[1] if o[1] != "none" else u[1] for o, u in zip(over, under)]
@@ -125,13 +134,13 @@ def load_game_lines(path: Path | None = None) -> pd.DataFrame:
     if not path.exists():
         return pd.DataFrame()
     g = pd.read_csv(path)
-    g["captured_at"] = pd.to_datetime(g["captured_at"], utc=True).astype("datetime64[us, UTC]")
+    g["captured_at"] = parse_times(g["captured_at"].astype(str)).astype("datetime64[us, UTC]")
     return g
 
 
 def latest_game_line(game_lines: pd.DataFrame, game_id: str, asof: pd.Timestamp) -> pd.Series | None:
-    """Latest manually captured game line at or before `asof` (strictly before kickoff is enforced by freeze)."""
+    """Latest manually captured game line strictly before `asof` (same strict rule as AsofIndex)."""
     if game_lines.empty:
         return None
-    g = game_lines[(game_lines["game_id"] == game_id) & (game_lines["captured_at"] <= asof)]
+    g = game_lines[(game_lines["game_id"] == game_id) & (game_lines["captured_at"] < pd.Timestamp(asof))]
     return None if g.empty else g.sort_values("captured_at").iloc[-1]

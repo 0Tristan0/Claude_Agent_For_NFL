@@ -17,7 +17,7 @@ from ..config import CONFIG_DIR
 
 @lru_cache(maxsize=1)
 def stadiums() -> pd.DataFrame:
-    return pd.read_csv(CONFIG_DIR / "stadiums.csv").set_index("stadium_id")
+    return pd.read_csv(CONFIG_DIR / "stadiums.csv", keep_default_na=False).set_index("stadium_id")
 
 
 def _utc_offset_hours(tz: str, when: pd.Timestamp) -> float:
@@ -29,7 +29,8 @@ def _utc_offset_hours(tz: str, when: pd.Timestamp) -> float:
 
 def build(tv: pd.DataFrame, games: pd.DataFrame) -> pd.DataFrame:
     st = stadiums()
-    home_games = games[games["location"].ne("Neutral")]
+    home_games = games[games["location"].ne("Neutral") & games["season_type"].eq("REG")] if "season_type" in games \
+        else games[games["location"].ne("Neutral")]
     home_stadium = (home_games.groupby(["season", "home_team"])["stadium_id"]
                     .agg(lambda s: s.value_counts().index[0]).rename("home_stadium_id").reset_index()
                     .rename(columns={"home_team": "team"}))
@@ -39,8 +40,9 @@ def build(tv: pd.DataFrame, games: pd.DataFrame) -> pd.DataFrame:
     c.loc[c["rest_days"].isna(), "short_week"] = np.nan
     tz_game = c["stadium_id"].map(st["tz"])
     tz_home = c["home_stadium_id"].map(st["tz"])
-    c["tz_shift_hours"] = [(_utc_offset_hours(g, k) - _utc_offset_hours(h, k)) if isinstance(g, str) and
-                           isinstance(h, str) else np.nan for g, h, k in zip(tz_game, tz_home, c["kickoff_utc"])]
+    shift = np.array([(_utc_offset_hours(g, k) - _utc_offset_hours(h, k)) if isinstance(g, str) and isinstance(h, str)
+                      else np.nan for g, h, k in zip(tz_game, tz_home, c["kickoff_utc"])], dtype=float)
+    c["tz_shift_hours"] = ((shift + 12) % 24) - 12          # wrap across the date line (Melbourne = -7 for LA)
     c["body_clock_kickoff_hour"] = [k.tz_convert(ZoneInfo(h)).hour + k.tz_convert(ZoneInfo(h)).minute / 60
                                     if isinstance(h, str) else np.nan for h, k in zip(tz_home, c["kickoff_utc"])]
     c["dome"] = (c["roof_pregame"] == "dome").astype(float)
