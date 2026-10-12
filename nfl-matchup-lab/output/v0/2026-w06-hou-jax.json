@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_06_HOU_JAX",
+ "season": 2026,
+ "week": 6,
+ "away": "HOU",
+ "home": "JAX",
+ "kickoff_et": "Sun Oct 18, 9:30 AM ET",
+ "kickoff_utc": "2026-10-18 13:30:00+00:00",
+ "home_spread": -3.0,
+ "total": 42.5,
+ "away_implied": 19.8,
+ "home_implied": 22.8,
+ "home_win": 0.59,
+ "median_score": [
+  19.9,
+  22.9
+ ]
+}

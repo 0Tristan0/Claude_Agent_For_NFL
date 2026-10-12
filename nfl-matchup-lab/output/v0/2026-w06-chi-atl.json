@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_06_CHI_ATL",
+ "season": 2026,
+ "week": 6,
+ "away": "CHI",
+ "home": "ATL",
+ "kickoff_et": "Sun Oct 18, 1:00 PM ET",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": 3.0,
+ "total": 48.5,
+ "away_implied": 25.8,
+ "home_implied": 22.8,
+ "home_win": 0.413,
+ "median_score": [
+  25.9,
+  22.9
+ ]
+}

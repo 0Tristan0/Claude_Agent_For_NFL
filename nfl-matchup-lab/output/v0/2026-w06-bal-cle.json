@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_06_BAL_CLE",
+ "season": 2026,
+ "week": 6,
+ "away": "BAL",
+ "home": "CLE",
+ "kickoff_et": "Sun Oct 18, 1:00 PM ET",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": 4.5,
+ "total": 40.5,
+ "away_implied": 22.5,
+ "home_implied": 18.0,
+ "home_win": 0.366,
+ "median_score": [
+  22.9,
+  16.9
+ ]
+}

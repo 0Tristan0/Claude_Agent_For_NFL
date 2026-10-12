@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_06_LAC_KC",
+ "season": 2026,
+ "week": 6,
+ "away": "LAC",
+ "home": "KC",
+ "kickoff_et": "Sun Oct 18, 4:25 PM ET",
+ "kickoff_utc": "2026-10-18 20:25:00+00:00",
+ "home_spread": -8.5,
+ "total": 42.5,
+ "away_implied": 17.0,
+ "home_implied": 25.5,
+ "home_win": 0.743,
+ "median_score": [
+  16.9,
+  25.9
+ ]
+}

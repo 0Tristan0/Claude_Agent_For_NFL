@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_06_WAS_SF",
+ "season": 2026,
+ "week": 6,
+ "away": "WAS",
+ "home": "SF",
+ "kickoff_et": "Mon Oct 19, 8:15 PM ET",
+ "kickoff_utc": "2026-10-20 00:15:00+00:00",
+ "home_spread": -7.5,
+ "total": 50.5,
+ "away_implied": 21.5,
+ "home_implied": 29.0,
+ "home_win": 0.708,
+ "median_score": [
+  20.85,
+  28.9
+ ]
+}

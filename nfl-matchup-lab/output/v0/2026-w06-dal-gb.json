@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_06_DAL_GB",
+ "season": 2026,
+ "week": 6,
+ "away": "DAL",
+ "home": "GB",
+ "kickoff_et": "Sun Oct 18, 8:20 PM ET",
+ "kickoff_utc": "2026-10-19 00:20:00+00:00",
+ "home_spread": -1.5,
+ "total": 52.5,
+ "away_implied": 25.5,
+ "home_implied": 27.0,
+ "home_win": 0.55,
+ "median_score": [
+  25.9,
+  26.85
+ ]
+}

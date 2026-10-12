@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_06_TEN_IND",
+ "season": 2026,
+ "week": 6,
+ "away": "TEN",
+ "home": "IND",
+ "kickoff_et": "Sun Oct 18, 1:00 PM ET",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": -7.0,
+ "total": 44.5,
+ "away_implied": 18.8,
+ "home_implied": 25.8,
+ "home_win": 0.705,
+ "median_score": [
+  16.9,
+  25.9
+ ]
+}

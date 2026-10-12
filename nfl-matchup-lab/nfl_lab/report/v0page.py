@@ -1,7 +1,8 @@
-"""HTML page for one game from the v0 model, styled with the existing report template."""
+"""HTML page for one game from the v0 model, in the site theme (report/theme.py)."""
 from __future__ import annotations
 
 import html
+import json
 from pathlib import Path
 
 import numpy as np
@@ -9,25 +10,9 @@ import pandas as pd
 
 from .. import config, teams
 from ..picks import payouts
+from . import theme
 
-ROOT = config.ROOT
-TEMPLATE = ROOT / "src" / "template.html"
 e = html.escape
-
-
-def _head(title: str) -> str:
-    t = TEMPLATE.read_text()
-    head = t[:t.index("<main")]
-    head = head.replace("<title>Bills at Rams MNF Matchup</title>", f"<title>{e(title)}</title>")
-    return head + """<style>
-.v0tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:999px;color:var(--t3);background:var(--t3bg)}
-.pt td,.pt th{white-space:nowrap}
-.pt .num{font-variant-numeric:tabular-nums;text-align:right}
-.rng{color:var(--muted);font-size:.85rem}
-.q-yes{color:var(--t1);font-weight:700}.q-no{color:var(--muted)}
-.small{font-size:.85rem;color:var(--muted)}
-</style>
-"""
 
 
 def _pct(x):
@@ -46,16 +31,17 @@ def _team_table(sim, team: str) -> str:
             continue
         def cell(s):
             x = sim.stat(pid, s)
-            if not x.any():
-                return "<td class='num'></td>"
-            q = np.quantile(x, [0.1, 0.5, 0.9])
+            q = np.quantile(x, [0.1, 0.5, 0.9]) if x.any() else np.zeros(3)
+            if q[2] == 0:
+                return "<td class='num'></td>"                 # 90% of sims at zero: leave blank
             return f"<td class='num'>{q[1]:.0f}<span class='rng'> ({q[0]:.0f} to {q[2]:.0f})</span></td>"
         pass_cell = cell("pass_yds") if m["starter_qb"] else "<td></td>"
         rows.append(f"<tr><th scope='row'>{e(m['name'])}<span class='vs-lbl'>{m['position']}</span></th>"
                     f"<td class='num'>{mean(pid, 'targets'):.1f}</td><td class='num'>{mean(pid, 'receptions'):.1f}</td>"
                     f"{cell('rec_yds')}<td class='num'>{mean(pid, 'rush_att'):.1f}</td>{cell('rush_yds')}{pass_cell}"
                     f"<td class='num'>{_pct(float(sim.stat(pid, 'anytime_td').mean()))}</td></tr>")
-    return ("<div class='tbl-wrap'><table class='pt'><caption>" + e(teams.name(team)) + "</caption><thead><tr>"
+    return ("<div class='tbl-wrap'><table class='pt'><caption>" + theme.swatch(teams.display(team)) + e(teams.name(team))
+            + "</caption><thead><tr>"
             "<th scope='col'>Player</th><th scope='col'>Targets</th><th scope='col'>Catches</th>"
             "<th scope='col'>Rec yds (10th to 90th)</th><th scope='col'>Rushes</th><th scope='col'>Rush yds</th>"
             "<th scope='col'>Pass yds</th><th scope='col'>Any TD</th></tr></thead><tbody>"
@@ -71,12 +57,12 @@ def _props_table(legs: pd.DataFrame) -> str:
         q = "Yes" if l["qualified_any"] else ("Check news: model far from line" if l.get("far_from_line") else
                                              ("No market price" if pd.isna(l["p_market"]) else "No"))
         rows.append(f"<tr><th scope='row'>{e(l['player'])}<span class='vs-lbl'>{e(teams.display(l['team']))} · "
-                    f"{e(l['source'])}</span></th><td>{e(l['stat'].replace('_', ' '))}</td><td class='num'>{l['line']:g}</td>"
-                    f"<td>{l['side']}</td><td class='num'>{_pct(l['p_model'])}</td><td class='num'>{_pct(l['p_market'])}</td>"
-                    f"<td class='{'q-yes' if l['qualified_any'] else 'q-no'}'>{q}</td></tr>")
-    return ("<div class='tbl-wrap'><table class='pt'><thead><tr><th scope='col'>Player</th><th scope='col'>Stat</th>"
-            "<th scope='col'>Line</th><th scope='col'>Side</th><th scope='col'>Model</th><th scope='col'>Market (no vig)</th>"
-            "<th scope='col'>Qualifies</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table></div>")
+                    f"{e(l['source'])}</span></th><td class='l'>{e(l['stat'].replace('_', ' '))}</td><td class='num'>{l['line']:g}</td>"
+                    f"<td class='l'>{l['side']}</td><td class='num'>{_pct(l['p_model'])}</td><td class='num'>{_pct(l['p_market'])}</td>"
+                    f"<td class='l {'q-yes' if l['qualified_any'] else 'q-no'}'>{q}</td></tr>")
+    return ("<div class='tbl-wrap'><table class='pt'><thead><tr><th scope='col'>Player</th><th scope='col' class='l'>Stat</th>"
+            "<th scope='col'>Line</th><th scope='col' class='l'>Side</th><th scope='col'>Model</th><th scope='col'>Market (no vig)</th>"
+            "<th scope='col' class='l'>Qualifies</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table></div>")
 
 
 def _lineups(best: dict) -> str:
@@ -126,21 +112,22 @@ def render(proj: dict, sim, legs: pd.DataFrame | None, best: dict | None, check:
     win = float((h_pts > a_pts).mean() + 0.5 * (h_pts == a_pts).mean())
     tph, tpa = proj["teams"][home], proj["teams"][away]
     be = payouts.breakevens()
-    title = f"{teams.display(away)} at {teams.display(home)} v0"
+    title = f"{teams.display(away)} at {teams.display(home)}, Week {int(g['week'])}"
     played = pd.Timestamp(g["kickoff_utc"]) <= pd.Timestamp.now(tz="UTC")
     line_note = "closing line" if played else "latest market line"
     lines_sentence = ("Market lines shown are closing lines." if played else
                       "Market lines are the latest in the nflverse schedule when this page was built.")
+    a_d, h_d = teams.display(away), teams.display(home)
+    kick = pd.Timestamp(g['kickoff_utc']).tz_convert('America/New_York')
     body = f"""<main class="wrap">
-<nav class="back"><a href="../index.html">All games</a></nav>
-<div class="board"><span class="eyebrow">Week {int(g['week'])} · {pd.Timestamp(g['kickoff_utc']).tz_convert('America/New_York'):%a %b %d, %-I:%M %p} ET · <span class="v0tag">Model v0</span></span>
-<div class="teams"><div class="team away"><span class="ab">{teams.display(away)}</span><span class="nm">{e(teams.name(away))}</span>
+{theme.nav("games", "../")}<div class="board"><span class="eyebrow">Week {int(g['week'])} · {kick:%a %b %d, %-I:%M %p} ET<span class="v0tag">Model v0</span></span>
+<div class="teams"><div class="team away">{theme.pennant(a_d)}<span class="nm">{e(teams.name(away))}</span>
 <span class="rec">Implied {tpa.implied_points:.1f} pts · sim win {1 - win:.0%}</span></div><span class="at">at</span>
-<div class="team home"><span class="ab">{teams.display(home)}</span><span class="nm">{e(teams.name(home))}</span>
+<div class="team home">{theme.pennant(h_d)}<span class="nm">{e(teams.name(home))}</span>
 <span class="rec">Implied {tph.implied_points:.1f} pts · sim win {win:.0%}</span></div></div>
-<div class="facts"><dl><div><dt>Spread / total</dt><dd>{e(teams.display(home))} {-g['spread_line']:+g} / {g['total_line']:g} ({line_note})</dd></div>
-<div><dt>Sim median score</dt><dd>{teams.display(away)} {np.median(a_pts):.0f}, {teams.display(home)} {np.median(h_pts):.0f}</dd></div>
-<div><dt>Plays / pass rate</dt><dd>{teams.display(away)} {tpa.plays:.0f} / {tpa.pass_rate:.0%} · {teams.display(home)} {tph.plays:.0f} / {tph.pass_rate:.0%}</dd></div>
+<div class="facts"><dl><div><dt>Spread / total</dt><dd>{e(h_d)} {-g['spread_line']:+g} / {g['total_line']:g} ({line_note})</dd></div>
+<div><dt>Sim median score</dt><dd>{a_d} {np.median(a_pts):.0f}, {h_d} {np.median(h_pts):.0f}</dd></div>
+<div><dt>Plays / pass rate</dt><dd>{a_d} {tpa.plays:.0f} / {tpa.pass_rate:.0%} · {h_d} {tph.plays:.0f} / {tph.pass_rate:.0%}</dd></div>
 <div><dt>Sims</dt><dd>{sim.n:,}</dd></div>
 <div><dt>Injuries</dt><dd>{e(str(proj.get('injury_note', 'not checked')))}</dd></div>
 <div><dt>Run at</dt><dd>{pd.Timestamp(proj.get('run_at', pd.Timestamp.now(tz='UTC'))).tz_convert('America/New_York'):%b %d %-I:%M %p} ET</dd></div></dl></div></div>
@@ -169,10 +156,12 @@ returning players in data/overrides.csv. These are estimates with real uncertain
 </main>
 """
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    doc = ("<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
-           "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\">\n"
-           + _head(title) + "<style>body{margin:0}.back a{font-family:var(--display);font-weight:600;"
-           "letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}</style>\n</head>\n<body>\n"
-           + body + "</body>\n</html>\n")
-    out_path.write_text(doc)
+    out_path.write_text(theme.document(title, body))
+    # small summary next to the page, used by the site index (ticket for each game)
+    out_path.with_suffix(".json").write_text(json.dumps(dict(
+        game_id=g["game_id"], season=int(g["season"]), week=int(g["week"]), away=a_d, home=h_d,
+        kickoff_et=f"{kick:%a %b %-d, %-I:%M %p} ET", kickoff_utc=str(pd.Timestamp(g["kickoff_utc"])),
+        home_spread=float(-g["spread_line"]), total=float(g["total_line"]),
+        away_implied=round(float(tpa.implied_points), 1), home_implied=round(float(tph.implied_points), 1),
+        home_win=round(win, 3), median_score=[float(np.median(a_pts)), float(np.median(h_pts))]), indent=1))
     return out_path

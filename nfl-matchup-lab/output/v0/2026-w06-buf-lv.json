@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_06_BUF_LV",
+ "season": 2026,
+ "week": 6,
+ "away": "BUF",
+ "home": "LV",
+ "kickoff_et": "Sun Oct 18, 4:25 PM ET",
+ "kickoff_utc": "2026-10-18 20:25:00+00:00",
+ "home_spread": 6.0,
+ "total": 52.5,
+ "away_implied": 29.2,
+ "home_implied": 23.2,
+ "home_win": 0.327,
+ "median_score": [
+  29.85,
+  22.9
+ ]
+}

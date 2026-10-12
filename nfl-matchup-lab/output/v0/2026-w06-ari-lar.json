@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_06_ARI_LA",
+ "season": 2026,
+ "week": 6,
+ "away": "ARI",
+ "home": "LAR",
+ "kickoff_et": "Sun Oct 18, 4:05 PM ET",
+ "kickoff_utc": "2026-10-18 20:05:00+00:00",
+ "home_spread": -12.5,
+ "total": 52.5,
+ "away_implied": 20.0,
+ "home_implied": 32.5,
+ "home_win": 0.823,
+ "median_score": [
+  19.9,
+  32.85
+ ]
+}
