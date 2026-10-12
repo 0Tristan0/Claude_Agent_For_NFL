@@ -50,6 +50,13 @@ python -m nfl_agent.cli slate                # export curves for the Receiving L
 python -m pytest                             # 60 tests, ~40 s, no network needed
 ```
 
+## NFL Matchup Lab (game reports)
+
+`nfl-matchup-lab/` builds a one-page matchup report for a single game: unit ranks, coverage, 1-on-1 matchups,
+a props board with hit estimates, PrizePicks break-evens and 3 to 6 pick lineups. See
+[`nfl-matchup-lab/README.md`](nfl-matchup-lab/README.md) for how to run it and
+[`nfl-matchup-lab/CLAUDE.md`](nfl-matchup-lab/CLAUDE.md) for the roadmap. Not betting advice.
+
 ## Receiving Line Checker (screenshot → scored picks)
 
 Live page: <https://claude.ai/artifact/AdVscj6DYUebaAxU9T3Q9W> (private to the owner until shared from its Share menu).
