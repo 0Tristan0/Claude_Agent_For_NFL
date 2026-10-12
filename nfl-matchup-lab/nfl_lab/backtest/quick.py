@@ -4,10 +4,11 @@ For every regular-season game from week 3 on, the model projects and simulates t
 (fits from earlier seasons only), then probabilities are graded against what happened.
 
 Lines: there are no free historical prop lines, so each player's line is a STAND-IN: the median of his
-last 6 games, rounded to the half yard below (anytime TD at 0.5). These are not PrizePicks lines; real
-lines are sharper, so hit rates here overstate what real picks would do. The point is calibration (do
-60% calls hit about 60% of the time?) and the comparison with the old method (hit rate in the last 8
-games pulled toward 50%).
+last 6 games, or half a unit above it when the median is a whole number (anytime TD at 0.5). These are not
+PrizePicks lines; real lines are sharper, so hit rates here overstate what real picks would do. The point
+is calibration (do 60% calls hit about 60% of the time?) and a comparison with a simple baseline: the
+player's hit rate at that line over his last 8 games, pulled toward 50% (the old lab's game-log half,
+without its market half).
 
 Actives: players who took a snap in the game (the inactive list is public ~90 minutes before kickoff).
 """
@@ -24,7 +25,7 @@ from ..sim import v0 as S
 STAT_COLS = {"rec_yds": "rec_yds", "receptions": "receptions", "rush_yds": "rush_yds", "pass_yds": "pass_yds",
              "anytime_td": None}
 GRADED = {"WR": ["rec_yds", "receptions", "anytime_td"], "TE": ["rec_yds", "receptions", "anytime_td"],
-          "RB": ["rush_yds", "rec_yds", "receptions", "anytime_td"], "QB": ["pass_yds", "rush_yds"]}
+          "RB": ["rush_yds", "rec_yds", "receptions", "anytime_td"], "QB": ["pass_yds", "rush_yds", "anytime_td"]}
 
 
 def _actual(row, stat):
@@ -33,7 +34,8 @@ def _actual(row, stat):
     return float(row[STAT_COLS[stat]])
 
 
-def run(tables: dict, season: int, weeks=range(3, 19), n_sims: int = 2000, progress=None) -> pd.DataFrame:
+def run(tables: dict, season: int, weeks=range(3, 19), n_sims: int = 2000, progress=None,
+        calibrate: bool = False) -> pd.DataFrame:
     if season >= 2025:
         raise ValueError("2025 is the holdout season: the quick check runs on 2024 or earlier only")
     fit_ = P.fit(tables, season)
@@ -59,18 +61,21 @@ def run(tables: dict, season: int, weeks=range(3, 19), n_sims: int = 2000, progr
                 continue
             is_starter = sim.meta[pid]["starter_qb"]
             for stat in GRADED.get(r["position"], []):
-                if stat == "pass_yds" and not is_starter:
+                if r["position"] == "QB" and not is_starter:
                     continue
                 if stat == "anytime_td":
                     line, past = 0.5, (h["rec_tds"] + h["rush_tds"] >= 1).astype(float).to_numpy()
                 else:
                     past = h[STAT_COLS[stat]].astype(float).to_numpy()
                     med = np.median(past[-6:])
-                    line = np.floor(med) + 0.5 if med == np.floor(med) else np.floor(med) + 0.5
+                    line = np.floor(med) + 0.5          # the median when it ends in .5, else half a unit above
                     if stat in ("rec_yds", "rush_yds", "pass_yds") and line < 4.5:
                         continue                    # skip near-zero usage lines
                 x = sim.stat(pid, stat)
-                p = float((x > line).mean())
+                p = float(np.clip((x > line).mean(), 0.01, 0.99))
+                if calibrate:
+                    from ..picks import calibration
+                    p = float(calibration.apply(p, calibration.load(), stat))
                 last8 = past[-8:]
                 b0 = (float((last8 > line).sum()) + 2.5) / (len(last8) + 5)
                 out.append(dict(game_id=gid, week=g["week"], player_id=pid, player=r["player_name"],

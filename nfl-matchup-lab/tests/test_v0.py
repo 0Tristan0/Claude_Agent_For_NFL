@@ -59,8 +59,12 @@ def test_sim_identities_and_ranges(v0_run):
         qb = [p for p in pids if sim.meta[p]["starter_qb"]][0]
         rec = sum(sim.stat(p, "receptions") for p in pids)
         rtd = sum(sim.stat(p, "rec_tds") for p in pids)
-        assert (rec <= sim.stat(qb, "completions")).all()        # completions = listed catches + other
-        assert (rtd <= sim.stat(qb, "pass_tds")).all()
+        tm = sim.teams[t]
+        assert (rec <= tm["completions"]).all() and (rtd <= tm["pass_tds"]).all()   # team = listed + other
+        assert (sim.stat(qb, "completions") <= tm["completions"]).all()            # starter may leave early
+        assert (sim.stat(qb, "pass_tds") <= tm["pass_tds"]).all()
+        assert (sum(sim.stat(p, "rush_tds") for p in pids) <= tm["rush_tds"]).all()
+        assert (sim.stat(qb, "pass_yds") == np.round(tm["pass_yds"])).mean() > 0.9
         for p in pids:
             assert (sim.stat(p, "receptions") <= sim.stat(p, "targets")).all()
         for p in pids:
@@ -159,3 +163,89 @@ def test_quick_check_refuses_holdout(tables):
     from nfl_lab.backtest import quick
     with pytest.raises(ValueError, match="holdout"):
         quick.run(tables, 2025)
+
+
+# ---- review follow-ups -----------------------------------------------------------------------------
+
+def test_v0_projection_and_sim_have_no_lookahead(raw):
+    """Fit, projection and a seeded sim are identical when all data unavailable at kickoff is removed."""
+    import leakcheck
+    from nfl_lab.data import pipeline
+    s = raw["schedules"]
+    gid = s[(s["season"] == 2023) & (s["week"] == 6)].iloc[3]["game_id"]
+    ko = leakcheck.kickoffs(s)[gid]
+    full = pipeline.build_tables(raw, first_season=2021)
+    trunc = pipeline.build_tables(leakcheck.truncate(raw, ko, 2023), first_season=2021)
+    a = P.project_game(full, gid, P.fit(full, 2023))
+    b = P.project_game(trunc, gid, P.fit(trunc, 2023))
+    for t in a["teams"]:
+        ta, tb = a["teams"][t], b["teams"][t]
+        assert (ta.plays, ta.pass_rate, ta.sack_rate) == (tb.plays, tb.pass_rate, tb.sack_rate)
+        pd.testing.assert_frame_equal(ta.players.reset_index(drop=True), tb.players.reset_index(drop=True),
+                                      check_exact=True, check_dtype=False)
+    sa, sb = S.simulate(a, 2000), S.simulate(b, 2000)
+    for pid in sa.players:
+        for k in ("rec_yds", "rush_yds", "rec_tds", "pass_yds"):
+            assert np.array_equal(sa.players[pid][k], sb.players[pid][k])
+
+
+def test_fit_ignores_target_season_and_later(tables, raw):
+    from nfl_lab.data import pipeline
+    cut = {k: (v[v["season"] < 2023] if "season" in v.columns else v) for k, v in raw.items()}
+    cut["schedules"] = raw["schedules"][raw["schedules"]["season"] < 2023]
+    cut["pbp"] = raw["pbp"][raw["pbp"]["season"] < 2023]
+    cut["participation"] = raw["participation"][raw["participation"]["nflverse_game_id"].str[:4].astype(int) < 2023]
+    cut["ftn"] = raw["ftn"][raw["ftn"]["season"] < 2023]
+    small = pipeline.build_tables(cut, first_season=2021)
+    f1, f2 = P.fit(tables, 2023), P.fit(small, 2023)
+    assert np.allclose(f1.plays_coef, f2.plays_coef) and np.allclose(f1.pr_coef, f2.pr_coef)
+    assert f1.league == pytest.approx(f2.league)
+
+
+def test_live_run_refuses_holdout_season(tables, monkeypatch):
+    from nfl_lab import config as cfg, v0run
+    monkeypatch.setattr(v0run, "load_tables", lambda: dict(tables, game_lines=pd.DataFrame()))
+    monkeypatch.setattr(cfg, "TEST_SEASON", 2023)
+    gid = tables["games"][tables["games"]["season"] == 2023]["game_id"].iloc[0]
+    with pytest.raises(ValueError, match="holdout"):
+        v0run.run_games([gid], 500, write_pages=False)
+
+
+def test_td_weights_keep_expected_share():
+    rng = np.random.default_rng(3)
+    events = rng.poisson([[0.3], [3.0], [6.0]], size=(3, 50000)).astype(float)
+    base = np.array([0.05, 0.25, 0.70])
+    w = S._per_event_weights(events, base)
+    assert w.mean(1) == pytest.approx(base, rel=0.02)
+    assert (w[:, events[0] == 0][0] == 0).all()                     # no catch, no TD
+
+
+def test_carry_yards_keep_mean_and_breakaways():
+    rng = np.random.default_rng(4)
+    emp = np.r_[np.full(900, 3.0), np.full(70, -2.0), np.full(30, 45.0)]
+    counts = np.full(20000, 15)
+    y = S._carry_yards(rng, counts, ypc=5.0, mult=np.ones(20000), emp=emp, ypc_pos=float(emp.mean()))
+    assert y.mean() / 15 == pytest.approx(5.0, rel=0.02)
+    assert (y > 100).mean() > 0.01                                    # big games still happen
+
+
+def test_rake_error_reports_infeasible_targets():
+    h = np.tile(np.array([True, False, True, False]), (2, 2500))     # two identical legs
+    w = payouts.rake(h, [0.60, 0.65])
+    assert payouts.rake_error(h, w, [0.60, 0.65]) > 1e-3
+
+
+def test_pick_rules_exchange_goblin_integer(v0_run):
+    _, proj, sim = v0_run
+    t = next(iter(proj["teams"]))
+    pid = max((p for p, m in sim.meta.items() if m["team"] == t), key=lambda p: sim.stat(p, "receptions").mean())
+    base = dict(game_id=sim.game_id, player_id=pid, player="x", team=t, stat="receptions", source="book",
+                p_over_implied=0.30, p_under_implied=np.nan, fair_over=0.30, fair_under=0.70)
+    props = pd.DataFrame([dict(base, line=1.5, odds_kind="exchange", line_type="standard"),
+                          dict(base, line=1.5, odds_kind="exchange", line_type="goblin"),
+                          dict(base, line=2.0, odds_kind="exchange", line_type="standard")])
+    legs = lineups.leg_table(props, {sim.game_id: sim}, None)
+    over = legs[legs["side"] == "over"].reset_index(drop=True)
+    assert over.loc[0, "market_edge"] == pytest.approx(over.loc[0, "p_model"] - 0.30)     # no overround on exchange
+    assert not over.loc[1, "qualified_any"]                                               # goblin never qualifies
+    assert over.loc[2, "integer_push"] and not over.loc[2, "qualified_any"]               # integer count line

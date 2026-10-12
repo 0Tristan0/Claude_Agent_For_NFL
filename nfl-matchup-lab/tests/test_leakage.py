@@ -138,7 +138,9 @@ MODEL_DIRS = ["features", "project", "sim", "picks"]
 BANNED_CALLS = {"read_parquet", "read_csv"}
 BANNED_NAMES = {"game_results", "stats_player", "stats_official"}
 BANNED_STRINGS = {"home_score", "away_score", "result", "total", "temp", "wind", "home_qb_name", "away_qb_name",
-                  "home_qb_id", "away_qb_id", "overtime"}
+                  "home_qb_id", "away_qb_id", "overtime", "off_points", "def_points", "roof"}
+# Fitting code may read past seasons' scores (it only ever sees seasons before the target season).
+ALLOWED_STRINGS = {("project", "v0.py"): {"off_points", "def_points"}}
 
 
 def _py_files():
@@ -150,13 +152,15 @@ def _py_files():
 @pytest.mark.parametrize("path", list(_py_files()), ids=lambda p: f"{p.parent.name}/{p.name}")
 def test_static_tripwires(path):
     tree = ast.parse(path.read_text())
+    allowed = ALLOWED_STRINGS.get((path.parent.name, path.name), set())
     problems = []
     for node in ast.walk(tree):
         if isinstance(node, ast.Attribute) and node.attr in BANNED_CALLS:
             problems.append(f"line {node.lineno}: calls {node.attr} (read history only through the tables/AsofIndex)")
         if isinstance(node, ast.Name) and node.id in BANNED_NAMES:
             problems.append(f"line {node.lineno}: uses {node.id}")
-        if isinstance(node, ast.Constant) and isinstance(node.value, str) and node.value in BANNED_STRINGS | BANNED_NAMES:
+        if isinstance(node, ast.Constant) and isinstance(node.value, str) and \
+                node.value in (BANNED_STRINGS | BANNED_NAMES) - allowed:
             problems.append(f"line {node.lineno}: string {node.value!r} names an outcome or blocked column")
         if isinstance(node, (ast.Import, ast.ImportFrom)):
             mod = getattr(node, "module", "") or ""

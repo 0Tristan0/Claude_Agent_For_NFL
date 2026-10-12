@@ -101,16 +101,20 @@ def _lineups(best: dict) -> str:
 def _trust(check: dict | None) -> str:
     if not check:
         return ""
-    o = check["overall"]
+    o, meta = check["overall"], check.get("meta", {})
+    season = meta.get("season", 2024)
+    fs = meta.get("fit_seasons") or []
     cal = check["calibration"]
     rows = "".join(f"<tr><td class='num'>{r.mean_p:.0%}</td><td class='num'>{r.hit_rate:.0%}</td>"
-                   f"<td class='num'>{r.ci_lo:.0%} to {r.ci_hi:.0%}</td><td class='num'>{int(r.n):,}</td></tr>"
+                   f"<td class='num'>{max(r.ci_lo, 0):.0%} to {min(r.ci_hi, 1):.0%}</td><td class='num'>{int(r.n):,}</td></tr>"
                    for r in cal.itertuples())
+    span = f"{min(fs)} to {max(fs)}" if fs else "earlier seasons"
     return f"""<section aria-labelledby="h-trust"><div><h2 id="h-trust">How much to trust this</h2>
-<p class="sub">Checked on every 2024 regular-season game from week 3 ({o['games']} games, {o['n']:,} graded props) using
-fits from 2021 to 2023 only. Lines in that check are stand-ins (each player's recent median), not PrizePicks lines, so real
-hit rates will be lower. Brier score {o['brier_model']:.3f} vs {o['brier_old']:.3f} for the old method (lower is better;
-difference {o['d_brier']:+.4f}, 95% range {o['d_brier_lo']:+.4f} to {o['d_brier_hi']:+.4f}). When the model says X%, here is how often it happened:</p></div>
+<p class="sub">Checked on every {season} regular-season game from week 3 ({o['games']} games, {o['n']:,} graded props), with the
+model fitted on {span} only. Lines in that check are stand-ins (each player's recent median), not PrizePicks lines, so real hit
+rates will be lower. {season} was also used to choose some v0 settings, so this is somewhat optimistic; the untouched test is the
+2025 season. Brier score {o['brier_model']:.3f} vs {o['brier_old']:.3f} for a simple baseline (his last-8-game hit rate pulled toward
+50%, no market; lower is better). When the model said X%, here is how often it happened:</p></div>
 <div class="tbl-wrap"><table class="pt"><thead><tr><th scope="col">Model said</th><th scope="col">Happened</th>
 <th scope="col">95% range</th><th scope="col">Props</th></tr></thead><tbody>{rows}</tbody></table></div></section>"""
 
@@ -125,6 +129,8 @@ def render(proj: dict, sim, legs: pd.DataFrame | None, best: dict | None, check:
     title = f"{teams.display(away)} at {teams.display(home)} v0"
     played = pd.Timestamp(g["kickoff_utc"]) <= pd.Timestamp.now(tz="UTC")
     line_note = "closing line" if played else "latest market line"
+    lines_sentence = ("Market lines shown are closing lines." if played else
+                      "Market lines are the latest in the nflverse schedule when this page was built.")
     body = f"""<main class="wrap">
 <nav class="back"><a href="../index.html">All games</a></nav>
 <div class="board"><span class="eyebrow">Week {int(g['week'])} · {pd.Timestamp(g['kickoff_utc']).tz_convert('America/New_York'):%a %b %d, %-I:%M %p} ET · <span class="v0tag">Model v0</span></span>
@@ -135,7 +141,9 @@ def render(proj: dict, sim, legs: pd.DataFrame | None, best: dict | None, check:
 <div class="facts"><dl><div><dt>Spread / total</dt><dd>{e(teams.display(home))} {-g['spread_line']:+g} / {g['total_line']:g} ({line_note})</dd></div>
 <div><dt>Sim median score</dt><dd>{teams.display(away)} {np.median(a_pts):.0f}, {teams.display(home)} {np.median(h_pts):.0f}</dd></div>
 <div><dt>Plays / pass rate</dt><dd>{teams.display(away)} {tpa.plays:.0f} / {tpa.pass_rate:.0%} · {teams.display(home)} {tph.plays:.0f} / {tph.pass_rate:.0%}</dd></div>
-<div><dt>Sims</dt><dd>{sim.n:,}</dd></div></dl></div></div>
+<div><dt>Sims</dt><dd>{sim.n:,}</dd></div>
+<div><dt>Injuries</dt><dd>{e(str(proj.get('injury_note', 'not checked')))}</dd></div>
+<div><dt>Run at</dt><dd>{pd.Timestamp(proj.get('run_at', pd.Timestamp.now(tz='UTC'))).tz_convert('America/New_York'):%b %d %-I:%M %p} ET</dd></div></dl></div></div>
 
 <section aria-labelledby="h-proj"><div><h2 id="h-proj">Projections</h2>
 <p class="sub">Medians with the 10th to 90th percentile range from {sim.n:,} simulated games. Targets and carries come from each
@@ -156,8 +164,8 @@ Same-game lineups can get lower multipliers in the app: skip a lineup if the app
 {_trust(check)}
 <footer class="notes"><p>Model v0: a simplified first version (team-level simulation, fixed shrinkage strengths). Data: nflverse
 play-by-play, snap counts, rosters, injuries and schedules (CC-BY 4.0); stadium time zones from the greerreNFL/Stadiums dataset;
-PrizePicks payouts from its help center. Lines in the schedule are closing lines. These are estimates with real uncertainty,
-not betting advice.</p></footer>
+PrizePicks payouts from its help center. {lines_sentence} Actives: players with a snap in the team's last 2 games, minus Out/Doubtful; add
+returning players in data/overrides.csv. These are estimates with real uncertainty, not betting advice.</p></footer>
 </main>
 """
     out_path.parent.mkdir(parents=True, exist_ok=True)

@@ -36,7 +36,9 @@ K_I10 = 8.0
 K_CATCH = 40.0             # pseudo targets
 K_YPC_REC = 30.0           # pseudo catches
 K_YPC_RUSH = 60.0          # pseudo carries
-K_SCRAMBLE = 100.0         # pseudo dropbacks
+K_SCRAMBLE = 30.0          # pseudo non-sack dropbacks (rates read with long memory, see qb_long)
+NO_HISTORY_SNAP = 0.15     # assumed snap share for a player with no games yet (depth role)
+GADGET_DB_PG = 5.0         # a non-starting QB with fewer dropbacks per game than this keeps his designed carries
 K_INT = 400.0              # pseudo attempts
 K_SACK = 150.0             # pseudo dropbacks
 OTHER_FLOOR = 0.015        # share of targets/carries left to players not listed (trick plays, call-ups)
@@ -60,6 +62,7 @@ class Fit:
     script_beta: float = 0.0                 # change in pass rate per point of (actual - expected) margin
     points_sd: float = 10.0
     points_corr: float = 0.0
+    carry_emp: dict = field(default_factory=dict)     # position -> real designed-carry yards (bootstrap source)
     notes: dict = field(default_factory=dict)
 
 
@@ -153,6 +156,8 @@ def fit(tables: dict, season: int) -> Fit:
         drives_pg=float(t["off_drives"].mean()),
         pass_td_share=float(pg["rec_tds"].sum() / (pg["rec_tds"].sum() + pg["rush_tds"].sum())),
         scramble_yds_mean=float(sc["rushing_yards"].mean()), scramble_yds_sd=float(sc["rushing_yards"].std()),
+        # per non-sack dropback, matching how the sim applies it
+        scramble_rate_nonsack=t["off_scrambles"].sum() / (t["off_dropbacks"].sum() - t["off_sacks"].sum()),
         other_catch_rate=0.62, other_yds_per_catch=9.5, other_yds_per_carry=4.0,
     )
     # share of points scored on offensive TDs (rest: FGs, defense/special-teams scores, safeties)
@@ -171,7 +176,12 @@ def fit(tables: dict, season: int) -> Fit:
     res = rows["off_points"] - rows["implied"]
     paired = rows.assign(res=res).pivot_table(index="game_id", columns=rows.groupby("game_id").cumcount(), values="res")
     points_corr = float(paired.dropna().corr().iloc[0, 1]) if paired.shape[1] == 2 else 0.0
-    return Fit(season=season, seasons=seasons, pos=pos, league=league, plays_coef=plays_coef, plays_sd=plays_sd,
+    pid_pos = pg.drop_duplicates(["game_id", "player_id"]).set_index(["game_id", "player_id"])["position"]
+    runs = plays[plays["designed_run"] & plays["rusher_player_id"].notna()]
+    rpos = pid_pos.reindex(list(zip(runs["game_id"], runs["rusher_player_id"]))).to_numpy()
+    carry_emp = {p: runs.loc[rpos == p, "rushing_yards"].fillna(0).to_numpy(float) for p in ("QB", "RB", "WR", "TE")}
+    carry_emp = {p: v for p, v in carry_emp.items() if len(v) >= 100}
+    return Fit(season=season, seasons=seasons, pos=pos, league=league, plays_coef=plays_coef, plays_sd=plays_sd, carry_emp=carry_emp,
                pr_coef=pr_coef, pr_sd=pr_sd_after, script_beta=script_beta, points_sd=float(res.std()),
                points_corr=points_corr, notes=dict(n_team_games=len(rows)))
 
@@ -182,9 +192,39 @@ def _curve(row, key, snap):
     """Interpolate a position's share-vs-snap-share curve (stored as comma-separated bin means)."""
     if not isinstance(row.get(key), str):
         return 0.0
-    xs = np.array([float(v) for v in row["curve_snap"].split(",")])
-    ys = np.array([float(v) for v in row[key].split(",")])
-    return float(np.interp(snap, xs, ys, left=0.0))
+    xs = np.r_[0.0, [float(v) for v in row["curve_snap"].split(",")]]
+    ys = np.r_[0.0, [float(v) for v in row[key].split(",")]]
+    return float(np.interp(snap, xs, ys))
+
+
+QB_LONG_COLS = ["scrambles", "dropbacks", "sacks_taken", "scramble_yds", "ints", "pass_att"]
+
+
+def _qb_long(eng, tables):
+    """Long-memory as-of sums for QB rates (no game decay, 0.8 per season back), built once per engine."""
+    if getattr(eng, "qb_long", None) is None:
+        pg = tables["player_games"]
+        eng.qb_long = AsofIndex(pg[pg["position"] == "QB"], "player_id", QB_LONG_COLS, half_life=None,
+                                season_discount=0.8)
+    return eng.qb_long
+
+
+def _pick_starter(tables, team, asof, season, P, is_qb, weighted_db) -> int:
+    """Starting QB: an explicit override if given, else the active QB with the most dropbacks in the
+    team's most recent game (ties and week 1: most recency-weighted dropbacks)."""
+    if not is_qb.any():
+        return -1
+    if "force_starter" in P.columns and P["force_starter"].fillna(False).astype(bool).any():
+        return int(np.flatnonzero(P["force_starter"].fillna(False).astype(bool).to_numpy())[0])
+    pg = visible(tables["player_games"], asof)
+    pg = pg[(pg["team"] == team) & (pg["position"] == "QB")]
+    last = pg[pg["season"] == season]
+    score = np.where(is_qb, weighted_db / 1000.0, -1.0)
+    if len(last):
+        g = last[last["kickoff_utc"] == last["kickoff_utc"].max()].set_index("player_id")["dropbacks"]
+        recent = P["player_id"].map(g).fillna(0).to_numpy(float)
+        score = np.where(is_qb, recent + weighted_db / 1000.0, -1.0)
+    return int(np.argmax(score))
 
 
 def _shrink(num, den, k, prior):
@@ -250,7 +290,7 @@ def project_game(tables: dict, game_id: str, fit_: Fit, asof: pd.Timestamp | Non
         pf = eng.player.features(act["player_id"].tolist(), asof, season)
         P = act.merge(pf, on="player_id", how="left")
         pp = pri.reindex(P["position"])
-        snap = P["snap_share"].fillna(0).clip(0, 1).to_numpy()
+        snap = P["snap_share"].fillna(NO_HISTORY_SNAP).clip(0, 1).to_numpy()
         tgt_prior = np.array([_curve(row, "curve_tgt", sv) for (_, row), sv in zip(pp.iterrows(), snap)]).clip(0, 0.6)
         car_prior = np.array([_curve(row, "curve_car", sv) for (_, row), sv in zip(pp.iterrows(), snap)]).clip(0, 0.9)
         S = lambda c: P[f"sum_{c}"].fillna(0).to_numpy(float)
@@ -270,9 +310,7 @@ def project_game(tables: dict, game_id: str, fit_: Fit, asof: pd.Timestamp | Non
         ypc = _shrink(S("rec_yds"), S("receptions"), K_YPC_REC, pp["yds_per_catch"].to_numpy())
         ypr = _shrink(S("designed_rush_yds"), S("designed_carries"), K_YPC_RUSH, pp["yds_per_carry"].to_numpy())
         is_qb = P["position"].to_numpy() == "QB"
-        # starting QB = the active QB with the most weighted dropbacks
-        qb_db = np.where(is_qb, S("dropbacks"), -1)
-        starter = int(np.argmax(qb_db)) if is_qb.any() else -1
+        starter = _pick_starter(tables, team, asof, season, P, is_qb, S("dropbacks"))
         P = P.assign(
             target_share=tshare, carry_share=cshare, rz_share=rz.clip(0, 0.9), i10_share=i10.clip(0, 0.95),
             catch_rate=cr.clip(0.2, 0.95), yds_per_catch=ypc, yds_per_carry=ypr,
@@ -282,13 +320,15 @@ def project_game(tables: dict, game_id: str, fit_: Fit, asof: pd.Timestamp | Non
             starter_qb=False, scramble_rate=np.nan, yds_per_scramble=np.nan, int_rate=np.nan)
         if starter >= 0:
             P.loc[starter, "starter_qb"] = True
-            P.loc[starter, "scramble_rate"] = _shrink(S("scrambles")[starter], S("dropbacks")[starter], K_SCRAMBLE,
-                                                      lg["scramble_rate"])
-            P.loc[starter, "yds_per_scramble"] = _shrink(S("scramble_yds")[starter], S("scrambles")[starter], 15.0,
-                                                         lg["scramble_yds_mean"])
-            P.loc[starter, "int_rate"] = _shrink(S("ints")[starter], S("pass_att")[starter], K_INT, lg["int_rate"])
-            # a backup QB keeps no designed carries
-            backups = is_qb & (np.arange(len(P)) != starter)
+            q = _qb_long(eng, tables).state(P.loc[starter, "player_id"], asof, season)
+            sc, db, sk, sy, it, pa = q[:6]
+            P.loc[starter, "scramble_rate"] = _shrink(sc, db - sk, K_SCRAMBLE, lg["scramble_rate_nonsack"])
+            P.loc[starter, "yds_per_scramble"] = _shrink(sy, sc, 15.0, lg["scramble_yds_mean"])
+            P.loc[starter, "int_rate"] = _shrink(it, pa, K_INT, lg["int_rate"])
+            # backup QBs keep no designed carries unless they have a gadget role (few dropbacks per game)
+            eff = np.maximum(P["eff_games"].fillna(0).to_numpy(float), 1e-9)
+            gadget = S("dropbacks") / eff < GADGET_DB_PG
+            backups = is_qb & (np.arange(len(P)) != starter) & ~gadget
             P.loc[backups, "carry_share"] = 0.0
         teams_out[team] = TeamProj(team=team, opponent=opp, is_home=float(v["is_home"]),
                                    implied_points=float(v["implied_points"]), team_spread=float(v["team_spread"]),

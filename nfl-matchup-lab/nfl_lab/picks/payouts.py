@@ -60,6 +60,11 @@ def rake(hits: np.ndarray, target_p, iters: int = 50, tol: float = 1e-6) -> np.n
     return w / w.sum()
 
 
+def rake_error(hits: np.ndarray, w: np.ndarray, target_p) -> float:
+    """Largest gap between a leg's weighted hit rate and its target after raking."""
+    return float(np.max(np.abs((w[None, :] * hits).sum(1) - np.asarray(target_p, float))))
+
+
 def entry_ev(hits: np.ndarray, scale: float = 1.0, weights: np.ndarray | None = None) -> dict:
     """Expected return per $1 from a (legs x sims) boolean hit matrix taken from the same sims.
 

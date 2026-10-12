@@ -2,8 +2,8 @@
 
 Fitted on one validation season's quick check (2023) and judged on another (2024), never on 2025.
 v0's raw sim probabilities are too confident at the extremes (its 79% calls hit about 72% in 2024), so
-this layer pulls them in. Lineup hit chances keep the sim's correlation: the joint probability is scaled
-by the product of each leg's calibrated / raw ratio.
+this layer pulls them in, per stat type where there is enough data. Lineup hit chances keep the sim's
+correlation by reweighting (raking) the simulated games to the calibrated leg probabilities.
 """
 from __future__ import annotations
 
@@ -35,10 +35,12 @@ def fit(p, y) -> dict:
     return dict(a=float(r.x[0]), b=float(r.x[1]), n=int(len(y)))
 
 
-def apply(p, params: dict | None):
+def apply(p, params: dict | None, stat: str | None = None):
+    """Calibrated probability. Per-stat parameters (params['by_stat'][stat]) when present, else pooled."""
     if not params:
         return np.asarray(p, float)
-    return 1 / (1 + np.exp(-(params["a"] * _logit(p) + params["b"])))
+    prm = (params.get("by_stat") or {}).get(stat, params) if stat else params
+    return 1 / (1 + np.exp(-(prm["a"] * _logit(p) + prm.get("b", 0.0))))
 
 
 def load() -> dict | None:

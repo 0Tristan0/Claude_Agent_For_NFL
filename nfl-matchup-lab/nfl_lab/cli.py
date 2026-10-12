@@ -134,6 +134,10 @@ def cmd_props(a):
 def _print_run(res, show_players=True):
     from .sim import v0 as S
     pd.set_option("display.width", 220)
+    if res.get("results"):
+        note = next(iter(res["results"].values()))["proj"].get("injury_note")
+        if note:
+            print("injuries:", note)
     for gid, r in res["results"].items():
         g = r["proj"]["game"]
         print(f"\n=== {gid}  ({g.get('line_source', 'schedule')} lines: spread {g['spread_line']:+g} home, total {g['total_line']:g})")
@@ -185,10 +189,15 @@ def cmd_slate(a):
 def cmd_check(a):
     from . import v0run
     from .backtest import quick
+    from .picks import calibration
+    from .project import v0 as P
     T = v0run.load_tables()
-    df = quick.run(T, a.season, n_sims=a.sims, progress=print)
+    df = quick.run(T, a.season, n_sims=a.sims, progress=print, calibrate=not a.raw)
     rep = quick.report(df)
-    v0run.save_check(rep)
+    cal = calibration.load()
+    v0run.save_check(rep, a.season, dict(season=a.season, fit_seasons=P.fit_seasons(a.season), n_sims=a.sims,
+                                         calibrated=not a.raw, calibration_fitted_on=(cal or {}).get("fitted_on"),
+                                         weeks="3-18", lines="stand-in (median of last 6 games)"))
     pd.set_option("display.width", 220)
     print(rep["overall"])
     print(rep["by_stat"].round(4).to_string(index=False))
@@ -230,6 +239,7 @@ def main(argv=None) -> int:
     s = sub.add_parser("check", help="calibration check of v0 on a validation season (2024 or earlier)")
     s.add_argument("--season", type=int, default=2024)
     s.add_argument("--sims", type=int, default=2000)
+    s.add_argument("--raw", action="store_true", help="skip calibration (report raw sim probabilities)")
     s.set_defaults(fn=cmd_check)
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO if a.verbose else logging.WARNING, format="%(message)s")

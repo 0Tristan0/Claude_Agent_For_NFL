@@ -98,7 +98,7 @@ def fair_probs(props: pd.DataFrame) -> pd.DataFrame:
             fu.append(pu if pu is not None else (1 - po if po is not None else np.nan))
             note.append("legacy blended estimate (reference only)")
             continue
-        orr = over_round.get(r["stat"], over_round["default"])
+        orr = 0.0 if r["odds_kind"] in ("exchange", "prob") else over_round.get(r["stat"], over_round["default"])
         f, n = market.fair_two_way(r["p_over_implied"], r["p_under_implied"], cfg["display_devig"], orr)
         fo.append(np.nan if f is None else f)
         fu.append(np.nan if f is None else 1 - f)

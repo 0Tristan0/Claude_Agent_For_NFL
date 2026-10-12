@@ -12,22 +12,21 @@ default = 0.045
 anytime_td = 0.20
 pass_tds = 0.08
 
-[line_mismatch]
+[line_mismatch]                # not implemented in v0: lines must match exactly
 max_sd = 0.5                  # refuse to shift a book price to a PrizePicks line more than 0.5 SD away
 refuse_integer_cross = true   # for count stats, refuse when the two lines straddle an integer
 
-[info_gap]
+[info_gap]                     # v0 uses picks/lineups.py FAR_FROM_LINE (72%) instead
 flag_sd = 1.5                 # model vs market gaps beyond this are flagged "check news", not "edge"
 
 [lineups]
 sizes = [3, 4, 5, 6]
-max_exhaustive = 50000        # combinations; above this a beam search is used
-beam_width = 64
+max_exhaustive = 50000        # combinations; above this only the legs with the biggest edges are searched
 min_ev_se = 2.0               # keep a lineup only if EV - 2 Monte Carlo SE > 1
 shrink_to_reference = 0.25    # shrink leg probs 25% toward max(market, break-even) before ranking
 negative_corr_block = -0.05   # never pair legs whose sim correlation is below this
 
-[kelly]
+[kelly]                        # not implemented in v0
 enabled = false               # off until live CLV is positive with a CI that excludes 0
 fraction = 0.25
 cap = 0.02                    # max share of bankroll per entry
