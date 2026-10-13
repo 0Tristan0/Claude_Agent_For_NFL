@@ -33,50 +33,54 @@ def _pct(x) -> str:
     return "" if x is None or (isinstance(x, float) and np.isnan(x)) else f"{x:.0%}"
 
 
-def lines_table(legs: pd.DataFrame | None, prefix: str = "../") -> str:
-    """PrizePicks lines for one game with the model's chance on each side. Other rows are counted, not shown."""
+def lines_table(legs: pd.DataFrame | None, blended: pd.DataFrame | None = None, used: set | None = None,
+                prefix: str = "../") -> str:
+    """PrizePicks lines for one game: the pick and its blended chance (sim + recent form) per standard line."""
     if legs is None or legs.empty or not legs["prizepicks"].any():
         other = 0 if legs is None or legs.empty else legs[["player", "stat", "line"]].drop_duplicates().shape[0]
         extra = f" ({other} reference lines from other sources are on file but don't go into lineups.)" if other else ""
         return f"<p class='sub'>No PrizePicks lines for this game yet.{extra} {HOW_TO_ADD}</p>"
+    used = used or set()
     allpp = legs[legs["prizepicks"]]
-    pp = allpp[allpp["line_type"].eq("standard")]
-    # one row per line: the side the model leans to
-    pp = (pp.sort_values("p_model", ascending=False, kind="mergesort")
-            .drop_duplicates(["player_id", "stat", "line"]).sort_values("p_model", ascending=False, kind="mergesort"))
+    std = allpp[allpp["line_type"].eq("standard")]
     n_alt = allpp.loc[~allpp["line_type"].eq("standard"), ["player_id", "stat", "line"]].drop_duplicates().shape[0]
     rows = []
-    for _, l in pp.iterrows():
-        if l["qualified_any"]:
-            q, cls = ("Yes, model + market" if l["basis"] == "model + market" else "Yes, model only"), "q-yes"
-        elif l["far_from_line"]:
-            q, cls = "No: model far from line, check news", "q-no"
-        elif l["line_type"] != "standard":
-            q, cls = f"No: {l['line_type']} line", "q-no"
-        elif l["integer_push"]:
-            q, cls = "No: whole-number line can push", "q-no"
-        else:
-            q, cls = "No: below break-even + 3 pts", "q-no"
+    b = blended if blended is not None else pd.DataFrame()
+    for _, l in (b.sort_values("p_model", ascending=False) if len(b) else b).iterrows():
+        top = (l["player_id"], l["stat"], l["line"]) in used
         rows.append(f"<tr><th scope='row'>{theme.logo(l['team'], 18, prefix)} {e(l['player'])}</th>"
                     f"<td class='l'>{e(stat_name(l['stat']))}</td><td class='num'>{l['line']:g}</td>"
                     f"<td class='l'>{SIDE[l['side']]}</td><td class='num'>{_pct(l['p_model'])}"
-                    + (f"<span class='rng'>model alone {_pct(l['p_model_alone'])}</span>"
-                       if l.get("basis") == "model only" and abs(l["p_model"] - l["p_model_alone"]) > 0.005 else "")
-                    + "</td>"
-                    f"<td class='num'>{_pct(l['p_market']) or '<span class=muted>none</span>'}</td>"
-                    f"<td class='l {cls}'>{q}</td></tr>")
+                    f"<span class='rng'>sim {_pct(l['p_sim'])} &middot; form {_pct(l['p_form'])} &middot; matchup "
+                    f"{round((l.get('p_matchup', 0) or 0) * 100):+d}</span></td>"
+                    f"<td class='l {'q-yes' if top else 'q-no'}'>{'In a top lineup' if top else ''}</td></tr>")
+    left = std[~std["lineup_ok"]].sort_values("p_model_alone", ascending=False).drop_duplicates(["player_id", "stat", "line"])
+    for _, l in left.iterrows():
+        why = ("model far from line, check news" if l["far_from_line"] else
+               "whole-number line can push" if l["integer_push"] else "left out")
+        rows.append(f"<tr><th scope='row'>{theme.logo(l['team'], 18, prefix)} {e(l['player'])}</th>"
+                    f"<td class='l'>{e(stat_name(l['stat']))}</td><td class='num'>{l['line']:g}</td>"
+                    f"<td class='l'>{SIDE[l['side']]}</td><td class='num muted'>sim {_pct(l['p_model_alone'])}</td>"
+                    f"<td class='l q-no'>Left out: {why}</td></tr>")
     n_other = legs.loc[~legs["prizepicks"], ["player", "stat", "line"]].drop_duplicates().shape[0]
-    note = (f"<p class='small'>{n_other} reference lines from other sources (old blended estimates, sportsbook-only rows) "
-            "are on file for this game; they are not PrizePicks lines, so they stay out of lineups.</p>") if n_other else ""
+    note = (f"<p class='small'>{n_other} reference lines from other sources are on file for this game; they are not "
+            "PrizePicks lines, so they stay out.</p>") if n_other else ""
     if n_alt:
-        note += (f"<p class='small'>{n_alt} goblin and demon lines are on the board for this game too. They pay differently "
-                 "from standard picks and those payouts aren't modeled yet, so they are left out.</p>")
-    if pp.empty:
+        note += (f"<p class='small'>{n_alt} goblin and demon lines are on the board too. They pay differently from standard "
+                 "picks and those payouts aren't modeled yet, so they are left out.</p>")
+    if not rows:
         return "<p class='sub'>No standard PrizePicks lines for this game that the model simulates.</p>" + note
     return ("<div class='tbl-wrap'><table class='pt'><thead><tr><th scope='col'>Player</th><th scope='col' class='l'>Stat</th>"
-            "<th scope='col'>Line</th><th scope='col' class='l'>Model's pick</th><th scope='col'>Chance</th>"
-            "<th scope='col'>Sportsbook (no vig)</th><th scope='col' class='l'>Qualifies</th></tr></thead><tbody>"
-            + "".join(rows) + "</tbody></table></div>" + note)
+            "<th scope='col'>Line</th><th scope='col' class='l'>Pick</th><th scope='col'>Chance</th>"
+            "<th scope='col' class='l'></th></tr></thead><tbody>" + "".join(rows) + "</tbody></table></div>" + note)
+
+
+def retro_note(retro: dict) -> str:
+    """Explains a before-kickoff test that has been graded against the real result."""
+    return (f"<div class='retro'><p><b>Graded test.</b> These lineups were built with only what was known before kickoff "
+            f"(stats through the previous game and the lines below), then checked against the final stats: "
+            f"{e(retro.get('final', ''))}. Lines here are the ones on file before kickoff, mostly sportsbook lines; "
+            f"PrizePicks had pulled its board by the time it was saved.</p></div>")
 
 
 def to_json(best: dict) -> dict:
@@ -92,7 +96,12 @@ def to_json(best: dict) -> dict:
             min_power_mult=float(L["min_power_mult"]),
             legs=[dict(player=x["player"], team=teams.display(x["team"]), stat=x["stat"], side=x["side"],
                        line=float(x["line"]), p_model=float(x["p_model"]), game_id=x["game_id"],
-                       **({"note": x["note"]} if x.get("note") else {})) for x in L["legs"]])
+                       player_id=x.get("player_id"),
+                       **({"note": x["note"]} if x.get("note") else {}),
+                       **({"reasons": list(x["reasons"])} if isinstance(x.get("reasons"), (list, tuple)) and len(x["reasons"]) else {}),
+                       **({"result": x["result"]} if x.get("result") else {})) for x in L["legs"]],
+            **({"outcome": L["outcome"]} if L.get("outcome") else {}),
+            **({"game": L["game"]} if L.get("game") else {}))
             for L in lst]
     return out
 
@@ -104,6 +113,9 @@ def lineup_cards(best_json: dict, prefix: str = "../", no_lines_msg: str = "") -
             legs = "".join(
                 f"<li>{theme.logo(x['team'], 18, prefix)}<span><b>{e(x['player'])}</b> {SIDE[x['side']]} {x['line']:g} "
                 f"{e(stat_name(x['stat']))}" + (f"<span class='vs-lbl'>{e(x['note'])}</span>" if x.get("note") else "")
+                + "".join(f"<span class='vs-lbl why'>{e(w)}</span>" for w in x.get("reasons", []))
+                + (f"<span class='vs-lbl res {'hit' if x['result']['hit'] else 'miss'}'>{'Hit' if x['result']['hit'] else 'Missed'}: "
+                   f"{e(str(x['result']['actual']))}</span>" if x.get("result") else "")
                 + f"</span><span class='pp'>{x['p_model']:.0%}</span></li>" for x in L["legs"])
             old = L.get("basis") == "old model"
             hit_rows = (f"<div><dt>All hit (legs multiplied)</dt><dd>{L['p_all']:.1%}</dd></div>" if old else
@@ -111,6 +123,10 @@ def lineup_cards(best_json: dict, prefix: str = "../", no_lines_msg: str = "") -
                         f"<div><dt>If legs were independent</dt><dd>{L['p_independent']:.1%}</dd></div>")
             tag = ("<span class='tag ok'>Recommended</span>" if L["recommended"] else
                    "<span class='tag'>Not recommended</span>")
+            if L.get("outcome"):
+                o = L["outcome"]
+                tag = (f"<span class='tag ok'>Won ${o['returned']:.2f} per $1</span>" if o["returned"] > 0 else
+                       "<span class='tag'>Lost</span>")
             if L.get("basis") == "old model":
                 tag = ("<span class='tag ok'>Above break-even</span>" if L["recommended"] else
                        "<span class='tag'>Below break-even</span>")
@@ -121,7 +137,8 @@ def lineup_cards(best_json: dict, prefix: str = "../", no_lines_msg: str = "") -
                    "per $1, which is below break-even.</p>")
             skip = (f"<div><dt>Skip if the app pays under</dt><dd>{L['min_power_mult']:.1f}x</dd></div>"
                     if L["recommended"] else "")
-            cards.append(f"""<article class="lu{'' if L['recommended'] else ' dim'}"><header><h3>{n}-pick {L['play_as']}</h3>{tag}</header>
+            game = f"<span class='small'>{e(L['game'])}</span>" if L.get("game") else ""
+            cards.append(f"""<article class="lu{'' if L['recommended'] else ' dim'}"><header><div><h3>{n}-pick {L['play_as']}</h3>{game}</div>{tag}</header>
 <ol class="lul">{legs}</ol><dl class="lustats">
 {hit_rows}
 <div><dt>Power return per $1</dt><dd>${(L['power_ev'] or 0):.2f}</dd></div>{flex}{skip}

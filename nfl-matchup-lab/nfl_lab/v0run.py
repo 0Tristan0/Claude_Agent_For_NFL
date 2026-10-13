@@ -106,7 +106,10 @@ def _outs(T, g, asof) -> tuple[set, str]:
                   f"missed their last game" if week > 1 else "no injury report")
 
 
-def run_games(game_ids: list[str], n_sims: int = 20000, write_pages: bool = True, allow_holdout: bool = False) -> dict:
+def run_games(game_ids: list[str], n_sims: int = 20000, write_pages: bool = True, allow_holdout: bool = False,
+              props_override: pd.DataFrame | None = None, retro: dict | None = None) -> dict:
+    """Project, simulate and price the given games. props_override replaces data/props.csv (used by the graded
+    before-kickoff test); retro = {"stats": nflverse weekly stats, "final": text} grades the lineups on the pages."""
     T = load_tables()
     games = T["games"].set_index("game_id")
     seasons = {int(games.loc[g, "season"]) for g in game_ids}
@@ -114,7 +117,7 @@ def run_games(game_ids: list[str], n_sims: int = 20000, write_pages: bool = True
         raise ValueError(f"{config.TEST_SEASON} is the holdout season: it is projected only by the final test")
     fits = {s: P.fit(T, s) for s in seasons}
     eng = bundle.engines(T)
-    props = lines.load_props()
+    props = lines.load_props() if props_override is None else props_override
     props = lines.fair_probs(props) if len(props) else props
     ov = live.overrides()
     now = pd.Timestamp.now(tz="UTC")
@@ -165,29 +168,44 @@ def run_games(game_ids: list[str], n_sims: int = 20000, write_pages: bool = True
             legs = lineups.leg_table(pd.concat(rows, ignore_index=True), sims, None)
     if unresolved:
         print("props rows not matched to an active player (check spelling, or he is listed out):", ", ".join(unresolved))
-    best = lineups.best_lineups(legs, sims) if len(legs) else {}
-    from .picks import oldmodel
+    from .picks import combined, matchups, oldmodel
     old_est = oldmodel.estimates(legs, T) if len(legs) else pd.DataFrame()
-    old_best = oldmodel.best_lineups(old_est)
-    from .picks import combined
-    combo = combined.best(legs, old_est, sims) if len(legs) else {"lineups": {}, "seventh": None, "n_agreed": 0}
+    per_game, picks_by_game = {}, {}
+    for gid, r in results.items():
+        gl = legs[legs["game_id"] == gid] if len(legs) else legs
+        g_old = old_est[old_est["game_id"] == gid] if len(old_est) else old_est
+        b = combined.blend(gl, g_old) if len(gl) else pd.DataFrame()
+        if len(b):
+            positions = {pid: m["position"] for pid, m in sims[gid].meta.items()}
+            b = matchups.adjust(b, matchups.context(T, gid, eng), positions)
+        picks_by_game[gid] = combined.pick_sides(b)
+        per_game[gid] = combined.lineups_for_game(picks_by_game[gid], {gid: sims[gid]}) if len(picks_by_game[gid]) else {}
+    labels = {gid: f"{teams.display(r['proj']['game']['away_team'])} at {teams.display(r['proj']['game']['home_team'])}"
+              for gid, r in results.items()}
+    best = combined.best_across_games(per_game, labels)
     check = load_check()
     pages = []
     if write_pages:
-        _save_week_lineups(results, legs, best, now, multi=len(game_ids) > 1, old_best=old_best, combo=combo)
+        _save_week_lineups(results, legs, best, now, multi=len(game_ids) > 1 and props_override is None)
         from .report import v0page
         for gid, r in results.items():
             gl = legs[legs["game_id"] == gid] if len(legs) else legs
-            gbest = lineups.best_lineups(gl, {gid: sims[gid]}) if len(gl) else {}
+            gbest = per_game.get(gid, {})
+            g_retro = None
+            if retro is not None:
+                from .backtest import retro as R
+                gbest = R.grade(gbest, retro["stats"], int(r["proj"]["game"]["week"]))
+                g_retro = dict(final=retro.get("final", ""))
             path = config.ROOT / "output" / "v0" / f"{slug(r['proj']['game'])}.html"
-            g_old = oldmodel.best_lineups(old_est[old_est["game_id"] == gid] if len(old_est) else old_est)
-            pages.append(v0page.render(r["proj"], r["sim"], gl, gbest, check, path, old_best=g_old))
+            pages.append(v0page.render(r["proj"], r["sim"], gl, gbest, check, path, blended=picks_by_game.get(gid),
+                                       retro=g_retro))
+            if retro is not None:
+                r["graded_lineups"] = gbest
     return dict(results=results, legs=legs, best=best, pages=pages, fits=fits, unresolved=unresolved,
-                old_estimates=old_est, old_best=old_best, combined=combo)
+                old_estimates=old_est)
 
 
-def _save_week_lineups(results: dict, legs: pd.DataFrame, best: dict, now, multi: bool, old_best: dict | None = None,
-                       combo: dict | None = None) -> None:
+def _save_week_lineups(results: dict, legs: pd.DataFrame, best: dict, now, multi: bool) -> None:
     """Cross-game PrizePicks lineups for the site's Lineups tab (output/v0/lineups-<season>-w<week>.json).
     A single-game run only writes the file when the week has none, so it never wipes a full-slate run."""
     import json
@@ -204,10 +222,7 @@ def _save_week_lineups(results: dict, legs: pd.DataFrame, best: dict, now, multi
         games[gid] = dict(slug=slug(r["proj"]["game"]), pp_lines=n_pp)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(dict(season=season, week=week, built_at=str(now), games=games,
-                                    best=picks_html.to_json(best), old_best=old_best or {},
-                                    combined=dict(lineups=picks_html.to_json((combo or {}).get("lineups", {})),
-                                                  seventh=(combo or {}).get("seventh"),
-                                                  n_agreed=(combo or {}).get("n_agreed", 0))), indent=1))
+                                    best=picks_html.to_json(best)), indent=1))
 
 
 _JERSEYS: dict = {}

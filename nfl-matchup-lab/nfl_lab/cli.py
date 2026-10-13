@@ -246,6 +246,21 @@ def cmd_market_cal(a):
     return 0
 
 
+def cmd_retro(a):
+    from .backtest import retro
+    graded = retro.run(a.game, final=a.final, n_sims=a.sims)
+    for n, lst in sorted(graded.items(), key=lambda kv: int(kv[0])):
+        for L in lst:
+            o = L.get("outcome")
+            head = f"{n}-pick {L['play_as']}: " + (f"{o['hits']} of {o['of']} hit, returned ${o['returned']:.2f} per $1" if o else "not fully graded")
+            print(head)
+            for x in L["legs"]:
+                r = x.get("result")
+                print(f"   {x['player']} {x['stat']} {x['side']} {x['line']:g} ({x['p_model']:.0%}): "
+                      + (f"{'HIT' if r['hit'] else 'MISS'} ({r['actual']})" if r else "no stats"))
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="nfl_lab", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("-v", "--verbose", action="store_true")
@@ -290,6 +305,11 @@ def main(argv=None) -> int:
     s.add_argument("--check-season", type=int, default=2024)
     s.add_argument("--sims", type=int, default=1500)
     s.set_defaults(fn=cmd_market_cal)
+    s = sub.add_parser("retro", help="graded before-kickoff test for a finished game")
+    s.add_argument("--game", required=True)
+    s.add_argument("--final", default="")
+    s.add_argument("--sims", type=int, default=20000)
+    s.set_defaults(fn=cmd_retro)
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO if a.verbose else logging.WARNING, format="%(message)s")
     return a.fn(a)

@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 6,
- "built_at": "2026-10-13 03:41:00.921951+00:00",
+ "built_at": "2026-10-13 15:18:03.472974+00:00",
  "games": {
   "2026_06_SEA_DEN": {
    "slug": "2026-w06-sea-den",
@@ -61,1160 +61,328 @@
   }
  },
  "best": {
-  "2": [
-   {
-    "n": 2,
-    "recommended": false,
-    "basis": "model only",
-    "play_as": "Power",
-    "p_all": 0.36411948314111753,
-    "p_independent": 0.3602571938905922,
-    "power_ev": 1.0923584494233527,
-    "flex_ev": null,
-    "best_ev": 1.0923584494233527,
-    "min_power_mult": 2.746351256388117,
-    "legs": [
-     {
-      "player": "George Kittle",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 61.5,
-      "p_model": 0.6041284249477005,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Nico Collins",
-      "team": "HOU",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 71.5,
-      "p_model": 0.5963255147170445,
-      "game_id": "2026_06_HOU_JAX"
-     }
-    ]
-   }
-  ],
   "3": [
    {
     "n": 3,
-    "recommended": false,
-    "basis": "model only",
+    "recommended": true,
+    "basis": "sim + form + matchups",
     "play_as": "Power",
-    "p_all": 0.22525979288601514,
-    "p_independent": 0.19364257931500475,
-    "power_ev": 1.1262989644300756,
-    "flex_ev": 0.982726289596097,
-    "best_ev": 1.1262989644300756,
-    "min_power_mult": 4.439318651535896,
+    "p_all": 0.24426159131846173,
+    "p_independent": 0.16441423705552752,
+    "power_ev": 1.2213079565923086,
+    "flex_ev": 0.9291729651863885,
+    "best_ev": 1.2213079565923086,
+    "min_power_mult": 4.093971527010265,
     "legs": [
      {
-      "player": "Nico Collins",
-      "team": "HOU",
+      "player": "Jaylen Waddle",
+      "team": "DEN",
       "stat": "rec_yds",
       "side": "under",
-      "line": 71.5,
-      "p_model": 0.5963255147170445,
-      "game_id": "2026_06_HOU_JAX"
+      "line": 49.5,
+      "p_model": 0.5885664697788064,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0036613",
+      "note": "sim 57%, recent form 56% (Less in 3 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: SEA allow 109 receiving yds a game to WRs (30th most)",
+       "For: SEA's pass defense ranks 3rd of 32 by EPA per dropback allowed"
+      ]
      },
      {
-      "player": "Dak Prescott",
-      "team": "DAL",
-      "stat": "completions",
+      "player": "Sam Darnold",
+      "team": "SEA",
+      "stat": "pass_yds",
       "side": "under",
-      "line": 24.5,
-      "p_model": 0.5701462215611733,
-      "game_id": "2026_06_DAL_GB"
+      "line": 218.5,
+      "p_model": 0.5475810985236491,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0034869",
+      "note": "sim 49%, recent form 56% (Less in 3 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: DEN pressure QBs on 25% of dropbacks (11th); SEA's line allows 26% (3rd most): a hard night to throw",
+       "For: DEN's pass defense ranks 5th of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Jaxon Smith-Njigba",
+      "team": "SEA",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 89.5,
+      "p_model": 0.5101472116042564,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0038543",
+      "note": "sim 52%, recent form 44% (Less in 1 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: DEN allow 118 receiving yds a game to WRs (28th most)",
+       "For: DEN's pass defense ranks 5th of 32 by EPA per dropback allowed"
+      ]
+     }
+    ],
+    "game": "SEA at DEN"
+   }
+  ],
+  "4": [
+   {
+    "n": 4,
+    "recommended": true,
+    "basis": "sim + form + matchups",
+    "play_as": "Power",
+    "p_all": 0.15144224525301345,
+    "p_independent": 0.08786505473845786,
+    "power_ev": 1.5144224525301344,
+    "flex_ev": 1.1593251583795894,
+    "best_ev": 1.5144224525301344,
+    "min_power_mult": 6.603177325648516,
+    "legs": [
+     {
+      "player": "Jaylen Waddle",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 49.5,
+      "p_model": 0.5885664697788064,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0036613",
+      "note": "sim 57%, recent form 56% (Less in 3 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: SEA allow 109 receiving yds a game to WRs (30th most)",
+       "For: SEA's pass defense ranks 3rd of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Sam Darnold",
+      "team": "SEA",
+      "stat": "pass_yds",
+      "side": "under",
+      "line": 218.5,
+      "p_model": 0.5475810985236491,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0034869",
+      "note": "sim 49%, recent form 56% (Less in 3 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: DEN pressure QBs on 25% of dropbacks (11th); SEA's line allows 26% (3rd most): a hard night to throw",
+       "For: DEN's pass defense ranks 5th of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Rashid Shaheed",
+      "team": "SEA",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 22.5,
+      "p_model": 0.5344127013738557,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0037545",
+      "note": "sim 51%, recent form 50% (Less in 2 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: DEN allow 118 receiving yds a game to WRs (28th most)",
+       "For: DEN's pass defense ranks 5th of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Jaxon Smith-Njigba",
+      "team": "SEA",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 89.5,
+      "p_model": 0.5101472116042564,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0038543",
+      "note": "sim 52%, recent form 44% (Less in 1 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: DEN allow 118 receiving yds a game to WRs (28th most)",
+       "For: DEN's pass defense ranks 5th of 32 by EPA per dropback allowed"
+      ]
+     }
+    ],
+    "game": "SEA at DEN"
+   }
+  ],
+  "5": [
+   {
+    "n": 5,
+    "recommended": true,
+    "basis": "sim + form + matchups",
+    "play_as": "Power",
+    "p_all": 0.08806981366226878,
+    "p_independent": 0.04598839529864379,
+    "power_ev": 1.7613962732453756,
+    "flex_ev": 1.3981645683550183,
+    "best_ev": 1.7613962732453756,
+    "min_power_mult": 11.354628316063124,
+    "legs": [
+     {
+      "player": "Jordan Love",
+      "team": "GB",
+      "stat": "pass_att",
+      "side": "under",
+      "line": 35.5,
+      "p_model": 0.5680927716821459,
+      "game_id": "2026_06_DAL_GB",
+      "player_id": "00-0036264",
+      "note": "sim 58%, recent form 56% (Less in 3 of last 4), matchup even"
      },
      {
       "player": "Jake Ferguson",
       "team": "DAL",
-      "stat": "receptions",
-      "side": "under",
-      "line": 3.5,
-      "p_model": 0.569549164891793,
-      "game_id": "2026_06_DAL_GB"
-     }
-    ]
-   }
-  ],
-  "4": [
-   {
-    "n": 4,
-    "recommended": true,
-    "basis": "model only",
-    "play_as": "Power",
-    "p_all": 0.13837950551788092,
-    "p_independent": 0.13396069430448304,
-    "power_ev": 1.3837950551788092,
-    "flex_ev": 1.2136198277774297,
-    "best_ev": 1.3837950551788092,
-    "min_power_mult": 7.226503637641511,
-    "legs": [
-     {
-      "player": "J.K. Dobbins",
-      "team": "DEN",
-      "stat": "rush_att",
-      "side": "under",
-      "line": 13.5,
-      "p_model": 0.6068378738346678,
-      "game_id": "2026_06_SEA_DEN"
-     },
-     {
-      "player": "Tony Pollard",
-      "team": "TEN",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 49.5,
-      "p_model": 0.605418170491175,
-      "game_id": "2026_06_TEN_IND"
-     },
-     {
-      "player": "George Kittle",
-      "team": "SF",
       "stat": "rec_yds",
       "side": "under",
-      "line": 61.5,
-      "p_model": 0.6041284249477005,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Christian McCaffrey",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 39.5,
-      "p_model": 0.6035593617358359,
-      "game_id": "2026_06_WAS_SF"
-     }
-    ]
-   },
-   {
-    "n": 4,
-    "recommended": true,
-    "basis": "model only",
-    "play_as": "Power",
-    "p_all": 0.13739233764582415,
-    "p_independent": 0.13329231943976635,
-    "power_ev": 1.3739233764582415,
-    "flex_ev": 1.2046103027867516,
-    "best_ev": 1.3739233764582415,
-    "min_power_mult": 7.278426272779803,
-    "legs": [
-     {
-      "player": "J.K. Dobbins",
-      "team": "DEN",
-      "stat": "rush_att",
-      "side": "under",
-      "line": 13.5,
-      "p_model": 0.6068378738346678,
-      "game_id": "2026_06_SEA_DEN"
-     },
-     {
-      "player": "George Kittle",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 61.5,
-      "p_model": 0.6041284249477005,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Christian McCaffrey",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 39.5,
-      "p_model": 0.6035593617358359,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Hunter Henry",
-      "team": "NE",
-      "stat": "receptions",
-      "side": "under",
-      "line": 3.5,
-      "p_model": 0.6023975357419351,
-      "game_id": "2026_06_NYJ_NE"
-     }
-    ]
-   },
-   {
-    "n": 4,
-    "recommended": true,
-    "basis": "model only",
-    "play_as": "Power",
-    "p_all": 0.1376844765775954,
-    "p_independent": 0.1319487654028723,
-    "power_ev": 1.376844765775954,
-    "flex_ev": 1.2042369721672057,
-    "best_ev": 1.376844765775954,
-    "min_power_mult": 7.26298290741895,
-    "legs": [
-     {
-      "player": "J.K. Dobbins",
-      "team": "DEN",
-      "stat": "rush_att",
-      "side": "under",
-      "line": 13.5,
-      "p_model": 0.6068378738346678,
-      "game_id": "2026_06_SEA_DEN"
-     },
-     {
-      "player": "George Kittle",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 61.5,
-      "p_model": 0.6041284249477005,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Christian McCaffrey",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 39.5,
-      "p_model": 0.6035593617358359,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Nico Collins",
-      "team": "HOU",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 71.5,
-      "p_model": 0.5963255147170445,
-      "game_id": "2026_06_HOU_JAX"
-     }
-    ]
-   }
-  ],
-  "5": [
-   {
-    "n": 5,
-    "recommended": true,
-    "basis": "model only",
-    "play_as": "Power",
-    "p_all": 0.0818851760264224,
-    "p_independent": 0.07798024066015487,
-    "power_ev": 1.637703520528448,
-    "flex_ev": 1.4710949505295332,
-    "best_ev": 1.637703520528448,
-    "min_power_mult": 12.212222633280092,
-    "legs": [
-     {
-      "player": "George Kittle",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 61.5,
-      "p_model": 0.6041284249477005,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Christian McCaffrey",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 39.5,
-      "p_model": 0.6035593617358359,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Hunter Henry",
-      "team": "NE",
-      "stat": "receptions",
-      "side": "under",
-      "line": 3.5,
-      "p_model": 0.6023975357419351,
-      "game_id": "2026_06_NYJ_NE"
-     },
-     {
-      "player": "Nico Collins",
-      "team": "HOU",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 71.5,
-      "p_model": 0.5963255147170445,
-      "game_id": "2026_06_HOU_JAX"
-     },
-     {
-      "player": "Emmett Johnson",
-      "team": "KC",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 7.5,
-      "p_model": 0.5953450307088066,
-      "game_id": "2026_06_LAC_KC"
-     }
-    ]
-   },
-   {
-    "n": 5,
-    "recommended": true,
-    "basis": "model only",
-    "play_as": "Power",
-    "p_all": 0.08221696519847041,
-    "p_independent": 0.07827798183462709,
-    "power_ev": 1.6443393039694083,
-    "flex_ev": 1.4753763909519118,
-    "best_ev": 1.6443393039694083,
-    "min_power_mult": 12.162939821313234,
-    "legs": [
-     {
-      "player": "Hunter Henry",
-      "team": "NE",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 37.5,
-      "p_model": 0.6046975887498338,
-      "game_id": "2026_06_NYJ_NE"
-     },
-     {
-      "player": "George Kittle",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 61.5,
-      "p_model": 0.6041284249477005,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Christian McCaffrey",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 39.5,
-      "p_model": 0.6035593617358359,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Nico Collins",
-      "team": "HOU",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 71.5,
-      "p_model": 0.5963255147170445,
-      "game_id": "2026_06_HOU_JAX"
-     },
-     {
-      "player": "Emmett Johnson",
-      "team": "KC",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 7.5,
-      "p_model": 0.5953450307088066,
-      "game_id": "2026_06_LAC_KC"
-     }
-    ]
-   },
-   {
-    "n": 5,
-    "recommended": true,
-    "basis": "model only",
-    "play_as": "Power",
-    "p_all": 0.08258515174650291,
-    "p_independent": 0.07837126097556167,
-    "power_ev": 1.6517030349300583,
-    "flex_ev": 1.4770382433586136,
-    "best_ev": 1.6517030349300583,
-    "min_power_mult": 12.108714204092326,
-    "legs": [
-     {
-      "player": "Tony Pollard",
-      "team": "TEN",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 49.5,
-      "p_model": 0.605418170491175,
-      "game_id": "2026_06_TEN_IND"
-     },
-     {
-      "player": "George Kittle",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 61.5,
-      "p_model": 0.6041284249477005,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Christian McCaffrey",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 39.5,
-      "p_model": 0.6035593617358359,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Nico Collins",
-      "team": "HOU",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 71.5,
-      "p_model": 0.5963255147170445,
-      "game_id": "2026_06_HOU_JAX"
-     },
-     {
-      "player": "Emmett Johnson",
-      "team": "KC",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 7.5,
-      "p_model": 0.5953450307088066,
-      "game_id": "2026_06_LAC_KC"
-     }
-    ]
-   }
-  ],
-  "6": [
-   {
-    "n": 6,
-    "recommended": true,
-    "basis": "model only",
-    "play_as": "Power",
-    "p_all": 0.050789712623908696,
-    "p_independent": 0.04721065466161466,
-    "power_ev": 1.9046142233965762,
-    "flex_ev": 1.7635401455198485,
-    "best_ev": 1.9046142233965762,
-    "min_power_mult": 19.689026543719034,
-    "legs": [
-     {
-      "player": "Tony Pollard",
-      "team": "TEN",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 49.5,
-      "p_model": 0.605418170491175,
-      "game_id": "2026_06_TEN_IND"
-     },
-     {
-      "player": "George Kittle",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 61.5,
-      "p_model": 0.6041284249477005,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Christian McCaffrey",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 39.5,
-      "p_model": 0.6035593617358359,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Hunter Henry",
-      "team": "NE",
-      "stat": "receptions",
-      "side": "under",
-      "line": 3.5,
-      "p_model": 0.6023975357419351,
-      "game_id": "2026_06_NYJ_NE"
-     },
-     {
-      "player": "Nico Collins",
-      "team": "HOU",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 71.5,
-      "p_model": 0.5963255147170445,
-      "game_id": "2026_06_HOU_JAX"
-     },
-     {
-      "player": "Emmett Johnson",
-      "team": "KC",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 7.5,
-      "p_model": 0.5953450307088066,
-      "game_id": "2026_06_LAC_KC"
-     }
-    ]
-   },
-   {
-    "n": 6,
-    "recommended": true,
-    "basis": "model only",
-    "play_as": "Power",
-    "p_all": 0.05059306832096718,
-    "p_independent": 0.04711664972635599,
-    "power_ev": 1.8972400620362693,
-    "flex_ev": 1.7643617366737914,
-    "best_ev": 1.8972400620362693,
-    "min_power_mult": 19.76555352713352,
-    "legs": [
-     {
-      "player": "J.K. Dobbins",
-      "team": "DEN",
-      "stat": "rush_att",
-      "side": "under",
-      "line": 13.5,
-      "p_model": 0.6068378738346678,
-      "game_id": "2026_06_SEA_DEN"
-     },
-     {
-      "player": "Tony Pollard",
-      "team": "TEN",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 49.5,
-      "p_model": 0.605418170491175,
-      "game_id": "2026_06_TEN_IND"
-     },
-     {
-      "player": "George Kittle",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 61.5,
-      "p_model": 0.6041284249477005,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Christian McCaffrey",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 39.5,
-      "p_model": 0.6035593617358359,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Hunter Henry",
-      "team": "NE",
-      "stat": "receptions",
-      "side": "under",
-      "line": 3.5,
-      "p_model": 0.6023975357419351,
-      "game_id": "2026_06_NYJ_NE"
+      "line": 29.5,
+      "p_model": 0.5674071369531286,
+      "game_id": "2026_06_DAL_GB",
+      "player_id": "00-0038041",
+      "note": "sim 56%, recent form 56% (Less in 3 of last 4), matchup +1 pts",
+      "reasons": [
+       "For: GB allow 32 receiving yds a game to TEs (29th most)",
+       "Against: GB pressure QBs on 25% of dropbacks (8th); DAL's line allows 24% (11th most): more quick checkdowns"
+      ]
      },
      {
       "player": "Dak Prescott",
       "team": "DAL",
-      "stat": "pass_att",
+      "stat": "pass_yds",
       "side": "under",
-      "line": 38.5,
-      "p_model": 0.5838668588550955,
-      "game_id": "2026_06_DAL_GB"
-     }
-    ]
-   },
-   {
-    "n": 6,
-    "recommended": true,
-    "basis": "model only",
-    "play_as": "Power",
-    "p_all": 0.05033701441040914,
-    "p_independent": 0.047390912542609055,
-    "power_ev": 1.8876380403903426,
-    "flex_ev": 1.7554194543507278,
-    "best_ev": 1.8876380403903426,
-    "min_power_mult": 19.86609678211688,
-    "legs": [
+      "line": 281.5,
+      "p_model": 0.5314842892931794,
+      "game_id": "2026_06_DAL_GB",
+      "player_id": "00-0033077",
+      "note": "sim 54%, recent form 50% (Less in 2 of last 4), matchup +1 pts",
+      "reasons": [
+       "For: GB pressure QBs on 25% of dropbacks (8th); DAL's line allows 24% (11th most): a hard night to throw"
+      ]
+     },
      {
-      "player": "Tony Pollard",
-      "team": "TEN",
+      "player": "Javonte Williams",
+      "team": "DAL",
       "stat": "rush_yds",
       "side": "under",
-      "line": 49.5,
-      "p_model": 0.605418170491175,
-      "game_id": "2026_06_TEN_IND"
+      "line": 67.5,
+      "p_model": 0.522701727548238,
+      "game_id": "2026_06_DAL_GB",
+      "player_id": "00-0036997",
+      "note": "sim 50%, recent form 56% (Less in 3 of last 4), matchup -1 pts"
      },
      {
-      "player": "Hunter Henry",
-      "team": "NE",
+      "player": "George Pickens",
+      "team": "DAL",
       "stat": "rec_yds",
       "side": "under",
-      "line": 37.5,
-      "p_model": 0.6046975887498338,
-      "game_id": "2026_06_NYJ_NE"
-     },
-     {
-      "player": "George Kittle",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 61.5,
-      "p_model": 0.6041284249477005,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Christian McCaffrey",
-      "team": "SF",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 39.5,
-      "p_model": 0.6035593617358359,
-      "game_id": "2026_06_WAS_SF"
-     },
-     {
-      "player": "Nico Collins",
-      "team": "HOU",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 71.5,
-      "p_model": 0.5963255147170445,
-      "game_id": "2026_06_HOU_JAX"
-     },
-     {
-      "player": "Emmett Johnson",
-      "team": "KC",
-      "stat": "rec_yds",
-      "side": "under",
-      "line": 7.5,
-      "p_model": 0.5953450307088066,
-      "game_id": "2026_06_LAC_KC"
+      "line": 68.5,
+      "p_model": 0.5135583693180372,
+      "game_id": "2026_06_DAL_GB",
+      "player_id": "00-0037247",
+      "note": "sim 55%, recent form 44% (Less in 1 of last 4), matchup +2 pts",
+      "reasons": [
+       "For: GB pressure QBs on 25% of dropbacks (8th); DAL's line allows 24% (11th most): less time for deep throws (his targets travel 11 yds)",
+       "For: GB allow 132 receiving yds a game to WRs (22nd most)"
+      ]
      }
-    ]
-   }
-  ]
- },
- "old_best": {
-  "2": [
-   {
-    "n": 2,
-    "recommended": true,
-    "basis": "old model",
-    "play_as": "Power",
-    "p_all": 0.39201512345679007,
-    "p_independent": 0.39201512345679007,
-    "power_ev": 1.1760453703703702,
-    "flex_ev": null,
-    "best_ev": 1.1760453703703702,
-    "min_power_mult": 2.5509219929629197,
-    "legs": [
-     {
-      "player": "Bhayshul Tuten",
-      "team": "JAX",
-      "stat": "receptions",
-      "side": "over",
-      "line": 1.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_HOU_JAX",
-      "note": "More in 4 of last 4 games; HOU D allows the most of this (rank 4)"
-     },
-     {
-      "player": "Bryce Young",
-      "team": "CAR",
-      "stat": "pass_att",
-      "side": "over",
-      "line": 33.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "More in 4 of last 4 games; PHI D allows the most of this (rank 7)"
-     }
-    ]
-   }
-  ],
-  "3": [
-   {
-    "n": 3,
-    "recommended": true,
-    "basis": "old model",
-    "play_as": "Power",
-    "p_all": 0.2454450245198902,
-    "p_independent": 0.2454450245198902,
-    "power_ev": 1.227225122599451,
-    "flex_ev": 1.1018891761831275,
-    "best_ev": 1.227225122599451,
-    "min_power_mult": 4.07423210943501,
-    "legs": [
-     {
-      "player": "Bhayshul Tuten",
-      "team": "JAX",
-      "stat": "receptions",
-      "side": "over",
-      "line": 1.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_HOU_JAX",
-      "note": "More in 4 of last 4 games; HOU D allows the most of this (rank 4)"
-     },
-     {
-      "player": "Bryce Young",
-      "team": "CAR",
-      "stat": "pass_att",
-      "side": "over",
-      "line": 33.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "More in 4 of last 4 games; PHI D allows the most of this (rank 7)"
-     },
-     {
-      "player": "Kirk Cousins",
-      "team": "LV",
-      "stat": "pass_yds",
-      "side": "over",
-      "line": 237.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_BUF_LV",
-      "note": "More in 4 of last 4 games; BUF D allows the most of this (rank 3)"
-     }
-    ]
-   }
-  ],
-  "4": [
-   {
-    "n": 4,
-    "recommended": true,
-    "basis": "old model",
-    "play_as": "Power",
-    "p_all": 0.14999418165104403,
-    "p_independent": 0.14999418165104403,
-    "power_ev": 1.4999418165104403,
-    "flex_ev": 1.296214944634964,
-    "best_ev": 1.4999418165104403,
-    "min_power_mult": 6.666925269984561,
-    "legs": [
-     {
-      "player": "Bhayshul Tuten",
-      "team": "JAX",
-      "stat": "receptions",
-      "side": "over",
-      "line": 1.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_HOU_JAX",
-      "note": "More in 4 of last 4 games; HOU D allows the most of this (rank 4)"
-     },
-     {
-      "player": "Bryce Young",
-      "team": "CAR",
-      "stat": "pass_att",
-      "side": "over",
-      "line": 33.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "More in 4 of last 4 games; PHI D allows the most of this (rank 7)"
-     },
-     {
-      "player": "Kirk Cousins",
-      "team": "LV",
-      "stat": "pass_yds",
-      "side": "over",
-      "line": 237.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_BUF_LV",
-      "note": "More in 4 of last 4 games; BUF D allows the most of this (rank 3)"
-     },
-     {
-      "player": "Bo Nix",
-      "team": "DEN",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 13.5,
-      "p_model": 0.6111111111111112,
-      "game_id": "2026_06_SEA_DEN",
-      "note": "Less in 4 of last 4 games"
-     }
-    ]
-   }
-  ],
-  "5": [
-   {
-    "n": 5,
-    "recommended": true,
-    "basis": "old model",
-    "play_as": "Power",
-    "p_all": 0.09166311100897136,
-    "p_independent": 0.09166311100897136,
-    "power_ev": 1.833262220179427,
-    "flex_ev": 1.6160527001706209,
-    "best_ev": 1.833262220179427,
-    "min_power_mult": 10.909514078156553,
-    "legs": [
-     {
-      "player": "Bhayshul Tuten",
-      "team": "JAX",
-      "stat": "receptions",
-      "side": "over",
-      "line": 1.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_HOU_JAX",
-      "note": "More in 4 of last 4 games; HOU D allows the most of this (rank 4)"
-     },
-     {
-      "player": "Bryce Young",
-      "team": "CAR",
-      "stat": "pass_att",
-      "side": "over",
-      "line": 33.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "More in 4 of last 4 games; PHI D allows the most of this (rank 7)"
-     },
-     {
-      "player": "Kirk Cousins",
-      "team": "LV",
-      "stat": "pass_yds",
-      "side": "over",
-      "line": 237.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_BUF_LV",
-      "note": "More in 4 of last 4 games; BUF D allows the most of this (rank 3)"
-     },
-     {
-      "player": "Bo Nix",
-      "team": "DEN",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 13.5,
-      "p_model": 0.6111111111111112,
-      "game_id": "2026_06_SEA_DEN",
-      "note": "Less in 4 of last 4 games"
-     },
-     {
-      "player": "Rashod Bateman",
-      "team": "BAL",
-      "stat": "rec_yds",
-      "side": "over",
-      "line": 30.5,
-      "p_model": 0.6111111111111112,
-      "game_id": "2026_06_BAL_CLE",
-      "note": "More in 4 of last 4 games"
-     }
-    ]
+    ],
+    "game": "DAL at GB"
    }
   ],
   "6": [
    {
     "n": 6,
     "recommended": true,
-    "basis": "old model",
+    "basis": "sim + form + matchups",
     "play_as": "Power",
-    "p_all": 0.05601634561659361,
-    "p_independent": 0.05601634561659361,
-    "power_ev": 2.1006129606222603,
-    "flex_ev": 1.942818133164753,
-    "best_ev": 2.1006129606222603,
-    "min_power_mult": 17.851932127892542,
+    "p_all": 0.05679819050733195,
+    "p_independent": 0.021803104190453112,
+    "power_ev": 2.129932144024948,
+    "flex_ev": 1.8170966854228336,
+    "best_ev": 2.129932144024948,
+    "min_power_mult": 17.606194688031692,
     "legs": [
+     {
+      "player": "Dalton Schultz",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 30.5,
+      "p_model": 0.5649639564869374,
+      "game_id": "2026_06_HOU_JAX",
+      "player_id": "00-0034383",
+      "note": "sim 53%, recent form 56% (Less in 3 of last 4), matchup +2 pts",
+      "reasons": [
+       "For: JAX allow 34 receiving yds a game to TEs (28th most)",
+       "For: JAX's pass defense ranks 7th of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "C.J. Stroud",
+      "team": "HOU",
+      "stat": "pass_att",
+      "side": "under",
+      "line": 35.5,
+      "p_model": 0.5356755519093422,
+      "game_id": "2026_06_HOU_JAX",
+      "player_id": "00-0039163",
+      "note": "sim 52%, recent form 56% (Less in 3 of last 4), matchup even"
+     },
      {
       "player": "Bhayshul Tuten",
       "team": "JAX",
-      "stat": "receptions",
-      "side": "over",
-      "line": 1.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_HOU_JAX",
-      "note": "More in 4 of last 4 games; HOU D allows the most of this (rank 4)"
-     },
-     {
-      "player": "Bryce Young",
-      "team": "CAR",
-      "stat": "pass_att",
-      "side": "over",
-      "line": 33.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "More in 4 of last 4 games; PHI D allows the most of this (rank 7)"
-     },
-     {
-      "player": "Kirk Cousins",
-      "team": "LV",
-      "stat": "pass_yds",
-      "side": "over",
-      "line": 237.5,
-      "p_model": 0.6261111111111111,
-      "game_id": "2026_06_BUF_LV",
-      "note": "More in 4 of last 4 games; BUF D allows the most of this (rank 3)"
-     },
-     {
-      "player": "Bo Nix",
-      "team": "DEN",
-      "stat": "rush_yds",
+      "stat": "rush_rec_yds",
       "side": "under",
-      "line": 13.5,
-      "p_model": 0.6111111111111112,
-      "game_id": "2026_06_SEA_DEN",
-      "note": "Less in 4 of last 4 games"
+      "line": 75.5,
+      "p_model": 0.5291663490221054,
+      "game_id": "2026_06_HOU_JAX",
+      "player_id": "00-0040719",
+      "note": "sim 57%, recent form 44% (Less in 1 of last 4), matchup +2 pts",
+      "reasons": [
+       "For: HOU allow 17 receiving yds a game to RBs (30th most)",
+       "For: HOU's pass defense ranks 10th of 32 by EPA per dropback allowed"
+      ]
      },
      {
-      "player": "Rashod Bateman",
-      "team": "BAL",
+      "player": "Brenton Strange",
+      "team": "JAX",
       "stat": "rec_yds",
-      "side": "over",
-      "line": 30.5,
-      "p_model": 0.6111111111111112,
-      "game_id": "2026_06_BAL_CLE",
-      "note": "More in 4 of last 4 games"
+      "side": "under",
+      "line": 37.5,
+      "p_model": 0.5174330263020237,
+      "game_id": "2026_06_HOU_JAX",
+      "player_id": "00-0038935",
+      "note": "sim 51%, recent form 50% (Less in 2 of last 4), matchup +1 pts",
+      "reasons": [
+       "For: HOU's pass defense ranks 10th of 32 by EPA per dropback allowed"
+      ]
      },
      {
-      "player": "Darren Waller",
-      "team": "CAR",
+      "player": "Trevor Lawrence",
+      "team": "JAX",
+      "stat": "pass_rush_yds",
+      "side": "under",
+      "line": 237.5,
+      "p_model": 0.5161491535935697,
+      "game_id": "2026_06_HOU_JAX",
+      "player_id": "00-0036971",
+      "note": "sim 46%, recent form 56% (Less in 3 of last 4), matchup +1 pts",
+      "reasons": [
+       "For: HOU's pass defense ranks 10th of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Parker Washington",
+      "team": "JAX",
       "stat": "rec_yds",
-      "side": "over",
-      "line": 25.5,
-      "p_model": 0.6111111111111112,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "More in 4 of last 4 games"
+      "side": "under",
+      "line": 61.5,
+      "p_model": 0.5097698061994537,
+      "game_id": "2026_06_HOU_JAX",
+      "player_id": "00-0038606",
+      "note": "sim 54%, recent form 50% (Less in 2 of last 4), matchup -1 pts",
+      "reasons": [
+       "Against: HOU allow 191 receiving yds a game to WRs (3rd most)",
+       "For: HOU's pass defense ranks 10th of 32 by EPA per dropback allowed"
+      ]
      }
-    ]
+    ],
+    "game": "HOU at JAX"
    }
   ]
- },
- "combined": {
-  "lineups": {
-   "3": [
-    {
-     "n": 3,
-     "recommended": false,
-     "basis": "both models agree",
-     "play_as": "Power",
-     "p_all": 0.20038781634977348,
-     "p_independent": 0.1743321528829053,
-     "power_ev": 1.0019390817488674,
-     "flex_ev": 0.9271164321347996,
-     "best_ev": 1.0019390817488674,
-     "min_power_mult": 4.990323355061254,
-     "legs": [
-      {
-       "player": "Hunter Henry",
-       "team": "NE",
-       "stat": "receptions",
-       "side": "under",
-       "line": 3.5,
-       "p_model": 0.5789765456487453,
-       "game_id": "2026_06_NYJ_NE",
-       "note": "new model 60%, old model 56% (under in 3 of last 4)"
-      },
-      {
-       "player": "J.K. Dobbins",
-       "team": "DEN",
-       "stat": "rec_yds",
-       "side": "under",
-       "line": 6.5,
-       "p_model": 0.5714084445178578,
-       "game_id": "2026_06_SEA_DEN",
-       "note": "new model 57%, old model 57% (under in 3 of last 4)"
-      },
-      {
-       "player": "Drake Maye",
-       "team": "NE",
-       "stat": "pass_yds",
-       "side": "under",
-       "line": 232.5,
-       "p_model": 0.5269505665659957,
-       "game_id": "2026_06_NYJ_NE",
-       "note": "new model 54%, old model 52% (under in 2 of last 4)"
-      }
-     ]
-    }
-   ],
-   "4": [
-    {
-     "n": 4,
-     "recommended": true,
-     "basis": "both models agree",
-     "play_as": "Power",
-     "p_all": 0.12248718765896666,
-     "p_independent": 0.0965265702905956,
-     "power_ev": 1.2248718765896665,
-     "flex_ev": 1.0521887417367926,
-     "best_ev": 1.2248718765896665,
-     "min_power_mult": 8.164119195749983,
-     "legs": [
-      {
-       "player": "Sam Darnold",
-       "team": "SEA",
-       "stat": "rush_yds",
-       "side": "over",
-       "line": 4.5,
-       "p_model": 0.5642789798434539,
-       "game_id": "2026_06_SEA_DEN",
-       "note": "new model 56%, old model 57% (over in 3 of last 4)"
-      },
-      {
-       "player": "Marvin Mims Jr.",
-       "team": "DEN",
-       "stat": "rec_yds",
-       "side": "under",
-       "line": 13.5,
-       "p_model": 0.5619851630019416,
-       "game_id": "2026_06_SEA_DEN",
-       "note": "new model 52%, old model 61% (under in 3 of last 3)"
-      },
-      {
-       "player": "Bo Nix",
-       "team": "DEN",
-       "stat": "pass_att",
-       "side": "under",
-       "line": 34.5,
-       "p_model": 0.5517470725085922,
-       "game_id": "2026_06_SEA_DEN",
-       "note": "new model 53%, old model 57% (under in 3 of last 4)"
-      },
-      {
-       "player": "Jaylen Waddle",
-       "team": "DEN",
-       "stat": "receptions",
-       "side": "under",
-       "line": 4.5,
-       "p_model": 0.5516811058914821,
-       "game_id": "2026_06_SEA_DEN",
-       "note": "new model 59%, old model 52% (under in 2 of last 4)"
-      }
-     ]
-    }
-   ],
-   "5": [
-    {
-     "n": 5,
-     "recommended": true,
-     "basis": "both models agree",
-     "play_as": "Power",
-     "p_all": 0.0659153499687824,
-     "p_independent": 0.05984532448412336,
-     "power_ev": 1.318306999375648,
-     "flex_ev": 1.2482916023635233,
-     "best_ev": 1.318306999375648,
-     "min_power_mult": 15.170973080983433,
-     "legs": [
-      {
-       "player": "Hunter Henry",
-       "team": "NE",
-       "stat": "receptions",
-       "side": "under",
-       "line": 3.5,
-       "p_model": 0.5789765456487453,
-       "game_id": "2026_06_NYJ_NE",
-       "note": "new model 60%, old model 56% (under in 3 of last 4)"
-      },
-      {
-       "player": "Najee Harris",
-       "team": "NYG",
-       "stat": "receptions",
-       "side": "under",
-       "line": 0.5,
-       "p_model": 0.57151982582667,
-       "game_id": "2026_06_NO_NYG",
-       "note": "new model 59%, old model 56% (under in 3 of last 4)"
-      },
-      {
-       "player": "J.K. Dobbins",
-       "team": "DEN",
-       "stat": "rec_yds",
-       "side": "under",
-       "line": 6.5,
-       "p_model": 0.5714084445178578,
-       "game_id": "2026_06_SEA_DEN",
-       "note": "new model 57%, old model 57% (under in 3 of last 4)"
-      },
-      {
-       "player": "Jaylen Waddle",
-       "team": "DEN",
-       "stat": "rec_yds",
-       "side": "under",
-       "line": 49.5,
-       "p_model": 0.5687852197788064,
-       "game_id": "2026_06_SEA_DEN",
-       "note": "new model 57%, old model 57% (under in 3 of last 4)"
-      },
-      {
-       "player": "Jameis Winston",
-       "team": "NYG",
-       "stat": "pass_att",
-       "side": "under",
-       "line": 32.5,
-       "p_model": 0.556471591175457,
-       "game_id": "2026_06_NO_NYG",
-       "note": "new model 54%, old model 57% (under in 3 of last 4)"
-      }
-     ]
-    }
-   ],
-   "6": [
-    {
-     "n": 6,
-     "recommended": true,
-     "basis": "both models agree",
-     "play_as": "Power",
-     "p_all": 0.038466430404225066,
-     "p_independent": 0.03408023440386801,
-     "power_ev": 1.44249114015844,
-     "flex_ev": 1.3867279138057333,
-     "best_ev": 1.44249114015844,
-     "min_power_mult": 25.996693467303434,
-     "legs": [
-      {
-       "player": "Hunter Henry",
-       "team": "NE",
-       "stat": "receptions",
-       "side": "under",
-       "line": 3.5,
-       "p_model": 0.5789765456487453,
-       "game_id": "2026_06_NYJ_NE",
-       "note": "new model 60%, old model 56% (under in 3 of last 4)"
-      },
-      {
-       "player": "Najee Harris",
-       "team": "NYG",
-       "stat": "receptions",
-       "side": "under",
-       "line": 0.5,
-       "p_model": 0.57151982582667,
-       "game_id": "2026_06_NO_NYG",
-       "note": "new model 59%, old model 56% (under in 3 of last 4)"
-      },
-      {
-       "player": "J.K. Dobbins",
-       "team": "DEN",
-       "stat": "rec_yds",
-       "side": "under",
-       "line": 6.5,
-       "p_model": 0.5714084445178578,
-       "game_id": "2026_06_SEA_DEN",
-       "note": "new model 57%, old model 57% (under in 3 of last 4)"
-      },
-      {
-       "player": "Kirk Cousins",
-       "team": "LV",
-       "stat": "pass_yds",
-       "side": "over",
-       "line": 237.5,
-       "p_model": 0.5694719616687482,
-       "game_id": "2026_06_BUF_LV",
-       "note": "new model 51%, old model 63% (over in 4 of last 4)"
-      },
-      {
-       "player": "Jaylen Waddle",
-       "team": "DEN",
-       "stat": "rec_yds",
-       "side": "under",
-       "line": 49.5,
-       "p_model": 0.5687852197788064,
-       "game_id": "2026_06_SEA_DEN",
-       "note": "new model 57%, old model 57% (under in 3 of last 4)"
-      },
-      {
-       "player": "Jameis Winston",
-       "team": "NYG",
-       "stat": "pass_att",
-       "side": "under",
-       "line": 32.5,
-       "p_model": 0.556471591175457,
-       "game_id": "2026_06_NO_NYG",
-       "note": "new model 54%, old model 57% (under in 3 of last 4)"
-      }
-     ]
-    }
-   ]
-  },
-  "seventh": {
-   "player": "Jordan Love",
-   "team": "GB",
-   "stat": "pass_att",
-   "side": "under",
-   "line": 35.5,
-   "p_model": 0.5755927716821458,
-   "p_new": 0.5806299878087362,
-   "p_old": 0.5705555555555556
-  },
-  "n_agreed": 81
  }
 }

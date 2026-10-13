@@ -14,8 +14,7 @@ from . import picks_html, theme
 
 e = html.escape
 
-PAGE_CSS = """.oldh{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
-.th2{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+PAGE_CSS = """.th2{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .th2 .muted{font-weight:400;font-size:.85rem;margin-left:4px}"""
 
 
@@ -83,7 +82,7 @@ averages. Each game is then simulated {{n_sims}} times.</p></section>"""
 
 
 def render(proj: dict, sim, legs: pd.DataFrame | None, best: dict | None, check: dict | None, out_path: Path,
-           old_best: dict | None = None) -> Path:
+           blended: pd.DataFrame | None = None, retro: dict | None = None) -> Path:
     g = proj["game"]
     home, away = g["home_team"], g["away_team"]
     h_pts, a_pts = sim.teams[home]["points"], sim.teams[away]["points"]
@@ -99,6 +98,8 @@ def render(proj: dict, sim, legs: pd.DataFrame | None, best: dict | None, check:
     kick = pd.Timestamp(g['kickoff_utc']).tz_convert('America/New_York')
     run_at = pd.Timestamp(proj.get('run_at', pd.Timestamp.now(tz='UTC'))).tz_convert('America/New_York')
     jerseys = proj.get("jerseys", {})
+    used = {(x["player_id"], x["stat"], x["line"]) for L in (best or {}).values() for lu in L for x in lu["legs"]}
+    retro_html = picks_html.retro_note(retro) if retro else ""
     body = f"""<main class="wrap">
 {theme.nav("home", "../")}<header class="head"><a class="back" href="../index.html">&larr; All games</a>
 <div class="meta"><span>Week {int(g['week'])}</span><span>{kick:%a %b %-d, %-I:%M %p} ET</span><span class="v0tag">Model v0</span></div>
@@ -120,24 +121,16 @@ def render(proj: dict, sim, legs: pd.DataFrame | None, best: dict | None, check:
 {_team_table(sim, home, jerseys, tph.implied_points)}
 
 <section class="pane" id="lines" data-tab="Lines" aria-labelledby="h-props"><div><h2 id="h-props">PrizePicks lines</h2>
-<p class="sub">The model's chance of More and Less at each PrizePicks line (calibrated on 2023). A pick qualifies when it clears
-the PrizePicks break-even by 3 points: 2-pick {be['power2']:.1%}, 3-pick {min(be['power3'], be['flex3']):.1%}, 4-pick {min(be['power4'], be['flex4']):.1%},
-5-pick {min(be['power5'], be['flex5']):.1%}, 6-pick {min(be['power6'], be['flex6']):.1%} per leg. With a sportsbook price on the row it must also beat that
-price by 3 points. Without one ("model only"), the PrizePicks line is the market: the model's lean is pulled halfway
-back toward 50%, because v0 has not yet been graded against real PrizePicks lines. When the model alone is 72% or more on
-one side, the line probably reflects news the model doesn't have, so it never qualifies.</p></div>{picks_html.lines_table(legs)}</section>
+<p class="sub">One chance per line: half from the {sim.n:,} simulated games, half from recent form (his last 4 games at the
+line, adjusted for the opponent). Without a sportsbook price the simulation's lean is pulled halfway toward 50%. Lines
+where the simulation alone is 72% or more on one side are left out: that usually means news the model doesn't have.</p></div>
+{picks_html.lines_table(legs, blended=blended, used=used)}</section>
 
-<section class="pane" id="lineups" data-tab="Lineups" aria-labelledby="h-lu"><div><h2 id="h-lu">PrizePicks lineups</h2>
-<p class="sub">Built only from this game's PrizePicks lines, one pick per player, both teams. Hit chances come from the simulated
-games, so picks that move together (a QB and his receiver) are counted together. Same-game entries can pay less in the app:
-skip a lineup if the app shows less than the listed multiplier. The Lineups tab at the top mixes games across the week.</p></div>
-{picks_html.lineup_cards(picks_html.to_json(best or {}), no_lines_msg=("No PrizePicks lineup for this game yet." if legs is not None and len(legs) and legs["prizepicks"].any() else "No PrizePicks lines for this game yet."))}
-<h3 class="oldh">Old model</h3>
-<p class="sub">The method from the original Bills-Rams report: each player's hit rate at the line in his last 4 games, pulled
-toward 50%, plus a 3-point nudge when the opponent is among the 8 defenses allowing the most or least of that stat,
-averaged with the market (50% for a PrizePicks line without a sportsbook price). Legs are multiplied as if independent.
-Shown for comparison; it was not checked against past seasons.</p>
-{picks_html.lineup_cards(old_best or {}, no_lines_msg="No old-model lineup for this game.")}</section>
+<section class="pane" id="lineups" data-tab="Lineups" aria-labelledby="h-lu"><div><h2 id="h-lu">Top lineups</h2>
+<p class="sub">The best 3, 4, 5 and 6-pick PrizePicks entries from this game's lines: one pick per player, both teams, ranked by
+expected return per $1. Hit chances come from the simulated games, so picks that move together are counted together.
+Same-game entries can pay less in the app: skip a lineup if the app shows less than the listed multiplier.</p></div>
+{retro_html}{picks_html.lineup_cards(picks_html.to_json(best or {}), no_lines_msg=("No PrizePicks lineup for this game yet." if legs is not None and len(legs) and legs["prizepicks"].any() else "No PrizePicks lines for this game yet."))}</section>
 {_trust(check).replace("{n_sims}", f"{sim.n:,}")}
 <footer class="notes"><p>Model v0: a simplified first version (team-level simulation, fixed shrinkage strengths). Data: nflverse
 play-by-play, snap counts, rosters, injuries and schedules (CC-BY 4.0); stadium time zones from the greerreNFL/Stadiums dataset;
