@@ -39,6 +39,11 @@ def _ordinal(n: int) -> str:
     return f"{n}{'th' if 11 <= n % 100 <= 13 else {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')}"
 
 
+def _most_least(r: int, n: int, most: str = "most", least: str = "fewest") -> str:
+    """Rank 1 = the most. Say it from the nearer end so it never reads backwards: 'the 3rd fewest', not '30th most'."""
+    return f"the {_ordinal(r)} {most}" if r <= (n + 1) / 2 else f"the {_ordinal(n - r + 1)} {least}"
+
+
 def _pct_rank(series: pd.Series, value: float, higher_is_more: bool = True) -> float:
     """0..1, where 1 = the most favorable to More among the 32 teams."""
     s = series.dropna()
@@ -87,8 +92,9 @@ def _factors(row, pos: str, ctx: dict) -> list[tuple[str, float, str]]:
         heat = (p_def + p_off) / 2                                 # 1 = heavy pressure expected
         pr = _rank(tf["def_pressure_rate_pfr"], d["def_pressure_rate_pfr"])
         lr = _rank(tf["off_pressure_rate_pfr"], o["off_pressure_rate_pfr"])
-        desc = (f"{O} pressure QBs on {d['def_pressure_rate_pfr']:.0%} of dropbacks ({_ordinal(pr)}); {T}'s line allows "
-                f"{o['off_pressure_rate_pfr']:.0%} ({_ordinal(lr)} most)")
+        n = int(tf["def_pressure_rate_pfr"].notna().sum())
+        desc = (f"{O} pressure QBs on {d['def_pressure_rate_pfr']:.0%} of dropbacks ({_most_least(pr, n, 'most', 'least')}); "
+                f"{T}'s line allows pressure on {o['off_pressure_rate_pfr']:.0%} ({_most_least(lr, n, 'most', 'least')})")
         adot = ctx["adot"].get(row["player_id"], np.nan)
         s = None
         if pos == "QB" and stat in PASS_STATS:
@@ -110,18 +116,23 @@ def _factors(row, pos: str, ctx: dict) -> list[tuple[str, float, str]]:
     if stat in PASS_STATS | REC_STATS and pos != "RB" or (stat in REC_STATS and pos == "RB"):
         p = _pct_rank(tf["def_pass_epa"], d["def_pass_epa"])       # higher EPA allowed = softer
         r = _rank(tf["def_pass_epa"], d["def_pass_epa"])
-        out.append(("pass_def", 2 * p - 1, f"{O}'s pass defense ranks {_ordinal(33 - r)} of 32 by EPA per dropback allowed"))
+        n = int(tf["def_pass_epa"].notna().sum())
+        out.append(("pass_def", 2 * p - 1, f"{O} have {_most_least(n - r + 1, n, 'best', 'worst')} pass defense "
+                                           f"(EPA per dropback allowed)"))
     if stat in RUSH_STATS and pos != "QB":
         p = _pct_rank(tf["def_rush_epa"], d["def_rush_epa"])
         r = _rank(tf["def_rush_epa"], d["def_rush_epa"])
-        out.append(("run_def", 2 * p - 1, f"{O}'s run defense ranks {_ordinal(33 - r)} of 32 by EPA per rush allowed"))
+        n = int(tf["def_rush_epa"].notna().sum())
+        out.append(("run_def", 2 * p - 1, f"{O} have {_most_least(n - r + 1, n, 'best', 'worst')} run defense "
+                                          f"(EPA per rush allowed)"))
     # position-specific receiving yards allowed
     if stat in REC_STATS and pos in ctx["allowed"]:
         a = ctx["allowed"][pos]
         if opp in a.index:
             p = _pct_rank(a, a[opp])
             r = _rank(a, a[opp])
-            out.append(("position", 2 * p - 1, f"{O} allow {a[opp]:.0f} receiving yds a game to {pos}s ({_ordinal(r)} most)"))
+            out.append(("position", 2 * p - 1, f"{O} allow {_most_least(r, len(a))} receiving yds to {pos}s "
+                                               f"({a[opp]:.0f} a game)"))
     # game script from the spread (team spread < 0 = favorite)
     spread = ctx["spread_home"] if team == g["home_team"] else -ctx["spread_home"]
     size = float(np.clip(abs(spread) / 10, 0, 1))
@@ -142,7 +153,10 @@ def _factors(row, pos: str, ctx: dict) -> list[tuple[str, float, str]]:
     # red zone for touchdown picks
     if stat in {"anytime_td", "rush_rec_tds", "pass_tds"} and "def_rz_td_rate" in tf:
         p = _pct_rank(tf["def_rz_td_rate"], d["def_rz_td_rate"])
-        out.append(("red_zone", 2 * p - 1, f"{O} allow touchdowns on {d['def_rz_td_rate']:.0%} of red-zone trips"))
+        r = _rank(tf["def_rz_td_rate"], d["def_rz_td_rate"])
+        n = int(tf["def_rz_td_rate"].notna().sum())
+        out.append(("red_zone", 2 * p - 1, f"{O} allow touchdowns on {d['def_rz_td_rate']:.0%} of red-zone trips "
+                                           f"({_most_least(r, n, 'most', 'fewest')})"))
     return out
 
 
