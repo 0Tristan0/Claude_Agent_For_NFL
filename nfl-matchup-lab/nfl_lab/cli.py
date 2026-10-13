@@ -6,6 +6,7 @@
   features   pregame features for one game, e.g. features --home LAR --away BUF --week 5 --season 2026
   devig      fair probabilities from a price pair, e.g. devig -- -175 +145
   props      parse data/props.csv and show fair probabilities
+  prizepicks import the PrizePicks NFL board (or --file board.json saved from a browser)
   project    v0 model for one game, e.g. project --home LAR --away BUF --week 5 --season 2026
   slate      v0 model for a whole week, e.g. slate --week 6
   check      v0 calibration check on 2024 (validation season)
@@ -131,6 +132,27 @@ def cmd_props(a):
     return 0
 
 
+def cmd_prizepicks(a):
+    import json
+    from .data import prizepicks as PP
+    try:
+        feed = json.loads(open(a.file).read()) if a.file else PP.fetch()
+    except (RuntimeError, OSError, ValueError) as exc:
+        print(exc)
+        return 1
+    rows, skipped = PP.parse(feed, pd.Timestamp.now(tz="UTC"))
+    for why, n in skipped.most_common():
+        print(f"  skipped {n}: {why}")
+    if rows.empty:
+        print("No NFL lines the model can use were found on the board.")
+        return 1
+    PP.write(rows, raw=feed)
+    print(f"{len(rows)} PrizePicks lines written to data/props.csv for {rows['team'].nunique()} teams:")
+    print(rows.groupby(["stat", "line_type"]).size().to_string())
+    print("Next: python -m nfl_lab slate --week <week>, then python3 src/site.py")
+    return 0
+
+
 def _print_run(res, show_players=True):
     from .sim import v0 as S
     pd.set_option("display.width", 220)
@@ -225,6 +247,9 @@ def main(argv=None) -> int:
     s.add_argument("prices", nargs="+")
     s.set_defaults(fn=cmd_devig)
     sub.add_parser("props").set_defaults(fn=cmd_props)
+    s = sub.add_parser("prizepicks", help="import the PrizePicks NFL board into data/props.csv")
+    s.add_argument("--file", help="a board saved from the PrizePicks feed in a browser (.json)")
+    s.set_defaults(fn=cmd_prizepicks)
     s = sub.add_parser("project", help="v0 model for one game: projections, your lines, lineups, page")
     for k in ("home", "away"):
         s.add_argument(f"--{k}", required=True)
