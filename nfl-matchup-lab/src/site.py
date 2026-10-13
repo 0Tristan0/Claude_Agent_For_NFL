@@ -383,6 +383,8 @@ def slip(b):
            f'<span class="tag pos">Up {money(profit)}</span>' if profit > 0 else
            f'<span class="tag neg">Down {money(-profit)}</span>' if profit < 0 else '<span class="tag">Even</span>')
     final = f' · Final {e(res["final"])}' if res and res.get("final") else ""
+    if res and res.get("provisional"):
+        final += " · graded from web recaps, waiting on official stats"
     a_d, h_d = ("LAR" if away == "LA" else away), ("LAR" if home == "LA" else home)
     return dict(staked=staked, back=back, pending=pending, html=f"""
 <section class="slip" aria-labelledby="h-{e(b['game'])}">

@@ -51,6 +51,28 @@
     },
     "note": "legs treated as independent; market = no-vig prices listed in src/ev.py; v0 = calibrated model v0 chances from output/v0/2026-w05-buf-lar.html"
   },
-  "result": null,
+  "result": {
+    "final": "BUF 37, LAR 34 (OT)",
+    "graded_at": "2026-10-13 04:01 UTC",
+    "provisional": true,
+    "source": "web recaps (therams.com, NFL.com, AP via KIRO 7 and ClickOrlando); to be confirmed with nflverse stats",
+    "legs": {
+      "Josh Allen rush+rec TDs more 0.5": {
+        "actual": "1 rush TD (10 for 121)",
+        "hit": true
+      },
+      "Matthew Stafford pass yds more 274.5": {
+        "actual": 383,
+        "hit": true
+      },
+      "Kyren Williams rec yds more 19.5": {
+        "actual": 29,
+        "hit": true
+      }
+    },
+    "pending_legs": [
+      "Dalton Kincaid rec yds less 57.5"
+    ]
+  },
   "replaces": "commit f2f940d ($6 + $4 with $10 reserve); the user asked to bet all $20"
 }
