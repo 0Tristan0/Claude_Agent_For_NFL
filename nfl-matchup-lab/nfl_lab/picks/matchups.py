@@ -160,7 +160,7 @@ def _factors(row, pos: str, ctx: dict) -> list[tuple[str, float, str]]:
     return out
 
 
-def adjust(picks: pd.DataFrame, ctx: dict, positions: dict) -> pd.DataFrame:
+def adjust(picks: pd.DataFrame, ctx: dict, positions: dict, cap: float = CAP) -> pd.DataFrame:
     """Add the matchup adjustment and reasons to blended picks for one game (columns p_matchup, reasons)."""
     if picks is None or picks.empty:
         return picks
@@ -169,7 +169,7 @@ def adjust(picks: pd.DataFrame, ctx: dict, positions: dict) -> pd.DataFrame:
     for _, r in picks.iterrows():
         sign = 1 if r["side"] == "over" else -1
         fs = _factors(r, positions.get(r["player_id"], ""), ctx)
-        a = float(np.clip(sum(WEIGHTS[n] * s * sign for n, s, _ in fs), -CAP, CAP))
+        a = float(np.clip(sum(WEIGHTS[n] * s * sign for n, s, _ in fs), -cap, cap))
         adj.append(a)
         strong = sorted([(WEIGHTS[n] * s * sign, why) for n, s, why in fs if abs(s) >= REASON_MIN],
                         key=lambda t: -abs(t[0]))

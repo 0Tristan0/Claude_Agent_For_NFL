@@ -1,0 +1,147 @@
+{
+  "game": "2026_06_NO_NYG",
+  "label": "NO at NYG",
+  "kickoff_utc": "2026-10-18 17:00 UTC",
+  "frozen_at": "2026-10-13 16:01 UTC",
+  "bankroll": 20.0,
+  "reserve_not_bet": 0.0,
+  "paper_money": true,
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game",
+  "entries": [
+    {
+      "id": "A",
+      "type": "flex",
+      "stake": 12.0,
+      "legs": [
+        "Darnell Mooney rec yds less 21.5",
+        "Tyler Shough pass+rush yds more 264.5",
+        "Jameis Winston pass attempts less 32.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Darnell Mooney",
+          "player_id": "00-0036309",
+          "team": "NYG",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 21.5,
+          "p_model": 0.5589149305555556,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 Less in 3 of last 4 (48, 20, 0, 14)",
+          "reasons": [
+            "For: NO allow the 9th fewest receiving yds to WRs (130 a game)"
+          ]
+        },
+        {
+          "player": "Tyler Shough",
+          "player_id": "00-0040743",
+          "team": "NO",
+          "stat": "pass_rush_yds",
+          "side": "over",
+          "line": 264.5,
+          "p_model": 0.5579774305555556,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 More in 3 of last 4 (275, 291, 291, 96)",
+          "reasons": [
+            "For: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): a clean pocket",
+            "Against: NYG have the 9th best pass defense (EPA per dropback allowed)"
+          ]
+        },
+        {
+          "player": "Jameis Winston",
+          "player_id": "00-0031503",
+          "team": "NYG",
+          "stat": "pass_att",
+          "side": "under",
+          "line": 32.5,
+          "p_model": 0.5555555555555556,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 Less in 3 of last 4 (27, 22, 29, 54)",
+          "reasons": []
+        }
+      ],
+      "pays": {
+        "3": 2.25,
+        "2": 1.25
+      }
+    },
+    {
+      "id": "B",
+      "type": "power",
+      "stake": 8.0,
+      "legs": [
+        "Darnell Mooney rec yds less 21.5",
+        "Tyler Shough pass+rush yds more 264.5",
+        "Jameis Winston pass attempts less 32.5",
+        "Cam Skattebo rush yds less 59.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Darnell Mooney",
+          "player_id": "00-0036309",
+          "team": "NYG",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 21.5,
+          "p_model": 0.5589149305555556,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 Less in 3 of last 4 (48, 20, 0, 14)",
+          "reasons": [
+            "For: NO allow the 9th fewest receiving yds to WRs (130 a game)"
+          ]
+        },
+        {
+          "player": "Tyler Shough",
+          "player_id": "00-0040743",
+          "team": "NO",
+          "stat": "pass_rush_yds",
+          "side": "over",
+          "line": 264.5,
+          "p_model": 0.5579774305555556,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 More in 3 of last 4 (275, 291, 291, 96)",
+          "reasons": [
+            "For: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): a clean pocket",
+            "Against: NYG have the 9th best pass defense (EPA per dropback allowed)"
+          ]
+        },
+        {
+          "player": "Jameis Winston",
+          "player_id": "00-0031503",
+          "team": "NYG",
+          "stat": "pass_att",
+          "side": "under",
+          "line": 32.5,
+          "p_model": 0.5555555555555556,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 Less in 3 of last 4 (27, 22, 29, 54)",
+          "reasons": []
+        },
+        {
+          "player": "Cam Skattebo",
+          "player_id": "00-0040715",
+          "team": "NYG",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 59.5,
+          "p_model": 0.5548524305555556,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 Less in 3 of last 4 (36, 60, 58, 59)",
+          "reasons": []
+        }
+      ],
+      "pays": {
+        "4": 10.0
+      }
+    }
+  ],
+  "expected_return_per_dollar": {
+    "A_flex3": {
+      "estimate": 0.906
+    },
+    "B_power4": {
+      "estimate": 0.961
+    }
+  },
+  "result": null
+}

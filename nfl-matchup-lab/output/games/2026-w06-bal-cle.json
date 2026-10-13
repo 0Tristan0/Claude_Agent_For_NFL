@@ -1,0 +1,622 @@
+{
+ "game_id": "2026_06_BAL_CLE",
+ "season": 2026,
+ "week": 6,
+ "label": "BAL at CLE",
+ "away": "BAL",
+ "home": "CLE",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": 4.5,
+ "total": 40.5,
+ "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
+ "built_at": "2026-10-13 16:01:46.807505+00:00",
+ "units": [
+  {
+   "offense": "BAL",
+   "defense": "CLE",
+   "stat": "EPA per dropback",
+   "off_value": 0.20345846339285137,
+   "def_value": -0.13677580705771814,
+   "off_rank": 3,
+   "def_rank": 2
+  },
+  {
+   "offense": "BAL",
+   "defense": "CLE",
+   "stat": "EPA per rush",
+   "off_value": 0.07108803915673344,
+   "def_value": 0.03712123034409862,
+   "off_rank": 2,
+   "def_rank": 30
+  },
+  {
+   "offense": "BAL",
+   "defense": "CLE",
+   "stat": "Explosive pass rate",
+   "off_value": 0.10453828119031985,
+   "def_value": 0.07083200764732053,
+   "off_rank": 3,
+   "def_rank": 11
+  },
+  {
+   "offense": "BAL",
+   "defense": "CLE",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.2079062519807387,
+   "def_value": 0.22428635340359088,
+   "off_rank": 9,
+   "def_rank": 17
+  },
+  {
+   "offense": "BAL",
+   "defense": "CLE",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.6474193156383554,
+   "def_value": 0.49261383707975037,
+   "off_rank": 5,
+   "def_rank": 5
+  },
+  {
+   "offense": "CLE",
+   "defense": "BAL",
+   "stat": "EPA per dropback",
+   "off_value": -0.059911123498290864,
+   "def_value": 0.0780217090550264,
+   "off_rank": 26,
+   "def_rank": 21
+  },
+  {
+   "offense": "CLE",
+   "defense": "BAL",
+   "stat": "EPA per rush",
+   "off_value": -0.20295215956212204,
+   "def_value": -0.1241764041166815,
+   "off_rank": 30,
+   "def_rank": 8
+  },
+  {
+   "offense": "CLE",
+   "defense": "BAL",
+   "stat": "Explosive pass rate",
+   "off_value": 0.07622345264478206,
+   "def_value": 0.09500556425863561,
+   "off_rank": 20,
+   "def_rank": 24
+  },
+  {
+   "offense": "CLE",
+   "defense": "BAL",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.2582191468574965,
+   "def_value": 0.1874926758776026,
+   "off_rank": 29,
+   "def_rank": 29
+  },
+  {
+   "offense": "CLE",
+   "defense": "BAL",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.46360877473458223,
+   "def_value": 0.4998041288020135,
+   "off_rank": 30,
+   "def_rank": 6
+  }
+ ],
+ "picks": [
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0036550",
+   "player": "Rashod Bateman",
+   "team": "BAL",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 30.5,
+   "side": "over",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    88.0,
+    37.0,
+    46.0,
+    62.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.6091892361,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00384375,
+   "tier": "High",
+   "reasons": [
+    "Against: CLE have the 2nd best pass defense (EPA per dropback allowed)",
+    "For: CLE allow the 10th most receiving yds to WRs (167 a game)"
+   ]
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0033537",
+   "player": "Deshaun Watson",
+   "team": "CLE",
+   "position": "QB",
+   "stat": "rush_att",
+   "line": 6.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    7.0,
+    11.0,
+    7.0,
+    6.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5555555556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "tier": "Medium",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0039064",
+   "player": "Zay Flowers",
+   "team": "BAL",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 60.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    150.0,
+    84.0,
+    118.0,
+    53.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5511336806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00884375,
+   "tier": "Medium",
+   "reasons": [
+    "Against: CLE have the 2nd best pass defense (EPA per dropback allowed)",
+    "For: CLE allow the 10th most receiving yds to WRs (167 a game)"
+   ]
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0032764",
+   "player": "Derrick Henry",
+   "team": "BAL",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 90.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    68.0,
+    89.0,
+    73.0,
+    102.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5458524306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01940625,
+   "tier": "Lean",
+   "reasons": [
+    "Against: CLE have the 3rd worst run defense (EPA per rush allowed)",
+    "Against: BAL favored by 4.5: more carries to close it out"
+   ]
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0032764",
+   "player": "Derrick Henry",
+   "team": "BAL",
+   "position": "RB",
+   "stat": "rec_yds",
+   "line": 9.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    19.0,
+    0.0,
+    6.0,
+    18.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.515234375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.03046875,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: CLE have the 2nd best pass defense (EPA per dropback allowed)",
+    "For: CLE allow the 7th fewest receiving yds to RBs (19 a game)"
+   ]
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0034975",
+   "player": "Justice Hill",
+   "team": "BAL",
+   "position": "RB",
+   "stat": "rec_yds",
+   "line": 8.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    12.0,
+    0.0,
+    22.0,
+    5.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.515234375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.03046875,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: CLE have the 2nd best pass defense (EPA per dropback allowed)",
+    "For: CLE allow the 7th fewest receiving yds to RBs (19 a game)"
+   ]
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0034975",
+   "player": "Justice Hill",
+   "team": "BAL",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 20.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    6.0,
+    33.0,
+    3.0,
+    73.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.509703125,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01940625,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: CLE have the 3rd worst run defense (EPA per rush allowed)",
+    "For: BAL favored by 4.5: more carries to close it out"
+   ]
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0034753",
+   "player": "Mark Andrews",
+   "team": "BAL",
+   "position": "TE",
+   "stat": "rec_yds",
+   "line": 27.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    49.0,
+    24.0,
+    27.0,
+    28.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.507859375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01571875,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: CLE have the 2nd best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0040879",
+   "player": "Matt Hibner",
+   "team": "BAL",
+   "position": "TE",
+   "stat": "rec_yds",
+   "line": 11.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    0.0,
+    23.0,
+    34.0,
+    0.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.507859375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01571875,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: CLE have the 2nd best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0033537",
+   "player": "Deshaun Watson",
+   "team": "CLE",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 194.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    238.0,
+    144.0,
+    268.0,
+    155.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.505484375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01096875,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: CLE underdog by 4.5: likely throwing to catch up"
+   ]
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0033537",
+   "player": "Deshaun Watson",
+   "team": "CLE",
+   "position": "QB",
+   "stat": "completions",
+   "line": 18.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    24.0,
+    16.0,
+    24.0,
+    15.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.505484375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01096875,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: CLE underdog by 4.5: likely throwing to catch up"
+   ]
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0033537",
+   "player": "Deshaun Watson",
+   "team": "CLE",
+   "position": "QB",
+   "stat": "pass_att",
+   "line": 30.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    30.0,
+    30.0,
+    33.0,
+    33.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.503375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00675,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: CLE underdog by 4.5: likely throwing to catch up"
+   ]
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0033537",
+   "player": "Deshaun Watson",
+   "team": "CLE",
+   "position": "QB",
+   "stat": "pass_rush_yds",
+   "line": 233.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    260.0,
+    189.0,
+    290.0,
+    195.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.502109375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00421875,
+   "tier": "Coin flip",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_BAL_CLE",
+   "player_id": "00-0033537",
+   "player": "Deshaun Watson",
+   "team": "CLE",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 26.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    22.0,
+    45.0,
+    22.0,
+    40.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.5,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "tier": "Coin flip",
+   "reasons": []
+  }
+ ],
+ "lineups": {
+  "3": [
+   {
+    "n": 3,
+    "entry": "A",
+    "recommended": false,
+    "basis": "Guesser method",
+    "play_as": "Flex",
+    "game": "BAL at CLE",
+    "p_all": 0.18652483658485777,
+    "p_independent": 0.18652483658485777,
+    "power_ev": 0.9326241829242888,
+    "flex_ev": 0.9456734306793839,
+    "best_ev": 0.9456734306793839,
+    "min_power_mult": 5.361216330807824,
+    "legs": [
+     {
+      "player": "Rashod Bateman",
+      "player_id": "00-0036550",
+      "team": "BAL",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 30.5,
+      "p_model": 0.6091892361111111,
+      "game_id": "2026_06_BAL_CLE",
+      "note": "High \u00b7 More in 4 of last 4 (88, 37, 46, 62)",
+      "reasons": [
+       "Against: CLE have the 2nd best pass defense (EPA per dropback allowed)",
+       "For: CLE allow the 10th most receiving yds to WRs (167 a game)"
+      ]
+     },
+     {
+      "player": "Deshaun Watson",
+      "player_id": "00-0033537",
+      "team": "CLE",
+      "stat": "rush_att",
+      "side": "over",
+      "line": 6.5,
+      "p_model": 0.5555555555555556,
+      "game_id": "2026_06_BAL_CLE",
+      "note": "Medium \u00b7 More in 3 of last 4 (7, 11, 7, 6)",
+      "reasons": []
+     },
+     {
+      "player": "Zay Flowers",
+      "player_id": "00-0039064",
+      "team": "BAL",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 60.5,
+      "p_model": 0.5511336805555556,
+      "game_id": "2026_06_BAL_CLE",
+      "note": "Medium \u00b7 More in 3 of last 4 (150, 84, 118, 53)",
+      "reasons": [
+       "Against: CLE have the 2nd best pass defense (EPA per dropback allowed)",
+       "For: CLE allow the 10th most receiving yds to WRs (167 a game)"
+      ]
+     }
+    ]
+   }
+  ],
+  "4": [
+   {
+    "n": 4,
+    "entry": "B",
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Power",
+    "game": "BAL at CLE",
+    "p_all": 0.10181503540882245,
+    "p_independent": 0.10181503540882245,
+    "power_ev": 1.0181503540882244,
+    "flex_ev": 0.9806770519821277,
+    "best_ev": 1.0181503540882244,
+    "min_power_mult": 9.8217320848994,
+    "legs": [
+     {
+      "player": "Rashod Bateman",
+      "player_id": "00-0036550",
+      "team": "BAL",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 30.5,
+      "p_model": 0.6091892361111111,
+      "game_id": "2026_06_BAL_CLE",
+      "note": "High \u00b7 More in 4 of last 4 (88, 37, 46, 62)",
+      "reasons": [
+       "Against: CLE have the 2nd best pass defense (EPA per dropback allowed)",
+       "For: CLE allow the 10th most receiving yds to WRs (167 a game)"
+      ]
+     },
+     {
+      "player": "Deshaun Watson",
+      "player_id": "00-0033537",
+      "team": "CLE",
+      "stat": "rush_att",
+      "side": "over",
+      "line": 6.5,
+      "p_model": 0.5555555555555556,
+      "game_id": "2026_06_BAL_CLE",
+      "note": "Medium \u00b7 More in 3 of last 4 (7, 11, 7, 6)",
+      "reasons": []
+     },
+     {
+      "player": "Zay Flowers",
+      "player_id": "00-0039064",
+      "team": "BAL",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 60.5,
+      "p_model": 0.5511336805555556,
+      "game_id": "2026_06_BAL_CLE",
+      "note": "Medium \u00b7 More in 3 of last 4 (150, 84, 118, 53)",
+      "reasons": [
+       "Against: CLE have the 2nd best pass defense (EPA per dropback allowed)",
+       "For: CLE allow the 10th most receiving yds to WRs (167 a game)"
+      ]
+     },
+     {
+      "player": "Derrick Henry",
+      "player_id": "00-0032764",
+      "team": "BAL",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 90.5,
+      "p_model": 0.5458524305555557,
+      "game_id": "2026_06_BAL_CLE",
+      "note": "Lean \u00b7 Less in 3 of last 4 (68, 89, 73, 102)",
+      "reasons": [
+       "Against: CLE have the 3rd worst run defense (EPA per rush allowed)",
+       "Against: BAL favored by 4.5: more carries to close it out"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

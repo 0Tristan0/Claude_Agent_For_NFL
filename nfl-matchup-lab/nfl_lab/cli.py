@@ -10,6 +10,8 @@
   project    v0 model for one game, e.g. project --home LAR --away BUF --week 5 --season 2026
   slate      v0 model for a whole week, e.g. slate --week 6
   check      v0 calibration check on 2024 (validation season)
+  guesser    Guesser method for a week: props board, lineups and the $20 entries per game, e.g. guesser --week 6
+  guesser-grade  grade that week's Guesser entries from nflverse's official stats
 """
 from __future__ import annotations
 
@@ -261,6 +263,27 @@ def cmd_retro(a):
     return 0
 
 
+def cmd_guesser(a):
+    from . import guesser
+    out = guesser.run_week(a.season, a.week)
+    for rec in out.values():
+        lu = rec.get("lineups") or {}
+        print(f"{rec['label']}: {len(rec.get('picks') or [])} lines rated, lineups {', '.join(sorted(lu)) or 'none'}")
+        for n in ("3", "4"):
+            for L in lu.get(n, []):
+                print(f"   Entry {L['entry']} {n}-pick {L['play_as']} (expected back per $1 {L['best_ev']:.2f}): "
+                      + "; ".join(f"{guesser.leg_text(x)} ({x['p_model']:.0%})" for x in L["legs"]))
+    return 0
+
+
+def cmd_guesser_grade(a):
+    from . import guesser
+    from .backtest import retro
+    done = guesser.grade_week(a.season, a.week, retro.fetch_stats(a.season))
+    print("graded:", ", ".join(done) or "nothing new (games not played yet or stats not posted)")
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="nfl_lab", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("-v", "--verbose", action="store_true")
@@ -310,6 +333,11 @@ def main(argv=None) -> int:
     s.add_argument("--final", default="")
     s.add_argument("--sims", type=int, default=20000)
     s.set_defaults(fn=cmd_retro)
+    for name, fn in (("guesser", cmd_guesser), ("guesser-grade", cmd_guesser_grade)):
+        s = sub.add_parser(name)
+        s.add_argument("--week", type=int, required=True)
+        s.add_argument("--season", type=int, default=config.LIVE_SEASON)
+        s.set_defaults(fn=fn)
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO if a.verbose else logging.WARNING, format="%(message)s")
     return a.fn(a)

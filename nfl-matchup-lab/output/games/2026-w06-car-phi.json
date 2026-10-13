@@ -1,0 +1,674 @@
+{
+ "game_id": "2026_06_CAR_PHI",
+ "season": 2026,
+ "week": 6,
+ "label": "CAR at PHI",
+ "away": "CAR",
+ "home": "PHI",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": -1.5,
+ "total": 41.5,
+ "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
+ "built_at": "2026-10-13 16:01:46.807505+00:00",
+ "units": [
+  {
+   "offense": "CAR",
+   "defense": "PHI",
+   "stat": "EPA per dropback",
+   "off_value": 0.13334943707998947,
+   "def_value": 0.03081816406409623,
+   "off_rank": 9,
+   "def_rank": 13
+  },
+  {
+   "offense": "CAR",
+   "defense": "PHI",
+   "stat": "EPA per rush",
+   "off_value": -0.0542818563079633,
+   "def_value": -0.10181710388311085,
+   "off_rank": 17,
+   "def_rank": 10
+  },
+  {
+   "offense": "CAR",
+   "defense": "PHI",
+   "stat": "Explosive pass rate",
+   "off_value": 0.08886145921768222,
+   "def_value": 0.07150233806820244,
+   "off_rank": 10,
+   "def_rank": 13
+  },
+  {
+   "offense": "CAR",
+   "defense": "PHI",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.29844546659127413,
+   "def_value": 0.170967860636746,
+   "off_rank": 32,
+   "def_rank": 31
+  },
+  {
+   "offense": "CAR",
+   "defense": "PHI",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.616794679143101,
+   "def_value": 0.5124643603806828,
+   "off_rank": 11,
+   "def_rank": 9
+  },
+  {
+   "offense": "PHI",
+   "defense": "CAR",
+   "stat": "EPA per dropback",
+   "off_value": -0.00679418609480721,
+   "def_value": 0.13556096635038256,
+   "off_rank": 19,
+   "def_rank": 27
+  },
+  {
+   "offense": "PHI",
+   "defense": "CAR",
+   "stat": "EPA per rush",
+   "off_value": -0.13527617290428035,
+   "def_value": -0.007888583658538386,
+   "off_rank": 23,
+   "def_rank": 24
+  },
+  {
+   "offense": "PHI",
+   "defense": "CAR",
+   "stat": "Explosive pass rate",
+   "off_value": 0.059097722677792376,
+   "def_value": 0.07380230440490759,
+   "off_rank": 30,
+   "def_rank": 14
+  },
+  {
+   "offense": "PHI",
+   "defense": "CAR",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.21569999994197317,
+   "def_value": 0.19258903025253413,
+   "off_rank": 11,
+   "def_rank": 28
+  },
+  {
+   "offense": "PHI",
+   "defense": "CAR",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.6258567469017976,
+   "def_value": 0.6300689257634957,
+   "off_rank": 10,
+   "def_rank": 22
+  }
+ ],
+ "picks": [
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0036389",
+   "player": "Jalen Hurts",
+   "team": "PHI",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 25.5,
+   "side": "under",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    16.0,
+    25.0,
+    18.0,
+    2.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.6164236111,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.010625,
+   "tier": "High",
+   "reasons": [
+    "For: CAR pressure QBs on 19% of dropbacks (the 5th least); PHI's line allows pressure on 22% (the 11th least): fewer reasons to run"
+   ]
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0039150",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "position": "QB",
+   "stat": "pass_att",
+   "line": 33.5,
+   "side": "over",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    37.0,
+    36.0,
+    48.0,
+    41.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.6111111111,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "tier": "High",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0039150",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 11.5,
+   "side": "under",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    10.0,
+    6.0,
+    0.0,
+    3.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.6107986111,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.000625,
+   "tier": "High",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0031610",
+   "player": "Darren Waller",
+   "team": "CAR",
+   "position": "TE",
+   "stat": "rec_yds",
+   "line": 25.5,
+   "side": "over",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    28.0,
+    33.0,
+    51.0,
+    36.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.6094704861,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00328125,
+   "tier": "High",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0039150",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "position": "QB",
+   "stat": "pass_rush_yds",
+   "line": 248.5,
+   "side": "over",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    371.0,
+    293.0,
+    291.0,
+    332.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.6091579861,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00390625,
+   "tier": "High",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0039150",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 232.5,
+   "side": "over",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    361.0,
+    287.0,
+    291.0,
+    329.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.6091579861,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00390625,
+   "tier": "High",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0031610",
+   "player": "Darren Waller",
+   "team": "CAR",
+   "position": "TE",
+   "stat": "receptions",
+   "line": 2.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    2.0,
+    3.0,
+    5.0,
+    3.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5539149306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00328125,
+   "tier": "Medium",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0036389",
+   "player": "Jalen Hurts",
+   "team": "PHI",
+   "position": "QB",
+   "stat": "pass_rush_yds",
+   "line": 242.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    280.0,
+    178.0,
+    111.0,
+    222.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5453211806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.02046875,
+   "tier": "Lean",
+   "reasons": [
+    "Against: CAR pressure QBs on 19% of dropbacks (the 5th least); PHI's line allows pressure on 22% (the 11th least): a clean pocket",
+    "Against: CAR have the 6th worst pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0039491",
+   "player": "Jalen Coker",
+   "team": "CAR",
+   "position": "WR",
+   "stat": "receptions",
+   "line": 4.5,
+   "side": "over",
+   "hits": 2,
+   "games": 3,
+   "log": [
+    8.0,
+    8.0,
+    2.0
+   ],
+   "recent": 0.5625,
+   "market": 0.5,
+   "p_model": 0.534609375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00671875,
+   "tier": "Lean",
+   "reasons": [
+    "For: PHI allow the 8th most receiving yds to WRs (172 a game)"
+   ]
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0039491",
+   "player": "Jalen Coker",
+   "team": "CAR",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 55.5,
+   "side": "over",
+   "hits": 2,
+   "games": 3,
+   "log": [
+    138.0,
+    66.0,
+    18.0
+   ],
+   "recent": 0.5625,
+   "market": 0.5,
+   "p_model": 0.534609375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00671875,
+   "tier": "Lean",
+   "reasons": [
+    "For: PHI allow the 8th most receiving yds to WRs (172 a game)"
+   ]
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0036389",
+   "player": "Jalen Hurts",
+   "team": "PHI",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 206.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    264.0,
+    153.0,
+    93.0,
+    220.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.510234375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.02046875,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: CAR pressure QBs on 19% of dropbacks (the 5th least); PHI's line allows pressure on 22% (the 11th least): a clean pocket",
+    "For: CAR have the 6th worst pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0036555",
+   "player": "Chuba Hubbard",
+   "team": "CAR",
+   "position": "RB",
+   "stat": "rush_att",
+   "line": 16.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    10.0,
+    12.0,
+    19.0,
+    20.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.503046875,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00609375,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: PHI have the 10th best run defense (EPA per rush allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0036555",
+   "player": "Chuba Hubbard",
+   "team": "CAR",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 71.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    49.0,
+    53.0,
+    82.0,
+    122.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.503046875,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00609375,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: PHI have the 10th best run defense (EPA per rush allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0036555",
+   "player": "Chuba Hubbard",
+   "team": "CAR",
+   "position": "RB",
+   "stat": "receptions",
+   "line": 2.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    3.0,
+    2.0,
+    4.0,
+    1.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.502890625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00578125,
+   "tier": "Coin flip",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0036555",
+   "player": "Chuba Hubbard",
+   "team": "CAR",
+   "position": "RB",
+   "stat": "rec_yds",
+   "line": 13.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    38.0,
+    11.0,
+    28.0,
+    7.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.502890625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00578125,
+   "tier": "Coin flip",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0036389",
+   "player": "Jalen Hurts",
+   "team": "PHI",
+   "position": "QB",
+   "stat": "pass_att",
+   "line": 33.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    37.0,
+    25.0,
+    27.0,
+    40.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.5,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "tier": "Coin flip",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0039150",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "position": "QB",
+   "stat": "ints",
+   "line": 0.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    1.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.5,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "tier": "Coin flip",
+   "reasons": []
+  }
+ ],
+ "lineups": {
+  "3": [
+   {
+    "n": 3,
+    "entry": "A",
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Flex",
+    "game": "CAR at PHI",
+    "p_all": 0.22958955428093386,
+    "p_independent": 0.22958955428093386,
+    "power_ev": 1.1479477714046693,
+    "flex_ev": 1.0616775457939494,
+    "best_ev": 1.0616775457939494,
+    "min_power_mult": 4.35559885610634,
+    "legs": [
+     {
+      "player": "Jalen Hurts",
+      "player_id": "00-0036389",
+      "team": "PHI",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 25.5,
+      "p_model": 0.6164236111111111,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "High \u00b7 Less in 4 of last 4 (16, 25, 18, 2)",
+      "reasons": [
+       "For: CAR pressure QBs on 19% of dropbacks (the 5th least); PHI's line allows pressure on 22% (the 11th least): fewer reasons to run"
+      ]
+     },
+     {
+      "player": "Bryce Young",
+      "player_id": "00-0039150",
+      "team": "CAR",
+      "stat": "pass_att",
+      "side": "over",
+      "line": 33.5,
+      "p_model": 0.6111111111111112,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "High \u00b7 More in 4 of last 4 (37, 36, 48, 41)",
+      "reasons": []
+     },
+     {
+      "player": "Darren Waller",
+      "player_id": "00-0031610",
+      "team": "CAR",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 25.5,
+      "p_model": 0.6094704861111111,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "High \u00b7 More in 4 of last 4 (28, 33, 51, 36)",
+      "reasons": []
+     }
+    ]
+   }
+  ],
+  "4": [
+   {
+    "n": 4,
+    "entry": "B",
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Power",
+    "game": "CAR at PHI",
+    "p_all": 0.12274072812065864,
+    "p_independent": 0.12274072812065864,
+    "power_ev": 1.2274072812065864,
+    "flex_ev": 1.1236762369680524,
+    "best_ev": 1.2274072812065864,
+    "min_power_mult": 8.147254911319765,
+    "legs": [
+     {
+      "player": "Jalen Hurts",
+      "player_id": "00-0036389",
+      "team": "PHI",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 25.5,
+      "p_model": 0.6164236111111111,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "High \u00b7 Less in 4 of last 4 (16, 25, 18, 2)",
+      "reasons": [
+       "For: CAR pressure QBs on 19% of dropbacks (the 5th least); PHI's line allows pressure on 22% (the 11th least): fewer reasons to run"
+      ]
+     },
+     {
+      "player": "Bryce Young",
+      "player_id": "00-0039150",
+      "team": "CAR",
+      "stat": "pass_att",
+      "side": "over",
+      "line": 33.5,
+      "p_model": 0.6111111111111112,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "High \u00b7 More in 4 of last 4 (37, 36, 48, 41)",
+      "reasons": []
+     },
+     {
+      "player": "Darren Waller",
+      "player_id": "00-0031610",
+      "team": "CAR",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 25.5,
+      "p_model": 0.6094704861111111,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "High \u00b7 More in 4 of last 4 (28, 33, 51, 36)",
+      "reasons": []
+     },
+     {
+      "player": "Jalen Coker",
+      "player_id": "00-0039491",
+      "team": "CAR",
+      "stat": "receptions",
+      "side": "over",
+      "line": 4.5,
+      "p_model": 0.534609375,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "Lean \u00b7 More in 2 of last 3 (8, 8, 2)",
+      "reasons": [
+       "For: PHI allow the 8th most receiving yds to WRs (172 a game)"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

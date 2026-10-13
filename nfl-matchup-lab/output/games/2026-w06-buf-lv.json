@@ -1,0 +1,136 @@
+{
+ "game_id": "2026_06_BUF_LV",
+ "season": 2026,
+ "week": 6,
+ "label": "BUF at LV",
+ "away": "BUF",
+ "home": "LV",
+ "kickoff_utc": "2026-10-18 20:25:00+00:00",
+ "home_spread": 6.0,
+ "total": 52.5,
+ "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
+ "built_at": "2026-10-13 16:01:46.807505+00:00",
+ "units": [
+  {
+   "offense": "BUF",
+   "defense": "LV",
+   "stat": "EPA per dropback",
+   "off_value": 0.18183400282661766,
+   "def_value": 0.10051109376176,
+   "off_rank": 4,
+   "def_rank": 23
+  },
+  {
+   "offense": "BUF",
+   "defense": "LV",
+   "stat": "EPA per rush",
+   "off_value": 0.06791040568050945,
+   "def_value": -0.08243953088212345,
+   "off_rank": 3,
+   "def_rank": 14
+  },
+  {
+   "offense": "BUF",
+   "defense": "LV",
+   "stat": "Explosive pass rate",
+   "off_value": 0.1161757175129956,
+   "def_value": 0.061450963997697935,
+   "off_rank": 1,
+   "def_rank": 4
+  },
+  {
+   "offense": "BUF",
+   "defense": "LV",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.19433265028680832,
+   "def_value": 0.2602109435185074,
+   "off_rank": 4,
+   "def_rank": 5
+  },
+  {
+   "offense": "BUF",
+   "defense": "LV",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.666424483323566,
+   "def_value": 0.6581366708209474,
+   "off_rank": 4,
+   "def_rank": 28
+  },
+  {
+   "offense": "LV",
+   "defense": "BUF",
+   "stat": "EPA per dropback",
+   "off_value": 0.02893079919753874,
+   "def_value": 0.03326552471083471,
+   "off_rank": 18,
+   "def_rank": 14
+  },
+  {
+   "offense": "LV",
+   "defense": "BUF",
+   "stat": "EPA per rush",
+   "off_value": -0.21629195620382247,
+   "def_value": 0.01894717559704014,
+   "off_rank": 31,
+   "def_rank": 28
+  },
+  {
+   "offense": "LV",
+   "defense": "BUF",
+   "stat": "Explosive pass rate",
+   "off_value": 0.0788898580760468,
+   "def_value": 0.08254748086999106,
+   "off_rank": 17,
+   "def_rank": 20
+  },
+  {
+   "offense": "LV",
+   "defense": "BUF",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.25420752383611517,
+   "def_value": 0.26080919696613114,
+   "off_rank": 28,
+   "def_rank": 4
+  },
+  {
+   "offense": "LV",
+   "defense": "BUF",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5451699934733649,
+   "def_value": 0.63522833240316,
+   "off_rank": 20,
+   "def_rank": 24
+  }
+ ],
+ "picks": [
+  {
+   "game_id": "2026_06_BUF_LV",
+   "player_id": "00-0029604",
+   "player": "Kirk Cousins",
+   "team": "LV",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 237.5,
+   "side": "over",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    253.0,
+    248.0,
+    365.0,
+    243.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.6069392361,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00834375,
+   "tier": "High",
+   "reasons": [
+    "Against: BUF pressure QBs on 26% of dropbacks (the 4th most); LV's line allows pressure on 25% (the 5th most): a hard night to throw",
+    "For: LV underdog by 6: likely throwing to catch up"
+   ]
+  }
+ ],
+ "lineups": {}
+}

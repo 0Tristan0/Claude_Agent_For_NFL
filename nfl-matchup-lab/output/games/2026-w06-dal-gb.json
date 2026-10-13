@@ -1,0 +1,932 @@
+{
+ "game_id": "2026_06_DAL_GB",
+ "season": 2026,
+ "week": 6,
+ "label": "DAL at GB",
+ "away": "DAL",
+ "home": "GB",
+ "kickoff_utc": "2026-10-19 00:20:00+00:00",
+ "home_spread": -1.5,
+ "total": 52.5,
+ "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
+ "built_at": "2026-10-13 16:01:46.807505+00:00",
+ "units": [
+  {
+   "offense": "DAL",
+   "defense": "GB",
+   "stat": "EPA per dropback",
+   "off_value": 0.1440370386735453,
+   "def_value": 0.03858119917528829,
+   "off_rank": 8,
+   "def_rank": 15
+  },
+  {
+   "offense": "DAL",
+   "defense": "GB",
+   "stat": "EPA per rush",
+   "off_value": -0.015239866858794136,
+   "def_value": -0.011341598259285586,
+   "off_rank": 11,
+   "def_rank": 22
+  },
+  {
+   "offense": "DAL",
+   "defense": "GB",
+   "stat": "Explosive pass rate",
+   "off_value": 0.06834652822399193,
+   "def_value": 0.05794259396085496,
+   "off_rank": 26,
+   "def_rank": 2
+  },
+  {
+   "offense": "DAL",
+   "defense": "GB",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.23685576428336622,
+   "def_value": 0.2535538294990011,
+   "off_rank": 22,
+   "def_rank": 8
+  },
+  {
+   "offense": "DAL",
+   "defense": "GB",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.6790094318864986,
+   "def_value": 0.6443654644364794,
+   "off_rank": 3,
+   "def_rank": 25
+  },
+  {
+   "offense": "GB",
+   "defense": "DAL",
+   "stat": "EPA per dropback",
+   "off_value": 0.23307989869681617,
+   "def_value": 0.34716150648823685,
+   "off_rank": 2,
+   "def_rank": 32
+  },
+  {
+   "offense": "GB",
+   "defense": "DAL",
+   "stat": "EPA per rush",
+   "off_value": -0.1697048387542975,
+   "def_value": 0.03776374429408096,
+   "off_rank": 27,
+   "def_rank": 31
+  },
+  {
+   "offense": "GB",
+   "defense": "DAL",
+   "stat": "Explosive pass rate",
+   "off_value": 0.10789253517200606,
+   "def_value": 0.12090139012294802,
+   "off_rank": 2,
+   "def_rank": 32
+  },
+  {
+   "offense": "GB",
+   "defense": "DAL",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.22605580402834247,
+   "def_value": 0.2556582313014128,
+   "off_rank": 16,
+   "def_rank": 6
+  },
+  {
+   "offense": "GB",
+   "defense": "DAL",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5364022802841731,
+   "def_value": 0.66659237746232,
+   "off_rank": 23,
+   "def_rank": 29
+  }
+ ],
+ "picks": [
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0036264",
+   "player": "Jordan Love",
+   "team": "GB",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 6.5,
+   "side": "under",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    0.0,
+    0.0,
+    -8.0,
+    6.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.6079861111,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00625,
+   "tier": "High",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0033077",
+   "player": "Dak Prescott",
+   "team": "DAL",
+   "position": "QB",
+   "stat": "pass_rush_yds",
+   "line": 290.5,
+   "side": "over",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    305.0,
+    295.0,
+    342.0,
+    316.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.6060329861,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01015625,
+   "tier": "High",
+   "reasons": [
+    "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): a hard night to throw"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0039811",
+   "player": "MarShawn Lloyd",
+   "team": "GB",
+   "position": "RB",
+   "stat": "rush_att",
+   "line": 10.5,
+   "side": "under",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    6.0,
+    4.0,
+    7.0,
+    10.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.6043142361,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01359375,
+   "tier": "High",
+   "reasons": [
+    "Against: DAL have the 2nd worst run defense (EPA per rush allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0039811",
+   "player": "MarShawn Lloyd",
+   "team": "GB",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 39.5,
+   "side": "under",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    20.0,
+    11.0,
+    13.0,
+    31.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.6043142361,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01359375,
+   "tier": "High",
+   "reasons": [
+    "Against: DAL have the 2nd worst run defense (EPA per rush allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0038041",
+   "player": "Jake Ferguson",
+   "team": "DAL",
+   "position": "TE",
+   "stat": "receptions",
+   "line": 3.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    4.0,
+    3.0,
+    3.0,
+    3.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5596961806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00828125,
+   "tier": "Medium",
+   "reasons": [
+    "For: GB allow the 4th fewest receiving yds to TEs (32 a game)",
+    "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): more quick checkdowns"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0038041",
+   "player": "Jake Ferguson",
+   "team": "DAL",
+   "position": "TE",
+   "stat": "rec_yds",
+   "line": 29.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    43.0,
+    23.0,
+    11.0,
+    19.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5596961806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00828125,
+   "tier": "Medium",
+   "reasons": [
+    "For: GB allow the 4th fewest receiving yds to TEs (32 a game)",
+    "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): more quick checkdowns"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0033077",
+   "player": "Dak Prescott",
+   "team": "DAL",
+   "position": "QB",
+   "stat": "pass_att",
+   "line": 38.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    31.0,
+    40.0,
+    45.0,
+    42.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5555555556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "tier": "Medium",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0036264",
+   "player": "Jordan Love",
+   "team": "GB",
+   "position": "QB",
+   "stat": "pass_att",
+   "line": 35.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    29.0,
+    53.0,
+    30.0,
+    31.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5555555556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "tier": "Medium",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0039811",
+   "player": "MarShawn Lloyd",
+   "team": "GB",
+   "position": "RB",
+   "stat": "rec_yds",
+   "line": 10.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    6.0,
+    7.0,
+    36.0,
+    6.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5529774306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00515625,
+   "tier": "Medium",
+   "reasons": [
+    "For: DAL allow the 4th fewest receiving yds to RBs (17 a game)",
+    "Against: DAL have the 1st worst pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0036997",
+   "player": "Javonte Williams",
+   "team": "DAL",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 67.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    30.0,
+    98.0,
+    62.0,
+    45.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5529774306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00515625,
+   "tier": "Medium",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0033077",
+   "player": "Dak Prescott",
+   "team": "DAL",
+   "position": "QB",
+   "stat": "completions",
+   "line": 24.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    26.0,
+    25.0,
+    32.0,
+    24.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5504774306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01015625,
+   "tier": "Medium",
+   "reasons": [
+    "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): a hard night to throw"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0037247",
+   "player": "George Pickens",
+   "team": "DAL",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 68.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    40.0,
+    82.0,
+    75.0,
+    130.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5467274306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01765625,
+   "tier": "Lean",
+   "reasons": [
+    "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): less time for deep throws (his targets travel 11 yds)",
+    "Against: GB allow the 11th fewest receiving yds to WRs (132 a game)"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0040667",
+   "player": "Matthew Golden",
+   "team": "GB",
+   "position": "WR",
+   "stat": "receptions",
+   "line": 4.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    4.0,
+    5.0,
+    3.0,
+    6.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.506953125,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01390625,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: DAL have the 1st worst pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0033077",
+   "player": "Dak Prescott",
+   "team": "DAL",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 281.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    279.0,
+    276.0,
+    335.0,
+    316.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.505078125,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01015625,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): a hard night to throw"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0033077",
+   "player": "Dak Prescott",
+   "team": "DAL",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 10.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    26.0,
+    19.0,
+    7.0,
+    0.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.504375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00875,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): more scrambles"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0036264",
+   "player": "Jordan Love",
+   "team": "GB",
+   "position": "QB",
+   "stat": "completions",
+   "line": 22.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    16.0,
+    28.0,
+    22.0,
+    25.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.504140625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00828125,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: DAL have the 1st worst pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0036264",
+   "player": "Jordan Love",
+   "team": "GB",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 259.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    145.0,
+    312.0,
+    197.0,
+    367.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.504140625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00828125,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: DAL have the 1st worst pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0036264",
+   "player": "Jordan Love",
+   "team": "GB",
+   "position": "QB",
+   "stat": "pass_rush_yds",
+   "line": 289.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    145.0,
+    312.0,
+    189.0,
+    373.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.504140625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00828125,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: DAL have the 1st worst pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_DAL_GB",
+   "player_id": "00-0036264",
+   "player": "Jordan Love",
+   "team": "GB",
+   "position": "QB",
+   "stat": "ints",
+   "line": 0.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    0.0,
+    1.0,
+    1.0,
+    0.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.5,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "tier": "Coin flip",
+   "reasons": []
+  }
+ ],
+ "lineups": {
+  "3": [
+   {
+    "n": 3,
+    "entry": "A",
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Flex",
+    "game": "DAL at GB",
+    "p_all": 0.22266540493605397,
+    "p_independent": 0.22266540493605397,
+    "power_ev": 1.1133270246802698,
+    "flex_ev": 1.0436377198370397,
+    "best_ev": 1.0436377198370397,
+    "min_power_mult": 4.491043412366571,
+    "legs": [
+     {
+      "player": "Jordan Love",
+      "player_id": "00-0036264",
+      "team": "GB",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 6.5,
+      "p_model": 0.6079861111111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 Less in 4 of last 4 (0, 0, -8, 6)",
+      "reasons": []
+     },
+     {
+      "player": "Dak Prescott",
+      "player_id": "00-0033077",
+      "team": "DAL",
+      "stat": "pass_rush_yds",
+      "side": "over",
+      "line": 290.5,
+      "p_model": 0.6060329861111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 More in 4 of last 4 (305, 295, 342, 316)",
+      "reasons": [
+       "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): a hard night to throw"
+      ]
+     },
+     {
+      "player": "MarShawn Lloyd",
+      "player_id": "00-0039811",
+      "team": "GB",
+      "stat": "rush_att",
+      "side": "under",
+      "line": 10.5,
+      "p_model": 0.6043142361111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 Less in 4 of last 4 (6, 4, 7, 10)",
+      "reasons": [
+       "Against: DAL have the 2nd worst run defense (EPA per rush allowed)"
+      ]
+     }
+    ]
+   }
+  ],
+  "4": [
+   {
+    "n": 4,
+    "entry": "B",
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Power",
+    "game": "DAL at GB",
+    "p_all": 0.12462497668456556,
+    "p_independent": 0.12462497668456556,
+    "power_ev": 1.2462497668456556,
+    "flex_ev": 1.1346421435635334,
+    "best_ev": 1.2462497668456556,
+    "min_power_mult": 8.024073717831612,
+    "legs": [
+     {
+      "player": "Jordan Love",
+      "player_id": "00-0036264",
+      "team": "GB",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 6.5,
+      "p_model": 0.6079861111111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 Less in 4 of last 4 (0, 0, -8, 6)",
+      "reasons": []
+     },
+     {
+      "player": "Dak Prescott",
+      "player_id": "00-0033077",
+      "team": "DAL",
+      "stat": "pass_rush_yds",
+      "side": "over",
+      "line": 290.5,
+      "p_model": 0.6060329861111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 More in 4 of last 4 (305, 295, 342, 316)",
+      "reasons": [
+       "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): a hard night to throw"
+      ]
+     },
+     {
+      "player": "MarShawn Lloyd",
+      "player_id": "00-0039811",
+      "team": "GB",
+      "stat": "rush_att",
+      "side": "under",
+      "line": 10.5,
+      "p_model": 0.6043142361111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 Less in 4 of last 4 (6, 4, 7, 10)",
+      "reasons": [
+       "Against: DAL have the 2nd worst run defense (EPA per rush allowed)"
+      ]
+     },
+     {
+      "player": "Jake Ferguson",
+      "player_id": "00-0038041",
+      "team": "DAL",
+      "stat": "receptions",
+      "side": "under",
+      "line": 3.5,
+      "p_model": 0.5596961805555556,
+      "game_id": "2026_06_DAL_GB",
+      "note": "Medium \u00b7 Less in 3 of last 4 (4, 3, 3, 3)",
+      "reasons": [
+       "For: GB allow the 4th fewest receiving yds to TEs (32 a game)",
+       "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): more quick checkdowns"
+      ]
+     }
+    ]
+   }
+  ],
+  "5": [
+   {
+    "n": 5,
+    "entry": null,
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Power",
+    "game": "DAL at GB",
+    "p_all": 0.06891479939007708,
+    "p_independent": 0.06891479939007708,
+    "power_ev": 1.3782959878015415,
+    "flex_ev": 1.3158917839032793,
+    "best_ev": 1.3782959878015415,
+    "min_power_mult": 14.51067127598703,
+    "legs": [
+     {
+      "player": "Jordan Love",
+      "player_id": "00-0036264",
+      "team": "GB",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 6.5,
+      "p_model": 0.6079861111111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 Less in 4 of last 4 (0, 0, -8, 6)",
+      "reasons": []
+     },
+     {
+      "player": "Dak Prescott",
+      "player_id": "00-0033077",
+      "team": "DAL",
+      "stat": "pass_rush_yds",
+      "side": "over",
+      "line": 290.5,
+      "p_model": 0.6060329861111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 More in 4 of last 4 (305, 295, 342, 316)",
+      "reasons": [
+       "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): a hard night to throw"
+      ]
+     },
+     {
+      "player": "MarShawn Lloyd",
+      "player_id": "00-0039811",
+      "team": "GB",
+      "stat": "rush_att",
+      "side": "under",
+      "line": 10.5,
+      "p_model": 0.6043142361111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 Less in 4 of last 4 (6, 4, 7, 10)",
+      "reasons": [
+       "Against: DAL have the 2nd worst run defense (EPA per rush allowed)"
+      ]
+     },
+     {
+      "player": "Jake Ferguson",
+      "player_id": "00-0038041",
+      "team": "DAL",
+      "stat": "receptions",
+      "side": "under",
+      "line": 3.5,
+      "p_model": 0.5596961805555556,
+      "game_id": "2026_06_DAL_GB",
+      "note": "Medium \u00b7 Less in 3 of last 4 (4, 3, 3, 3)",
+      "reasons": [
+       "For: GB allow the 4th fewest receiving yds to TEs (32 a game)",
+       "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): more quick checkdowns"
+      ]
+     },
+     {
+      "player": "Javonte Williams",
+      "player_id": "00-0036997",
+      "team": "DAL",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 67.5,
+      "p_model": 0.5529774305555556,
+      "game_id": "2026_06_DAL_GB",
+      "note": "Medium \u00b7 Less in 3 of last 4 (30, 98, 62, 45)",
+      "reasons": []
+     }
+    ]
+   }
+  ],
+  "6": [
+   {
+    "n": 6,
+    "entry": null,
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Power",
+    "game": "DAL at GB",
+    "p_all": 0.03767761119778841,
+    "p_independent": 0.03767761119778841,
+    "power_ev": 1.4129104199170655,
+    "flex_ev": 1.391363181910233,
+    "best_ev": 1.4129104199170655,
+    "min_power_mult": 26.540960751213913,
+    "legs": [
+     {
+      "player": "Jordan Love",
+      "player_id": "00-0036264",
+      "team": "GB",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 6.5,
+      "p_model": 0.6079861111111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 Less in 4 of last 4 (0, 0, -8, 6)",
+      "reasons": []
+     },
+     {
+      "player": "Dak Prescott",
+      "player_id": "00-0033077",
+      "team": "DAL",
+      "stat": "pass_rush_yds",
+      "side": "over",
+      "line": 290.5,
+      "p_model": 0.6060329861111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 More in 4 of last 4 (305, 295, 342, 316)",
+      "reasons": [
+       "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): a hard night to throw"
+      ]
+     },
+     {
+      "player": "MarShawn Lloyd",
+      "player_id": "00-0039811",
+      "team": "GB",
+      "stat": "rush_att",
+      "side": "under",
+      "line": 10.5,
+      "p_model": 0.6043142361111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 Less in 4 of last 4 (6, 4, 7, 10)",
+      "reasons": [
+       "Against: DAL have the 2nd worst run defense (EPA per rush allowed)"
+      ]
+     },
+     {
+      "player": "Jake Ferguson",
+      "player_id": "00-0038041",
+      "team": "DAL",
+      "stat": "receptions",
+      "side": "under",
+      "line": 3.5,
+      "p_model": 0.5596961805555556,
+      "game_id": "2026_06_DAL_GB",
+      "note": "Medium \u00b7 Less in 3 of last 4 (4, 3, 3, 3)",
+      "reasons": [
+       "For: GB allow the 4th fewest receiving yds to TEs (32 a game)",
+       "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): more quick checkdowns"
+      ]
+     },
+     {
+      "player": "Javonte Williams",
+      "player_id": "00-0036997",
+      "team": "DAL",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 67.5,
+      "p_model": 0.5529774305555556,
+      "game_id": "2026_06_DAL_GB",
+      "note": "Medium \u00b7 Less in 3 of last 4 (30, 98, 62, 45)",
+      "reasons": []
+     },
+     {
+      "player": "George Pickens",
+      "player_id": "00-0037247",
+      "team": "DAL",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 68.5,
+      "p_model": 0.5467274305555556,
+      "game_id": "2026_06_DAL_GB",
+      "note": "Lean \u00b7 More in 3 of last 4 (40, 82, 75, 130)",
+      "reasons": [
+       "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): less time for deep throws (his targets travel 11 yds)",
+       "Against: GB allow the 11th fewest receiving yds to WRs (132 a game)"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

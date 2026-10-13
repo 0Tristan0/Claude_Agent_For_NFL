@@ -1,0 +1,189 @@
+{
+ "game_id": "2026_06_PIT_TB",
+ "season": 2026,
+ "week": 6,
+ "label": "PIT at TB",
+ "away": "PIT",
+ "home": "TB",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": 3.0,
+ "total": 40.5,
+ "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
+ "built_at": "2026-10-13 16:01:46.807505+00:00",
+ "units": [
+  {
+   "offense": "PIT",
+   "defense": "TB",
+   "stat": "EPA per dropback",
+   "off_value": -0.056680594140769855,
+   "def_value": 0.0776818978195887,
+   "off_rank": 25,
+   "def_rank": 20
+  },
+  {
+   "offense": "PIT",
+   "defense": "TB",
+   "stat": "EPA per rush",
+   "off_value": 0.06217079633882499,
+   "def_value": -0.18094774822538684,
+   "off_rank": 4,
+   "def_rank": 2
+  },
+  {
+   "offense": "PIT",
+   "defense": "TB",
+   "stat": "Explosive pass rate",
+   "off_value": 0.07310837644989672,
+   "def_value": 0.0801049830794651,
+   "off_rank": 24,
+   "def_rank": 17
+  },
+  {
+   "offense": "PIT",
+   "defense": "TB",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.20508637653497633,
+   "def_value": 0.20145187611016815,
+   "off_rank": 7,
+   "def_rank": 25
+  },
+  {
+   "offense": "PIT",
+   "defense": "TB",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5365116110803949,
+   "def_value": 0.6015036799584336,
+   "off_rank": 22,
+   "def_rank": 20
+  },
+  {
+   "offense": "TB",
+   "defense": "PIT",
+   "stat": "EPA per dropback",
+   "off_value": -0.0792588733170766,
+   "def_value": 0.07534800572055197,
+   "off_rank": 27,
+   "def_rank": 19
+  },
+  {
+   "offense": "TB",
+   "defense": "PIT",
+   "stat": "EPA per rush",
+   "off_value": 0.025903388033944593,
+   "def_value": 0.003903447066883287,
+   "off_rank": 7,
+   "def_rank": 27
+  },
+  {
+   "offense": "TB",
+   "defense": "PIT",
+   "stat": "Explosive pass rate",
+   "off_value": 0.0781096979631913,
+   "def_value": 0.10828980856945092,
+   "off_rank": 19,
+   "def_rank": 29
+  },
+  {
+   "offense": "TB",
+   "defense": "PIT",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.20431127555464382,
+   "def_value": 0.2036266453852461,
+   "off_rank": 6,
+   "def_rank": 23
+  },
+  {
+   "offense": "TB",
+   "defense": "PIT",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5362536723004927,
+   "def_value": 0.5216366340034063,
+   "off_rank": 24,
+   "def_rank": 10
+  }
+ ],
+ "picks": [
+  {
+   "game_id": "2026_06_PIT_TB",
+   "player_id": "00-0023459",
+   "player": "Aaron Rodgers",
+   "team": "PIT",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 223.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    187.0,
+    292.0,
+    299.0,
+    235.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5605711806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01003125,
+   "tier": "Medium",
+   "reasons": [
+    "For: TB pressure QBs on 20% of dropbacks (the 8th least); PIT's line allows pressure on 21% (the 7th least): a clean pocket"
+   ]
+  },
+  {
+   "game_id": "2026_06_PIT_TB",
+   "player_id": "00-0023459",
+   "player": "Aaron Rodgers",
+   "team": "PIT",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 0.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    5.0,
+    10.0,
+    0.0,
+    6.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5499305556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01125,
+   "tier": "Lean",
+   "reasons": [
+    "Against: TB pressure QBs on 20% of dropbacks (the 8th least); PIT's line allows pressure on 21% (the 7th least): fewer reasons to run"
+   ]
+  },
+  {
+   "game_id": "2026_06_PIT_TB",
+   "player_id": "00-0039361",
+   "player": "Bucky Irving",
+   "team": "TB",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 63.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    89.0,
+    46.0,
+    61.0,
+    165.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.502671875,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00534375,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: PIT have the 6th worst run defense (EPA per rush allowed)"
+   ]
+  }
+ ],
+ "lineups": {}
+}

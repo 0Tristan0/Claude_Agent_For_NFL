@@ -1,0 +1,153 @@
+{
+  "game": "2026_06_WAS_SF",
+  "label": "WAS at SF",
+  "kickoff_utc": "2026-10-20 00:15 UTC",
+  "frozen_at": "2026-10-13 16:01 UTC",
+  "bankroll": 20.0,
+  "reserve_not_bet": 0.0,
+  "paper_money": true,
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game",
+  "entries": [
+    {
+      "id": "A",
+      "type": "flex",
+      "stake": 12.0,
+      "legs": [
+        "Brock Purdy pass attempts less 30.5",
+        "Christian McCaffrey receptions less 4.5",
+        "Jayden Daniels pass yds less 205.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Brock Purdy",
+          "player_id": "00-0037834",
+          "team": "SF",
+          "stat": "pass_att",
+          "side": "under",
+          "line": 30.5,
+          "p_model": 0.6167361111111112,
+          "game_id": "2026_06_WAS_SF",
+          "note": "High \u00b7 Less in 4 of last 4 (22, 27, 30, 29)",
+          "reasons": [
+            "For: SF favored by 7.5: may lean on the run late"
+          ]
+        },
+        {
+          "player": "Christian McCaffrey",
+          "player_id": "00-0033280",
+          "team": "SF",
+          "stat": "receptions",
+          "side": "under",
+          "line": 4.5,
+          "p_model": 0.6094704861111111,
+          "game_id": "2026_06_WAS_SF",
+          "note": "High \u00b7 Less in 4 of last 4 (4, 4, 3, 3)",
+          "reasons": [
+            "Against: WAS have the 7th worst pass defense (EPA per dropback allowed)",
+            "For: WAS pressure QBs on 23% of dropbacks (the 15th most); SF's line allows pressure on 16% (the 1st least): fewer checkdowns"
+          ]
+        },
+        {
+          "player": "Jayden Daniels",
+          "player_id": "00-0039910",
+          "team": "WAS",
+          "stat": "pass_yds",
+          "side": "under",
+          "line": 205.5,
+          "p_model": 0.585546875,
+          "game_id": "2026_06_WAS_SF",
+          "note": "Med-High \u00b7 Less in 3 of last 3 (164, 96, 199)",
+          "reasons": [
+            "Against: WAS underdog by 7.5: likely throwing to catch up"
+          ]
+        }
+      ],
+      "pays": {
+        "3": 2.25,
+        "2": 1.25
+      }
+    },
+    {
+      "id": "B",
+      "type": "power",
+      "stake": 8.0,
+      "legs": [
+        "Brock Purdy pass attempts less 30.5",
+        "Christian McCaffrey receptions less 4.5",
+        "Jayden Daniels pass yds less 205.5",
+        "Jacory Croskey-Merritt rush yds less 45.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Brock Purdy",
+          "player_id": "00-0037834",
+          "team": "SF",
+          "stat": "pass_att",
+          "side": "under",
+          "line": 30.5,
+          "p_model": 0.6167361111111112,
+          "game_id": "2026_06_WAS_SF",
+          "note": "High \u00b7 Less in 4 of last 4 (22, 27, 30, 29)",
+          "reasons": [
+            "For: SF favored by 7.5: may lean on the run late"
+          ]
+        },
+        {
+          "player": "Christian McCaffrey",
+          "player_id": "00-0033280",
+          "team": "SF",
+          "stat": "receptions",
+          "side": "under",
+          "line": 4.5,
+          "p_model": 0.6094704861111111,
+          "game_id": "2026_06_WAS_SF",
+          "note": "High \u00b7 Less in 4 of last 4 (4, 4, 3, 3)",
+          "reasons": [
+            "Against: WAS have the 7th worst pass defense (EPA per dropback allowed)",
+            "For: WAS pressure QBs on 23% of dropbacks (the 15th most); SF's line allows pressure on 16% (the 1st least): fewer checkdowns"
+          ]
+        },
+        {
+          "player": "Jayden Daniels",
+          "player_id": "00-0039910",
+          "team": "WAS",
+          "stat": "pass_yds",
+          "side": "under",
+          "line": 205.5,
+          "p_model": 0.585546875,
+          "game_id": "2026_06_WAS_SF",
+          "note": "Med-High \u00b7 Less in 3 of last 3 (164, 96, 199)",
+          "reasons": [
+            "Against: WAS underdog by 7.5: likely throwing to catch up"
+          ]
+        },
+        {
+          "player": "Jacory Croskey-Merritt",
+          "player_id": "00-0040242",
+          "team": "WAS",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 45.5,
+          "p_model": 0.5637586805555556,
+          "game_id": "2026_06_WAS_SF",
+          "note": "Medium \u00b7 Less in 3 of last 4 (43, 36, 15, 82)",
+          "reasons": [
+            "For: WAS underdog by 7.5: may abandon the run if behind"
+          ]
+        }
+      ],
+      "pays": {
+        "4": 10.0
+      }
+    }
+  ],
+  "expected_return_per_dollar": {
+    "A_flex3": {
+      "estimate": 1.037
+    },
+    "B_power4": {
+      "estimate": 1.241
+    }
+  },
+  "result": null
+}

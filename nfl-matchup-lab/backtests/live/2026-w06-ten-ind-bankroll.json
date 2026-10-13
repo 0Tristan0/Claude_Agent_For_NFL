@@ -1,0 +1,149 @@
+{
+  "game": "2026_06_TEN_IND",
+  "label": "TEN at IND",
+  "kickoff_utc": "2026-10-18 17:00 UTC",
+  "frozen_at": "2026-10-13 16:01 UTC",
+  "bankroll": 20.0,
+  "reserve_not_bet": 0.0,
+  "paper_money": true,
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game",
+  "entries": [
+    {
+      "id": "A",
+      "type": "flex",
+      "stake": 12.0,
+      "legs": [
+        "Daniel Jones rush yds less 7.5",
+        "Cam Ward rush yds less 11.5",
+        "Tony Pollard rush yds more 49.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Daniel Jones",
+          "player_id": "00-0035710",
+          "team": "IND",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 7.5,
+          "p_model": 0.5599305555555556,
+          "game_id": "2026_06_TEN_IND",
+          "note": "Medium \u00b7 Less in 3 of last 4 (10, 5, 2, 4)",
+          "reasons": [
+            "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): fewer reasons to run"
+          ]
+        },
+        {
+          "player": "Cam Ward",
+          "player_id": "00-0040676",
+          "team": "TEN",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 11.5,
+          "p_model": 0.5555555555555556,
+          "game_id": "2026_06_TEN_IND",
+          "note": "Medium \u00b7 Less in 3 of last 4 (7, 2, 27, 2)",
+          "reasons": []
+        },
+        {
+          "player": "Tony Pollard",
+          "player_id": "00-0035261",
+          "team": "TEN",
+          "stat": "rush_yds",
+          "side": "over",
+          "line": 49.5,
+          "p_model": 0.5547586805555556,
+          "game_id": "2026_06_TEN_IND",
+          "note": "Medium \u00b7 More in 3 of last 4 (64, 74, 48, 52)",
+          "reasons": [
+            "Against: TEN underdog by 7: may abandon the run if behind",
+            "For: IND have the 7th worst run defense (EPA per rush allowed)"
+          ]
+        }
+      ],
+      "pays": {
+        "3": 2.25,
+        "2": 1.25
+      }
+    },
+    {
+      "id": "B",
+      "type": "power",
+      "stake": 8.0,
+      "legs": [
+        "Daniel Jones rush yds less 7.5",
+        "Cam Ward rush yds less 11.5",
+        "Tony Pollard rush yds more 49.5",
+        "Jonathan Taylor rush yds less 92.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Daniel Jones",
+          "player_id": "00-0035710",
+          "team": "IND",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 7.5,
+          "p_model": 0.5599305555555556,
+          "game_id": "2026_06_TEN_IND",
+          "note": "Medium \u00b7 Less in 3 of last 4 (10, 5, 2, 4)",
+          "reasons": [
+            "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): fewer reasons to run"
+          ]
+        },
+        {
+          "player": "Cam Ward",
+          "player_id": "00-0040676",
+          "team": "TEN",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 11.5,
+          "p_model": 0.5555555555555556,
+          "game_id": "2026_06_TEN_IND",
+          "note": "Medium \u00b7 Less in 3 of last 4 (7, 2, 27, 2)",
+          "reasons": []
+        },
+        {
+          "player": "Tony Pollard",
+          "player_id": "00-0035261",
+          "team": "TEN",
+          "stat": "rush_yds",
+          "side": "over",
+          "line": 49.5,
+          "p_model": 0.5547586805555556,
+          "game_id": "2026_06_TEN_IND",
+          "note": "Medium \u00b7 More in 3 of last 4 (64, 74, 48, 52)",
+          "reasons": [
+            "Against: TEN underdog by 7: may abandon the run if behind",
+            "For: IND have the 7th worst run defense (EPA per rush allowed)"
+          ]
+        },
+        {
+          "player": "Jonathan Taylor",
+          "player_id": "00-0036223",
+          "team": "IND",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 92.5,
+          "p_model": 0.5500711805555556,
+          "game_id": "2026_06_TEN_IND",
+          "note": "Medium \u00b7 Less in 3 of last 4 (92, 68, 95, 45)",
+          "reasons": [
+            "Against: IND favored by 7: more carries to close it out"
+          ]
+        }
+      ],
+      "pays": {
+        "4": 10.0
+      }
+    }
+  ],
+  "expected_return_per_dollar": {
+    "A_flex3": {
+      "estimate": 0.904
+    },
+    "B_power4": {
+      "estimate": 0.949
+    }
+  },
+  "result": null
+}

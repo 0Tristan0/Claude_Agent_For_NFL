@@ -1,0 +1,152 @@
+{
+  "game": "2026_06_SEA_DEN",
+  "label": "SEA at DEN",
+  "kickoff_utc": "2026-10-16 00:15 UTC",
+  "frozen_at": "2026-10-13 16:01 UTC",
+  "bankroll": 20.0,
+  "reserve_not_bet": 0.0,
+  "paper_money": true,
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game",
+  "entries": [
+    {
+      "id": "A",
+      "type": "flex",
+      "stake": 12.0,
+      "legs": [
+        "Bo Nix rush yds less 13.5",
+        "Marvin Mims Jr. rec yds less 13.5",
+        "Cooper Kupp rec yds less 20.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Bo Nix",
+          "player_id": "00-0039732",
+          "team": "DEN",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 13.5,
+          "p_model": 0.6079861111111111,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "High \u00b7 Less in 4 of last 4 (6, 7, 10, 10)",
+          "reasons": []
+        },
+        {
+          "player": "Marvin Mims Jr.",
+          "player_id": "00-0038976",
+          "team": "DEN",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 13.5,
+          "p_model": 0.6073906250000001,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "High \u00b7 Less in 3 of last 3 (0, 10, 6)",
+          "reasons": [
+            "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+            "For: SEA have the 3rd best pass defense (EPA per dropback allowed)"
+          ]
+        },
+        {
+          "player": "Cooper Kupp",
+          "player_id": "00-0033908",
+          "team": "SEA",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 20.5,
+          "p_model": 0.5692586805555555,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "Medium \u00b7 Less in 3 of last 4 (20, 46, 13, 15)",
+          "reasons": [
+            "For: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+            "For: DEN have the 5th best pass defense (EPA per dropback allowed)"
+          ]
+        }
+      ],
+      "pays": {
+        "3": 2.25,
+        "2": 1.25
+      }
+    },
+    {
+      "id": "B",
+      "type": "power",
+      "stake": 8.0,
+      "legs": [
+        "Bo Nix rush yds less 13.5",
+        "Marvin Mims Jr. rec yds less 13.5",
+        "Courtland Sutton rec yds less 31.5",
+        "Cooper Kupp rec yds less 20.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Bo Nix",
+          "player_id": "00-0039732",
+          "team": "DEN",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 13.5,
+          "p_model": 0.6079861111111111,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "High \u00b7 Less in 4 of last 4 (6, 7, 10, 10)",
+          "reasons": []
+        },
+        {
+          "player": "Marvin Mims Jr.",
+          "player_id": "00-0038976",
+          "team": "DEN",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 13.5,
+          "p_model": 0.6073906250000001,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "High \u00b7 Less in 3 of last 3 (0, 10, 6)",
+          "reasons": [
+            "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+            "For: SEA have the 3rd best pass defense (EPA per dropback allowed)"
+          ]
+        },
+        {
+          "player": "Courtland Sutton",
+          "player_id": "00-0034348",
+          "team": "DEN",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 31.5,
+          "p_model": 0.5723211805555556,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "Medium \u00b7 Less in 3 of last 4 (25, 46, 4, 18)",
+          "reasons": [
+            "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+            "For: SEA have the 3rd best pass defense (EPA per dropback allowed)"
+          ]
+        },
+        {
+          "player": "Cooper Kupp",
+          "player_id": "00-0033908",
+          "team": "SEA",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 20.5,
+          "p_model": 0.5692586805555555,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "Medium \u00b7 Less in 3 of last 4 (20, 46, 13, 15)",
+          "reasons": [
+            "For: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+            "For: DEN have the 5th best pass defense (EPA per dropback allowed)"
+          ]
+        }
+      ],
+      "pays": {
+        "4": 10.0
+      }
+    }
+  ],
+  "expected_return_per_dollar": {
+    "A_flex3": {
+      "estimate": 1.011
+    },
+    "B_power4": {
+      "estimate": 1.203
+    }
+  },
+  "result": null
+}

@@ -1,0 +1,148 @@
+{
+  "game": "2026_06_DAL_GB",
+  "label": "DAL at GB",
+  "kickoff_utc": "2026-10-19 00:20 UTC",
+  "frozen_at": "2026-10-13 16:01 UTC",
+  "bankroll": 20.0,
+  "reserve_not_bet": 0.0,
+  "paper_money": true,
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game",
+  "entries": [
+    {
+      "id": "A",
+      "type": "flex",
+      "stake": 12.0,
+      "legs": [
+        "Jordan Love rush yds less 6.5",
+        "Dak Prescott pass+rush yds more 290.5",
+        "MarShawn Lloyd rush attempts less 10.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Jordan Love",
+          "player_id": "00-0036264",
+          "team": "GB",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 6.5,
+          "p_model": 0.6079861111111111,
+          "game_id": "2026_06_DAL_GB",
+          "note": "High \u00b7 Less in 4 of last 4 (0, 0, -8, 6)",
+          "reasons": []
+        },
+        {
+          "player": "Dak Prescott",
+          "player_id": "00-0033077",
+          "team": "DAL",
+          "stat": "pass_rush_yds",
+          "side": "over",
+          "line": 290.5,
+          "p_model": 0.6060329861111111,
+          "game_id": "2026_06_DAL_GB",
+          "note": "High \u00b7 More in 4 of last 4 (305, 295, 342, 316)",
+          "reasons": [
+            "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): a hard night to throw"
+          ]
+        },
+        {
+          "player": "MarShawn Lloyd",
+          "player_id": "00-0039811",
+          "team": "GB",
+          "stat": "rush_att",
+          "side": "under",
+          "line": 10.5,
+          "p_model": 0.6043142361111111,
+          "game_id": "2026_06_DAL_GB",
+          "note": "High \u00b7 Less in 4 of last 4 (6, 4, 7, 10)",
+          "reasons": [
+            "Against: DAL have the 2nd worst run defense (EPA per rush allowed)"
+          ]
+        }
+      ],
+      "pays": {
+        "3": 2.25,
+        "2": 1.25
+      }
+    },
+    {
+      "id": "B",
+      "type": "power",
+      "stake": 8.0,
+      "legs": [
+        "Jordan Love rush yds less 6.5",
+        "Dak Prescott pass+rush yds more 290.5",
+        "MarShawn Lloyd rush attempts less 10.5",
+        "Jake Ferguson receptions less 3.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Jordan Love",
+          "player_id": "00-0036264",
+          "team": "GB",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 6.5,
+          "p_model": 0.6079861111111111,
+          "game_id": "2026_06_DAL_GB",
+          "note": "High \u00b7 Less in 4 of last 4 (0, 0, -8, 6)",
+          "reasons": []
+        },
+        {
+          "player": "Dak Prescott",
+          "player_id": "00-0033077",
+          "team": "DAL",
+          "stat": "pass_rush_yds",
+          "side": "over",
+          "line": 290.5,
+          "p_model": 0.6060329861111111,
+          "game_id": "2026_06_DAL_GB",
+          "note": "High \u00b7 More in 4 of last 4 (305, 295, 342, 316)",
+          "reasons": [
+            "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): a hard night to throw"
+          ]
+        },
+        {
+          "player": "MarShawn Lloyd",
+          "player_id": "00-0039811",
+          "team": "GB",
+          "stat": "rush_att",
+          "side": "under",
+          "line": 10.5,
+          "p_model": 0.6043142361111111,
+          "game_id": "2026_06_DAL_GB",
+          "note": "High \u00b7 Less in 4 of last 4 (6, 4, 7, 10)",
+          "reasons": [
+            "Against: DAL have the 2nd worst run defense (EPA per rush allowed)"
+          ]
+        },
+        {
+          "player": "Jake Ferguson",
+          "player_id": "00-0038041",
+          "team": "DAL",
+          "stat": "receptions",
+          "side": "under",
+          "line": 3.5,
+          "p_model": 0.5596961805555556,
+          "game_id": "2026_06_DAL_GB",
+          "note": "Medium \u00b7 Less in 3 of last 4 (4, 3, 3, 3)",
+          "reasons": [
+            "For: GB allow the 4th fewest receiving yds to TEs (32 a game)",
+            "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): more quick checkdowns"
+          ]
+        }
+      ],
+      "pays": {
+        "4": 10.0
+      }
+    }
+  ],
+  "expected_return_per_dollar": {
+    "A_flex3": {
+      "estimate": 1.044
+    },
+    "B_power4": {
+      "estimate": 1.246
+    }
+  },
+  "result": null
+}

@@ -1,0 +1,693 @@
+{
+ "game_id": "2026_06_LAC_KC",
+ "season": 2026,
+ "week": 6,
+ "label": "LAC at KC",
+ "away": "LAC",
+ "home": "KC",
+ "kickoff_utc": "2026-10-18 20:25:00+00:00",
+ "home_spread": -8.5,
+ "total": 42.5,
+ "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
+ "built_at": "2026-10-13 16:01:46.807505+00:00",
+ "units": [
+  {
+   "offense": "LAC",
+   "defense": "KC",
+   "stat": "EPA per dropback",
+   "off_value": -0.19526930992756003,
+   "def_value": 0.06436185799259057,
+   "off_rank": 31,
+   "def_rank": 18
+  },
+  {
+   "offense": "LAC",
+   "defense": "KC",
+   "stat": "EPA per rush",
+   "off_value": -0.19642925062703057,
+   "def_value": -0.12844527000780728,
+   "off_rank": 29,
+   "def_rank": 7
+  },
+  {
+   "offense": "LAC",
+   "defense": "KC",
+   "stat": "Explosive pass rate",
+   "off_value": 0.054124809454065226,
+   "def_value": 0.07931240043353388,
+   "off_rank": 32,
+   "def_rank": 16
+  },
+  {
+   "offense": "LAC",
+   "defense": "KC",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.29166658501901155,
+   "def_value": 0.23237454986190462,
+   "off_rank": 31,
+   "def_rank": 16
+  },
+  {
+   "offense": "LAC",
+   "defense": "KC",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5296067927251679,
+   "def_value": 0.5058109401361389,
+   "off_rank": 25,
+   "def_rank": 7
+  },
+  {
+   "offense": "KC",
+   "defense": "LAC",
+   "stat": "EPA per dropback",
+   "off_value": 0.10195461758001619,
+   "def_value": -0.061394612317885275,
+   "off_rank": 13,
+   "def_rank": 4
+  },
+  {
+   "offense": "KC",
+   "defense": "LAC",
+   "stat": "EPA per rush",
+   "off_value": 0.07606747852026681,
+   "def_value": -0.09526662546226523,
+   "off_rank": 1,
+   "def_rank": 12
+  },
+  {
+   "offense": "KC",
+   "defense": "LAC",
+   "stat": "Explosive pass rate",
+   "off_value": 0.08195299760495717,
+   "def_value": 0.08790811468252949,
+   "off_rank": 15,
+   "def_rank": 21
+  },
+  {
+   "offense": "KC",
+   "defense": "LAC",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.2292692829028251,
+   "def_value": 0.2534231114426465,
+   "off_rank": 19,
+   "def_rank": 9
+  },
+  {
+   "offense": "KC",
+   "defense": "LAC",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5829082824777291,
+   "def_value": 0.46966062456885954,
+   "off_rank": 14,
+   "def_rank": 3
+  }
+ ],
+ "picks": [
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0033873",
+   "player": "Patrick Mahomes",
+   "team": "KC",
+   "position": "QB",
+   "stat": "pass_tds",
+   "line": 1.5,
+   "side": "over",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    2.0,
+    3.0,
+    2.0,
+    2.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "p_model": 0.5957986111,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.030625,
+   "tier": "Med-High",
+   "reasons": [
+    "Against: LAC allow touchdowns on 47% of red-zone trips (the 3rd fewest)",
+    "Against: LAC have the 4th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0033873",
+   "player": "Patrick Mahomes",
+   "team": "KC",
+   "position": "QB",
+   "stat": "pass_att",
+   "line": 31.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    27.0,
+    47.0,
+    24.0,
+    30.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5619305556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01275,
+   "tier": "Medium",
+   "reasons": [
+    "For: KC favored by 8.5: may lean on the run late"
+   ]
+  },
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0038134",
+   "player": "Kenneth Walker III",
+   "team": "KC",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 90.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    173.0,
+    117.0,
+    70.0,
+    177.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5598211806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00853125,
+   "tier": "Medium",
+   "reasons": [
+    "For: KC favored by 8.5: more carries to close it out"
+   ]
+  },
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0038134",
+   "player": "Kenneth Walker III",
+   "team": "KC",
+   "position": "RB",
+   "stat": "rush_att",
+   "line": 18.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    23.0,
+    24.0,
+    18.0,
+    22.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5598211806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00853125,
+   "tier": "Medium",
+   "reasons": [
+    "For: KC favored by 8.5: more carries to close it out"
+   ]
+  },
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0041013",
+   "player": "Emmett Johnson",
+   "team": "KC",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 14.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    24.0,
+    15.0,
+    17.0,
+    0.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5598211806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00853125,
+   "tier": "Medium",
+   "reasons": [
+    "For: KC favored by 8.5: more carries to close it out"
+   ]
+  },
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0036355",
+   "player": "Justin Herbert",
+   "team": "LAC",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 203.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    192.0,
+    226.0,
+    189.0,
+    121.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5531649306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00478125,
+   "tier": "Medium",
+   "reasons": [
+    "Against: LAC underdog by 8.5: likely throwing to catch up",
+    "For: KC pressure QBs on 23% of dropbacks (the 16th most); LAC's line allows pressure on 29% (the 2nd most): a hard night to throw"
+   ]
+  },
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0041013",
+   "player": "Emmett Johnson",
+   "team": "KC",
+   "position": "RB",
+   "stat": "rec_yds",
+   "line": 7.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    44.0,
+    20.0,
+    0.0,
+    10.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5481336806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01484375,
+   "tier": "Lean",
+   "reasons": [
+    "Against: LAC have the 4th best pass defense (EPA per dropback allowed)",
+    "Against: LAC allow the 9th fewest receiving yds to RBs (25 a game)"
+   ]
+  },
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0040666",
+   "player": "Omarion Hampton",
+   "team": "LAC",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 38.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    94.0,
+    56.0,
+    45.0,
+    33.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5447274306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.02165625,
+   "tier": "Lean",
+   "reasons": [
+    "Against: LAC underdog by 8.5: may abandon the run if behind",
+    "Against: KC have the 7th best run defense (EPA per rush allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0033873",
+   "player": "Patrick Mahomes",
+   "team": "KC",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 232.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    184.0,
+    382.0,
+    246.0,
+    225.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.515359375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.03071875,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: KC favored by 8.5: may lean on the run late",
+    "For: LAC have the 4th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0033873",
+   "player": "Patrick Mahomes",
+   "team": "KC",
+   "position": "QB",
+   "stat": "completions",
+   "line": 19.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    15.0,
+    32.0,
+    20.0,
+    15.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.515359375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.03071875,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: KC favored by 8.5: may lean on the run late",
+    "For: LAC have the 4th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0033873",
+   "player": "Patrick Mahomes",
+   "team": "KC",
+   "position": "QB",
+   "stat": "pass_rush_yds",
+   "line": 243.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    207.0,
+    399.0,
+    247.0,
+    225.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.508984375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01796875,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: LAC have the 4th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0036355",
+   "player": "Justin Herbert",
+   "team": "LAC",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 23.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    2.0,
+    17.0,
+    40.0,
+    54.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.5046875,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.009375,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: KC pressure QBs on 23% of dropbacks (the 16th most); LAC's line allows pressure on 29% (the 2nd most): more scrambles"
+   ]
+  },
+  {
+   "game_id": "2026_06_LAC_KC",
+   "player_id": "00-0033873",
+   "player": "Patrick Mahomes",
+   "team": "KC",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 14.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    23.0,
+    17.0,
+    1.0,
+    0.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.503125,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00625,
+   "tier": "Coin flip",
+   "reasons": []
+  }
+ ],
+ "lineups": {
+  "3": [
+   {
+    "n": 3,
+    "entry": "A",
+    "recommended": false,
+    "basis": "Guesser method",
+    "play_as": "Flex",
+    "game": "LAC at KC",
+    "p_all": 0.18450300811056433,
+    "p_independent": 0.18450300811056433,
+    "power_ev": 0.9225150405528216,
+    "flex_ev": 0.9392317673985283,
+    "best_ev": 0.9392317673985283,
+    "min_power_mult": 5.419965832756207,
+    "legs": [
+     {
+      "player": "Patrick Mahomes",
+      "player_id": "00-0033873",
+      "team": "KC",
+      "stat": "pass_tds",
+      "side": "over",
+      "line": 1.5,
+      "p_model": 0.5957986111111111,
+      "game_id": "2026_06_LAC_KC",
+      "note": "Med-High \u00b7 More in 4 of last 4 (2, 3, 2, 2)",
+      "reasons": [
+       "Against: LAC allow touchdowns on 47% of red-zone trips (the 3rd fewest)",
+       "Against: LAC have the 4th best pass defense (EPA per dropback allowed)"
+      ]
+     },
+     {
+      "player": "Kenneth Walker III",
+      "player_id": "00-0038134",
+      "team": "KC",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 90.5,
+      "p_model": 0.5598211805555555,
+      "game_id": "2026_06_LAC_KC",
+      "note": "Medium \u00b7 More in 3 of last 4 (173, 117, 70, 177)",
+      "reasons": [
+       "For: KC favored by 8.5: more carries to close it out"
+      ]
+     },
+     {
+      "player": "Justin Herbert",
+      "player_id": "00-0036355",
+      "team": "LAC",
+      "stat": "pass_yds",
+      "side": "under",
+      "line": 203.5,
+      "p_model": 0.5531649305555556,
+      "game_id": "2026_06_LAC_KC",
+      "note": "Medium \u00b7 Less in 3 of last 4 (192, 226, 189, 121)",
+      "reasons": [
+       "Against: LAC underdog by 8.5: likely throwing to catch up",
+       "For: KC pressure QBs on 23% of dropbacks (the 16th most); LAC's line allows pressure on 29% (the 2nd most): a hard night to throw"
+      ]
+     }
+    ]
+   }
+  ],
+  "4": [
+   {
+    "n": 4,
+    "entry": "B",
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Power",
+    "game": "LAC at KC",
+    "p_all": 0.10328869181650736,
+    "p_independent": 0.10328869181650736,
+    "power_ev": 1.0328869181650737,
+    "flex_ev": 0.9903476698274425,
+    "best_ev": 1.0328869181650737,
+    "min_power_mult": 9.681601948996533,
+    "legs": [
+     {
+      "player": "Patrick Mahomes",
+      "player_id": "00-0033873",
+      "team": "KC",
+      "stat": "pass_tds",
+      "side": "over",
+      "line": 1.5,
+      "p_model": 0.5957986111111111,
+      "game_id": "2026_06_LAC_KC",
+      "note": "Med-High \u00b7 More in 4 of last 4 (2, 3, 2, 2)",
+      "reasons": [
+       "Against: LAC allow touchdowns on 47% of red-zone trips (the 3rd fewest)",
+       "Against: LAC have the 4th best pass defense (EPA per dropback allowed)"
+      ]
+     },
+     {
+      "player": "Kenneth Walker III",
+      "player_id": "00-0038134",
+      "team": "KC",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 90.5,
+      "p_model": 0.5598211805555555,
+      "game_id": "2026_06_LAC_KC",
+      "note": "Medium \u00b7 More in 3 of last 4 (173, 117, 70, 177)",
+      "reasons": [
+       "For: KC favored by 8.5: more carries to close it out"
+      ]
+     },
+     {
+      "player": "Emmett Johnson",
+      "player_id": "00-0041013",
+      "team": "KC",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 14.5,
+      "p_model": 0.5598211805555555,
+      "game_id": "2026_06_LAC_KC",
+      "note": "Medium \u00b7 More in 3 of last 4 (24, 15, 17, 0)",
+      "reasons": [
+       "For: KC favored by 8.5: more carries to close it out"
+      ]
+     },
+     {
+      "player": "Justin Herbert",
+      "player_id": "00-0036355",
+      "team": "LAC",
+      "stat": "pass_yds",
+      "side": "under",
+      "line": 203.5,
+      "p_model": 0.5531649305555556,
+      "game_id": "2026_06_LAC_KC",
+      "note": "Medium \u00b7 Less in 3 of last 4 (192, 226, 189, 121)",
+      "reasons": [
+       "Against: LAC underdog by 8.5: likely throwing to catch up",
+       "For: KC pressure QBs on 23% of dropbacks (the 16th most); LAC's line allows pressure on 29% (the 2nd most): a hard night to throw"
+      ]
+     }
+    ]
+   }
+  ],
+  "5": [
+   {
+    "n": 5,
+    "entry": null,
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Flex",
+    "game": "LAC at KC",
+    "p_all": 0.0562641836986507,
+    "p_independent": 0.0562641836986507,
+    "power_ev": 1.125283673973014,
+    "flex_ev": 1.1372703759531138,
+    "best_ev": 1.1372703759531138,
+    "min_power_mult": 17.773296158635667,
+    "legs": [
+     {
+      "player": "Patrick Mahomes",
+      "player_id": "00-0033873",
+      "team": "KC",
+      "stat": "pass_tds",
+      "side": "over",
+      "line": 1.5,
+      "p_model": 0.5957986111111111,
+      "game_id": "2026_06_LAC_KC",
+      "note": "Med-High \u00b7 More in 4 of last 4 (2, 3, 2, 2)",
+      "reasons": [
+       "Against: LAC allow touchdowns on 47% of red-zone trips (the 3rd fewest)",
+       "Against: LAC have the 4th best pass defense (EPA per dropback allowed)"
+      ]
+     },
+     {
+      "player": "Kenneth Walker III",
+      "player_id": "00-0038134",
+      "team": "KC",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 90.5,
+      "p_model": 0.5598211805555555,
+      "game_id": "2026_06_LAC_KC",
+      "note": "Medium \u00b7 More in 3 of last 4 (173, 117, 70, 177)",
+      "reasons": [
+       "For: KC favored by 8.5: more carries to close it out"
+      ]
+     },
+     {
+      "player": "Emmett Johnson",
+      "player_id": "00-0041013",
+      "team": "KC",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 14.5,
+      "p_model": 0.5598211805555555,
+      "game_id": "2026_06_LAC_KC",
+      "note": "Medium \u00b7 More in 3 of last 4 (24, 15, 17, 0)",
+      "reasons": [
+       "For: KC favored by 8.5: more carries to close it out"
+      ]
+     },
+     {
+      "player": "Justin Herbert",
+      "player_id": "00-0036355",
+      "team": "LAC",
+      "stat": "pass_yds",
+      "side": "under",
+      "line": 203.5,
+      "p_model": 0.5531649305555556,
+      "game_id": "2026_06_LAC_KC",
+      "note": "Medium \u00b7 Less in 3 of last 4 (192, 226, 189, 121)",
+      "reasons": [
+       "Against: LAC underdog by 8.5: likely throwing to catch up",
+       "For: KC pressure QBs on 23% of dropbacks (the 16th most); LAC's line allows pressure on 29% (the 2nd most): a hard night to throw"
+      ]
+     },
+     {
+      "player": "Omarion Hampton",
+      "player_id": "00-0040666",
+      "team": "LAC",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 38.5,
+      "p_model": 0.5447274305555556,
+      "game_id": "2026_06_LAC_KC",
+      "note": "Lean \u00b7 More in 3 of last 4 (94, 56, 45, 33)",
+      "reasons": [
+       "Against: LAC underdog by 8.5: may abandon the run if behind",
+       "Against: KC have the 7th best run defense (EPA per rush allowed)"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

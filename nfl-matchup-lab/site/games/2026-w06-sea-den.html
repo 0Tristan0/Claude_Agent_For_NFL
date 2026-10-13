@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SEA at DEN, Week 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
+<style id="lab-theme">
+/* Layout: a quiet scoreboard. Near-black and neutral grays, white type, hairlines instead of boxes;
+   team logos are the only color on the page. One family (Archivo), narrowed for numbers and team codes. */
+:root{
+  color-scheme:dark;
+  --bg:#0A0A0B; --surface:#111113; --raise:#18181B; --line:#222226; --line-2:#2F2F34;
+  --text:#EDEDEF; --muted:#8C8C93; --faint:#5F5F66;
+  --pos:#86C29C; --neg:#DE8A80; --warn:#D2B87C;
+  --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  /* token names the older report pages use */
+  --fg:var(--text); --track:#26262B; --display:var(--sans); --body:var(--sans);
+  --t1:#8FC9A3; --t1bg:#16221A; --t2:#B8C493; --t2bg:#1D2118; --t3:#D3BA7E; --t3bg:#25201A; --t4:#DE8A80; --t4bg:#291A18;
+  --buf:#93A6C9; --lar:#CDB97F; --lar-strong:#CDB97F;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-variant-numeric:tabular-nums}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:0 72px;display:grid;gap:56px}
+@media (min-width:760px){.wrap{padding-inline:32px}}
+h1,h2,h3{margin:0;line-height:1.1;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,5vw,2.75rem);font-weight:750;font-stretch:88%}
+h2{font-size:1.15rem;font-weight:650}
+h3{font-size:1rem;font-weight:650}
+p{margin:0}
+.sub{color:var(--muted);margin-top:6px;max-width:68ch;font-size:.93rem}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+section{display:grid;gap:16px;min-width:0}
+a{color:var(--text);text-underline-offset:3px;text-decoration-color:var(--line-2)}
+a:hover{text-decoration-color:var(--text)}
+code{font-size:.88em;color:var(--text)}
+:focus-visible{outline:2px solid var(--text);outline-offset:2px;border-radius:2px}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+
+/* top navigation */
+.site{display:flex;justify-content:space-between;align-items:center;gap:8px 20px;flex-wrap:wrap;min-height:60px;border-bottom:1px solid var(--line)}
+.brand{font-weight:800;font-stretch:80%;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:var(--text)}
+.tabs{display:flex;gap:22px}
+.tabs a{font-size:.88rem;font-weight:500;color:var(--muted);text-decoration:none;padding-block:19px;border-bottom:1px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--text)}
+.tabs a[aria-current="page"]{color:var(--text);border-bottom-color:var(--text)}
+.back{font-size:.85rem;color:var(--muted);text-decoration:none;justify-self:start}
+.back:hover{color:var(--text)}
+
+/* section tabs inside a game page (built by TAB_JS from section.pane; without script every section shows) */
+.subtabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;
+  background:var(--bg);border-bottom:1px solid var(--line);margin-bottom:-28px}
+.subtabs::-webkit-scrollbar{display:none}
+.subtabs button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--muted);
+  font:inherit;font-size:.88rem;font-weight:550;padding:12px 12px 11px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;cursor:pointer}
+.subtabs button:first-child{padding-left:0}
+.subtabs button:hover{color:var(--text)}
+.subtabs button[aria-selected="true"]{color:var(--text);border-bottom-color:var(--text)}
+
+/* logos */
+.lg{display:inline-block;width:var(--s,24px);height:var(--s,24px);border-radius:calc(var(--s,24px) * .22);vertical-align:middle;flex:none;object-fit:cover;background:var(--raise)}
+
+/* game header */
+.head{display:grid;gap:22px}
+.head .meta{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--muted);font-size:.85rem}
+.head .meta .v0tag{color:var(--text)}
+.match{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.ms{display:flex;align-items:center;gap:14px;min-width:0}
+.ms.home{flex-direction:row-reverse;text-align:right}
+.ms .who{display:grid;gap:2px;min-width:0}
+.ms .code{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;font-stretch:80%;line-height:1;letter-spacing:.01em}
+.ms .nm{color:var(--muted);font-size:.9rem}
+.vsat{color:var(--faint);font-size:.9rem}
+.wp{display:grid;gap:6px}
+.wpbar{display:flex;height:4px;border-radius:2px;overflow:hidden;gap:2px}
+.wpbar span{display:block;height:100%}
+.wpbar .a{background:var(--faint)} .wpbar .h{background:var(--text)}
+.wp .lbl{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:14px 24px;border-top:1px solid var(--line);padding-top:18px;margin:0}
+.facts div{display:grid;gap:2px;min-width:0}
+.facts dt{font-size:.72rem;color:var(--muted)}
+.facts dd{margin:0;font-weight:550}
+.facts .wide{grid-column:1/-1}
+@media (max-width:560px){.match{grid-template-columns:1fr}.ms.home{flex-direction:row;text-align:left}.vsat{display:none}}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border-top:1px solid var(--line-2)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums}
+caption{text-align:left;padding:0 0 12px;font-weight:650;font-size:1rem;caption-side:top}
+caption .lg{margin-right:10px;vertical-align:-6px}
+thead th{font-size:.72rem;font-weight:500;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody th{text-align:left;font-weight:550;padding:9px 12px;vertical-align:top}
+tbody td{padding:9px 12px;vertical-align:middle}
+tbody tr+tr>*{border-top:1px solid var(--line)}
+tbody tr:hover>*{background:var(--surface)}
+th:first-child,td:first-child{padding-left:0}
+.vs-lbl{display:block;font-weight:400;font-size:.76rem;color:var(--muted)}
+.pt td,.pt th{white-space:nowrap}
+.pt .num{text-align:right}
+.pt thead th:not(:first-child){text-align:right}
+.pt thead th.l,.pt td.l{text-align:left}
+.rng{color:var(--faint);font-size:.78rem;margin-left:6px}
+.jn{display:inline-block;width:2.3em;color:var(--faint);font-weight:600;font-stretch:80%}
+.pos{color:var(--muted);font-size:.78rem;margin-left:8px;font-weight:400}
+.q-yes{color:var(--pos);font-weight:650}
+.q-no{color:var(--muted)}
+.small{font-size:.85rem;color:var(--muted)}
+
+/* report pieces shared with the older Bills-Rams page */
+.board{display:grid;gap:18px}
+.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+.team{display:grid;gap:4px;justify-items:start;min-width:0}
+.team.home{justify-items:end;text-align:right}
+.team .tm{display:flex;align-items:center;gap:12px}
+.team.home .tm{flex-direction:row-reverse}
+.team .ab{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;font-stretch:80%;line-height:1}
+.team .nm{font-weight:550}
+.team .rec{color:var(--muted);font-size:.85rem}
+.at{color:var(--faint)}
+.board .facts{display:flex;flex-wrap:wrap}
+.board .facts dl{display:contents}
+.side{white-space:nowrap}
+.side .v{display:inline-block;min-width:4.6em;font-weight:600}
+.pill{display:inline-block;min-width:3.2em;text-align:center;font-size:.74rem;font-weight:650;padding:1px 7px;border-radius:4px;margin-right:10px}
+.t1{color:var(--t1);background:var(--t1bg)} .t2{color:var(--t2);background:var(--t2bg)}
+.t3{color:var(--t3);background:var(--t3bg)} .t4{color:var(--t4);background:var(--t4bg)}
+.bar{display:inline-block;width:72px;height:4px;background:var(--track);border-radius:2px;vertical-align:middle;overflow:hidden}
+.fill{display:block;height:100%}
+.fill.buf{background:var(--buf)} .fill.lar{background:var(--lar)}
+.edge{display:inline-block;font-weight:650;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;border:1px solid currentColor}
+.edge.buf{color:var(--buf)} .edge.lar{color:var(--lar)} .edge.even{color:var(--muted)}
+.tchip{font-weight:750;font-stretch:80%}
+.tchip.buf{color:var(--buf)} .tchip.lar{color:var(--lar)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.82rem;color:var(--muted);align-items:center}
+.legend .pill{margin-right:4px}
+.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px}
+.take{border-top:1px solid var(--line-2);padding-top:12px;min-width:0}
+.take b{display:block;font-weight:650}
+.take p{margin-top:6px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.card header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card h3{font-size:1.05rem}
+.card .pos{font-size:.74rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.line{font-weight:550;font-size:.92rem}
+.vsbox{display:grid;gap:2px;padding:10px 12px;background:var(--bg);border-radius:6px;font-size:.92rem}
+.vsbox .k{font-size:.7rem;color:var(--muted)}
+.verdict{font-weight:650;letter-spacing:.06em;text-transform:uppercase;font-size:.74rem}
+.verdict.big{color:var(--t1)} .verdict.mid{color:var(--t3)} .verdict.low{color:var(--t4)}
+
+/* lineups */
+.lus{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+.lu{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:12px;align-content:start;min-width:0}
+.lu header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.lu h3{font-size:1.05rem}
+.lu .rec{font-size:.85rem;color:var(--muted)} .lu .rec b{color:var(--text)}
+.lu ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+.lu .pp{color:var(--muted);font-size:.84rem}
+.lustats{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin:0;border-top:1px solid var(--line);padding-top:12px}
+.lustats div{display:grid} .lustats dt{font-size:.72rem;color:var(--muted)} .lustats dd{margin:0;font-weight:650}
+.lul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.lul li{display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:center}
+.lul b{font-weight:600}
+.lu.dim{opacity:.8}
+.lu .tag{font-size:.72rem;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:1px 9px;white-space:nowrap}
+.lu .tag.ok{color:var(--pos);border-color:color-mix(in srgb,var(--pos) 45%,transparent)}
+.res.hit{color:var(--pos)} .res.miss{color:var(--neg)}
+.vs-lbl.why{color:var(--text);opacity:.82}
+.retro{border:1px solid var(--line-2);border-radius:8px;padding:12px 14px;color:var(--muted);font-size:.9rem}
+.retro b{color:var(--text)}
+
+.notes{color:var(--faint);font-size:.82rem;display:grid;gap:8px;max-width:78ch;border-top:1px solid var(--line);padding-top:20px}
+.notes a{color:inherit}
+.notes ul{margin:0;padding-left:1.2em}
+@media (max-width:520px){.bar{width:44px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>.board2 td.why{white-space:normal;min-width:300px;max-width:520px;font-size:.84rem;color:var(--muted)}
+.board2 td.why span{display:block}
+.tier{font-size:.78rem;font-weight:600}
+.tier.High{color:var(--pos)} .tier.Med-High{color:var(--t2)} .tier.Medium{color:var(--t3)}
+.tier.Lean,.tier.Coin{color:var(--muted)}
+.ut td,.ut th{white-space:nowrap}
+.adv{font-size:.78rem;color:var(--muted)}
+.adv.o{color:var(--pos)} .adv.d{color:var(--neg)}.gl{display:grid;gap:14px}
+.ents{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:8px}
+.ent{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;display:grid;gap:4px;align-content:start}
+.ent.dim{opacity:.7}
+.ent .eh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ent .eh b{font-size:.95rem}
+.ent .ek,.ent .ef{font-size:.78rem;color:var(--muted)}
+.ent .ev{font-size:1.35rem;font-weight:750;font-stretch:88%;line-height:1.15}
+.ent .ev small{display:block;font-size:.72rem;font-weight:400;color:var(--muted)}
+.ent .ev.up{color:var(--pos)}
+.ent .gs{font-size:.72rem;color:var(--text);border:1px solid var(--line-2);border-radius:999px;padding:0 8px;white-space:nowrap}
+.gp{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--line-2)}
+.gp>li{display:grid;grid-template-columns:22px 20px 1fr auto;gap:4px 10px;align-items:start;padding:10px 0;border-bottom:1px solid var(--line)}
+.gp .no{color:var(--faint);font-size:.82rem;padding-top:2px;text-align:right}
+.gp .img-wrap{padding-top:2px}
+.gp .pp{font-weight:700;font-size:.95rem;text-align:right}
+.gp .pp small{display:block;font-weight:500;font-size:.72rem;color:var(--muted)}
+.gp .vs-lbl{display:block}</style>
+</head>
+<body>
+<main class="wrap">
+<nav class="site" aria-label="Site"><a class="brand" href="../index.html">Matchup Lab</a><div class="tabs"><a href="../index.html" aria-current="page">Home</a><a href="../lineups.html">Lineups</a><a href="../guesser.html">Guesser</a></div></nav>
+<header class="head"><a class="back" href="../index.html">&larr; All games</a>
+<div class="meta"><span>Week 6</span><span>Thu Oct 15, 8:15 PM ET</span></div>
+<div class="match"><div class="ms away"><img class="lg" src="../logos/SEA.png" alt="" width="64" height="64" style="--s:64px" loading="lazy"><div class="who"><span class="code">SEA</span></div></div>
+<span class="vsat">at</span><div class="ms home"><img class="lg" src="../logos/DEN.png" alt="" width="64" height="64" style="--s:64px" loading="lazy"><div class="who"><span class="code">DEN</span></div></div></div>
+<dl class="facts"><div class="wide"><dt>Line</dt><dd>SEA -3 · O/U 40.5 · implied SEA 21.8, DEN 18.8</dd></div>
+<div class="wide"><dt>Injuries</dt><dd>week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game</dd></div></dl></header>
+
+<section class="pane" id="lineups" data-tab="Lineups" aria-labelledby="h-lu"><div><h2 id="h-lu">Lineups</h2>
+<p class="sub">Built the way the Bills-Rams $20 entries were: the top picks by estimate from this game only, one per player,
+both teams (if the top 3 are all one team, the other team's best pick takes the 3rd spot). Entry A is the top 3 as a Flex
+($12 in the Guesser), Entry B the top 4 as a Power ($8). The 5- and 6-pick add the next picks. A lineup's chance multiplies its picks' estimates.</p></div>
+<div class='gl'><div class='ents'><div class='ent'><div class='eh'><b>Entry A</b><span class='gs'>Guesser $12</span></div><span class='ek'>3-pick Flex · Picks 1, 2, 4</span><span class='ev up'>$1.01<small>expected back per $1</small></span><span class='ef'>All hit 21.0%</span></div><div class='ent'><div class='eh'><b>Entry B</b><span class='gs'>Guesser $8</span></div><span class='ek'>4-pick Power · Picks 1-4</span><span class='ev up'>$1.20<small>expected back per $1</small></span><span class='ef'>All hit 12.0% · skip under 8.3x</span></div><div class='ent'><div class='eh'><b>5-pick</b></div><span class='ek'>5-pick Power · Picks 1-5</span><span class='ev up'>$1.37<small>expected back per $1</small></span><span class='ef'>All hit 6.8% · skip under 14.6x</span></div><div class='ent'><div class='eh'><b>6-pick</b></div><span class='ek'>6-pick Power · Picks 1-6</span><span class='ev up'>$1.46<small>expected back per $1</small></span><span class='ef'>All hit 3.9% · skip under 25.7x</span></div></div><ol class='gp'><li><span class='no'>1</span><span class='img-wrap'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"></span><span><b>Bo Nix</b> Less 13.5 Rush Yards<span class='vs-lbl'>High · Less in 4 of last 4 (6, 7, 10, 10)</span></span><span class='pp'>61%</span></li><li><span class='no'>2</span><span class='img-wrap'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"></span><span><b>Marvin Mims Jr.</b> Less 13.5 Receiving Yards<span class='vs-lbl'>High · Less in 3 of last 3 (0, 10, 6)</span><span class='vs-lbl why'>For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)</span><span class='vs-lbl why'>For: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></span><span class='pp'>61%</span></li><li><span class='no'>3</span><span class='img-wrap'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"></span><span><b>Courtland Sutton</b> Less 31.5 Receiving Yards<span class='vs-lbl'>Medium · Less in 3 of last 4 (25, 46, 4, 18)</span><span class='vs-lbl why'>For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)</span><span class='vs-lbl why'>For: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></span><span class='pp'>57%</span></li><li><span class='no'>4</span><span class='img-wrap'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"></span><span><b>Cooper Kupp</b> Less 20.5 Receiving Yards<span class='vs-lbl'>Medium · Less in 3 of last 4 (20, 46, 13, 15)</span><span class='vs-lbl why'>For: DEN allow the 5th fewest receiving yds to WRs (118 a game)</span><span class='vs-lbl why'>For: DEN have the 5th best pass defense (EPA per dropback allowed)</span></span><span class='pp'>57%</span></li><li><span class='no'>5</span><span class='img-wrap'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"></span><span><b>Jaylen Waddle</b> Less 49.5 Receiving Yards<span class='vs-lbl'>Medium · Less in 3 of last 4 (138, 10, 35, 19)</span><span class='vs-lbl why'>For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)</span><span class='vs-lbl why'>For: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></span><span class='pp'>57%</span></li><li><span class='no'>6</span><span class='img-wrap'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"></span><span><b>Sam Darnold</b> Less 218.5 Pass Yards<span class='vs-lbl'>Medium · Less in 3 of last 4 (13, 379, 168, 195)</span><span class='vs-lbl why'>For: DEN pressure QBs on 25% of dropbacks (the 11th most); SEA&#x27;s line allows pressure on 26% (the 3rd most): a hard night to throw</span><span class='vs-lbl why'>For: DEN have the 5th best pass defense (EPA per dropback allowed)</span></span><span class='pp'>57%</span></li></ol></div></section>
+
+<section class="pane" id="props" data-tab="Props board" aria-labelledby="h-pb"><div><h2 id="h-pb">Props board</h2>
+<p class="sub">Every standard PrizePicks line for this game, rated with the original formula: (recent + matchup + market) / 2.
+Recent is his last 4 games at the line pulled toward 50%; matchup is this game's matchups (up to 8 points before halving);
+market is 50% when there is no sportsbook price. High is 60% or more, Med-High 57.5%, Medium 55%, Lean 52.5%.</p></div><div class='tbl-wrap'><table class='pt board2'><thead><tr><th scope='col'>Player</th><th scope='col' class='l'>Prop</th><th scope='col'>Line</th><th scope='col' class='l'>Lean</th><th scope='col' class='l'>Confidence</th><th scope='col' class='l'>Last 4</th><th scope='col' class='l'>Why</th></tr></thead><tbody><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Bo Nix<span class='vs-lbl'>QB</span></th><td class='l'>Rush Yards</td><td class='num'>13.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier High'>High</span><span class='vs-lbl'>61%</span></td><td class='l'>Less in 4 of 4<span class='vs-lbl'>6, 7, 10, 10</span></td><td class='why'><span>No strong matchup signal.</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Marvin Mims Jr.<span class='vs-lbl'>WR</span></th><td class='l'>Receiving Yards</td><td class='num'>13.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier High'>High</span><span class='vs-lbl'>61%</span></td><td class='l'>Less in 3 of 3<span class='vs-lbl'>0, 10, 6</span></td><td class='why'><span>For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)</span><span>For: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Courtland Sutton<span class='vs-lbl'>WR</span></th><td class='l'>Receiving Yards</td><td class='num'>31.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>57%</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>25, 46, 4, 18</span></td><td class='why'><span>For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)</span><span>For: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Cooper Kupp<span class='vs-lbl'>WR</span></th><td class='l'>Receiving Yards</td><td class='num'>20.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>57%</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>20, 46, 13, 15</span></td><td class='why'><span>For: DEN allow the 5th fewest receiving yds to WRs (118 a game)</span><span>For: DEN have the 5th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Jaylen Waddle<span class='vs-lbl'>WR</span></th><td class='l'>Receiving Yards</td><td class='num'>49.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>57%</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>138, 10, 35, 19</span></td><td class='why'><span>For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)</span><span>For: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Sam Darnold<span class='vs-lbl'>QB</span></th><td class='l'>Pass Yards</td><td class='num'>218.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>57%</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>13, 379, 168, 195</span></td><td class='why'><span>For: DEN pressure QBs on 25% of dropbacks (the 11th most); SEA&#x27;s line allows pressure on 26% (the 3rd most): a hard night to throw</span><span>For: DEN have the 5th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Sam Darnold<span class='vs-lbl'>QB</span></th><td class='l'>Pass+Rush Yds</td><td class='num'>223.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>57%</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>13, 384, 174, 200</span></td><td class='why'><span>For: DEN pressure QBs on 25% of dropbacks (the 11th most); SEA&#x27;s line allows pressure on 26% (the 3rd most): a hard night to throw</span><span>For: DEN have the 5th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Evan Engram<span class='vs-lbl'>TE</span></th><td class='l'>Receiving Yards</td><td class='num'>21.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>57%</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>17, 0, 6, 55</span></td><td class='why'><span>For: SEA allow the 2nd fewest receiving yds to TEs (28 a game)</span><span>For: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Sam Darnold<span class='vs-lbl'>QB</span></th><td class='l'>Rush Yards</td><td class='num'>4.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>56%</span></td><td class='l'>More in 3 of 4<span class='vs-lbl'>0, 5, 6, 5</span></td><td class='why'><span>For: DEN pressure QBs on 25% of dropbacks (the 11th most); SEA&#x27;s line allows pressure on 26% (the 3rd most): more scrambles</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> J.K. Dobbins<span class='vs-lbl'>RB</span></th><td class='l'>Receiving Yards</td><td class='num'>6.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>56%</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>0, 4, 12, 6</span></td><td class='why'><span>For: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Sam Darnold<span class='vs-lbl'>QB</span></th><td class='l'>Pass Attempts</td><td class='num'>29.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>56%</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>2, 45, 22, 29</span></td><td class='why'><span>No strong matchup signal.</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Sam Darnold<span class='vs-lbl'>QB</span></th><td class='l'>Rush Attempts</td><td class='num'>2.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>56%</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>0, 1, 3, 1</span></td><td class='why'><span>No strong matchup signal.</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Bo Nix<span class='vs-lbl'>QB</span></th><td class='l'>Pass Attempts</td><td class='num'>34.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>55%</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>31, 34, 42, 27</span></td><td class='why'><span>No strong matchup signal.</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> RJ Harvey<span class='vs-lbl'>RB</span></th><td class='l'>Receptions</td><td class='num'>3.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>55%</span></td><td class='l'>More in 3 of 4<span class='vs-lbl'>4, 6, 10, 0</span></td><td class='why'><span>Against: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> RJ Harvey<span class='vs-lbl'>RB</span></th><td class='l'>Rush+Rec Yds</td><td class='num'>39.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>55%</span></td><td class='l'>More in 3 of 4<span class='vs-lbl'>41, 47, 93, 7</span></td><td class='why'><span>Against: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> RJ Harvey<span class='vs-lbl'>RB</span></th><td class='l'>Receiving Yards</td><td class='num'>21.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>55%</span></td><td class='l'>More in 3 of 4<span class='vs-lbl'>23, 41, 68, 0</span></td><td class='why'><span>Against: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> George Holani<span class='vs-lbl'>RB</span></th><td class='l'>Rush Yards</td><td class='num'>14.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Medium'>Medium</span><span class='vs-lbl'>55%</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>13, 10, 18, 7</span></td><td class='why'><span>No strong matchup signal.</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Jaxon Smith-Njigba<span class='vs-lbl'>WR</span></th><td class='l'>Receiving Yards</td><td class='num'>89.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Lean'>Lean</span><span class='vs-lbl'>54%</span></td><td class='l'>More in 3 of 4<span class='vs-lbl'>155, 128, 76, 102</span></td><td class='why'><span>Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)</span><span>Against: DEN have the 5th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Tory Horton<span class='vs-lbl'>WR</span></th><td class='l'>Receiving Yards</td><td class='num'>5.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>52%</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>0, 48, 6, 0</span></td><td class='why'><span>For: DEN allow the 5th fewest receiving yds to WRs (118 a game)</span><span>For: DEN pressure QBs on 25% of dropbacks (the 11th most); SEA&#x27;s line allows pressure on 26% (the 3rd most): less time for deep throws (his targets travel 12 yds)</span><span>For: DEN have the 5th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Troy Franklin<span class='vs-lbl'>WR</span></th><td class='l'>Receiving Yards</td><td class='num'>17.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>52%</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>27, 21, 0, 16</span></td><td class='why'><span>For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)</span><span>For: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Jaxon Smith-Njigba<span class='vs-lbl'>WR</span></th><td class='l'>Receptions</td><td class='num'>6.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>9, 10, 5, 5</span></td><td class='why'><span>For: DEN allow the 5th fewest receiving yds to WRs (118 a game)</span><span>For: DEN have the 5th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Rashid Shaheed<span class='vs-lbl'>WR</span></th><td class='l'>Receiving Yards</td><td class='num'>22.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>35, 14, 20, 23</span></td><td class='why'><span>For: DEN allow the 5th fewest receiving yds to WRs (118 a game)</span><span>For: DEN have the 5th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Jaylen Waddle<span class='vs-lbl'>WR</span></th><td class='l'>Receptions</td><td class='num'>4.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>8, 2, 5, 2</span></td><td class='why'><span>For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)</span><span>For: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> RJ Harvey<span class='vs-lbl'>RB</span></th><td class='l'>Rush Yards</td><td class='num'>15.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>18, 6, 25, 7</span></td><td class='why'><span>For: SEA have the 1st best run defense (EPA per rush allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> J.K. Dobbins<span class='vs-lbl'>RB</span></th><td class='l'>Rush Attempts</td><td class='num'>13.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>10, 17, 11, 18</span></td><td class='why'><span>For: SEA have the 1st best run defense (EPA per rush allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> J.K. Dobbins<span class='vs-lbl'>RB</span></th><td class='l'>Rush Yards</td><td class='num'>47.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>36, 49, 40, 68</span></td><td class='why'><span>For: SEA have the 1st best run defense (EPA per rush allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Bo Nix<span class='vs-lbl'>QB</span></th><td class='l'>Pass+Rush Yds</td><td class='num'>223.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>294, 193, 224, 133</span></td><td class='why'><span>For: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Emanuel Wilson<span class='vs-lbl'>RB</span></th><td class='l'>Receiving Yards</td><td class='num'>9.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>0, 0, 39, 11</span></td><td class='why'><span>For: DEN allow the 4th most receiving yds to RBs (40 a game)</span><span>For: DEN pressure QBs on 25% of dropbacks (the 11th most); SEA&#x27;s line allows pressure on 26% (the 3rd most): more quick checkdowns</span><span>Against: DEN have the 5th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> George Holani<span class='vs-lbl'>RB</span></th><td class='l'>Receiving Yards</td><td class='num'>9.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>2, 48, 2, 24</span></td><td class='why'><span>For: DEN allow the 4th most receiving yds to RBs (40 a game)</span><span>For: DEN pressure QBs on 25% of dropbacks (the 11th most); SEA&#x27;s line allows pressure on 26% (the 3rd most): more quick checkdowns</span><span>Against: DEN have the 5th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Emanuel Wilson<span class='vs-lbl'>RB</span></th><td class='l'>Rush+Rec Yds</td><td class='num'>80.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>92, 14, 120, 72</span></td><td class='why'><span>For: DEN allow the 4th most receiving yds to RBs (40 a game)</span><span>For: DEN pressure QBs on 25% of dropbacks (the 11th most); SEA&#x27;s line allows pressure on 26% (the 3rd most): more quick checkdowns</span><span>Against: DEN have the 5th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> George Holani<span class='vs-lbl'>RB</span></th><td class='l'>Rush+Rec Yds</td><td class='num'>26.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>15, 58, 20, 31</span></td><td class='why'><span>For: DEN allow the 4th most receiving yds to RBs (40 a game)</span><span>For: DEN pressure QBs on 25% of dropbacks (the 11th most); SEA&#x27;s line allows pressure on 26% (the 3rd most): more quick checkdowns</span><span>Against: DEN have the 5th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Emanuel Wilson<span class='vs-lbl'>RB</span></th><td class='l'>Receptions</td><td class='num'>1.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>0, 0, 3, 2</span></td><td class='why'><span>For: DEN allow the 4th most receiving yds to RBs (40 a game)</span><span>For: DEN pressure QBs on 25% of dropbacks (the 11th most); SEA&#x27;s line allows pressure on 26% (the 3rd most): more quick checkdowns</span><span>Against: DEN have the 5th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/DEN.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Bo Nix<span class='vs-lbl'>QB</span></th><td class='l'>Pass Yards</td><td class='num'>202.5</td><td class='l'><b>Less</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>51%</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>288, 186, 214, 123</span></td><td class='why'><span>For: SEA have the 3rd best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> AJ Barner<span class='vs-lbl'>TE</span></th><td class='l'>Receiving Yards</td><td class='num'>19.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>50%</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>8, 69, 12, 20</span></td><td class='why'><span>For: DEN pressure QBs on 25% of dropbacks (the 11th most); SEA&#x27;s line allows pressure on 26% (the 3rd most): more quick checkdowns</span><span>Against: DEN have the 5th best pass defense (EPA per dropback allowed)</span><span>For: DEN allow the 8th most receiving yds to TEs (63 a game)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Emanuel Wilson<span class='vs-lbl'>RB</span></th><td class='l'>Rush Yards</td><td class='num'>66.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>50%</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>92, 14, 81, 61</span></td><td class='why'><span>No strong matchup signal.</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/SEA.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Emanuel Wilson<span class='vs-lbl'>RB</span></th><td class='l'>Rush+Rec TDs</td><td class='num'>0.5</td><td class='l'><b>More</b></td><td class='l'><span class='tier Coin'>Coin flip</span><span class='vs-lbl'>49%</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>-, -, TD, TD</span></td><td class='why'><span>Against: DEN allow touchdowns on 49% of red-zone trips (the 4th fewest)</span></td></tr></tbody></table></div></section>
+
+<section class="pane" id="units" data-tab="Unit vs unit" aria-labelledby="h-uu"><div><h2 id="h-uu">Unit vs unit</h2>
+<p class="sub">Each offense against the defense it faces tonight, recency weighted (this season counts most).</p></div>
+<div class='legend'><span><span class='pill t1'>1-8</span>Top quarter</span><span><span class='pill t2'>9-16</span>Above avg</span><span><span class='pill t3'>17-24</span>Below avg</span><span><span class='pill t4'>25-32</span>Bottom quarter</span><span>Ranks out of 32; 1 = best for that unit. Pressure: the line's rank is pressure allowed, the defense's is pressure created.</span></div><div class='tbl-wrap'><table class='pt ut'><caption><img class="lg" src="../logos/SEA.png" alt="" width="22" height="22" style="--s:22px" loading="lazy"> SEA offense vs <img class="lg" src="../logos/DEN.png" alt="" width="22" height="22" style="--s:22px" loading="lazy"> DEN defense</caption><thead><tr><th scope='col'>Stat</th><th scope='col' class='l'>SEA offense</th><th scope='col' class='l'>DEN defense</th><th scope='col' class='l'>Edge</th></tr></thead><tbody><tr><th scope='row'>EPA per dropback</th><td class='l'><span class='pill t3'>17</span>+0.037</td><td class='l'><span class='pill t1'>5</span>-0.052</td><td class='l'><span class='adv d'>Defense</span></td></tr><tr><th scope='row'>EPA per rush</th><td class='l'><span class='pill t4'>32</span>-0.252</td><td class='l'><span class='pill t3'>20</span>-0.048</td><td class='l'><span class='adv d'>Defense</span></td></tr><tr><th scope='row'>Explosive pass rate</th><td class='l'><span class='pill t1'>8</span>9%</td><td class='l'><span class='pill t1'>8</span>7%</td><td class='l'><span class='adv'>Even</span></td></tr><tr><th scope='row'>Pressure rate (PFR)</th><td class='l'><span class='pill t4'>30</span>26%</td><td class='l'><span class='pill t2'>11</span>25%</td><td class='l'><span class='adv d'>Defense</span></td></tr><tr><th scope='row'>Red-zone TD rate</th><td class='l'><span class='pill t3'>17</span>56%</td><td class='l'><span class='pill t1'>4</span>49%</td><td class='l'><span class='adv d'>Defense</span></td></tr></tbody></table></div><div class='tbl-wrap'><table class='pt ut'><caption><img class="lg" src="../logos/DEN.png" alt="" width="22" height="22" style="--s:22px" loading="lazy"> DEN offense vs <img class="lg" src="../logos/SEA.png" alt="" width="22" height="22" style="--s:22px" loading="lazy"> SEA defense</caption><thead><tr><th scope='col'>Stat</th><th scope='col' class='l'>DEN offense</th><th scope='col' class='l'>SEA defense</th><th scope='col' class='l'>Edge</th></tr></thead><tbody><tr><th scope='row'>EPA per dropback</th><td class='l'><span class='pill t3'>22</span>-0.019</td><td class='l'><span class='pill t1'>3</span>-0.118</td><td class='l'><span class='adv d'>Defense</span></td></tr><tr><th scope='row'>EPA per rush</th><td class='l'><span class='pill t2'>16</span>-0.050</td><td class='l'><span class='pill t1'>1</span>-0.248</td><td class='l'><span class='adv d'>Defense</span></td></tr><tr><th scope='row'>Explosive pass rate</th><td class='l'><span class='pill t4'>25</span>7%</td><td class='l'><span class='pill t1'>1</span>6%</td><td class='l'><span class='adv d'>Defense</span></td></tr><tr><th scope='row'>Pressure rate (PFR)</th><td class='l'><span class='pill t2'>13</span>22%</td><td class='l'><span class='pill t1'>3</span>26%</td><td class='l'><span class='adv d'>Defense</span></td></tr><tr><th scope='row'>Red-zone TD rate</th><td class='l'><span class='pill t3'>21</span>54%</td><td class='l'><span class='pill t4'>27</span>65%</td><td class='l'><span class='adv o'>Offense</span></td></tr></tbody></table></div></section>
+
+<footer class="notes"><p>Method: nfl_lab/guesser.py. Data: nflverse play-by-play, snap counts, rosters and injuries
+(CC-BY 4.0); pressure rates from PFR via nflverse; lines from the PrizePicks board saved before kickoff. Only stats from before
+kickoff are used. Estimates with real uncertainty, not betting advice.</p></footer>
+</main>
+<script>
+(function(){
+  var panes=[].slice.call(document.querySelectorAll('section.pane'));
+  if(panes.length<2) return;
+  var bar=document.createElement('div');
+  bar.className='subtabs'; bar.setAttribute('role','tablist'); bar.setAttribute('aria-label','Sections');
+  panes[0].parentNode.insertBefore(bar,panes[0]);
+  var tabs=panes.map(function(p,i){
+    var b=document.createElement('button');
+    b.type='button'; b.id='tab-'+p.id; b.setAttribute('role','tab'); b.setAttribute('aria-controls',p.id);
+    if(p.dataset.logo){var im=document.createElement('img'); im.src=p.dataset.logo; im.alt=''; im.className='lg'; im.style.setProperty('--s','18px'); b.appendChild(im);}
+    var h=p.querySelector('h2');
+    b.appendChild(document.createTextNode(p.dataset.tab||(h?h.textContent:'Section '+(i+1))));
+    p.setAttribute('role','tabpanel'); p.setAttribute('aria-labelledby',b.id);
+    b.addEventListener('click',function(){show(i,true);});
+    b.addEventListener('keydown',function(ev){
+      var n=panes.length, j=ev.key==='ArrowRight'?(i+1)%n:ev.key==='ArrowLeft'?(i+n-1)%n:ev.key==='Home'?0:ev.key==='End'?n-1:-1;
+      if(j>=0){ev.preventDefault(); show(j,true); tabs[j].focus();}
+    });
+    bar.appendChild(b); return b;
+  });
+  function show(i,user){
+    panes.forEach(function(p,j){p.hidden=j!==i; tabs[j].setAttribute('aria-selected',j===i?'true':'false'); tabs[j].tabIndex=j===i?0:-1;});
+    if(!user) return;
+    try{history.replaceState(null,'','#'+panes[i].id);}catch(e){}
+    try{tabs[i].scrollIntoView({block:'nearest',inline:'nearest'});}catch(e){}
+    var top=bar.getBoundingClientRect().top;
+    if(top<=1){window.scrollTo(0,window.scrollY+panes[i].getBoundingClientRect().top-bar.offsetHeight-12);}
+  }
+  function fromHash(){var want=(location.hash||'').slice(1), k=-1; panes.forEach(function(p,j){if(p.id===want) k=j;}); return k;}
+  window.addEventListener('hashchange',function(){var k=fromHash(); if(k>=0) show(k,false);});
+  show(Math.max(0,fromHash()),false);
+})();
+</script>
+</body>
+</html>

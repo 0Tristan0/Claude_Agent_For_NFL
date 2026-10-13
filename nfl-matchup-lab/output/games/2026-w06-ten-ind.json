@@ -1,0 +1,405 @@
+{
+ "game_id": "2026_06_TEN_IND",
+ "season": 2026,
+ "week": 6,
+ "label": "TEN at IND",
+ "away": "TEN",
+ "home": "IND",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": -7.0,
+ "total": 44.5,
+ "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
+ "built_at": "2026-10-13 16:01:46.807505+00:00",
+ "units": [
+  {
+   "offense": "TEN",
+   "defense": "IND",
+   "stat": "EPA per dropback",
+   "off_value": -0.2191644394938501,
+   "def_value": 0.13962458147493212,
+   "off_rank": 32,
+   "def_rank": 28
+  },
+  {
+   "offense": "TEN",
+   "defense": "IND",
+   "stat": "EPA per rush",
+   "off_value": -0.14106498786051763,
+   "def_value": 0.0006947299747434294,
+   "off_rank": 24,
+   "def_rank": 26
+  },
+  {
+   "offense": "TEN",
+   "defense": "IND",
+   "stat": "Explosive pass rate",
+   "off_value": 0.08158789696355098,
+   "def_value": 0.0957615001164634,
+   "off_rank": 16,
+   "def_rank": 26
+  },
+  {
+   "offense": "TEN",
+   "defense": "IND",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.2464945314787752,
+   "def_value": 0.1988558770326807,
+   "off_rank": 26,
+   "def_rank": 26
+  },
+  {
+   "offense": "TEN",
+   "defense": "IND",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5072804181228404,
+   "def_value": 0.5740849504056986,
+   "off_rank": 27,
+   "def_rank": 16
+  },
+  {
+   "offense": "IND",
+   "defense": "TEN",
+   "stat": "EPA per dropback",
+   "off_value": -0.026198167009652194,
+   "def_value": 0.24970871247064708,
+   "off_rank": 23,
+   "def_rank": 30
+  },
+  {
+   "offense": "IND",
+   "defense": "TEN",
+   "stat": "EPA per rush",
+   "off_value": 0.03744204379711114,
+   "def_value": -0.060314017479282,
+   "off_rank": 6,
+   "def_rank": 17
+  },
+  {
+   "offense": "IND",
+   "defense": "TEN",
+   "stat": "Explosive pass rate",
+   "off_value": 0.07876590145880537,
+   "def_value": 0.1116936574435106,
+   "off_rank": 18,
+   "def_rank": 31
+  },
+  {
+   "offense": "IND",
+   "defense": "TEN",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.19694900170175797,
+   "def_value": 0.21989545447150669,
+   "off_rank": 5,
+   "def_rank": 19
+  },
+  {
+   "offense": "IND",
+   "defense": "TEN",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.6428960987233573,
+   "def_value": 0.6473142512408074,
+   "off_rank": 7,
+   "def_rank": 26
+  }
+ ],
+ "picks": [
+  {
+   "game_id": "2026_06_TEN_IND",
+   "player_id": "00-0035710",
+   "player": "Daniel Jones",
+   "team": "IND",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 7.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    10.0,
+    5.0,
+    2.0,
+    4.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5599305556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00875,
+   "tier": "Medium",
+   "reasons": [
+    "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): fewer reasons to run"
+   ]
+  },
+  {
+   "game_id": "2026_06_TEN_IND",
+   "player_id": "00-0040676",
+   "player": "Cam Ward",
+   "team": "TEN",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 11.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    7.0,
+    2.0,
+    27.0,
+    2.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5555555556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "tier": "Medium",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_TEN_IND",
+   "player_id": "00-0035261",
+   "player": "Tony Pollard",
+   "team": "TEN",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 49.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    64.0,
+    74.0,
+    48.0,
+    52.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5547586806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00159375,
+   "tier": "Medium",
+   "reasons": [
+    "Against: TEN underdog by 7: may abandon the run if behind",
+    "For: IND have the 7th worst run defense (EPA per rush allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_TEN_IND",
+   "player_id": "00-0036223",
+   "player": "Jonathan Taylor",
+   "team": "IND",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 92.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    92.0,
+    68.0,
+    95.0,
+    45.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5500711806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01096875,
+   "tier": "Medium",
+   "reasons": [
+    "Against: IND favored by 7: more carries to close it out"
+   ]
+  },
+  {
+   "game_id": "2026_06_TEN_IND",
+   "player_id": "00-0040676",
+   "player": "Cam Ward",
+   "team": "TEN",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 185.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    183.0,
+    181.0,
+    222.0,
+    170.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "p_model": 0.5449149306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.02128125,
+   "tier": "Lean",
+   "reasons": [
+    "Against: IND have the 5th worst pass defense (EPA per dropback allowed)",
+    "Against: TEN underdog by 7: likely throwing to catch up"
+   ]
+  },
+  {
+   "game_id": "2026_06_TEN_IND",
+   "player_id": "00-0035710",
+   "player": "Daniel Jones",
+   "team": "IND",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 211.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    210.0,
+    235.0,
+    143.0,
+    267.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.505453125,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01090625,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: TEN have the 3rd worst pass defense (EPA per dropback allowed)",
+    "Against: IND favored by 7: may lean on the run late",
+    "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): a clean pocket"
+   ]
+  }
+ ],
+ "lineups": {
+  "3": [
+   {
+    "n": 3,
+    "entry": "A",
+    "recommended": false,
+    "basis": "Guesser method",
+    "play_as": "Flex",
+    "game": "TEN at IND",
+    "p_all": 0.17257018677929956,
+    "p_independent": 0.17257018677929956,
+    "power_ev": 0.8628509338964978,
+    "flex_ev": 0.9035173873838573,
+    "best_ev": 0.9035173873838573,
+    "min_power_mult": 5.7947436846603315,
+    "legs": [
+     {
+      "player": "Daniel Jones",
+      "player_id": "00-0035710",
+      "team": "IND",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 7.5,
+      "p_model": 0.5599305555555556,
+      "game_id": "2026_06_TEN_IND",
+      "note": "Medium \u00b7 Less in 3 of last 4 (10, 5, 2, 4)",
+      "reasons": [
+       "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): fewer reasons to run"
+      ]
+     },
+     {
+      "player": "Cam Ward",
+      "player_id": "00-0040676",
+      "team": "TEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 11.5,
+      "p_model": 0.5555555555555556,
+      "game_id": "2026_06_TEN_IND",
+      "note": "Medium \u00b7 Less in 3 of last 4 (7, 2, 27, 2)",
+      "reasons": []
+     },
+     {
+      "player": "Tony Pollard",
+      "player_id": "00-0035261",
+      "team": "TEN",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 49.5,
+      "p_model": 0.5547586805555556,
+      "game_id": "2026_06_TEN_IND",
+      "note": "Medium \u00b7 More in 3 of last 4 (64, 74, 48, 52)",
+      "reasons": [
+       "Against: TEN underdog by 7: may abandon the run if behind",
+       "For: IND have the 7th worst run defense (EPA per rush allowed)"
+      ]
+     }
+    ]
+   }
+  ],
+  "4": [
+   {
+    "n": 4,
+    "entry": "B",
+    "recommended": false,
+    "basis": "Guesser method",
+    "play_as": "Power",
+    "game": "TEN at IND",
+    "p_all": 0.09492588637038205,
+    "p_independent": 0.09492588637038205,
+    "power_ev": 0.9492588637038204,
+    "flex_ev": 0.9311946403821066,
+    "best_ev": 0.9492588637038204,
+    "min_power_mult": 10.534534237565058,
+    "legs": [
+     {
+      "player": "Daniel Jones",
+      "player_id": "00-0035710",
+      "team": "IND",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 7.5,
+      "p_model": 0.5599305555555556,
+      "game_id": "2026_06_TEN_IND",
+      "note": "Medium \u00b7 Less in 3 of last 4 (10, 5, 2, 4)",
+      "reasons": [
+       "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): fewer reasons to run"
+      ]
+     },
+     {
+      "player": "Cam Ward",
+      "player_id": "00-0040676",
+      "team": "TEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 11.5,
+      "p_model": 0.5555555555555556,
+      "game_id": "2026_06_TEN_IND",
+      "note": "Medium \u00b7 Less in 3 of last 4 (7, 2, 27, 2)",
+      "reasons": []
+     },
+     {
+      "player": "Tony Pollard",
+      "player_id": "00-0035261",
+      "team": "TEN",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 49.5,
+      "p_model": 0.5547586805555556,
+      "game_id": "2026_06_TEN_IND",
+      "note": "Medium \u00b7 More in 3 of last 4 (64, 74, 48, 52)",
+      "reasons": [
+       "Against: TEN underdog by 7: may abandon the run if behind",
+       "For: IND have the 7th worst run defense (EPA per rush allowed)"
+      ]
+     },
+     {
+      "player": "Jonathan Taylor",
+      "player_id": "00-0036223",
+      "team": "IND",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 92.5,
+      "p_model": 0.5500711805555556,
+      "game_id": "2026_06_TEN_IND",
+      "note": "Medium \u00b7 Less in 3 of last 4 (92, 68, 95, 45)",
+      "reasons": [
+       "Against: IND favored by 7: more carries to close it out"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}
