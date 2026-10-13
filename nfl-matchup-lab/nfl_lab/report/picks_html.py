@@ -102,19 +102,27 @@ def lineup_cards(best_json: dict, prefix: str = "../", no_lines_msg: str = "") -
         for L in best_json[n][:1]:
             legs = "".join(
                 f"<li>{theme.logo(x['team'], 18, prefix)}<span><b>{e(x['player'])}</b> {SIDE[x['side']]} {x['line']:g} "
-                f"{e(stat_name(x['stat']))}</span><span class='pp'>{x['p_model']:.0%}</span></li>" for x in L["legs"])
+                f"{e(stat_name(x['stat']))}" + (f"<span class='vs-lbl'>{e(x['note'])}</span>" if x.get("note") else "")
+                + f"</span><span class='pp'>{x['p_model']:.0%}</span></li>" for x in L["legs"])
+            old = L.get("basis") == "old model"
+            hit_rows = (f"<div><dt>All hit (legs multiplied)</dt><dd>{L['p_all']:.1%}</dd></div>" if old else
+                        f"<div><dt>All hit (simulated)</dt><dd>{L['p_all']:.1%}</dd></div>"
+                        f"<div><dt>If legs were independent</dt><dd>{L['p_independent']:.1%}</dd></div>")
             tag = ("<span class='tag ok'>Recommended</span>" if L["recommended"] else
                    "<span class='tag'>Not recommended</span>")
+            if L.get("basis") == "old model":
+                tag = ("<span class='tag ok'>Above break-even</span>" if L["recommended"] else
+                       "<span class='tag'>Below break-even</span>")
             flex = (f"<div><dt>Flex return per $1</dt><dd>${L['flex_ev']:.2f}</dd></div>" if L["flex_ev"] is not None else "")
+            who = "old model" if old else "model"
             why = ("" if L["recommended"] else
-                   f"<p class='small'>Best the model can build from these lines, but it expects ${L['best_ev']:.2f} back "
+                   f"<p class='small'>Best the {who} can build from these lines, but it expects ${L['best_ev']:.2f} back "
                    "per $1, which is below break-even.</p>")
             skip = (f"<div><dt>Skip if the app pays under</dt><dd>{L['min_power_mult']:.1f}x</dd></div>"
                     if L["recommended"] else "")
             cards.append(f"""<article class="lu{'' if L['recommended'] else ' dim'}"><header><h3>{n}-pick {L['play_as']}</h3>{tag}</header>
 <ol class="lul">{legs}</ol><dl class="lustats">
-<div><dt>All hit (simulated)</dt><dd>{L['p_all']:.1%}</dd></div>
-<div><dt>If legs were independent</dt><dd>{L['p_independent']:.1%}</dd></div>
+{hit_rows}
 <div><dt>Power return per $1</dt><dd>${(L['power_ev'] or 0):.2f}</dd></div>{flex}{skip}
 </dl>{why}<p class='small'>Basis: {e(L['basis'])}</p></article>""")
     if not cards:

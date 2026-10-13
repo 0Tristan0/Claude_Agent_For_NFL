@@ -177,7 +177,8 @@ th:first-child,td:first-child{padding-left:0}
 @media (max-width:520px){.bar{width:44px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-<style>.th2{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+<style>.oldh{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.th2{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .th2 .muted{font-weight:400;font-size:.85rem;margin-left:4px}</style>
 </head>
 <body>
@@ -195,7 +196,7 @@ th:first-child,td:first-child{padding-left:0}
 <dl class="facts"><div><dt>Spread</dt><dd>TB +3</dd></div><div><dt>Total</dt><dd>40.5</dd></div>
 <div><dt>Sim median score</dt><dd>PIT 21, TB 19</dd></div>
 <div><dt>Plays / pass rate</dt><dd>60 / 65% &middot; 61 / 61%</dd></div>
-<div><dt>Simulations</dt><dd>20,000</dd></div><div><dt>Run</dt><dd>Oct 12, 9:24 PM ET</dd></div>
+<div><dt>Simulations</dt><dd>20,000</dd></div><div><dt>Run</dt><dd>Oct 12, 11:27 PM ET</dd></div>
 <div class="wide"><dt>Injuries</dt><dd>week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game; players with PrizePicks lines counted as active</dd></div>
 <div class="wide"><dt>Line source</dt><dd>Spread and total: latest market line</dd></div></dl></header>
 
@@ -216,10 +217,19 @@ games, so picks that move together (a QB and his receiver) are counted together.
 skip a lineup if the app shows less than the listed multiplier. The Lineups tab at the top mixes games across the week.</p></div>
 <div class='lus'><article class="lu dim"><header><h3>2-pick Power</h3><span class='tag'>Not recommended</span></header>
 <ol class="lul"><li><img class="lg" src="../logos/PIT.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>Aaron Rodgers</b> More 0.5 Rush Yards</span><span class='pp'>57%</span></li><li><img class="lg" src="../logos/TB.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>Bucky Irving</b> Less 63.5 Rush Yards</span><span class='pp'>52%</span></li></ol><dl class="lustats">
-<div><dt>All hit (simulated)</dt><dd>28.9%</dd></div>
-<div><dt>If legs were independent</dt><dd>29.5%</dd></div>
+<div><dt>All hit (simulated)</dt><dd>28.9%</dd></div><div><dt>If legs were independent</dt><dd>29.5%</dd></div>
 <div><dt>Power return per $1</dt><dd>$0.87</dd></div>
-</dl><p class='small'>Best the model can build from these lines, but it expects $0.87 back per $1, which is below break-even.</p><p class='small'>Basis: model only</p></article></div></section>
+</dl><p class='small'>Best the model can build from these lines, but it expects $0.87 back per $1, which is below break-even.</p><p class='small'>Basis: model only</p></article></div>
+<h3 class="oldh">Old model</h3>
+<p class="sub">The method from the original Bills-Rams report: each player's hit rate at the line in his last 4 games, pulled
+toward 50%, plus a 3-point nudge when the opponent is among the 8 defenses allowing the most or least of that stat,
+averaged with the market (50% for a PrizePicks line without a sportsbook price). Legs are multiplied as if independent.
+Shown for comparison; it was not checked against past seasons.</p>
+<div class='lus'><article class="lu dim"><header><h3>2-pick Power</h3><span class='tag'>Below break-even</span></header>
+<ol class="lul"><li><img class="lg" src="../logos/PIT.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>Aaron Rodgers</b> More 223.5 Pass Yards<span class='vs-lbl'>More in 3 of last 4 games</span></span><span class='pp'>56%</span></li><li><img class="lg" src="../logos/TB.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>Bucky Irving</b> More 63.5 Rush Yards<span class='vs-lbl'>More in 2 of last 4 games</span></span><span class='pp'>50%</span></li></ol><dl class="lustats">
+<div><dt>All hit (legs multiplied)</dt><dd>27.8%</dd></div>
+<div><dt>Power return per $1</dt><dd>$0.83</dd></div>
+</dl><p class='small'>Best the old model can build from these lines, but it expects $0.83 back per $1, which is below break-even.</p><p class='small'>Basis: old model</p></article></div></section>
 <section class="pane" id="model" data-tab="Model check" aria-labelledby="h-trust"><div><h2 id="h-trust">How much to trust this</h2>
 <p class="sub">Checked on every 2024 regular-season game from week 3 (240 games, 16,278 graded props), with the
 model fitted on 2021 to 2023 only. Lines in that check are stand-ins (each player's recent median), not PrizePicks lines, so real hit

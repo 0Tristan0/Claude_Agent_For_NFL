@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 6,
- "built_at": "2026-10-13 01:24:51.866819+00:00",
+ "built_at": "2026-10-13 03:27:41.911799+00:00",
  "games": {
   "2026_06_SEA_DEN": {
    "slug": "2026-w06-sea-den",
@@ -671,6 +671,288 @@
       "line": 7.5,
       "p_model": 0.5953450307088066,
       "game_id": "2026_06_LAC_KC"
+     }
+    ]
+   }
+  ]
+ },
+ "old_best": {
+  "2": [
+   {
+    "n": 2,
+    "recommended": true,
+    "basis": "old model",
+    "play_as": "Power",
+    "p_all": 0.39201512345679007,
+    "p_independent": 0.39201512345679007,
+    "power_ev": 1.1760453703703702,
+    "flex_ev": null,
+    "best_ev": 1.1760453703703702,
+    "min_power_mult": 2.5509219929629197,
+    "legs": [
+     {
+      "player": "Bhayshul Tuten",
+      "team": "JAX",
+      "stat": "receptions",
+      "side": "over",
+      "line": 1.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "More in 4 of last 4 games; HOU D allows the most of this (rank 4)"
+     },
+     {
+      "player": "Bryce Young",
+      "team": "CAR",
+      "stat": "pass_att",
+      "side": "over",
+      "line": 33.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "More in 4 of last 4 games; PHI D allows the most of this (rank 7)"
+     }
+    ]
+   }
+  ],
+  "3": [
+   {
+    "n": 3,
+    "recommended": true,
+    "basis": "old model",
+    "play_as": "Power",
+    "p_all": 0.2454450245198902,
+    "p_independent": 0.2454450245198902,
+    "power_ev": 1.227225122599451,
+    "flex_ev": 1.1018891761831275,
+    "best_ev": 1.227225122599451,
+    "min_power_mult": 4.07423210943501,
+    "legs": [
+     {
+      "player": "Bhayshul Tuten",
+      "team": "JAX",
+      "stat": "receptions",
+      "side": "over",
+      "line": 1.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "More in 4 of last 4 games; HOU D allows the most of this (rank 4)"
+     },
+     {
+      "player": "Bryce Young",
+      "team": "CAR",
+      "stat": "pass_att",
+      "side": "over",
+      "line": 33.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "More in 4 of last 4 games; PHI D allows the most of this (rank 7)"
+     },
+     {
+      "player": "Kirk Cousins",
+      "team": "LV",
+      "stat": "pass_yds",
+      "side": "over",
+      "line": 237.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_BUF_LV",
+      "note": "More in 4 of last 4 games; BUF D allows the most of this (rank 3)"
+     }
+    ]
+   }
+  ],
+  "4": [
+   {
+    "n": 4,
+    "recommended": true,
+    "basis": "old model",
+    "play_as": "Power",
+    "p_all": 0.14999418165104403,
+    "p_independent": 0.14999418165104403,
+    "power_ev": 1.4999418165104403,
+    "flex_ev": 1.296214944634964,
+    "best_ev": 1.4999418165104403,
+    "min_power_mult": 6.666925269984561,
+    "legs": [
+     {
+      "player": "Bhayshul Tuten",
+      "team": "JAX",
+      "stat": "receptions",
+      "side": "over",
+      "line": 1.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "More in 4 of last 4 games; HOU D allows the most of this (rank 4)"
+     },
+     {
+      "player": "Bryce Young",
+      "team": "CAR",
+      "stat": "pass_att",
+      "side": "over",
+      "line": 33.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "More in 4 of last 4 games; PHI D allows the most of this (rank 7)"
+     },
+     {
+      "player": "Kirk Cousins",
+      "team": "LV",
+      "stat": "pass_yds",
+      "side": "over",
+      "line": 237.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_BUF_LV",
+      "note": "More in 4 of last 4 games; BUF D allows the most of this (rank 3)"
+     },
+     {
+      "player": "Bo Nix",
+      "team": "DEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6111111111111112,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Less in 4 of last 4 games"
+     }
+    ]
+   }
+  ],
+  "5": [
+   {
+    "n": 5,
+    "recommended": true,
+    "basis": "old model",
+    "play_as": "Power",
+    "p_all": 0.09166311100897136,
+    "p_independent": 0.09166311100897136,
+    "power_ev": 1.833262220179427,
+    "flex_ev": 1.6160527001706209,
+    "best_ev": 1.833262220179427,
+    "min_power_mult": 10.909514078156553,
+    "legs": [
+     {
+      "player": "Bhayshul Tuten",
+      "team": "JAX",
+      "stat": "receptions",
+      "side": "over",
+      "line": 1.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "More in 4 of last 4 games; HOU D allows the most of this (rank 4)"
+     },
+     {
+      "player": "Bryce Young",
+      "team": "CAR",
+      "stat": "pass_att",
+      "side": "over",
+      "line": 33.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "More in 4 of last 4 games; PHI D allows the most of this (rank 7)"
+     },
+     {
+      "player": "Kirk Cousins",
+      "team": "LV",
+      "stat": "pass_yds",
+      "side": "over",
+      "line": 237.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_BUF_LV",
+      "note": "More in 4 of last 4 games; BUF D allows the most of this (rank 3)"
+     },
+     {
+      "player": "Bo Nix",
+      "team": "DEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6111111111111112,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Less in 4 of last 4 games"
+     },
+     {
+      "player": "Rashod Bateman",
+      "team": "BAL",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 30.5,
+      "p_model": 0.6111111111111112,
+      "game_id": "2026_06_BAL_CLE",
+      "note": "More in 4 of last 4 games"
+     }
+    ]
+   }
+  ],
+  "6": [
+   {
+    "n": 6,
+    "recommended": true,
+    "basis": "old model",
+    "play_as": "Power",
+    "p_all": 0.05601634561659361,
+    "p_independent": 0.05601634561659361,
+    "power_ev": 2.1006129606222603,
+    "flex_ev": 1.942818133164753,
+    "best_ev": 2.1006129606222603,
+    "min_power_mult": 17.851932127892542,
+    "legs": [
+     {
+      "player": "Bhayshul Tuten",
+      "team": "JAX",
+      "stat": "receptions",
+      "side": "over",
+      "line": 1.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "More in 4 of last 4 games; HOU D allows the most of this (rank 4)"
+     },
+     {
+      "player": "Bryce Young",
+      "team": "CAR",
+      "stat": "pass_att",
+      "side": "over",
+      "line": 33.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "More in 4 of last 4 games; PHI D allows the most of this (rank 7)"
+     },
+     {
+      "player": "Kirk Cousins",
+      "team": "LV",
+      "stat": "pass_yds",
+      "side": "over",
+      "line": 237.5,
+      "p_model": 0.6261111111111111,
+      "game_id": "2026_06_BUF_LV",
+      "note": "More in 4 of last 4 games; BUF D allows the most of this (rank 3)"
+     },
+     {
+      "player": "Bo Nix",
+      "team": "DEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6111111111111112,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Less in 4 of last 4 games"
+     },
+     {
+      "player": "Rashod Bateman",
+      "team": "BAL",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 30.5,
+      "p_model": 0.6111111111111112,
+      "game_id": "2026_06_BAL_CLE",
+      "note": "More in 4 of last 4 games"
+     },
+     {
+      "player": "Darren Waller",
+      "team": "CAR",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 25.5,
+      "p_model": 0.6111111111111112,
+      "game_id": "2026_06_CAR_PHI",
+      "note": "More in 4 of last 4 games"
      }
     ]
    }

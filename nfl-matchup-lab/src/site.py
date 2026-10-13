@@ -501,6 +501,12 @@ def lineups_page():
                  'at least two teams, mixing games. "Recommended" means the model expects more than $1 back per $1 even after '
                  'allowing for simulation noise; anything else is shown so you can see how close it gets.</p></div>'
                  + picks_html.lineup_cards(d["best"], prefix="", no_lines_msg=msg) + '</section>\n'
+                 '<section aria-labelledby="h-old"><div><h2 id="h-old">Old model lineups</h2><p class="sub">The method from '
+                 'the original Bills-Rams report, for comparison: each player\'s hit rate at the line in his last 4 games, '
+                 'pulled toward 50%, plus a 3-point nudge when the opponent is among the 8 defenses allowing the most or '
+                 'least of that stat, averaged with the market (50% for a PrizePicks line without a sportsbook price). '
+                 'Legs are multiplied as if independent. It was not checked against past seasons.</p></div>'
+                 + picks_html.lineup_cards(d.get("old_best") or {}, prefix="", no_lines_msg=msg) + '</section>\n'
                  f'<section aria-labelledby="h-loaded"><div><h2 id="h-loaded">PrizePicks lines loaded</h2><p class="sub">'
                  f'{with_lines} of {len(games)} games have PrizePicks lines on file. Tap a game to see its lines.</p></div>'
                  f'<div class="loaded">{rows}</div></section>\n')
