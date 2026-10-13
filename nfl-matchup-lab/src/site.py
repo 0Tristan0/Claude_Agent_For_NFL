@@ -6,7 +6,7 @@ Every page shares the look in nfl_lab/report/theme.py; team logos are copied to 
 Run after the report scripts:  python3 src/site.py
 """
 import glob, html, json, os, re, shutil, sys
-from datetime import date, datetime
+from datetime import date, datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -45,12 +45,24 @@ def game_page(g):
     """The locked legacy report in the site theme. Only its look changes; its content is the frozen record."""
     src = open(os.path.join(ROOT, g["report"])).read()
     body = src[src.index("<main"):]
-    body = re.sub(r'(<main class="wrap">)', lambda m: m.group(1) + "\n" + theme.nav("games", "../"), body, count=1)
+    body = re.sub(r'(<main class="wrap">)', lambda m: m.group(1) + "\n" + theme.nav("home", "../"), body, count=1)
     body = body.replace('<div class="board" aria-label="Game info">',
                         '<div class="board" aria-label="Game info"><a class="back" href="../index.html">&larr; All games</a>', 1)
     body = re.sub(r'<span class="ab">([A-Z]{2,3})</span>',
                   lambda m: f'<span class="tm">{theme.logo(m.group(1), 52, "../")}<span class="ab">{m.group(1)}</span></span>', body)
+    body = re.sub(r'<section aria-labelledby="(h-[\w-]+)"( id="[^"]+")?>', lambda m: legacy_pane(m), body)
     return theme.document(f'{g["away"]} at {g["home"]}, Week {g["week"]} report', body)
+
+
+LEGACY_TABS = {"h-big": ("summary", "Summary"), "h-unit": ("units", "Unit vs unit"), "h-cov": ("coverage", "Coverage"),
+               "h-play": ("players", "Players"), "h-1v1": ("matchups", "1-on-1"), "h-props": ("props", "Props"),
+               "h-pay": ("payouts", "Payouts"), "h-lu": ("lineups", "Lineups")}
+
+
+def legacy_pane(m):
+    key = m.group(1)
+    pid, label = LEGACY_TABS.get(key, (key[2:], key[2:].title()))
+    return f'<section class="pane" id="{pid}" data-tab="{label}" aria-labelledby="{key}">'
 
 
 def matchup(away, home, size=22, prefix=""):
@@ -114,60 +126,138 @@ def kickoff(p):
     return datetime.fromisoformat(k).astimezone(ET) if k else None
 
 
-def game_row(p):
+def status(p, now):
+    """Status at build time; the page's script recomputes it when it is viewed."""
+    k = kickoff(p)
+    if k is None or now < k:
+        return "up"
+    return "live" if now < k + timedelta(hours=4) else "final"
+
+
+STATUS_TXT = {"up": "", "live": "Live", "final": "Final"}
+
+
+def kick_attr(p):
+    k = p["meta"].get("kickoff_utc")
+    return f' data-kick="{e(datetime.fromisoformat(k).astimezone(timezone.utc).isoformat())}"' if k else ""
+
+
+def line_text(m, a, h):
+    if not m:
+        return ""
+    fav = h if m["home_spread"] < 0 else a
+    spread = f'{fav} {-abs(m["home_spread"]):+g}' if m["home_spread"] else "Pick'em"
+    return f'{e(spread)}<span class="muted"> · </span>O/U {m["total"]:g}'
+
+
+def game_row(p, now):
     m, a, h = p["meta"], p["away"], p["home"]
     k = kickoff(p)
-    clock = k.strftime("%-I:%M %p") if k else ""
-    if m:
-        hw = m["home_win"]
-        fav = h if m["home_spread"] < 0 else a
-        spread = f'{fav} {-abs(m["home_spread"]):+g}' if m["home_spread"] else "Pick'em"
-        line = f'{e(spread)}<span class="muted"> · </span>O/U {m["total"]:g}'
-        sides = [(a, m["away_implied"], 1 - hw), (h, m["home_implied"], hw)]
-    else:
-        line, sides = "", [(a, None, None), (h, None, None)]
+    st = status(p, now)
+    sides = ([(a, m["away_implied"], 1 - m["home_win"]), (h, m["home_implied"], m["home_win"])] if m
+             else [(a, None, None), (h, None, None)])
     trs = "".join(
         f'<span class="tr{" fav" if w is not None and w >= 0.5 else ""}">{theme.logo(t, 24)}<b>{e(t)}</b>'
         f'<span class="tn">{e(nickname(t))}</span><span class="ip">{"" if ip is None else f"{ip:.1f}"}</span>'
         f'<span class="wn">{"" if w is None else f"{w:.0%}"}</span></span>' for t, ip, w in sides)
-    return (f'<a class="gm" href="games/v0-{p["file"]}"><span class="time">{e(clock)}</span>'
-            f'<span class="trs">{trs}</span><span class="ln">{line}</span><span class="go" aria-hidden="true">&rsaquo;</span></a>')
+    return (f'<a class="gm" href="games/v0-{p["file"]}"{kick_attr(p)} data-status="{st}"><span class="time">'
+            f'{k.strftime("%-I:%M %p") if k else ""}<span class="st">{STATUS_TXT[st]}</span></span>'
+            f'<span class="trs">{trs}</span><span class="ln">{line_text(m, a, h)}</span><span class="go" aria-hidden="true">&rsaquo;</span></a>')
 
 
-def v0_section():
+def chip(p, now):
+    m, a, h = p["meta"], p["away"], p["home"]
+    k = kickoff(p)
+    st = status(p, now)
+    when = k.strftime("%a %-I:%M %p") if k else ""
+    return (f'<a class="chip" href="games/v0-{p["file"]}"{kick_attr(p)} data-status="{st}">'
+            f'<span class="when">{e(when)}<span class="st">{STATUS_TXT[st]}</span></span>'
+            f'<span class="pair">{theme.logo(a, 22)}<b>{e(a)}</b></span><span class="pair">{theme.logo(h, 22)}<b>{e(h)}</b></span>'
+            f'<span class="ln">{line_text(m, a, h)}</span></a>')
+
+
+def game_list(pages, now, newest_first):
+    ordered = sorted(pages, key=lambda p: p["meta"].get("kickoff_utc", ""), reverse=newest_first)
+    days = {}
+    for p in ordered:
+        k = kickoff(p)
+        label = f'{k.strftime("%A, %B %-d")} · Week {p["week"]}' if k else f'Week {p["week"]}'
+        days.setdefault(label, []).append(p)
+    return "".join(
+        f'<div class="day"><div class="dayh"><span>{e(d)}</span><span class="cols"><span>Pts</span><span>Win</span>'
+        f'<span class="lnh">Line</span><span></span></span></div><div class="list">{"".join(game_row(p, now) for p in dps)}</div></div>'
+        for d, dps in days.items())
+
+
+def games_sections(now):
     pages = v0_pages()
     if not pages:
         return ""
-    out = []
-    weeks = {}
-    for p in pages:
-        weeks.setdefault((p["season"], p["week"]), []).append(p)
-    for (season, week), ps in weeks.items():
-        days = {}
-        for p in ps:
-            k = kickoff(p)
-            days.setdefault(k.strftime("%A, %B %-d") if k else "Date unknown", []).append(p)
-        blocks = "".join(
-            f'<div class="day"><div class="dayh"><span>{e(d)}</span><span class="cols"><span>Pts</span><span>Win</span>'
-            f'<span class="lnh">Line</span></span></div><div class="list">{"".join(game_row(p) for p in dps)}</div></div>'
-            for d, dps in days.items())
-        out.append(f'<section aria-labelledby="h-w{season}-{week}"><div class="wkh"><h2 id="h-w{season}-{week}">Week {week}</h2>'
-                   f'<span class="muted">{season} · {len(ps)} {"game" if len(ps) == 1 else "games"}</span></div>{blocks}</section>\n')
-    return "".join(out)
+    nxt = sorted([p for p in pages if status(p, now) != "final"], key=lambda p: p["meta"].get("kickoff_utc", ""))
+    up = (f'<section aria-labelledby="h-next"><div class="secth"><h2 id="h-next">Up next</h2>'
+          f'<span class="muted">Tap a game to open it</span></div><div class="next">{"".join(chip(p, now) for p in nxt)}</div></section>\n'
+          if nxt else "")
+    return (up + '<section aria-labelledby="h-all"><div class="secth"><h2 id="h-all">All games</h2>'
+            '<div class="sort" role="group" aria-label="Order" hidden><button type="button" data-o="desc" aria-pressed="true">Latest first</button>'
+            '<button type="button" data-o="asc" aria-pressed="false">Soonest first</button></div></div>'
+            f'<div id="list-desc">{game_list(pages, now, True)}</div>'
+            f'<div id="list-asc" hidden>{game_list(pages, now, False)}</div></section>\n')
+
+
+INDEX_JS = """
+(function(){
+  var now=Date.now(), TXT={up:'',live:'Live',final:'Final'};
+  [].forEach.call(document.querySelectorAll('[data-kick]'),function(el){
+    var k=Date.parse(el.getAttribute('data-kick')); if(isNaN(k)) return;
+    var s=now<k?'up':(now<k+4*3600e3?'live':'final');
+    el.setAttribute('data-status',s);
+    var b=el.querySelector('.st'); if(b) b.textContent=TXT[s];
+    if(el.classList.contains('chip')) el.hidden=s==='final';
+  });
+  var next=document.querySelector('.next');
+  if(next && !next.querySelector('.chip:not([hidden])')) next.closest('section').hidden=true;
+  var tg=document.querySelector('.sort'); if(!tg) return;
+  var lists={desc:document.getElementById('list-desc'),asc:document.getElementById('list-asc')};
+  function set(o){
+    lists.desc.hidden=o!=='desc'; lists.asc.hidden=o!=='asc';
+    [].forEach.call(tg.querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-o')===o?'true':'false');});
+    try{localStorage.setItem('lab-sort',o);}catch(e){}
+  }
+  var saved='desc'; try{saved=localStorage.getItem('lab-sort')||'desc';}catch(e){}
+  [].forEach.call(tg.querySelectorAll('button'),function(b){b.addEventListener('click',function(){set(b.getAttribute('data-o'));});});
+  tg.hidden=false; set(saved==='asc'?'asc':'desc');
+})();
+"""
 
 
 INDEX_CSS = """
 .hero{display:grid;gap:8px}
-.wkh{display:flex;align-items:baseline;gap:12px}
-.wkh .muted{font-size:.85rem}
-.day{display:grid;gap:0}
+.secth{display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap}
+.secth .muted{font-size:.85rem}
+.next{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px}
+@media (max-width:640px){.next{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;scrollbar-width:none}
+  .next::-webkit-scrollbar{display:none}.chip{flex:0 0 148px;scroll-snap-align:start}}
+.chip{display:grid;gap:6px;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;color:var(--text);text-decoration:none}
+.chip:hover,.chip:focus-visible{border-color:var(--line-2);background:var(--raise)}
+.chip .when{display:flex;justify-content:space-between;gap:6px;font-size:.76rem;color:var(--muted)}
+.chip .pair{display:flex;align-items:center;gap:8px}
+.chip b{font-weight:700;font-stretch:85%}
+.chip .ln{font-size:.76rem;color:var(--muted)}
+.st{font-weight:650;color:var(--text)}
+[data-status="live"] .st{color:var(--pos)}
+[data-status="final"] .st{color:var(--muted)}
+.gm .st{display:block;font-size:.72rem;margin-top:2px}
+.sort{display:inline-flex;border:1px solid var(--line-2);border-radius:999px;padding:2px}
+.sort button{appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-size:.8rem;padding:4px 12px;border-radius:999px;cursor:pointer}
+.sort button[aria-pressed="true"]{background:var(--raise);color:var(--text)}
+.day{display:grid;margin-top:8px}
 .dayh{display:flex;justify-content:space-between;align-items:end;gap:12px;font-size:.75rem;color:var(--muted);padding-bottom:8px;border-bottom:1px solid var(--line-2)}
-.cols{display:grid;grid-template-columns:44px 44px 150px 16px;gap:0 10px;text-align:right}
-.lnh{text-align:right}
+.cols{display:grid;grid-template-columns:44px 44px 150px 16px;gap:0 10px;text-align:right;flex:none}
 .list{display:grid}
 .gm{display:grid;grid-template-columns:72px 1fr 150px 16px;align-items:center;gap:0 10px;padding:12px 0;border-bottom:1px solid var(--line);
   color:var(--text);text-decoration:none}
 .gm:hover{background:var(--surface)}
+.gm[data-status="final"]{opacity:.62}
 .gm .time{color:var(--muted);font-size:.82rem}
 .trs{display:grid;gap:6px;min-width:0}
 .tr{display:grid;grid-template-columns:24px 40px 1fr 44px 44px;align-items:center;gap:0 10px;color:var(--muted)}
@@ -178,9 +268,8 @@ INDEX_CSS = """
 .gm .ln{text-align:right;font-size:.85rem}
 .gm .go{color:var(--faint);font-size:1.2rem;text-align:right}
 @media (max-width:640px){
-  .cols .lnh{display:none}.cols{grid-template-columns:44px 44px;margin-right:0}
-  .gm{grid-template-columns:56px 1fr;row-gap:6px}.gm .ln{grid-column:2;text-align:left;color:var(--muted);font-size:.8rem}.gm .go{display:none}
-  .tr{grid-template-columns:24px 40px 1fr 44px 44px}}
+  .cols{grid-template-columns:44px 44px}.cols span:nth-child(n+3){display:none}
+  .gm{grid-template-columns:56px 1fr;row-gap:6px}.gm .ln{grid-column:2;text-align:left;color:var(--muted);font-size:.8rem}.gm .go{display:none}}
 .mu2{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-stretch:85%;font-size:1.05rem}
 .at2{color:var(--faint);font-weight:400;font-size:.85rem;margin-inline:2px}
 .locks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
@@ -198,16 +287,16 @@ INDEX_CSS = """
 
 
 def index_page():
-    upcoming = [g for g in G if g["status"] == "pending"]
-    graded = [g for g in G if g["status"] == "graded"]
-    locks = upcoming + graded
+    now = datetime.now(timezone.utc)
+    locks = [g for g in G if g["status"] == "pending"] + [g for g in G if g["status"] == "graded"]
     pages = v0_pages()
-    week = f'Week {pages[0]["week"]}' if pages else "2026 season"
-    return (theme.head("NFL Matchup Lab") + f"<style>{INDEX_CSS}</style>\n" + '<main class="wrap">\n' + theme.nav("games") +
-            f'<header class="hero"><span class="eyebrow">2026 season · {week}</span><h1>Games</h1>'
+    open_weeks = [p["week"] for p in pages if status(p, now) != "final"] or [p["week"] for p in pages]
+    week = f"Week {max(open_weeks)}" if pages else "Games"
+    return (theme.head("NFL Matchup Lab") + f"<style>{INDEX_CSS}</style>\n" + '<main class="wrap">\n' + theme.nav("home") +
+            f'<header class="hero"><span class="eyebrow">2026 season</span><h1>{week}</h1>'
             '<p class="sub">Each game simulated 20,000 times from market lines and player usage. Pts is the market-implied '
             'score, Win is the share of simulations each team won. Open a game for player projections.</p></header>\n'
-            + v0_section()
+            + games_sections(now)
             + ('<section aria-labelledby="h-lock"><div><h2 id="h-lock">Locked picks</h2><p class="sub">Hand-built reports '
                'whose picks were committed to git before kickoff, then graded.</p></div>'
                f'<div class="locks">{"".join(locked_row(g) for g in locks)}</div></section>\n' if locks else "")
@@ -218,7 +307,8 @@ def index_page():
             '<th scope="col">Game lines</th><th scope="col">Props hit</th><th scope="col">Units</th>'
             '<th scope="col">Test</th></tr></thead><tbody>' + record_rows() + '</tbody></table></div></section>\n'
             '<footer class="notes"><p>Data: nflverse (CC-BY 4.0), team logos from nflverse. Built by <code>src/site.py</code>. '
-            'Estimates with real uncertainty, not betting advice.</p></footer>\n</main>\n')
+            'Estimates with real uncertainty, not betting advice.</p></footer>\n</main>\n'
+            f'<script>{INDEX_JS}</script>\n')
 
 
 # ---- the Guesser: paper bankroll on the locked picks ------------------------------------------------

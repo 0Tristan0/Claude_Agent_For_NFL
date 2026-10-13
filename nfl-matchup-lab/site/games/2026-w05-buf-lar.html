@@ -22,6 +22,7 @@
   --buf:#93A6C9; --lar:#CDB97F; --lar-strong:#CDB97F;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{background:var(--bg)}
 body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-variant-numeric:tabular-nums}
@@ -51,6 +52,16 @@ code{font-size:.88em;color:var(--text)}
 .tabs a[aria-current="page"]{color:var(--text);border-bottom-color:var(--text)}
 .back{font-size:.85rem;color:var(--muted);text-decoration:none;justify-self:start}
 .back:hover{color:var(--text)}
+
+/* section tabs inside a game page (built by TAB_JS from section.pane; without script every section shows) */
+.subtabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;
+  background:var(--bg);border-bottom:1px solid var(--line);margin-bottom:-28px}
+.subtabs::-webkit-scrollbar{display:none}
+.subtabs button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--muted);
+  font:inherit;font-size:.88rem;font-weight:550;padding:12px 12px 11px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;cursor:pointer}
+.subtabs button:first-child{padding-left:0}
+.subtabs button:hover{color:var(--text)}
+.subtabs button[aria-selected="true"]{color:var(--text);border-bottom-color:var(--text)}
 
 /* logos */
 .lg{display:inline-block;width:var(--s,24px);height:var(--s,24px);border-radius:calc(var(--s,24px) * .22);vertical-align:middle;flex:none;object-fit:cover;background:var(--raise)}
@@ -163,7 +174,7 @@ th:first-child,td:first-child{padding-left:0}
 </head>
 <body>
 <main class="wrap">
-<nav class="site" aria-label="Site"><a class="brand" href="../index.html">Matchup Lab</a><div class="tabs"><a href="../index.html" aria-current="page">Games</a><a href="../guesser.html">Guesser</a></div></nav>
+<nav class="site" aria-label="Site"><a class="brand" href="../index.html">Matchup Lab</a><div class="tabs"><a href="../index.html" aria-current="page">Home</a><a href="../guesser.html">Guesser</a></div></nav>
 
   <div class="board" aria-label="Game info"><a class="back" href="../index.html">&larr; All games</a>
     <span class="eyebrow">Monday Night Football · Week 5 · SoFi Stadium</span>
@@ -181,7 +192,7 @@ th:first-child,td:first-child{padding-left:0}
     </dl></div>
   </div>
 
-  <section aria-labelledby="h-big">
+  <section class="pane" id="summary" data-tab="Summary" aria-labelledby="h-big">
     <h2 id="h-big">The short version</h2>
     <div class="takes">
       <div class="take lar"><b>Biggest mismatch: Rams passing game</b><p>The Rams throw for the 2nd most yards in the league and face a Bills pass D that ranks 29th in yards and TDs allowed. This is where the game tilts.</p></div>
@@ -190,7 +201,7 @@ th:first-child,td:first-child{padding-left:0}
     </div>
   </section>
 
-  <section aria-labelledby="h-unit">
+  <section class="pane" id="units" data-tab="Unit vs unit" aria-labelledby="h-unit">
     <div>
       <h2 id="h-unit">Unit vs unit</h2>
       <p class="sub">Each row lines up one offense stat with the matching stat for the defense it faces tonight. Ranks are out of 32 teams. The bar gets longer the better the rank.</p>
@@ -304,7 +315,7 @@ th:first-child,td:first-child{padding-left:0}
 <td class="e"><span class="edge lar">LAR O</span></td></tr></tbody></table></div>
   </section>
 
-  <section aria-labelledby="h-cov">
+  <section class="pane" id="coverage" data-tab="Coverage" aria-labelledby="h-cov">
     <div>
       <h2 id="h-cov">Pass coverage head to head</h2>
       <p class="sub">Both secondaries side by side. The Rams are top 2 in four of these. The Bills are bottom 8 in four.</p>
@@ -336,7 +347,7 @@ th:first-child,td:first-child{padding-left:0}
       </tbody></table></div>
   </section>
 
-  <section aria-labelledby="h-play">
+  <section class="pane" id="players" data-tab="Players" aria-labelledby="h-play">
     <div>
       <h2 id="h-play">Who can cash in</h2>
       <p class="sub">Top players on each side matched against the spot where the other team is weakest.</p>
@@ -411,7 +422,7 @@ th:first-child,td:first-child{padding-left:0}
 .win{justify-self:start;font-family:var(--display);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.95rem;padding:2px 10px;border-radius:4px;border:1.5px solid currentColor}
 .win.lar{color:var(--lar)} .win.buf{color:var(--buf)} .win.even{color:var(--muted)}
 </style>
-  <section aria-labelledby="h-1v1">
+  <section class="pane" id="matchups" data-tab="1-on-1" aria-labelledby="h-1v1">
     <div>
       <h2 id="h-1v1">1-on-1 matchups</h2>
       <p class="sub">Who should win each key battle, based on the ranks above and this week's previews. Rams win 5, Bills win 2, one is even.</p>
@@ -420,7 +431,7 @@ th:first-child,td:first-child{padding-left:0}
   </section>
 
 
-  <section aria-labelledby="h-props" id="props">
+  <section class="pane" id="props" data-tab="Props" aria-labelledby="h-props">
     <div>
       <h2 id="h-props">Props board</h2>
       <p class="sub">PrizePicks only published two lines for this game outside the app (Cook 75.5 rush yds and Nacua 94.5 rec yds). The rest are sportsbook lines from the same day; PrizePicks usually sits within a point or two of these, so check the app before you lock anything in. Dots show each game this season, green if that side would have hit.</p>
@@ -518,7 +529,7 @@ th:first-child,td:first-child{padding-left:0}
 .warn{border:1.5px solid var(--t3);background:var(--t3bg);color:var(--fg);border-radius:8px;padding:12px 14px;max-width:80ch}
 .warn b{color:var(--t3)}
 </style>
-  <section aria-labelledby="h-pay" id="payouts">
+  <section class="pane" id="payouts" data-tab="Payouts" aria-labelledby="h-pay">
     <div>
       <h2 id="h-pay">Payout check</h2>
       <p class="sub">On PrizePicks every pick needs to hit more often than the payout implies. With standard Power payouts (3-pick 5x, 4-pick 10x, 5-pick 20x, 6-pick 37.5x) a pick has to hit about 58.5% of the time in a 3-pick, 56.2% in a 4-pick, and 54.7% in a 6-pick. My hit estimate is half this season's game log (pulled toward 50% because it's only 4 games) plus the matchup, and half what the betting market says. The two black lines on each bar mark those break-evens.</p>
@@ -568,7 +579,7 @@ th:first-child,td:first-child{padding-left:0}
 <td><span class="lean c-lo">Below break-even</span></td></tr></tbody></table></div>
   </section>
 
-  <section aria-labelledby="h-lu" id="lineups">
+  <section class="pane" id="lineups" data-tab="Lineups" aria-labelledby="h-lu">
     <div>
       <h2 id="h-lu">Lineups</h2>
       <p class="sub">Built from the picks that clear break-even, strongest first. "Return per $1" is the average payback if my estimates are right; above $1.00 means the payout is worth the risk. Even so, the 6-pick only hits about 1 time in 28.</p>
@@ -628,5 +639,39 @@ th:first-child,td:first-child{padding-left:0}
     </ul>
   </footer>
 </main>
+<script>
+(function(){
+  var panes=[].slice.call(document.querySelectorAll('section.pane'));
+  if(panes.length<2) return;
+  var bar=document.createElement('div');
+  bar.className='subtabs'; bar.setAttribute('role','tablist'); bar.setAttribute('aria-label','Sections');
+  panes[0].parentNode.insertBefore(bar,panes[0]);
+  var tabs=panes.map(function(p,i){
+    var b=document.createElement('button');
+    b.type='button'; b.id='tab-'+p.id; b.setAttribute('role','tab'); b.setAttribute('aria-controls',p.id);
+    if(p.dataset.logo){var im=document.createElement('img'); im.src=p.dataset.logo; im.alt=''; im.className='lg'; im.style.setProperty('--s','18px'); b.appendChild(im);}
+    var h=p.querySelector('h2');
+    b.appendChild(document.createTextNode(p.dataset.tab||(h?h.textContent:'Section '+(i+1))));
+    p.setAttribute('role','tabpanel'); p.setAttribute('aria-labelledby',b.id);
+    b.addEventListener('click',function(){show(i,true);});
+    b.addEventListener('keydown',function(ev){
+      var n=panes.length, j=ev.key==='ArrowRight'?(i+1)%n:ev.key==='ArrowLeft'?(i+n-1)%n:ev.key==='Home'?0:ev.key==='End'?n-1:-1;
+      if(j>=0){ev.preventDefault(); show(j,true); tabs[j].focus();}
+    });
+    bar.appendChild(b); return b;
+  });
+  function show(i,user){
+    panes.forEach(function(p,j){p.hidden=j!==i; tabs[j].setAttribute('aria-selected',j===i?'true':'false'); tabs[j].tabIndex=j===i?0:-1;});
+    if(!user) return;
+    try{history.replaceState(null,'','#'+panes[i].id);}catch(e){}
+    try{tabs[i].scrollIntoView({block:'nearest',inline:'nearest'});}catch(e){}
+    var top=bar.getBoundingClientRect().top;
+    if(top<=1){window.scrollTo(0,window.scrollY+panes[i].getBoundingClientRect().top-bar.offsetHeight-12);}
+  }
+  function fromHash(){var want=(location.hash||'').slice(1), k=-1; panes.forEach(function(p,j){if(p.id===want) k=j;}); return k;}
+  window.addEventListener('hashchange',function(){var k=fromHash(); if(k>=0) show(k,false);});
+  show(Math.max(0,fromHash()),false);
+})();
+</script>
 </body>
 </html>

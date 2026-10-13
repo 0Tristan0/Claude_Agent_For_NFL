@@ -14,9 +14,8 @@ from . import theme
 
 e = html.escape
 
-PAGE_CSS = """.tblock{display:grid;gap:12px}
-.th3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.th3 .muted{font-weight:400;font-size:.85rem;margin-left:4px}"""
+PAGE_CSS = """.th2{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.th2 .muted{font-weight:400;font-size:.85rem;margin-left:4px}"""
 
 
 def _pct(x):
@@ -46,12 +45,16 @@ def _team_table(sim, team: str, jerseys: dict, implied: float) -> str:
                     f"<td class='num'>{mean(pid, 'targets'):.1f}</td><td class='num'>{mean(pid, 'receptions'):.1f}</td>"
                     f"{cell('rec_yds')}<td class='num'>{mean(pid, 'rush_att'):.1f}</td>{cell('rush_yds')}{pass_cell}"
                     f"<td class='num'>{_pct(float(sim.stat(pid, 'anytime_td').mean()))}</td></tr>")
-    return (f"<div class='tblock'><h3 class='th3'>{theme.logo(team, 28, '../')}{e(teams.name(team))}"
-            f"<span class='muted'>{implied:.1f} implied pts</span></h3><div class='tbl-wrap'><table class='pt'><thead><tr>"
+    d = teams.display(team)
+    return (f"<section class='pane' id='{d.lower()}' data-tab='{d} players' data-logo='../logos/{teams.code(team)}.png' "
+            f"aria-labelledby='h-{d.lower()}'><div><h2 class='th2' id='h-{d.lower()}'>{theme.logo(team, 28, '../')}{e(teams.name(team))}"
+            f"<span class='muted'>{implied:.1f} implied pts</span></h2><p class='sub'>Medians from {sim.n:,} simulated games; the small "
+            "numbers are the 10th to 90th percentile range. Any TD is the share of simulations where he scored.</p></div>"
+            "<div class='tbl-wrap'><table class='pt'><thead><tr>"
             "<th scope='col'><span class='jn'>#</span>Player</th><th scope='col'>Targets</th><th scope='col'>Catches</th>"
             "<th scope='col'>Rec yds</th><th scope='col'>Rushes</th><th scope='col'>Rush yds</th>"
             "<th scope='col'>Pass yds</th><th scope='col'>Any TD</th></tr></thead><tbody>"
-            + "".join(rows) + "</tbody></table></div></div>")
+            + "".join(rows) + "</tbody></table></div></section>")
 
 
 def _props_table(legs: pd.DataFrame) -> str:
@@ -101,14 +104,17 @@ def _trust(check: dict | None) -> str:
                    f"<td class='num'>{max(r.ci_lo, 0):.0%} to {min(r.ci_hi, 1):.0%}</td><td class='num'>{int(r.n):,}</td></tr>"
                    for r in cal.itertuples())
     span = f"{min(fs)} to {max(fs)}" if fs else "earlier seasons"
-    return f"""<section aria-labelledby="h-trust"><div><h2 id="h-trust">How much to trust this</h2>
+    return f"""<section class="pane" id="model" data-tab="Model check" aria-labelledby="h-trust"><div><h2 id="h-trust">How much to trust this</h2>
 <p class="sub">Checked on every {season} regular-season game from week 3 ({o['games']} games, {o['n']:,} graded props), with the
 model fitted on {span} only. Lines in that check are stand-ins (each player's recent median), not PrizePicks lines, so real hit
 rates will be lower. {season} was also used to choose some v0 settings, so this is somewhat optimistic; the untouched test is the
 2025 season. Brier score {o['brier_model']:.3f} vs {o['brier_old']:.3f} for a simple baseline (his last-8-game hit rate pulled toward
 50%, no market; lower is better). When the model said X%, here is how often it happened:</p></div>
 <div class="tbl-wrap"><table class="pt"><thead><tr><th scope="col">Model said</th><th scope="col">Happened</th>
-<th scope="col">95% range</th><th scope="col">Props</th></tr></thead><tbody>{rows}</tbody></table></div></section>"""
+<th scope="col">95% range</th><th scope="col">Props</th></tr></thead><tbody>{rows}</tbody></table></div>
+<p class="sub">How the projections are built: targets and carries come from each player's recent share of team volume (shrunk
+toward what his snap share predicts), team volume from the market total and spread, and efficiency shrunk toward position
+averages. Each game is then simulated {{n_sims}} times.</p></section>"""
 
 
 def render(proj: dict, sim, legs: pd.DataFrame | None, best: dict | None, check: dict | None, out_path: Path) -> Path:
@@ -128,7 +134,7 @@ def render(proj: dict, sim, legs: pd.DataFrame | None, best: dict | None, check:
     run_at = pd.Timestamp(proj.get('run_at', pd.Timestamp.now(tz='UTC'))).tz_convert('America/New_York')
     jerseys = proj.get("jerseys", {})
     body = f"""<main class="wrap">
-{theme.nav("games", "../")}<header class="head"><a class="back" href="../index.html">&larr; All games</a>
+{theme.nav("home", "../")}<header class="head"><a class="back" href="../index.html">&larr; All games</a>
 <div class="meta"><span>Week {int(g['week'])}</span><span>{kick:%a %b %-d, %-I:%M %p} ET</span><span class="v0tag">Model v0</span></div>
 <div class="match"><div class="ms away">{theme.logo(away, 64, '../')}<div class="who"><span class="code">{a_d}</span>
 <span class="nm">{e(teams.name(away))}</span></div></div><span class="vsat">at</span>
@@ -144,23 +150,20 @@ def render(proj: dict, sim, legs: pd.DataFrame | None, best: dict | None, check:
 <div class="wide"><dt>Injuries</dt><dd>{e(str(proj.get('injury_note', 'not checked')))}</dd></div>
 <div class="wide"><dt>Line source</dt><dd>Spread and total: {line_note}</dd></div></dl></header>
 
-<section aria-labelledby="h-proj"><div><h2 id="h-proj">Projections</h2>
-<p class="sub">Medians from {sim.n:,} simulated games; the small numbers are the 10th to 90th percentile range. Targets and carries come from each
-player's recent share of team volume (shrunk toward what his snap share predicts), team volume from the market total and
-spread, and efficiency shrunk toward position averages.</p></div>
-{_team_table(sim, away, jerseys, tpa.implied_points)}{_team_table(sim, home, jerseys, tph.implied_points)}</section>
+{_team_table(sim, away, jerseys, tpa.implied_points)}
+{_team_table(sim, home, jerseys, tph.implied_points)}
 
-<section aria-labelledby="h-props"><div><h2 id="h-props">Your lines</h2>
+<section class="pane" id="lines" data-tab="Lines" aria-labelledby="h-props"><div><h2 id="h-props">Your lines</h2>
 <p class="sub">From data/props.csv. Model chances are calibrated on 2023 (raw sim chances were too confident at the
 extremes). When the model is very far from a real line (72% or more on one side), the line probably reflects news the
 model doesn't have, so those legs never qualify. Break-even per leg: 3-pick {min(be['power3'], be['flex3']):.1%}, 4-pick {min(be['power4'], be['flex4']):.1%},
 5-pick {min(be['power5'], be['flex5']):.1%}, 6-pick {min(be['power6'], be['flex6']):.1%}. A leg qualifies only if the model beats that and the
 no-vig market price by 3 points.</p></div>{_props_table(legs)}</section>
 
-<section aria-labelledby="h-lu"><div><h2 id="h-lu">Lineups</h2>
+<section class="pane" id="lineups" data-tab="Lineups" aria-labelledby="h-lu"><div><h2 id="h-lu">Lineups</h2>
 <p class="sub">Hit chance comes from the simulated games, so legs that move together (a QB and his receiver) are counted together.
 Same-game lineups can get lower multipliers in the app: skip a lineup if the app shows less than the listed minimum.</p></div>{_lineups(best or {})}</section>
-{_trust(check)}
+{_trust(check).replace("{n_sims}", f"{sim.n:,}")}
 <footer class="notes"><p>Model v0: a simplified first version (team-level simulation, fixed shrinkage strengths). Data: nflverse
 play-by-play, snap counts, rosters, injuries and schedules (CC-BY 4.0); stadium time zones from the greerreNFL/Stadiums dataset;
 PrizePicks payouts from its help center. {lines_sentence} Actives: players with a snap in the team's last 2 games, minus Out/Doubtful; add
