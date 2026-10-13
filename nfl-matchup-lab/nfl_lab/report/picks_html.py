@@ -17,7 +17,7 @@ e = html.escape
 PP_STAT = {"rec_yds": "Receiving Yards", "rush_yds": "Rush Yards", "pass_yds": "Pass Yards", "receptions": "Receptions",
            "anytime_td": "Rush+Rec TDs", "rush_rec_tds": "Rush+Rec TDs", "rush_rec_yds": "Rush+Rec Yds",
            "pass_tds": "Pass TDs", "pass_att": "Pass Attempts", "completions": "Pass Completions",
-           "rush_att": "Rush Attempts", "ints": "INT Thrown"}
+           "rush_att": "Rush Attempts", "ints": "INT", "pass_rush_yds": "Pass+Rush Yds"}
 SIDE = {"over": "More", "under": "Less"}
 
 HOW_TO_ADD = ("Add PrizePicks lines to <code>data/props.csv</code> with source <code>prizepicks</code> (player, team, stat, "
@@ -39,7 +39,12 @@ def lines_table(legs: pd.DataFrame | None, prefix: str = "../") -> str:
         other = 0 if legs is None or legs.empty else legs[["player", "stat", "line"]].drop_duplicates().shape[0]
         extra = f" ({other} reference lines from other sources are on file but don't go into lineups.)" if other else ""
         return f"<p class='sub'>No PrizePicks lines for this game yet.{extra} {HOW_TO_ADD}</p>"
-    pp = legs[legs["prizepicks"]].sort_values("p_model", ascending=False)
+    allpp = legs[legs["prizepicks"]]
+    pp = allpp[allpp["line_type"].eq("standard")]
+    # one row per line: the side the model leans to
+    pp = (pp.sort_values("p_model", ascending=False, kind="mergesort")
+            .drop_duplicates(["player_id", "stat", "line"]).sort_values("p_model", ascending=False, kind="mergesort"))
+    n_alt = allpp.loc[~allpp["line_type"].eq("standard"), ["player_id", "stat", "line"]].drop_duplicates().shape[0]
     rows = []
     for _, l in pp.iterrows():
         if l["qualified_any"]:
@@ -54,14 +59,22 @@ def lines_table(legs: pd.DataFrame | None, prefix: str = "../") -> str:
             q, cls = "No: below break-even + 3 pts", "q-no"
         rows.append(f"<tr><th scope='row'>{theme.logo(l['team'], 18, prefix)} {e(l['player'])}</th>"
                     f"<td class='l'>{e(stat_name(l['stat']))}</td><td class='num'>{l['line']:g}</td>"
-                    f"<td class='l'>{SIDE[l['side']]}</td><td class='num'>{_pct(l['p_model'])}</td>"
+                    f"<td class='l'>{SIDE[l['side']]}</td><td class='num'>{_pct(l['p_model'])}"
+                    + (f"<span class='rng'>model alone {_pct(l['p_model_alone'])}</span>"
+                       if l.get("basis") == "model only" and abs(l["p_model"] - l["p_model_alone"]) > 0.005 else "")
+                    + "</td>"
                     f"<td class='num'>{_pct(l['p_market']) or '<span class=muted>none</span>'}</td>"
                     f"<td class='l {cls}'>{q}</td></tr>")
     n_other = legs.loc[~legs["prizepicks"], ["player", "stat", "line"]].drop_duplicates().shape[0]
     note = (f"<p class='small'>{n_other} reference lines from other sources (old blended estimates, sportsbook-only rows) "
             "are on file for this game; they are not PrizePicks lines, so they stay out of lineups.</p>") if n_other else ""
+    if n_alt:
+        note += (f"<p class='small'>{n_alt} goblin and demon lines are on the board for this game too. They pay differently "
+                 "from standard picks and those payouts aren't modeled yet, so they are left out.</p>")
+    if pp.empty:
+        return "<p class='sub'>No standard PrizePicks lines for this game that the model simulates.</p>" + note
     return ("<div class='tbl-wrap'><table class='pt'><thead><tr><th scope='col'>Player</th><th scope='col' class='l'>Stat</th>"
-            "<th scope='col'>Line</th><th scope='col' class='l'>Pick</th><th scope='col'>Model</th>"
+            "<th scope='col'>Line</th><th scope='col' class='l'>Model's pick</th><th scope='col'>Chance</th>"
             "<th scope='col'>Sportsbook (no vig)</th><th scope='col' class='l'>Qualifies</th></tr></thead><tbody>"
             + "".join(rows) + "</tbody></table></div>" + note)
 

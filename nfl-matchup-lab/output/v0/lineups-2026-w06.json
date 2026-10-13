@@ -1,64 +1,679 @@
 {
  "season": 2026,
  "week": 6,
- "built_at": "2026-10-13 00:36:39.592705+00:00",
+ "built_at": "2026-10-13 01:24:51.866819+00:00",
  "games": {
   "2026_06_SEA_DEN": {
    "slug": "2026-w06-sea-den",
-   "pp_lines": 0
+   "pp_lines": 342
   },
   "2026_06_HOU_JAX": {
    "slug": "2026-w06-hou-jax",
-   "pp_lines": 0
+   "pp_lines": 302
   },
   "2026_06_BAL_CLE": {
    "slug": "2026-w06-bal-cle",
-   "pp_lines": 0
+   "pp_lines": 107
   },
   "2026_06_CAR_PHI": {
    "slug": "2026-w06-car-phi",
-   "pp_lines": 0
+   "pp_lines": 144
   },
   "2026_06_CHI_ATL": {
    "slug": "2026-w06-chi-atl",
-   "pp_lines": 0
+   "pp_lines": 92
   },
   "2026_06_NO_NYG": {
    "slug": "2026-w06-no-nyg",
-   "pp_lines": 0
+   "pp_lines": 188
   },
   "2026_06_NYJ_NE": {
    "slug": "2026-w06-nyj-ne",
-   "pp_lines": 0
+   "pp_lines": 76
   },
   "2026_06_PIT_TB": {
    "slug": "2026-w06-pit-tb",
-   "pp_lines": 0
+   "pp_lines": 29
   },
   "2026_06_TEN_IND": {
    "slug": "2026-w06-ten-ind",
-   "pp_lines": 0
+   "pp_lines": 37
   },
   "2026_06_ARI_LA": {
    "slug": "2026-w06-ari-lar",
-   "pp_lines": 0
+   "pp_lines": 3
   },
   "2026_06_BUF_LV": {
    "slug": "2026-w06-buf-lv",
-   "pp_lines": 0
+   "pp_lines": 1
   },
   "2026_06_LAC_KC": {
    "slug": "2026-w06-lac-kc",
-   "pp_lines": 0
+   "pp_lines": 86
   },
   "2026_06_DAL_GB": {
    "slug": "2026-w06-dal-gb",
-   "pp_lines": 0
+   "pp_lines": 191
   },
   "2026_06_WAS_SF": {
    "slug": "2026-w06-was-sf",
-   "pp_lines": 0
+   "pp_lines": 167
   }
  },
- "best": {}
+ "best": {
+  "2": [
+   {
+    "n": 2,
+    "recommended": false,
+    "basis": "model only",
+    "play_as": "Power",
+    "p_all": 0.36411948314111753,
+    "p_independent": 0.3602571938905922,
+    "power_ev": 1.0923584494233527,
+    "flex_ev": null,
+    "best_ev": 1.0923584494233527,
+    "min_power_mult": 2.746351256388117,
+    "legs": [
+     {
+      "player": "George Kittle",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 61.5,
+      "p_model": 0.6041284249477005,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Nico Collins",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 71.5,
+      "p_model": 0.5963255147170445,
+      "game_id": "2026_06_HOU_JAX"
+     }
+    ]
+   }
+  ],
+  "3": [
+   {
+    "n": 3,
+    "recommended": false,
+    "basis": "model only",
+    "play_as": "Power",
+    "p_all": 0.22525979288601514,
+    "p_independent": 0.19364257931500475,
+    "power_ev": 1.1262989644300756,
+    "flex_ev": 0.982726289596097,
+    "best_ev": 1.1262989644300756,
+    "min_power_mult": 4.439318651535896,
+    "legs": [
+     {
+      "player": "Nico Collins",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 71.5,
+      "p_model": 0.5963255147170445,
+      "game_id": "2026_06_HOU_JAX"
+     },
+     {
+      "player": "Dak Prescott",
+      "team": "DAL",
+      "stat": "completions",
+      "side": "under",
+      "line": 24.5,
+      "p_model": 0.5701462215611733,
+      "game_id": "2026_06_DAL_GB"
+     },
+     {
+      "player": "Jake Ferguson",
+      "team": "DAL",
+      "stat": "receptions",
+      "side": "under",
+      "line": 3.5,
+      "p_model": 0.569549164891793,
+      "game_id": "2026_06_DAL_GB"
+     }
+    ]
+   }
+  ],
+  "4": [
+   {
+    "n": 4,
+    "recommended": true,
+    "basis": "model only",
+    "play_as": "Power",
+    "p_all": 0.13837950551788092,
+    "p_independent": 0.13396069430448304,
+    "power_ev": 1.3837950551788092,
+    "flex_ev": 1.2136198277774297,
+    "best_ev": 1.3837950551788092,
+    "min_power_mult": 7.226503637641511,
+    "legs": [
+     {
+      "player": "J.K. Dobbins",
+      "team": "DEN",
+      "stat": "rush_att",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6068378738346678,
+      "game_id": "2026_06_SEA_DEN"
+     },
+     {
+      "player": "Tony Pollard",
+      "team": "TEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 49.5,
+      "p_model": 0.605418170491175,
+      "game_id": "2026_06_TEN_IND"
+     },
+     {
+      "player": "George Kittle",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 61.5,
+      "p_model": 0.6041284249477005,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Christian McCaffrey",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 39.5,
+      "p_model": 0.6035593617358359,
+      "game_id": "2026_06_WAS_SF"
+     }
+    ]
+   },
+   {
+    "n": 4,
+    "recommended": true,
+    "basis": "model only",
+    "play_as": "Power",
+    "p_all": 0.13739233764582415,
+    "p_independent": 0.13329231943976635,
+    "power_ev": 1.3739233764582415,
+    "flex_ev": 1.2046103027867516,
+    "best_ev": 1.3739233764582415,
+    "min_power_mult": 7.278426272779803,
+    "legs": [
+     {
+      "player": "J.K. Dobbins",
+      "team": "DEN",
+      "stat": "rush_att",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6068378738346678,
+      "game_id": "2026_06_SEA_DEN"
+     },
+     {
+      "player": "George Kittle",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 61.5,
+      "p_model": 0.6041284249477005,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Christian McCaffrey",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 39.5,
+      "p_model": 0.6035593617358359,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Hunter Henry",
+      "team": "NE",
+      "stat": "receptions",
+      "side": "under",
+      "line": 3.5,
+      "p_model": 0.6023975357419351,
+      "game_id": "2026_06_NYJ_NE"
+     }
+    ]
+   },
+   {
+    "n": 4,
+    "recommended": true,
+    "basis": "model only",
+    "play_as": "Power",
+    "p_all": 0.1376844765775954,
+    "p_independent": 0.1319487654028723,
+    "power_ev": 1.376844765775954,
+    "flex_ev": 1.2042369721672057,
+    "best_ev": 1.376844765775954,
+    "min_power_mult": 7.26298290741895,
+    "legs": [
+     {
+      "player": "J.K. Dobbins",
+      "team": "DEN",
+      "stat": "rush_att",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6068378738346678,
+      "game_id": "2026_06_SEA_DEN"
+     },
+     {
+      "player": "George Kittle",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 61.5,
+      "p_model": 0.6041284249477005,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Christian McCaffrey",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 39.5,
+      "p_model": 0.6035593617358359,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Nico Collins",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 71.5,
+      "p_model": 0.5963255147170445,
+      "game_id": "2026_06_HOU_JAX"
+     }
+    ]
+   }
+  ],
+  "5": [
+   {
+    "n": 5,
+    "recommended": true,
+    "basis": "model only",
+    "play_as": "Power",
+    "p_all": 0.0818851760264224,
+    "p_independent": 0.07798024066015487,
+    "power_ev": 1.637703520528448,
+    "flex_ev": 1.4710949505295332,
+    "best_ev": 1.637703520528448,
+    "min_power_mult": 12.212222633280092,
+    "legs": [
+     {
+      "player": "George Kittle",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 61.5,
+      "p_model": 0.6041284249477005,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Christian McCaffrey",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 39.5,
+      "p_model": 0.6035593617358359,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Hunter Henry",
+      "team": "NE",
+      "stat": "receptions",
+      "side": "under",
+      "line": 3.5,
+      "p_model": 0.6023975357419351,
+      "game_id": "2026_06_NYJ_NE"
+     },
+     {
+      "player": "Nico Collins",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 71.5,
+      "p_model": 0.5963255147170445,
+      "game_id": "2026_06_HOU_JAX"
+     },
+     {
+      "player": "Emmett Johnson",
+      "team": "KC",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 7.5,
+      "p_model": 0.5953450307088066,
+      "game_id": "2026_06_LAC_KC"
+     }
+    ]
+   },
+   {
+    "n": 5,
+    "recommended": true,
+    "basis": "model only",
+    "play_as": "Power",
+    "p_all": 0.08221696519847041,
+    "p_independent": 0.07827798183462709,
+    "power_ev": 1.6443393039694083,
+    "flex_ev": 1.4753763909519118,
+    "best_ev": 1.6443393039694083,
+    "min_power_mult": 12.162939821313234,
+    "legs": [
+     {
+      "player": "Hunter Henry",
+      "team": "NE",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 37.5,
+      "p_model": 0.6046975887498338,
+      "game_id": "2026_06_NYJ_NE"
+     },
+     {
+      "player": "George Kittle",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 61.5,
+      "p_model": 0.6041284249477005,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Christian McCaffrey",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 39.5,
+      "p_model": 0.6035593617358359,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Nico Collins",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 71.5,
+      "p_model": 0.5963255147170445,
+      "game_id": "2026_06_HOU_JAX"
+     },
+     {
+      "player": "Emmett Johnson",
+      "team": "KC",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 7.5,
+      "p_model": 0.5953450307088066,
+      "game_id": "2026_06_LAC_KC"
+     }
+    ]
+   },
+   {
+    "n": 5,
+    "recommended": true,
+    "basis": "model only",
+    "play_as": "Power",
+    "p_all": 0.08258515174650291,
+    "p_independent": 0.07837126097556167,
+    "power_ev": 1.6517030349300583,
+    "flex_ev": 1.4770382433586136,
+    "best_ev": 1.6517030349300583,
+    "min_power_mult": 12.108714204092326,
+    "legs": [
+     {
+      "player": "Tony Pollard",
+      "team": "TEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 49.5,
+      "p_model": 0.605418170491175,
+      "game_id": "2026_06_TEN_IND"
+     },
+     {
+      "player": "George Kittle",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 61.5,
+      "p_model": 0.6041284249477005,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Christian McCaffrey",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 39.5,
+      "p_model": 0.6035593617358359,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Nico Collins",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 71.5,
+      "p_model": 0.5963255147170445,
+      "game_id": "2026_06_HOU_JAX"
+     },
+     {
+      "player": "Emmett Johnson",
+      "team": "KC",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 7.5,
+      "p_model": 0.5953450307088066,
+      "game_id": "2026_06_LAC_KC"
+     }
+    ]
+   }
+  ],
+  "6": [
+   {
+    "n": 6,
+    "recommended": true,
+    "basis": "model only",
+    "play_as": "Power",
+    "p_all": 0.050789712623908696,
+    "p_independent": 0.04721065466161466,
+    "power_ev": 1.9046142233965762,
+    "flex_ev": 1.7635401455198485,
+    "best_ev": 1.9046142233965762,
+    "min_power_mult": 19.689026543719034,
+    "legs": [
+     {
+      "player": "Tony Pollard",
+      "team": "TEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 49.5,
+      "p_model": 0.605418170491175,
+      "game_id": "2026_06_TEN_IND"
+     },
+     {
+      "player": "George Kittle",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 61.5,
+      "p_model": 0.6041284249477005,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Christian McCaffrey",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 39.5,
+      "p_model": 0.6035593617358359,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Hunter Henry",
+      "team": "NE",
+      "stat": "receptions",
+      "side": "under",
+      "line": 3.5,
+      "p_model": 0.6023975357419351,
+      "game_id": "2026_06_NYJ_NE"
+     },
+     {
+      "player": "Nico Collins",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 71.5,
+      "p_model": 0.5963255147170445,
+      "game_id": "2026_06_HOU_JAX"
+     },
+     {
+      "player": "Emmett Johnson",
+      "team": "KC",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 7.5,
+      "p_model": 0.5953450307088066,
+      "game_id": "2026_06_LAC_KC"
+     }
+    ]
+   },
+   {
+    "n": 6,
+    "recommended": true,
+    "basis": "model only",
+    "play_as": "Power",
+    "p_all": 0.05059306832096718,
+    "p_independent": 0.04711664972635599,
+    "power_ev": 1.8972400620362693,
+    "flex_ev": 1.7643617366737914,
+    "best_ev": 1.8972400620362693,
+    "min_power_mult": 19.76555352713352,
+    "legs": [
+     {
+      "player": "J.K. Dobbins",
+      "team": "DEN",
+      "stat": "rush_att",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6068378738346678,
+      "game_id": "2026_06_SEA_DEN"
+     },
+     {
+      "player": "Tony Pollard",
+      "team": "TEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 49.5,
+      "p_model": 0.605418170491175,
+      "game_id": "2026_06_TEN_IND"
+     },
+     {
+      "player": "George Kittle",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 61.5,
+      "p_model": 0.6041284249477005,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Christian McCaffrey",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 39.5,
+      "p_model": 0.6035593617358359,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Hunter Henry",
+      "team": "NE",
+      "stat": "receptions",
+      "side": "under",
+      "line": 3.5,
+      "p_model": 0.6023975357419351,
+      "game_id": "2026_06_NYJ_NE"
+     },
+     {
+      "player": "Dak Prescott",
+      "team": "DAL",
+      "stat": "pass_att",
+      "side": "under",
+      "line": 38.5,
+      "p_model": 0.5838668588550955,
+      "game_id": "2026_06_DAL_GB"
+     }
+    ]
+   },
+   {
+    "n": 6,
+    "recommended": true,
+    "basis": "model only",
+    "play_as": "Power",
+    "p_all": 0.05033701441040914,
+    "p_independent": 0.047390912542609055,
+    "power_ev": 1.8876380403903426,
+    "flex_ev": 1.7554194543507278,
+    "best_ev": 1.8876380403903426,
+    "min_power_mult": 19.86609678211688,
+    "legs": [
+     {
+      "player": "Tony Pollard",
+      "team": "TEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 49.5,
+      "p_model": 0.605418170491175,
+      "game_id": "2026_06_TEN_IND"
+     },
+     {
+      "player": "Hunter Henry",
+      "team": "NE",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 37.5,
+      "p_model": 0.6046975887498338,
+      "game_id": "2026_06_NYJ_NE"
+     },
+     {
+      "player": "George Kittle",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 61.5,
+      "p_model": 0.6041284249477005,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Christian McCaffrey",
+      "team": "SF",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 39.5,
+      "p_model": 0.6035593617358359,
+      "game_id": "2026_06_WAS_SF"
+     },
+     {
+      "player": "Nico Collins",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 71.5,
+      "p_model": 0.5963255147170445,
+      "game_id": "2026_06_HOU_JAX"
+     },
+     {
+      "player": "Emmett Johnson",
+      "team": "KC",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 7.5,
+      "p_model": 0.5953450307088066,
+      "game_id": "2026_06_LAC_KC"
+     }
+    ]
+   }
+  ]
+ }
 }

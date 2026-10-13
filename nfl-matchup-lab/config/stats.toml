@@ -23,6 +23,8 @@
 "rush + rec yards" = "rush_rec_yds"
 "anytime td" = "anytime_td"
 "rush+rec tds" = "rush_rec_tds"
+"pass+rush yds" = "pass_rush_yds"
+"anytime tds" = "anytime_td"
 "rush + rec tds" = "rush_rec_tds"
 
 [count_stats]

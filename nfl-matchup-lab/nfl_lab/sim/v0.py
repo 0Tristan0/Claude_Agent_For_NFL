@@ -78,6 +78,8 @@ class SimResult:
         p = self.players[player_id]
         if stat == "rush_rec_yds":
             return p["rush_yds"] + p["rec_yds"]
+        if stat == "pass_rush_yds":
+            return p["pass_yds"] + p["rush_yds"]
         if stat == "anytime_td":
             return (p["rec_tds"] + p["rush_tds"] >= 1).astype(float)
         if stat == "rush_rec_tds":

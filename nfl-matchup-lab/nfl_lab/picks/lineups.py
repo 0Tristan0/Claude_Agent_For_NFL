@@ -47,6 +47,7 @@ def leg_table(props: pd.DataFrame, sims: dict, resolve) -> pd.DataFrame:
     margin = cfg["margin"]
     be = payouts.breakevens()
     cal = calibration.load()
+    mcal = calibration.load_market()
     count_stats = set(config.load("stats")["count_stats"]["keys"])
     rows = []
     for _, r in props.iterrows():
@@ -59,6 +60,11 @@ def leg_table(props: pd.DataFrame, sims: dict, resolve) -> pd.DataFrame:
         p_over = float(calibration.apply(raw_over, cal, r["stat"]))
         p_under = float(calibration.apply(raw_under, cal, r["stat"]))
         kind = str(r.get("odds_kind") or "")
+        is_market_line = (str(r.get("source", "")).strip().lower() in LINEUP_SOURCES
+                          or kind in QUALIFYING_KINDS)
+        mu = calibration.market_under(raw_under, r["stat"], mcal) if is_market_line else None
+        if mu is not None:                       # market-style line: use the map fitted at such lines
+            p_under, p_over = mu, 1 - mu
         has_mkt = kind in QUALIFYING_KINDS and not np.isnan(r.get("fair_over", np.nan))
         # exchange/probability quotes already are probabilities: no sportsbook overround to remove
         orr = 0.0 if kind in ("exchange", "prob") else cfg["one_sided_overround"].get(
@@ -67,6 +73,7 @@ def leg_table(props: pd.DataFrame, sims: dict, resolve) -> pd.DataFrame:
         is_pp = str(r.get("source", "")).strip().lower() in LINEUP_SOURCES
         for side, p, raw, fair in (("over", p_over, raw_over, r.get("fair_over")),
                                    ("under", p_under, raw_under, r.get("fair_under"))):
+            p_cal = p
             if side == "under" and r["stat"] == "anytime_td":
                 continue
             edge, basis = None, "no price"
@@ -76,10 +83,12 @@ def leg_table(props: pd.DataFrame, sims: dict, resolve) -> pd.DataFrame:
                                        cfg["devig_methods"], orr)
                 basis = "model + market"
             elif is_pp:
-                edge, basis = p - 0.5, "model only"          # PrizePicks standard line taken as a coin flip
+                # the PrizePicks line is the market: pull the model toward 50% (partial trust until graded)
+                p = 0.5 + cfg.get("model_only_weight", 1.0) * (p - 0.5)
+                edge, basis = p - 0.5, "model only"
             rows.append(dict(game_id=r["game_id"], player_id=r["player_id"], player=r["player"], team=r["team"],
-                             stat=r["stat"], line=r["line"], side=side, p_model=p, p_sim=raw,
-                             far_from_line=bool(max(p, 1 - p) >= FAR_FROM_LINE and r.get("source", "") != "standin"),
+                             stat=r["stat"], line=r["line"], side=side, p_model=p, p_sim=raw, p_model_alone=p_cal,
+                             far_from_line=bool(max(p_cal, 1 - p_cal) >= FAR_FROM_LINE and r.get("source", "") != "standin"),
                              p_market=float(fair) if has_mkt and fair == fair else np.nan,
                              market_edge=edge, source=r["source"], odds_kind=kind or "none",
                              line_type=r.get("line_type", "standard") or "standard", integer_push=integer_push,

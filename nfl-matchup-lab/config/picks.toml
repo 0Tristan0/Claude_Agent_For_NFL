@@ -1,6 +1,10 @@
 # How picks qualify and how lineups are sized.
 
 margin = 0.03                 # model must beat break-even AND the devigged market by this much
+# Without a sportsbook price, a PrizePicks line is the market: the model's lean is pulled toward 50% by this
+# weight (chance used = 50% + weight x (model - 50%)). v0 has never been graded against real PrizePicks lines,
+# so it gets partial trust until it is. 1.0 = trust the model fully.
+model_only_weight = 0.5
 devig_methods = ["multiplicative", "power", "shin"]   # qualify on the smallest edge across these
 display_devig = "power"
 breakeven_basis = "entry"     # a leg must clear the break-even of the entry size it goes into

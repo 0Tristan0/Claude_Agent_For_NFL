@@ -6,3 +6,4 @@ experiments/runs/**/*.parquet
 *.egg-info/
 __pycache__/
 output/logos/
+data/prizepicks/

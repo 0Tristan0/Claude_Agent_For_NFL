@@ -121,8 +121,9 @@ def render(proj: dict, sim, legs: pd.DataFrame | None, best: dict | None, check:
 <p class="sub">The model's chance of More and Less at each PrizePicks line (calibrated on 2023). A pick qualifies when it clears
 the PrizePicks break-even by 3 points: 2-pick {be['power2']:.1%}, 3-pick {min(be['power3'], be['flex3']):.1%}, 4-pick {min(be['power4'], be['flex4']):.1%},
 5-pick {min(be['power5'], be['flex5']):.1%}, 6-pick {min(be['power6'], be['flex6']):.1%} per leg. With a sportsbook price on the row it must also beat that
-price by 3 points; without one the line is treated as a coin flip ("model only"). When the model is 72% or more on one
-side, the line probably reflects news the model doesn't have, so it never qualifies.</p></div>{picks_html.lines_table(legs)}</section>
+price by 3 points. Without one ("model only"), the PrizePicks line is the market: the model's lean is pulled halfway
+back toward 50%, because v0 has not yet been graded against real PrizePicks lines. When the model alone is 72% or more on
+one side, the line probably reflects news the model doesn't have, so it never qualifies.</p></div>{picks_html.lines_table(legs)}</section>
 
 <section class="pane" id="lineups" data-tab="Lineups" aria-labelledby="h-lu"><div><h2 id="h-lu">PrizePicks lineups</h2>
 <p class="sub">Built only from this game's PrizePicks lines, one pick per player, both teams. Hit chances come from the simulated

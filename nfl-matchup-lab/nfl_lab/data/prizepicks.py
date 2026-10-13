@@ -28,7 +28,7 @@ ARCHIVE_DIR = config.DATA_DIR / "prizepicks"
 PP_STATS = {"Pass Yards": "pass_yds", "Rush Yards": "rush_yds", "Receiving Yards": "rec_yds", "Receptions": "receptions",
             "Rush+Rec TDs": "rush_rec_tds", "Rush+Rec Yds": "rush_rec_yds", "Pass TDs": "pass_tds",
             "Pass Attempts": "pass_att", "Pass Completions": "completions", "Rush Attempts": "rush_att",
-            "INT": "ints", "Interceptions": "ints"}
+            "INT": "ints", "Interceptions": "ints", "Anytime TDs": "anytime_td", "Pass+Rush Yds": "pass_rush_yds"}
 
 
 def fetch(timeout: float = 30) -> dict:

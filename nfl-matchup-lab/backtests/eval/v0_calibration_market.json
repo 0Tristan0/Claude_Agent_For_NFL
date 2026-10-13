@@ -1,0 +1,68 @@
+{
+ "by_stat": {
+  "pass_yds": {
+   "a": 1.0,
+   "b": -0.19962850202407909,
+   "n": 296
+  },
+  "rec_yds": {
+   "a": 1.0,
+   "b": -0.07895933517283668,
+   "n": 1570
+  },
+  "receptions": {
+   "a": 1.0,
+   "b": -0.1614867442298885,
+   "n": 1586
+  },
+  "rush_yds": {
+   "a": 1.0,
+   "b": 0.06710695279310767,
+   "n": 736
+  }
+ },
+ "fitted_on": 2023,
+ "checked_on": 2024,
+ "weeks": "3-12",
+ "sims": 1500,
+ "line": "model mean rounded to .5",
+ "form": "shift only (slope 1)",
+ "check": [
+  {
+   "stat": "pass_yds",
+   "n": 294,
+   "raw_says": 0.5468,
+   "fitted_says": 0.497,
+   "happened": 0.466,
+   "brier_raw": 0.2556,
+   "brier_fitted": 0.25
+  },
+  {
+   "stat": "rec_yds",
+   "n": 1615,
+   "raw_says": 0.6076,
+   "fitted_says": 0.5887,
+   "happened": 0.5598,
+   "brier_raw": 0.2476,
+   "brier_fitted": 0.2461
+  },
+  {
+   "stat": "receptions",
+   "n": 1602,
+   "raw_says": 0.5601,
+   "fitted_says": 0.5205,
+   "happened": 0.5169,
+   "brier_raw": 0.2488,
+   "brier_fitted": 0.247
+  },
+  {
+   "stat": "rush_yds",
+   "n": 750,
+   "raw_says": 0.5885,
+   "fitted_says": 0.6046,
+   "happened": 0.6,
+   "brier_raw": 0.2387,
+   "brier_fitted": 0.2386
+  }
+ ]
+}

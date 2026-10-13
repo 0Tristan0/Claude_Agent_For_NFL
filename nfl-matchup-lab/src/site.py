@@ -470,10 +470,10 @@ def latest_lineups():
 
 LINEUPS_CSS = """
 .hero{display:grid;gap:8px}
-.loaded{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0 16px;border-top:1px solid var(--line-2)}
+.loaded{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0 20px;border-top:1px solid var(--line-2)}
 .loaded a{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);color:var(--text);text-decoration:none;font-size:.88rem}
 .loaded b{font-weight:700;font-stretch:85%}
-.loaded .n{margin-left:auto;color:var(--muted)}
+.loaded .n{margin-left:auto;color:var(--muted);white-space:nowrap}
 .loaded .n.has{color:var(--text);font-weight:600}
 .at2{color:var(--faint);font-size:.8rem}
 """
@@ -509,7 +509,11 @@ def lineups_page():
     body = ('<main class="wrap">\n' + theme.nav("lineups") +
             f'<header class="hero"><span class="eyebrow">PrizePicks{week_txt}</span><h1>Lineups</h1>'
             '<p class="sub">PrizePicks Power and Flex lineups built from simulated games, so picks that move together are '
-            f'counted together. Only PrizePicks lines are used.{built}</p></header>\n' + inner +
+            f'counted together. Only PrizePicks lines are used.{built}</p>'
+            '<p class="sub">Read these as an experiment. The model has not been graded against real PrizePicks lines yet, so '
+            'without a sportsbook price its lean is cut in half toward 50%, and its chances at lines like these were '
+            're-checked on the 2023 and 2024 seasons, where it called "Less" too often. Even so, most of its strongest '
+            'picks are still "Less" picks.</p></header>\n' + inner +
             '<footer class="notes"><p>Payouts: PrizePicks standard tables (Power 2 to 6 picks, Flex 3 to 6). The app can pay '
             'less on some entries; skip a lineup if the app shows less than the listed multiplier. Estimates, not betting '
             'advice.</p></footer>\n</main>\n')

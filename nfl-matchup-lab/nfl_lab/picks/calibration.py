@@ -15,6 +15,10 @@ from scipy.optimize import minimize
 from .. import config
 
 PATH = config.BACKTESTS_DIR / "eval" / "v0_calibration.json"
+# A second map for market-style lines (PrizePicks and sportsbook lines sit near the model's mean, not near a
+# player's recent median): fitted on P(under) at a line equal to the model's own mean, 2023, checked on 2024.
+MARKET_PATH = config.BACKTESTS_DIR / "eval" / "v0_calibration_market.json"
+MARKET_FAMILY = {"pass_rush_yds": "pass_yds"}      # stats with no fit of their own borrow a close one
 
 
 def _logit(p):
@@ -45,6 +49,21 @@ def apply(p, params: dict | None, stat: str | None = None):
 
 def load() -> dict | None:
     return json.loads(PATH.read_text()) if PATH.exists() else None
+
+
+def load_market() -> dict | None:
+    return json.loads(MARKET_PATH.read_text()) if MARKET_PATH.exists() else None
+
+
+def market_under(raw_under: float, stat: str, market: dict | None) -> float | None:
+    """Calibrated P(under) at a market line, or None when there is no market fit for this stat."""
+    if not market:
+        return None
+    key = stat if stat in market.get("by_stat", {}) else MARKET_FAMILY.get(stat)
+    if key not in market.get("by_stat", {}):
+        return None
+    prm = market["by_stat"][key]
+    return float(1 / (1 + np.exp(-(prm["a"] * _logit(raw_under) + prm.get("b", 0.0)))))
 
 
 def save(params: dict, **meta) -> None:

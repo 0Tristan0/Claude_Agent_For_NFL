@@ -28,9 +28,30 @@ def slug(g) -> str:
     return f"{int(g['season'])}-w{int(g['week']):02d}-{teams.display(g['away_team']).lower()}-{teams.display(g['home_team']).lower()}"
 
 
-def _active_with_overrides(T, g, asof, out, ov):
+PASSING = ["pass_yds", "pass_att", "completions", "pass_tds", "pass_rush_yds"]
+
+
+def board_overrides(props: pd.DataFrame, g) -> tuple[pd.DataFrame, dict]:
+    """Players on the PrizePicks board for this game are expected to play: PrizePicks pulls a player's lines once he
+    is ruled out. So each one counts as 'in' (this brings back players returning from injury and recent trades).
+    The QB with the highest Pass Yards line on a team is taken as its starter."""
+    if props is None or props.empty:
+        return pd.DataFrame(columns=["player", "team", "status"]), {}
+    ko = g["kickoff_utc"]
+    pp = props[props["source"].str.lower().eq("prizepicks") & props["game_id"].isin(["", g["game_id"]])
+               & props["team"].isin([g["home_team"], g["away_team"]])
+               & (props["captured_at"] < ko) & (props["captured_at"] > ko - pd.Timedelta(days=7))]
+    rows = pp[["player", "team"]].drop_duplicates().assign(status="in")
+    py = pp[pp["stat"].eq("pass_yds")].sort_values("line")
+    starters = {t: grp["player"].iloc[-1] for t, grp in py.groupby("team")}
+    return rows.reset_index(drop=True), starters
+
+
+def _active_with_overrides(T, g, asof, out, ov, starters: dict | None = None, quiet: set | None = None):
     """Live actives: a snap in the team's last 2 games, minus Out/Doubtful, with data/overrides.csv applied.
-    'out' removes a player; 'in' adds him (from his latest game) and, for a QB, makes him the starter."""
+    'out' removes a player; 'in' adds him (from his latest game) and, for a QB, makes him the starter
+    (when `starters` names a team's starter, only that QB is forced in as starter). Names in `quiet` that
+    have no past games are skipped without a message."""
     from .features.asof import visible
     act = {}
     hist = visible(T["player_games"], asof)
@@ -44,12 +65,20 @@ def _active_with_overrides(T, g, asof, out, ov):
             for _, r in o[o["status"] == "in"].iterrows():
                 h = hist[hist["player_name"].map(lines.norm_name) == lines.norm_name(r["player"])]
                 if h.empty:
-                    print(f"override: no past games found for {r['player']} ({team}); not added")
+                    if r["player"] not in (quiet or set()):
+                        print(f"override: no past games found for {r['player']} ({team}); not added")
                     continue
                 last = h.sort_values("kickoff_utc").iloc[-1]
+                st = (starters or {}).get(team)
+                force = last["position"] == "QB" and (st is None or lines.norm_name(st) == lines.norm_name(r["player"]))
+                prev = a[a["player_id"] == last["player_id"]]
+                if not force and len(prev):
+                    continue                                     # already active: nothing to change
                 a = a[a["player_id"] != last["player_id"]]
+                if force:
+                    a = a.assign(force_starter=False)            # one forced starter per team
                 a = pd.concat([a, pd.DataFrame([dict(player_id=last["player_id"], player_name=last["player_name"],
-                                                      position=last["position"], force_starter=last["position"] == "QB")])],
+                                                      position=last["position"], force_starter=force)])],
                               ignore_index=True)
         act[team] = a.reset_index(drop=True)
     return act
@@ -95,7 +124,17 @@ def run_games(game_ids: list[str], n_sims: int = 20000, write_pages: bool = True
         g["game_id"] = gid
         asof = min(now, g["kickoff_utc"])
         out, injury_note = _outs(T, g, asof)
-        act = _active_with_overrides(T, g, asof, out, ov)
+        board, starters = board_overrides(props, g)
+        manual_out = set(ov.loc[ov["status"] == "out", "player"].map(lines.norm_name)) if len(ov) else set()
+        board = board[~board["player"].map(lines.norm_name).isin(manual_out)]
+        manual_in = ov[ov["status"] == "in"] if len(ov) else ov
+        if len(manual_in):                                       # a manual 'in' QB beats the board's choice
+            for _, r in manual_in.iterrows():
+                starters.pop(r["team"], None)
+        act = _active_with_overrides(T, g, asof, out, pd.concat([ov, board], ignore_index=True), starters,
+                                     quiet=set(board["player"]))
+        if len(board):
+            injury_note += "; players with PrizePicks lines counted as active"
         proj = P.project_game(T, gid, fits[season_of(g)], eng=eng, active_override=act)
         proj["injury_note"] = injury_note
         proj["run_at"] = now

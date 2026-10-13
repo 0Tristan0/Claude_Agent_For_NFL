@@ -228,6 +228,24 @@ def cmd_check(a):
     return 0
 
 
+def cmd_market_cal(a):
+    import json
+    from . import v0run
+    from .backtest import market_lines as M
+    from .picks import calibration
+    T = v0run.load_tables()
+    dfs = {}
+    for season in (a.fit_season, a.check_season):
+        dfs[season] = M.run(T, season, n_sims=a.sims, progress=print)
+        dfs[season].to_csv(config.BACKTESTS_DIR / "eval" / f"market_lines_{season}.csv", index=False)
+    params = M.fit(dfs[a.fit_season])
+    rep = M.check(dfs[a.check_season], params)
+    calibration.MARKET_PATH.write_text(json.dumps({**params, "fitted_on": a.fit_season, "checked_on": a.check_season,
+                                                   "weeks": "3-12", "sims": a.sims, "check": rep.round(4).to_dict("records")}, indent=1))
+    print(rep.round(3).to_string(index=False))
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="nfl_lab", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("-v", "--verbose", action="store_true")
@@ -267,6 +285,11 @@ def main(argv=None) -> int:
     s.add_argument("--sims", type=int, default=2000)
     s.add_argument("--raw", action="store_true", help="skip calibration (report raw sim probabilities)")
     s.set_defaults(fn=cmd_check)
+    s = sub.add_parser("market-cal", help="fit the calibration used at market-style lines (2023) and check it (2024)")
+    s.add_argument("--fit-season", type=int, default=2023)
+    s.add_argument("--check-season", type=int, default=2024)
+    s.add_argument("--sims", type=int, default=1500)
+    s.set_defaults(fn=cmd_market_cal)
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO if a.verbose else logging.WARNING, format="%(message)s")
     return a.fn(a)
