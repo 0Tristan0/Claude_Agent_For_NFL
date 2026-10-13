@@ -150,13 +150,13 @@ def _flex_ev(ps: list[float]) -> float | None:
                      for combo in itertools.product([0, 1], repeat=n)))
 
 
-def lineups(picks: pd.DataFrame, label: str = "", sizes=(3, 4, 5, 6)) -> dict:
+def lineups(picks: pd.DataFrame, label: str = "", sizes=(3, 4, 5, 6), min_pick: float = None) -> dict:
     """Entry A (3-pick Flex), Entry B (4-pick Power), then 5 and 6 picks: the top estimates, one per player."""
     power, _ = payouts.tables()
     out = {}
     if picks is None or picks.empty:
         return out
-    pool = picks[(picks["games"] >= MIN_GAMES) & (picks["p_model"] >= MIN_PICK)]
+    pool = picks[(picks["games"] >= MIN_GAMES) & (picks["p_model"] >= (MIN_PICK if min_pick is None else min_pick))]
     pool = pool.sort_values("p_model", ascending=False, kind="mergesort").drop_duplicates("player_id")
     for n in sizes:
         pick = pool.head(n)
@@ -300,3 +300,75 @@ def grade_week(season: int, week: int, stats: pd.DataFrame) -> list[str]:
         path.write_text(json.dumps(d, indent=2, default=str))
         done.append(d["game"])
     return done
+
+
+RETRO_PATH = LIVE_DIR / "{slug}-guesser-retro.json"
+
+
+def retro_board(game_id: str, prices: bool) -> pd.DataFrame:
+    """The lines on file for a finished game (data/props.csv rows with its game_id, all captured before kickoff), as
+    standard PrizePicks lines. prices=False drops any sportsbook price (market = 50%, as on a PrizePicks board);
+    prices=True keeps the prices the original report collected."""
+    import tempfile
+    raw = pd.read_csv(lines.PROPS_PATH, dtype=str, keep_default_na=False)
+    g = raw[raw["game_id"] == game_id].copy()
+    g["has_price"] = (g["over_odds"] != "") | (g["under_odds"] != "")
+    g = g.sort_values("has_price", ascending=False, kind="mergesort").drop_duplicates(["player", "team", "stat", "line"])
+    g = g.drop(columns="has_price")
+    g["source"], g["line_type"] = "prizepicks", "standard"
+    if not prices:
+        g["over_odds"], g["under_odds"], g["odds_kind"] = "", "", ""
+    with tempfile.TemporaryDirectory() as d:
+        p = Path(d) / "props.csv"
+        g.to_csv(p, index=False)
+        out = lines.load_props(p)
+    return lines.fair_probs(out) if len(out) else out
+
+
+def retro_predict(game_id: str) -> Path:
+    """Before-kickoff test, step 1: rate a finished game with only what was known before kickoff and freeze the
+    lineups to backtests/live/<slug>-guesser-retro.json. No results are read here."""
+    from . import v0run
+    T = v0run.load_tables()
+    if (T["player_games"]["game_id"] == game_id).any():
+        raise RuntimeError(f"{game_id} is already in data/tables: the test would see the result")
+    eng = bundle.engines(T)
+    g = T["games"].set_index("game_id").loc[game_id].copy()
+    g["game_id"] = game_id
+    variants = {}
+    for name, prices in (("no_prices", False), ("with_prices", True)):
+        board = retro_board(game_id, prices)
+        picks, note = rate_game(T, eng, board, game_id)
+        lu = lineups(picks, game_label(g))
+        filled = {n: [dict(L, filled=True, basis="Guesser method, filled with coin flips")]
+                  for n, (L,) in lineups(picks, game_label(g), min_pick=0.5).items() if n not in lu}
+        variants[name] = dict(
+            market=("50% for every line, as on a PrizePicks board (how Week 6 is rated)" if not prices else
+                    "the sportsbook / Kalshi / Polymarket prices the original report collected before kickoff"),
+            picks=[] if picks.empty else json.loads(picks.to_json(orient="records")), lineups=lu, filled=filled,
+            filled_rule="sizes the model would not build (fewer players at Lean, 52.5%, or better), filled with the "
+                        "next-best picks down to 50%, same order, one per player, 3+ games",
+            injury_note=note)
+    rec = dict(game_id=game_id, label=game_label(g), kickoff_utc=str(g["kickoff_utc"]),
+               predicted_at=f"{pd.Timestamp.now(tz='UTC'):%Y-%m-%d %H:%M} UTC",
+               data_check=f"{game_id} not in data/tables (latest game in tables kicked off "
+                          f"{T['player_games']['kickoff_utc'].max()}); stats, matchups and actives taken as of kickoff",
+               lines=f"{len(retro_board(game_id, False))} lines on file in data/props.csv for this game, saved before kickoff",
+               method="Guesser method (nfl_lab/guesser.py), same code as the Week 6 lineups", variants=variants, graded=None)
+    path = Path(str(RETRO_PATH).format(slug=slug(g)))
+    path.write_text(json.dumps(rec, indent=1, default=str))
+    return path
+
+
+def retro_grade(path: Path, stats: pd.DataFrame, final: str = "") -> dict:
+    """Before-kickoff test, step 2: grade the frozen lineups against nflverse's official weekly stats."""
+    from .backtest import retro
+    rec = json.loads(Path(path).read_text())
+    week = int(rec["game_id"].split("_")[1])
+    for v in rec["variants"].values():
+        v["lineups"] = retro.grade(v["lineups"], stats, week)
+        v["filled"] = retro.grade(v.get("filled") or {}, stats, week)
+    rec["graded"] = dict(at=f"{pd.Timestamp.now(tz='UTC'):%Y-%m-%d %H:%M} UTC", final=final,
+                         source=f"nflverse stats_player_week_{rec['game_id'][:4]}")
+    Path(path).write_text(json.dumps(rec, indent=1, default=str))
+    return rec

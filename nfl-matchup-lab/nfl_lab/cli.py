@@ -16,6 +16,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import sys
 
@@ -284,6 +285,35 @@ def cmd_guesser_grade(a):
     return 0
 
 
+def cmd_guesser_retro(a):
+    from . import guesser
+    from .backtest import retro
+    if not a.grade:
+        path = guesser.retro_predict(a.game)
+        rec = json.loads(path.read_text())
+        for name, v in rec["variants"].items():
+            print(f"{name}:")
+            for n, lst in sorted({**v["lineups"], **v.get("filled", {})}.items(), key=lambda kv: int(kv[0])):
+                for L in lst:
+                    print(f"   {n}-pick {L['play_as']}{' (filled)' if L.get('filled') else ''} ({L['p_all']:.1%} all hit, ${L['best_ev']:.2f} per $1): "
+                          + "; ".join(f"{guesser.leg_text(x)} ({x['p_model']:.0%})" for x in L["legs"]))
+        print("frozen:", path)
+        return 0
+    path = sorted((guesser.LIVE_DIR).glob("*-guesser-retro.json"))
+    path = [p for p in path if json.loads(p.read_text())["game_id"] == a.game][0]
+    rec = guesser.retro_grade(path, retro.fetch_stats(int(a.game[:4])), a.final)
+    for name, v in rec["variants"].items():
+        print(f"{name}:")
+        for n, lst in sorted({**v["lineups"], **v.get("filled", {})}.items(), key=lambda kv: int(kv[0])):
+            for L in lst:
+                o = L.get("outcome")
+                print(f"   {n}-pick {L['play_as']}{' (filled)' if L.get('filled') else ''}: " + (f"{o['hits']} of {o['of']} hit, ${o['returned']:.2f} back per $1" if o else "not graded"))
+                for x in L["legs"]:
+                    r = x.get("result")
+                    print(f"      {guesser.leg_text(x)} ({x['p_model']:.0%}): " + (f"{'HIT' if r['hit'] else 'MISS'} ({r['actual']})" if r else "no stats"))
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="nfl_lab", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("-v", "--verbose", action="store_true")
@@ -338,6 +368,11 @@ def main(argv=None) -> int:
         s.add_argument("--week", type=int, required=True)
         s.add_argument("--season", type=int, default=config.LIVE_SEASON)
         s.set_defaults(fn=fn)
+    s = sub.add_parser("guesser-retro", help="before-kickoff test of the Guesser method on a finished game")
+    s.add_argument("--game", required=True)
+    s.add_argument("--grade", action="store_true", help="step 2: grade the frozen lineups")
+    s.add_argument("--final", default="")
+    s.set_defaults(fn=cmd_guesser_retro)
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO if a.verbose else logging.WARNING, format="%(message)s")
     return a.fn(a)

@@ -1,0 +1,1351 @@
+{
+ "game_id": "2026_05_BUF_LA",
+ "label": "BUF at LAR",
+ "kickoff_utc": "2026-10-13 00:15:00+00:00",
+ "predicted_at": "2026-10-13 16:13 UTC",
+ "data_check": "2026_05_BUF_LA not in data/tables (latest game in tables kicked off 2026-10-12 00:20:00+00:00); stats, matchups and actives taken as of kickoff",
+ "lines": "13 lines on file in data/props.csv for this game, saved before kickoff",
+ "method": "Guesser method (nfl_lab/guesser.py), same code as the Week 6 lineups",
+ "variants": {
+  "no_prices": {
+   "market": "50% for every line, as on a PrizePicks board (how Week 6 is rated)",
+   "picks": [
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0034857",
+     "player": "Josh Allen",
+     "team": "BUF",
+     "position": "QB",
+     "stat": "anytime_td",
+     "line": 0.5,
+     "side": "over",
+     "hits": 4,
+     "games": 4,
+     "log": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "recent": 0.7222222222,
+     "market": 0.5,
+     "p_model": 0.6122829861,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.00234375,
+     "reasons": [],
+     "tier": "High"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0037261",
+     "player": "Khalil Shakir",
+     "team": "BUF",
+     "position": "WR",
+     "stat": "rec_yds",
+     "line": 49.5,
+     "side": "under",
+     "hits": 3,
+     "games": 4,
+     "log": [
+      40.0,
+      38.0,
+      6.0,
+      82.0
+     ],
+     "recent": 0.6111111111,
+     "market": 0.5,
+     "p_model": 0.5658836806,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.02065625,
+     "reasons": [
+      "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
+     ],
+     "tier": "Medium"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0037840",
+     "player": "Kyren Williams",
+     "team": "LA",
+     "position": "RB",
+     "stat": "rush_yds",
+     "line": 69.5,
+     "side": "over",
+     "hits": 3,
+     "games": 4,
+     "log": [
+      41.0,
+      85.0,
+      88.0,
+      80.0
+     ],
+     "recent": 0.6111111111,
+     "market": 0.5,
+     "p_model": 0.5635711806,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.01603125,
+     "reasons": [
+      "For: BUF have the 5th worst run defense (EPA per rush allowed)",
+      "For: LAR favored by 3.5: more carries to close it out"
+     ],
+     "tier": "Medium"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0037840",
+     "player": "Kyren Williams",
+     "team": "LA",
+     "position": "RB",
+     "stat": "rec_yds",
+     "line": 19.5,
+     "side": "over",
+     "hits": 3,
+     "games": 4,
+     "log": [
+      24.0,
+      12.0,
+      70.0,
+      67.0
+     ],
+     "recent": 0.6111111111,
+     "market": 0.5,
+     "p_model": 0.5621961806,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.01328125,
+     "reasons": [
+      "For: BUF allow the 3rd most receiving yds to RBs (40 a game)"
+     ],
+     "tier": "Medium"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0037840",
+     "player": "Kyren Williams",
+     "team": "LA",
+     "position": "RB",
+     "stat": "anytime_td",
+     "line": 0.5,
+     "side": "over",
+     "hits": 3,
+     "games": 4,
+     "log": [
+      1.0,
+      1.0,
+      0.0,
+      1.0
+     ],
+     "recent": 0.6111111111,
+     "market": 0.5,
+     "p_model": 0.5590711806,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.00703125,
+     "reasons": [
+      "For: BUF allow touchdowns on 64% of red-zone trips (the 9th most)"
+     ],
+     "tier": "Medium"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0026498",
+     "player": "Matthew Stafford",
+     "team": "LA",
+     "position": "QB",
+     "stat": "pass_yds",
+     "line": 274.5,
+     "side": "over",
+     "hits": 3,
+     "games": 4,
+     "log": [
+      155.0,
+      327.0,
+      390.0,
+      317.0
+     ],
+     "recent": 0.6111111111,
+     "market": 0.5,
+     "p_model": 0.5523836806,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": -0.00634375,
+     "reasons": [
+      "Against: LAR favored by 3.5: may lean on the run late"
+     ],
+     "tier": "Medium"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0036244",
+     "player": "Colby Parkinson",
+     "team": "LA",
+     "position": "TE",
+     "stat": "rec_yds",
+     "line": 14.5,
+     "side": "under",
+     "hits": 2,
+     "games": 3,
+     "log": [
+      6.0,
+      15.0,
+      0.0
+     ],
+     "recent": 0.5625,
+     "market": 0.5,
+     "p_model": 0.536546875,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.01059375,
+     "reasons": [],
+     "tier": "Lean"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0038933",
+     "player": "Dalton Kincaid",
+     "team": "BUF",
+     "position": "TE",
+     "stat": "rec_yds",
+     "line": 57.5,
+     "side": "under",
+     "hits": 2,
+     "games": 4,
+     "log": [
+      130.0,
+      95.0,
+      38.0,
+      7.0
+     ],
+     "recent": 0.5,
+     "market": 0.5,
+     "p_model": 0.511890625,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.02378125,
+     "reasons": [
+      "For: LAR allow the 1st fewest receiving yds to TEs (21 a game)"
+     ],
+     "tier": "Coin flip"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0037248",
+     "player": "James Cook",
+     "team": "BUF",
+     "position": "RB",
+     "stat": "receptions",
+     "line": 1.5,
+     "side": "under",
+     "hits": 2,
+     "games": 4,
+     "log": [
+      3.0,
+      1.0,
+      0.0,
+      2.0
+     ],
+     "recent": 0.5,
+     "market": 0.5,
+     "p_model": 0.506953125,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.01390625,
+     "reasons": [],
+     "tier": "Coin flip"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0037248",
+     "player": "James Cook",
+     "team": "BUF",
+     "position": "RB",
+     "stat": "rush_yds",
+     "line": 75.5,
+     "side": "under",
+     "hits": 2,
+     "games": 4,
+     "log": [
+      57.0,
+      135.0,
+      154.0,
+      75.0
+     ],
+     "recent": 0.5,
+     "market": 0.5,
+     "p_model": 0.506140625,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.01228125,
+     "reasons": [
+      "For: LAR have the 9th best run defense (EPA per rush allowed)",
+      "For: BUF underdog by 3.5: may abandon the run if behind"
+     ],
+     "tier": "Coin flip"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0039075",
+     "player": "Puka Nacua",
+     "team": "LA",
+     "position": "WR",
+     "stat": "rec_yds",
+     "line": 94.5,
+     "side": "over",
+     "hits": 1,
+     "games": 2,
+     "log": [
+      74.0,
+      125.0
+     ],
+     "recent": 0.5,
+     "market": 0.5,
+     "p_model": 0.505328125,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.01065625,
+     "reasons": [
+      "For: BUF allow the 5th most receiving yds to WRs (186 a game)"
+     ],
+     "tier": "Coin flip"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0034857",
+     "player": "Josh Allen",
+     "team": "BUF",
+     "position": "QB",
+     "stat": "pass_yds",
+     "line": 249.5,
+     "side": "over",
+     "hits": 2,
+     "games": 4,
+     "log": [
+      334.0,
+      248.0,
+      204.0,
+      253.0
+     ],
+     "recent": 0.5,
+     "market": 0.5,
+     "p_model": 0.500984375,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.00196875,
+     "reasons": [
+      "For: BUF underdog by 3.5: likely throwing to catch up"
+     ],
+     "tier": "Coin flip"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0026498",
+     "player": "Matthew Stafford",
+     "team": "LA",
+     "position": "QB",
+     "stat": "rush_yds",
+     "line": 9.5,
+     "side": "under",
+     "hits": 2,
+     "games": 4,
+     "log": [
+      -1.0,
+      -1.0,
+      13.0,
+      10.0
+     ],
+     "recent": 0.5,
+     "market": 0.5,
+     "p_model": 0.500625,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.00125,
+     "reasons": [],
+     "tier": "Coin flip"
+    }
+   ],
+   "lineups": {
+    "3": [
+     {
+      "n": 3,
+      "entry": "A",
+      "recommended": false,
+      "basis": "Guesser method",
+      "play_as": "Flex",
+      "game": "BUF at LAR",
+      "p_all": 0.19526667787489493,
+      "p_independent": 0.19526667787489493,
+      "power_ev": 0.9763333893744747,
+      "flex_ev": 0.970177144370956,
+      "best_ev": 0.970177144370956,
+      "min_power_mult": 5.1212014813950395,
+      "legs": [
+       {
+        "player": "Josh Allen",
+        "player_id": "00-0034857",
+        "team": "BUF",
+        "stat": "anytime_td",
+        "side": "over",
+        "line": 0.5,
+        "p_model": 0.6122829861111111,
+        "game_id": "2026_05_BUF_LA",
+        "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
+        "reasons": []
+       },
+       {
+        "player": "Khalil Shakir",
+        "player_id": "00-0037261",
+        "team": "BUF",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 49.5,
+        "p_model": 0.5658836805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
+        "reasons": [
+         "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
+        ]
+       },
+       {
+        "player": "Kyren Williams",
+        "player_id": "00-0037840",
+        "team": "LAR",
+        "stat": "rush_yds",
+        "side": "over",
+        "line": 69.5,
+        "p_model": 0.5635711805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 More in 3 of last 4 (41, 85, 88, 80)",
+        "reasons": [
+         "For: BUF have the 5th worst run defense (EPA per rush allowed)",
+         "For: LAR favored by 3.5: more carries to close it out"
+        ]
+       }
+      ]
+     }
+    ],
+    "4": [
+     {
+      "n": 4,
+      "entry": "B",
+      "recommended": true,
+      "basis": "Guesser method",
+      "play_as": "Power",
+      "game": "BUF at LAR",
+      "p_all": 0.10786212621439052,
+      "p_independent": 0.10786212621439052,
+      "power_ev": 1.0786212621439053,
+      "flex_ev": 1.0222817439420635,
+      "best_ev": 1.0786212621439053,
+      "min_power_mult": 9.271094823519102,
+      "legs": [
+       {
+        "player": "Josh Allen",
+        "player_id": "00-0034857",
+        "team": "BUF",
+        "stat": "anytime_td",
+        "side": "over",
+        "line": 0.5,
+        "p_model": 0.6122829861111111,
+        "game_id": "2026_05_BUF_LA",
+        "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
+        "reasons": []
+       },
+       {
+        "player": "Khalil Shakir",
+        "player_id": "00-0037261",
+        "team": "BUF",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 49.5,
+        "p_model": 0.5658836805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
+        "reasons": [
+         "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
+        ]
+       },
+       {
+        "player": "Kyren Williams",
+        "player_id": "00-0037840",
+        "team": "LAR",
+        "stat": "rush_yds",
+        "side": "over",
+        "line": 69.5,
+        "p_model": 0.5635711805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 More in 3 of last 4 (41, 85, 88, 80)",
+        "reasons": [
+         "For: BUF have the 5th worst run defense (EPA per rush allowed)",
+         "For: LAR favored by 3.5: more carries to close it out"
+        ]
+       },
+       {
+        "player": "Matthew Stafford",
+        "player_id": "00-0026498",
+        "team": "LAR",
+        "stat": "pass_yds",
+        "side": "over",
+        "line": 274.5,
+        "p_model": 0.5523836805555555,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 More in 3 of last 4 (155, 327, 390, 317)",
+        "reasons": [
+         "Against: LAR favored by 3.5: may lean on the run late"
+        ]
+       }
+      ]
+     }
+    ],
+    "5": [
+     {
+      "n": 5,
+      "entry": null,
+      "recommended": true,
+      "basis": "Guesser method",
+      "play_as": "Flex",
+      "game": "BUF at LAR",
+      "p_all": 0.05787308675118681,
+      "p_independent": 0.05787308675118681,
+      "power_ev": 1.1574617350237362,
+      "flex_ev": 1.1610592949969158,
+      "best_ev": 1.1610592949969158,
+      "min_power_mult": 17.27918893110523,
+      "legs": [
+       {
+        "player": "Josh Allen",
+        "player_id": "00-0034857",
+        "team": "BUF",
+        "stat": "anytime_td",
+        "side": "over",
+        "line": 0.5,
+        "p_model": 0.6122829861111111,
+        "game_id": "2026_05_BUF_LA",
+        "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
+        "reasons": []
+       },
+       {
+        "player": "Khalil Shakir",
+        "player_id": "00-0037261",
+        "team": "BUF",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 49.5,
+        "p_model": 0.5658836805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
+        "reasons": [
+         "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
+        ]
+       },
+       {
+        "player": "Kyren Williams",
+        "player_id": "00-0037840",
+        "team": "LAR",
+        "stat": "rush_yds",
+        "side": "over",
+        "line": 69.5,
+        "p_model": 0.5635711805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 More in 3 of last 4 (41, 85, 88, 80)",
+        "reasons": [
+         "For: BUF have the 5th worst run defense (EPA per rush allowed)",
+         "For: LAR favored by 3.5: more carries to close it out"
+        ]
+       },
+       {
+        "player": "Matthew Stafford",
+        "player_id": "00-0026498",
+        "team": "LAR",
+        "stat": "pass_yds",
+        "side": "over",
+        "line": 274.5,
+        "p_model": 0.5523836805555555,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 More in 3 of last 4 (155, 327, 390, 317)",
+        "reasons": [
+         "Against: LAR favored by 3.5: may lean on the run late"
+        ]
+       },
+       {
+        "player": "Colby Parkinson",
+        "player_id": "00-0036244",
+        "team": "LAR",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 14.5,
+        "p_model": 0.536546875,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Lean \u00b7 Less in 2 of last 3 (6, 15, 0)",
+        "reasons": []
+       }
+      ]
+     }
+    ]
+   },
+   "filled": {
+    "6": [
+     {
+      "n": 6,
+      "entry": null,
+      "recommended": true,
+      "basis": "Guesser method, filled with coin flips",
+      "play_as": "Flex",
+      "game": "BUF at LAR",
+      "p_all": 0.029624690547744234,
+      "p_independent": 0.029624690547744234,
+      "power_ev": 1.1109258955404089,
+      "flex_ev": 1.1386924394013334,
+      "best_ev": 1.1386924394013334,
+      "min_power_mult": 33.75562686092412,
+      "legs": [
+       {
+        "player": "Josh Allen",
+        "player_id": "00-0034857",
+        "team": "BUF",
+        "stat": "anytime_td",
+        "side": "over",
+        "line": 0.5,
+        "p_model": 0.6122829861111111,
+        "game_id": "2026_05_BUF_LA",
+        "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
+        "reasons": []
+       },
+       {
+        "player": "Khalil Shakir",
+        "player_id": "00-0037261",
+        "team": "BUF",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 49.5,
+        "p_model": 0.5658836805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
+        "reasons": [
+         "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
+        ]
+       },
+       {
+        "player": "Kyren Williams",
+        "player_id": "00-0037840",
+        "team": "LAR",
+        "stat": "rush_yds",
+        "side": "over",
+        "line": 69.5,
+        "p_model": 0.5635711805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 More in 3 of last 4 (41, 85, 88, 80)",
+        "reasons": [
+         "For: BUF have the 5th worst run defense (EPA per rush allowed)",
+         "For: LAR favored by 3.5: more carries to close it out"
+        ]
+       },
+       {
+        "player": "Matthew Stafford",
+        "player_id": "00-0026498",
+        "team": "LAR",
+        "stat": "pass_yds",
+        "side": "over",
+        "line": 274.5,
+        "p_model": 0.5523836805555555,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 More in 3 of last 4 (155, 327, 390, 317)",
+        "reasons": [
+         "Against: LAR favored by 3.5: may lean on the run late"
+        ]
+       },
+       {
+        "player": "Colby Parkinson",
+        "player_id": "00-0036244",
+        "team": "LAR",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 14.5,
+        "p_model": 0.536546875,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Lean \u00b7 Less in 2 of last 3 (6, 15, 0)",
+        "reasons": []
+       },
+       {
+        "player": "Dalton Kincaid",
+        "player_id": "00-0038933",
+        "team": "BUF",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 57.5,
+        "p_model": 0.5118906249999999,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Coin flip \u00b7 Less in 2 of last 4 (130, 95, 38, 7)",
+        "reasons": [
+         "For: LAR allow the 1st fewest receiving yds to TEs (21 a game)"
+        ]
+       }
+      ],
+      "filled": true
+     }
+    ]
+   },
+   "filled_rule": "sizes the model would not build (fewer players at Lean, 52.5%, or better), filled with the next-best picks down to 50%, same order, one per player, 3+ games",
+   "injury_note": "injury report week 5"
+  },
+  "with_prices": {
+   "market": "the sportsbook / Kalshi / Polymarket prices the original report collected before kickoff",
+   "picks": [
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0034857",
+     "player": "Josh Allen",
+     "team": "BUF",
+     "position": "QB",
+     "stat": "anytime_td",
+     "line": 0.5,
+     "side": "over",
+     "hits": 4,
+     "games": 4,
+     "log": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "recent": 0.7222222222,
+     "market": 0.52,
+     "p_model": 0.6222829861,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.00234375,
+     "reasons": [],
+     "tier": "High"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0037840",
+     "player": "Kyren Williams",
+     "team": "LA",
+     "position": "RB",
+     "stat": "anytime_td",
+     "line": 0.5,
+     "side": "over",
+     "hits": 3,
+     "games": 4,
+     "log": [
+      1.0,
+      1.0,
+      0.0,
+      1.0
+     ],
+     "recent": 0.6111111111,
+     "market": 0.6,
+     "p_model": 0.6090711806,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.00703125,
+     "reasons": [
+      "For: BUF allow touchdowns on 64% of red-zone trips (the 9th most)"
+     ],
+     "tier": "High"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0037261",
+     "player": "Khalil Shakir",
+     "team": "BUF",
+     "position": "WR",
+     "stat": "rec_yds",
+     "line": 49.5,
+     "side": "under",
+     "hits": 3,
+     "games": 4,
+     "log": [
+      40.0,
+      38.0,
+      6.0,
+      82.0
+     ],
+     "recent": 0.6111111111,
+     "market": 0.55,
+     "p_model": 0.5908836806,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.02065625,
+     "reasons": [
+      "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
+     ],
+     "tier": "Med-High"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0026498",
+     "player": "Matthew Stafford",
+     "team": "LA",
+     "position": "QB",
+     "stat": "pass_yds",
+     "line": 274.5,
+     "side": "over",
+     "hits": 3,
+     "games": 4,
+     "log": [
+      155.0,
+      327.0,
+      390.0,
+      317.0
+     ],
+     "recent": 0.6111111111,
+     "market": 0.545,
+     "p_model": 0.5748836806,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": -0.00634375,
+     "reasons": [
+      "Against: LAR favored by 3.5: may lean on the run late"
+     ],
+     "tier": "Medium"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0037840",
+     "player": "Kyren Williams",
+     "team": "LA",
+     "position": "RB",
+     "stat": "rec_yds",
+     "line": 19.5,
+     "side": "over",
+     "hits": 3,
+     "games": 4,
+     "log": [
+      24.0,
+      12.0,
+      70.0,
+      67.0
+     ],
+     "recent": 0.6111111111,
+     "market": 0.52,
+     "p_model": 0.5721961806,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.01328125,
+     "reasons": [
+      "For: BUF allow the 3rd most receiving yds to RBs (40 a game)"
+     ],
+     "tier": "Medium"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0037840",
+     "player": "Kyren Williams",
+     "team": "LA",
+     "position": "RB",
+     "stat": "rush_yds",
+     "line": 69.5,
+     "side": "over",
+     "hits": 3,
+     "games": 4,
+     "log": [
+      41.0,
+      85.0,
+      88.0,
+      80.0
+     ],
+     "recent": 0.6111111111,
+     "market": 0.475,
+     "p_model": 0.5510711806,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.01603125,
+     "reasons": [
+      "For: BUF have the 5th worst run defense (EPA per rush allowed)",
+      "For: LAR favored by 3.5: more carries to close it out"
+     ],
+     "tier": "Medium"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0038933",
+     "player": "Dalton Kincaid",
+     "team": "BUF",
+     "position": "TE",
+     "stat": "rec_yds",
+     "line": 57.5,
+     "side": "under",
+     "hits": 2,
+     "games": 4,
+     "log": [
+      130.0,
+      95.0,
+      38.0,
+      7.0
+     ],
+     "recent": 0.5,
+     "market": 0.52,
+     "p_model": 0.521890625,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.02378125,
+     "reasons": [
+      "For: LAR allow the 1st fewest receiving yds to TEs (21 a game)"
+     ],
+     "tier": "Coin flip"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0039075",
+     "player": "Puka Nacua",
+     "team": "LA",
+     "position": "WR",
+     "stat": "rec_yds",
+     "line": 94.5,
+     "side": "over",
+     "hits": 1,
+     "games": 2,
+     "log": [
+      74.0,
+      125.0
+     ],
+     "recent": 0.5,
+     "market": 0.52,
+     "p_model": 0.515328125,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.01065625,
+     "reasons": [
+      "For: BUF allow the 5th most receiving yds to WRs (186 a game)"
+     ],
+     "tier": "Coin flip"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0034857",
+     "player": "Josh Allen",
+     "team": "BUF",
+     "position": "QB",
+     "stat": "pass_yds",
+     "line": 249.5,
+     "side": "under",
+     "hits": 2,
+     "games": 4,
+     "log": [
+      334.0,
+      248.0,
+      204.0,
+      253.0
+     ],
+     "recent": 0.5,
+     "market": 0.52,
+     "p_model": 0.509015625,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": -0.00196875,
+     "reasons": [
+      "Against: BUF underdog by 3.5: likely throwing to catch up"
+     ],
+     "tier": "Coin flip"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0037248",
+     "player": "James Cook",
+     "team": "BUF",
+     "position": "RB",
+     "stat": "receptions",
+     "line": 1.5,
+     "side": "over",
+     "hits": 2,
+     "games": 4,
+     "log": [
+      3.0,
+      1.0,
+      0.0,
+      2.0
+     ],
+     "recent": 0.5,
+     "market": 0.53,
+     "p_model": 0.508046875,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": -0.01390625,
+     "reasons": [],
+     "tier": "Coin flip"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0036244",
+     "player": "Colby Parkinson",
+     "team": "LA",
+     "position": "TE",
+     "stat": "rec_yds",
+     "line": 14.5,
+     "side": "under",
+     "hits": 2,
+     "games": 3,
+     "log": [
+      6.0,
+      15.0,
+      0.0
+     ],
+     "recent": 0.5625,
+     "market": 0.44,
+     "p_model": 0.506546875,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.01059375,
+     "reasons": [],
+     "tier": "Coin flip"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0037248",
+     "player": "James Cook",
+     "team": "BUF",
+     "position": "RB",
+     "stat": "rush_yds",
+     "line": 75.5,
+     "side": "under",
+     "hits": 2,
+     "games": 4,
+     "log": [
+      57.0,
+      135.0,
+      154.0,
+      75.0
+     ],
+     "recent": 0.5,
+     "market": 0.5,
+     "p_model": 0.506140625,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.01228125,
+     "reasons": [
+      "For: LAR have the 9th best run defense (EPA per rush allowed)",
+      "For: BUF underdog by 3.5: may abandon the run if behind"
+     ],
+     "tier": "Coin flip"
+    },
+    {
+     "game_id": "2026_05_BUF_LA",
+     "player_id": "00-0026498",
+     "player": "Matthew Stafford",
+     "team": "LA",
+     "position": "QB",
+     "stat": "rush_yds",
+     "line": 9.5,
+     "side": "under",
+     "hits": 2,
+     "games": 4,
+     "log": [
+      -1.0,
+      -1.0,
+      13.0,
+      10.0
+     ],
+     "recent": 0.5,
+     "market": 0.5,
+     "p_model": 0.500625,
+     "captured_at": "2026-10-12 17:56:32+00:00",
+     "p_matchup": 0.00125,
+     "reasons": [],
+     "tier": "Coin flip"
+    }
+   ],
+   "lineups": {
+    "3": [
+     {
+      "n": 3,
+      "entry": "A",
+      "recommended": true,
+      "basis": "Guesser method",
+      "play_as": "Flex",
+      "game": "BUF at LAR",
+      "p_all": 0.2239535613257398,
+      "p_independent": 0.2239535613257398,
+      "power_ev": 1.119767806628699,
+      "flex_ev": 1.0473218018335777,
+      "best_ev": 1.0473218018335777,
+      "min_power_mult": 4.4652114218692995,
+      "legs": [
+       {
+        "player": "Josh Allen",
+        "player_id": "00-0034857",
+        "team": "BUF",
+        "stat": "anytime_td",
+        "side": "over",
+        "line": 0.5,
+        "p_model": 0.6222829861111111,
+        "game_id": "2026_05_BUF_LA",
+        "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
+        "reasons": []
+       },
+       {
+        "player": "Kyren Williams",
+        "player_id": "00-0037840",
+        "team": "LAR",
+        "stat": "anytime_td",
+        "side": "over",
+        "line": 0.5,
+        "p_model": 0.6090711805555555,
+        "game_id": "2026_05_BUF_LA",
+        "note": "High \u00b7 More in 3 of last 4 (TD, TD, no TD, TD)",
+        "reasons": [
+         "For: BUF allow touchdowns on 64% of red-zone trips (the 9th most)"
+        ]
+       },
+       {
+        "player": "Khalil Shakir",
+        "player_id": "00-0037261",
+        "team": "BUF",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 49.5,
+        "p_model": 0.5908836805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Med-High \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
+        "reasons": [
+         "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
+        ]
+       }
+      ]
+     }
+    ],
+    "4": [
+     {
+      "n": 4,
+      "entry": "B",
+      "recommended": true,
+      "basis": "Guesser method",
+      "play_as": "Power",
+      "game": "BUF at LAR",
+      "p_all": 0.12874724760846562,
+      "p_independent": 0.12874724760846562,
+      "power_ev": 1.2874724760846563,
+      "flex_ev": 1.1614339946723784,
+      "best_ev": 1.2874724760846563,
+      "min_power_mult": 7.767156335963847,
+      "legs": [
+       {
+        "player": "Josh Allen",
+        "player_id": "00-0034857",
+        "team": "BUF",
+        "stat": "anytime_td",
+        "side": "over",
+        "line": 0.5,
+        "p_model": 0.6222829861111111,
+        "game_id": "2026_05_BUF_LA",
+        "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
+        "reasons": []
+       },
+       {
+        "player": "Kyren Williams",
+        "player_id": "00-0037840",
+        "team": "LAR",
+        "stat": "anytime_td",
+        "side": "over",
+        "line": 0.5,
+        "p_model": 0.6090711805555555,
+        "game_id": "2026_05_BUF_LA",
+        "note": "High \u00b7 More in 3 of last 4 (TD, TD, no TD, TD)",
+        "reasons": [
+         "For: BUF allow touchdowns on 64% of red-zone trips (the 9th most)"
+        ]
+       },
+       {
+        "player": "Khalil Shakir",
+        "player_id": "00-0037261",
+        "team": "BUF",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 49.5,
+        "p_model": 0.5908836805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Med-High \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
+        "reasons": [
+         "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
+        ]
+       },
+       {
+        "player": "Matthew Stafford",
+        "player_id": "00-0026498",
+        "team": "LAR",
+        "stat": "pass_yds",
+        "side": "over",
+        "line": 274.5,
+        "p_model": 0.5748836805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 More in 3 of last 4 (155, 327, 390, 317)",
+        "reasons": [
+         "Against: LAR favored by 3.5: may lean on the run late"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "filled": {
+    "5": [
+     {
+      "n": 5,
+      "entry": null,
+      "recommended": true,
+      "basis": "Guesser method, filled with coin flips",
+      "play_as": "Power",
+      "game": "BUF at LAR",
+      "p_all": 0.06719198152141187,
+      "p_independent": 0.06719198152141187,
+      "power_ev": 1.3438396304282374,
+      "flex_ev": 1.2935685662604754,
+      "best_ev": 1.3438396304282374,
+      "min_power_mult": 14.882728226750285,
+      "legs": [
+       {
+        "player": "Josh Allen",
+        "player_id": "00-0034857",
+        "team": "BUF",
+        "stat": "anytime_td",
+        "side": "over",
+        "line": 0.5,
+        "p_model": 0.6222829861111111,
+        "game_id": "2026_05_BUF_LA",
+        "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
+        "reasons": []
+       },
+       {
+        "player": "Kyren Williams",
+        "player_id": "00-0037840",
+        "team": "LAR",
+        "stat": "anytime_td",
+        "side": "over",
+        "line": 0.5,
+        "p_model": 0.6090711805555555,
+        "game_id": "2026_05_BUF_LA",
+        "note": "High \u00b7 More in 3 of last 4 (TD, TD, no TD, TD)",
+        "reasons": [
+         "For: BUF allow touchdowns on 64% of red-zone trips (the 9th most)"
+        ]
+       },
+       {
+        "player": "Khalil Shakir",
+        "player_id": "00-0037261",
+        "team": "BUF",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 49.5,
+        "p_model": 0.5908836805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Med-High \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
+        "reasons": [
+         "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
+        ]
+       },
+       {
+        "player": "Matthew Stafford",
+        "player_id": "00-0026498",
+        "team": "LAR",
+        "stat": "pass_yds",
+        "side": "over",
+        "line": 274.5,
+        "p_model": 0.5748836805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 More in 3 of last 4 (155, 327, 390, 317)",
+        "reasons": [
+         "Against: LAR favored by 3.5: may lean on the run late"
+        ]
+       },
+       {
+        "player": "Dalton Kincaid",
+        "player_id": "00-0038933",
+        "team": "BUF",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 57.5,
+        "p_model": 0.5218906249999999,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Coin flip \u00b7 Less in 2 of last 4 (130, 95, 38, 7)",
+        "reasons": [
+         "For: LAR allow the 1st fewest receiving yds to TEs (21 a game)"
+        ]
+       }
+      ],
+      "filled": true
+     }
+    ],
+    "6": [
+     {
+      "n": 6,
+      "entry": null,
+      "recommended": true,
+      "basis": "Guesser method, filled with coin flips",
+      "play_as": "Flex",
+      "game": "BUF at LAR",
+      "p_all": 0.03413667623701105,
+      "p_independent": 0.03413667623701105,
+      "power_ev": 1.2801253588879142,
+      "flex_ev": 1.2829115934223139,
+      "best_ev": 1.2829115934223139,
+      "min_power_mult": 29.29400604373422,
+      "legs": [
+       {
+        "player": "Josh Allen",
+        "player_id": "00-0034857",
+        "team": "BUF",
+        "stat": "anytime_td",
+        "side": "over",
+        "line": 0.5,
+        "p_model": 0.6222829861111111,
+        "game_id": "2026_05_BUF_LA",
+        "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
+        "reasons": []
+       },
+       {
+        "player": "Kyren Williams",
+        "player_id": "00-0037840",
+        "team": "LAR",
+        "stat": "anytime_td",
+        "side": "over",
+        "line": 0.5,
+        "p_model": 0.6090711805555555,
+        "game_id": "2026_05_BUF_LA",
+        "note": "High \u00b7 More in 3 of last 4 (TD, TD, no TD, TD)",
+        "reasons": [
+         "For: BUF allow touchdowns on 64% of red-zone trips (the 9th most)"
+        ]
+       },
+       {
+        "player": "Khalil Shakir",
+        "player_id": "00-0037261",
+        "team": "BUF",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 49.5,
+        "p_model": 0.5908836805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Med-High \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
+        "reasons": [
+         "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
+        ]
+       },
+       {
+        "player": "Matthew Stafford",
+        "player_id": "00-0026498",
+        "team": "LAR",
+        "stat": "pass_yds",
+        "side": "over",
+        "line": 274.5,
+        "p_model": 0.5748836805555556,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Medium \u00b7 More in 3 of last 4 (155, 327, 390, 317)",
+        "reasons": [
+         "Against: LAR favored by 3.5: may lean on the run late"
+        ]
+       },
+       {
+        "player": "Dalton Kincaid",
+        "player_id": "00-0038933",
+        "team": "BUF",
+        "stat": "rec_yds",
+        "side": "under",
+        "line": 57.5,
+        "p_model": 0.5218906249999999,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Coin flip \u00b7 Less in 2 of last 4 (130, 95, 38, 7)",
+        "reasons": [
+         "For: LAR allow the 1st fewest receiving yds to TEs (21 a game)"
+        ]
+       },
+       {
+        "player": "James Cook",
+        "player_id": "00-0037248",
+        "team": "BUF",
+        "stat": "receptions",
+        "side": "over",
+        "line": 1.5,
+        "p_model": 0.508046875,
+        "game_id": "2026_05_BUF_LA",
+        "note": "Coin flip \u00b7 More in 2 of last 4 (3, 1, 0, 2)",
+        "reasons": []
+       }
+      ],
+      "filled": true
+     }
+    ]
+   },
+   "filled_rule": "sizes the model would not build (fewer players at Lean, 52.5%, or better), filled with the next-best picks down to 50%, same order, one per player, 3+ games",
+   "injury_note": "injury report week 5"
+  }
+ },
+ "graded": null
+}
