@@ -1,177 +1,180 @@
-"""Shared look for every page on the site: the CSS, the top navigation and the team pennants.
+"""Shared look for every page on the site: the CSS, the top navigation and team logos.
 
 Pages inline the CSS in a <style id="lab-theme"> block so each HTML file works on its own; src/site.py
 swaps that block for the current one when it copies pages into site/, so a restyle never needs a re-run
-of the simulations.
+of the simulations. Logos live in assets/logos (nflverse team codes) and are copied next to the pages.
 """
 from __future__ import annotations
 
 import csv
 import html
 import re
+import shutil
 from functools import lru_cache
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+LOGO_DIR = ROOT / "assets" / "logos"
 e = html.escape
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;'
-         '1,6..96,400..800&family=Graduate&family=Libre+Franklin:ital,wght@0,400..800;1,400..800&display=swap">\n')
+         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;'
+         '1,62..125,100..900&display=swap">\n')
 
 CSS = r"""
-/* Layout: a members' club game program at night. Felt-green ground, ivory type, brass rules; varsity
-   pennants on the scoreboard, a lace-stitch rule over each section head, agate-style stat tables below. */
+/* Layout: a quiet scoreboard. Near-black and neutral grays, white type, hairlines instead of boxes;
+   team logos are the only color on the page. One family (Archivo), narrowed for numbers and team codes. */
 :root{
   color-scheme:dark;
-  --ground:#0B1611; --panel:#11201A; --panel-hi:#172A21; --rule:#24382E; --rule-hi:#38503F;
-  --ivory:#ECE5D2; --sage:#9AA99D; --brass:#C8A55E; --brass-dim:#7F6A3E; --pine:#8CC9A0; --claret:#E39189;
-  --serif:"Bodoni Moda","Bodoni 72",Didot,Georgia,serif;
-  --varsity:"Graduate",Rockwell,"Courier New",serif;
-  --sans:"Libre Franklin","Franklin Gothic Medium","Helvetica Neue",Arial,sans-serif;
+  --bg:#0A0A0B; --surface:#111113; --raise:#18181B; --line:#222226; --line-2:#2F2F34;
+  --text:#EDEDEF; --muted:#8C8C93; --faint:#5F5F66;
+  --pos:#86C29C; --neg:#DE8A80; --warn:#D2B87C;
+  --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
   /* token names the older report pages use */
-  --bg:var(--ground); --surface:var(--panel); --fg:var(--ivory); --muted:var(--sage); --line:var(--rule);
-  --track:#22362C; --display:var(--sans); --body:var(--sans);
-  --t1:#8CC9A0; --t1bg:#163426; --t2:#BCCB8A; --t2bg:#212F1C; --t3:#E2BE6E; --t3bg:#33291A; --t4:#E39189; --t4bg:#3A1F1F;
-  --buf:#E8909A; --lar:#D6B05C; --lar-strong:#E2BD68;
+  --fg:var(--text); --track:#26262B; --display:var(--sans); --body:var(--sans);
+  --t1:#8FC9A3; --t1bg:#16221A; --t2:#B8C493; --t2bg:#1D2118; --t3:#D3BA7E; --t3bg:#25201A; --t4:#DE8A80; --t4bg:#291A18;
+  --buf:#93A6C9; --lar:#CDB97F; --lar-strong:#CDB97F;
 }
 *{box-sizing:border-box}
-html{background:var(--ground)}
-body{margin:0;background:var(--ground);color:var(--ivory);font-family:var(--sans);font-size:16px;line-height:1.55;
-  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-.wrap{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:18px 64px;display:grid;gap:48px}
-@media (min-width:760px){.wrap{padding-inline:28px}}
-h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.005em}
-h2{font-size:clamp(1.65rem,4vw,2.15rem)}
-h2::before{content:"";display:block;width:92px;height:11px;margin-bottom:14px;
-  background:linear-gradient(var(--brass),var(--brass)) 0 50%/100% 1.5px no-repeat,
-             repeating-linear-gradient(90deg,var(--brass) 0 2px,transparent 2px 10px) 7px 0/80px 100% no-repeat}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-variant-numeric:tabular-nums}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:0 72px;display:grid;gap:56px}
+@media (min-width:760px){.wrap{padding-inline:32px}}
+h1,h2,h3{margin:0;line-height:1.1;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,5vw,2.75rem);font-weight:750;font-stretch:88%}
+h2{font-size:1.15rem;font-weight:650}
+h3{font-size:1rem;font-weight:650}
 p{margin:0}
-.sub{color:var(--sage);margin-top:10px;max-width:68ch}
-.eyebrow{font-weight:600;font-size:.72rem;letter-spacing:.17em;text-transform:uppercase;color:var(--brass)}
-section{display:grid;gap:18px;min-width:0}
-a{color:var(--brass);text-underline-offset:3px}
-a:hover{color:var(--ivory)}
-code{font-size:.9em;color:var(--ivory)}
-:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
-.num{font-variant-numeric:tabular-nums lining-nums}
+.sub{color:var(--muted);margin-top:6px;max-width:68ch;font-size:.93rem}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+section{display:grid;gap:16px;min-width:0}
+a{color:var(--text);text-underline-offset:3px;text-decoration-color:var(--line-2)}
+a:hover{text-decoration-color:var(--text)}
+code{font-size:.88em;color:var(--text)}
+:focus-visible{outline:2px solid var(--text);outline-offset:2px;border-radius:2px}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
 
 /* top navigation */
-.site{display:flex;justify-content:space-between;align-items:center;gap:10px 20px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--rule)}
-.brand{display:flex;align-items:center;gap:10px;color:var(--ivory);text-decoration:none;font-family:var(--serif);font-size:1.1rem;font-weight:600}
-.brand:hover{color:var(--ivory)}
-.brand svg{width:30px;height:30px;color:var(--brass);flex:none}
-.tabs{display:flex;gap:2px;flex-wrap:wrap}
-.tabs a{font-size:.74rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);text-decoration:none;
-  padding:8px 12px;border-bottom:2px solid transparent}
-.tabs a:hover{color:var(--ivory)}
-.tabs a[aria-current="page"]{color:var(--ivory);border-bottom-color:var(--brass)}
+.site{display:flex;justify-content:space-between;align-items:center;gap:8px 20px;flex-wrap:wrap;min-height:60px;border-bottom:1px solid var(--line)}
+.brand{font-weight:800;font-stretch:80%;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:var(--text)}
+.tabs{display:flex;gap:22px}
+.tabs a{font-size:.88rem;font-weight:500;color:var(--muted);text-decoration:none;padding-block:19px;border-bottom:1px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--text)}
+.tabs a[aria-current="page"]{color:var(--text);border-bottom-color:var(--text)}
+.back{font-size:.85rem;color:var(--muted);text-decoration:none;justify-self:start}
+.back:hover{color:var(--text)}
 
-/* scoreboard */
-.board{background:repeating-linear-gradient(90deg,transparent 0 calc(10% - 1px),color-mix(in srgb,var(--ivory) 5%,transparent) calc(10% - 1px) 10%),
-  radial-gradient(ellipse at 50% -10%,color-mix(in srgb,var(--brass) 10%,transparent),transparent 65%),var(--panel);
-  border:1px solid var(--rule-hi);border-radius:3px;padding:24px clamp(16px,3.5vw,32px);display:grid;gap:20px;
-  box-shadow:inset 0 0 0 6px var(--panel),inset 0 0 0 7px color-mix(in srgb,var(--brass) 40%,transparent)}
-.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:12px}
-.team{display:grid;gap:6px;justify-items:start;min-width:0}
-.team.home{justify-items:end;text-align:right}
-.team .ab{font-family:var(--varsity);font-size:clamp(2.4rem,8vw,4rem);line-height:.95;letter-spacing:.02em}
-.team.away .ab{color:var(--buf)} .team.home .ab{color:var(--lar-strong)}
-.team .nm{font-family:var(--serif);font-size:clamp(1.05rem,2.6vw,1.4rem);font-weight:500;line-height:1.2}
-.team .rec{color:var(--sage);font-size:.86rem;font-variant-numeric:tabular-nums}
-.at{font-family:var(--serif);font-style:italic;font-size:1.6rem;color:var(--brass);align-self:center}
-.pn{display:block;max-width:100%;filter:drop-shadow(0 0 .6px var(--brass)) drop-shadow(0 0 .6px var(--brass))}
-.pennant{--w:clamp(120px,30vw,224px);width:var(--w);max-width:100%;aspect-ratio:5/2;display:flex;align-items:center;
-  padding-left:calc(var(--w) * .1);color:var(--tt);font-family:var(--varsity);font-size:calc(var(--w) * .165);letter-spacing:.03em;line-height:1;
-  background:linear-gradient(90deg,var(--brass) 0 5px,var(--tc) 5px);clip-path:polygon(0 0,100% 50%,0 100%)}
-.team.home .pennant{justify-content:flex-end;padding-left:0;padding-right:calc(var(--w) * .1);
-  background:linear-gradient(270deg,var(--brass) 0 5px,var(--tc) 5px);clip-path:polygon(100% 0,0 50%,100% 100%)}
-.facts{display:flex;flex-wrap:wrap;gap:12px 30px;border-top:1px solid color-mix(in srgb,var(--brass) 30%,transparent);padding-top:16px;font-variant-numeric:tabular-nums}
-.facts dl{display:contents}
+/* logos */
+.lg{display:inline-block;width:var(--s,24px);height:var(--s,24px);border-radius:calc(var(--s,24px) * .22);vertical-align:middle;flex:none;object-fit:cover;background:var(--raise)}
+
+/* game header */
+.head{display:grid;gap:22px}
+.head .meta{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--muted);font-size:.85rem}
+.head .meta .v0tag{color:var(--text)}
+.match{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.ms{display:flex;align-items:center;gap:14px;min-width:0}
+.ms.home{flex-direction:row-reverse;text-align:right}
+.ms .who{display:grid;gap:2px;min-width:0}
+.ms .code{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;font-stretch:80%;line-height:1;letter-spacing:.01em}
+.ms .nm{color:var(--muted);font-size:.9rem}
+.vsat{color:var(--faint);font-size:.9rem}
+.wp{display:grid;gap:6px}
+.wpbar{display:flex;height:4px;border-radius:2px;overflow:hidden;gap:2px}
+.wpbar span{display:block;height:100%}
+.wpbar .a{background:var(--faint)} .wpbar .h{background:var(--text)}
+.wp .lbl{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:14px 24px;border-top:1px solid var(--line);padding-top:18px;margin:0}
 .facts div{display:grid;gap:2px;min-width:0}
-.facts dt{font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);font-weight:600}
-.facts dd{margin:0;font-weight:600}
-.v0tag{display:inline-block;border:1px solid var(--brass-dim);color:var(--brass);border-radius:2px;padding:0 7px;margin-left:4px;
-  font-size:.64rem;letter-spacing:.15em;vertical-align:1px}
-@media (max-width:520px){.teams{grid-template-columns:1fr 1fr}.at{display:none}.team .rec{font-size:.8rem}}
+.facts dt{font-size:.72rem;color:var(--muted)}
+.facts dd{margin:0;font-weight:550}
+.facts .wide{grid-column:1/-1}
+@media (max-width:560px){.match{grid-template-columns:1fr}.ms.home{flex-direction:row;text-align:left}.vsat{display:none}}
 
 /* tables */
-.tbl-wrap{overflow-x:auto;background:var(--panel);border:1px solid var(--rule);border-radius:3px}
-table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums lining-nums}
-caption{text-align:left;padding:18px 18px 8px;font-family:var(--serif);font-weight:600;font-size:1.3rem}
-caption .sw{display:inline-block;width:22px;height:12px;margin-right:10px;background:var(--tc);clip-path:polygon(0 0,100% 50%,0 100%);vertical-align:1px}
-thead th{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);font-weight:600;text-align:left;padding:10px 16px;
-  border-bottom:1px solid var(--brass-dim);white-space:nowrap}
-tbody th{text-align:left;font-weight:600;padding:10px 16px;vertical-align:top}
-table:not(.pt) tbody th{width:28%}
-tbody td{padding:10px 16px;vertical-align:middle}
-tbody tr+tr>*{border-top:1px solid var(--rule)}
-tbody tr:hover>*{background:var(--panel-hi)}
-.vs-lbl{display:block;font-weight:400;font-size:.76rem;color:var(--sage);letter-spacing:.02em}
+.tbl-wrap{overflow-x:auto;border-top:1px solid var(--line-2)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums}
+caption{text-align:left;padding:0 0 12px;font-weight:650;font-size:1rem;caption-side:top}
+caption .lg{margin-right:10px;vertical-align:-6px}
+thead th{font-size:.72rem;font-weight:500;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody th{text-align:left;font-weight:550;padding:9px 12px;vertical-align:top}
+tbody td{padding:9px 12px;vertical-align:middle}
+tbody tr+tr>*{border-top:1px solid var(--line)}
+tbody tr:hover>*{background:var(--surface)}
+th:first-child,td:first-child{padding-left:0}
+.vs-lbl{display:block;font-weight:400;font-size:.76rem;color:var(--muted)}
 .pt td,.pt th{white-space:nowrap}
 .pt .num{text-align:right}
 .pt thead th:not(:first-child){text-align:right}
 .pt thead th.l,.pt td.l{text-align:left}
-.rng{color:var(--sage);font-size:.8rem}
-.q-yes{color:var(--pine);font-weight:700}
-.q-no{color:var(--sage)}
-.small{font-size:.85rem;color:var(--sage)}
+.rng{color:var(--faint);font-size:.78rem;margin-left:6px}
+.jn{display:inline-block;width:2.3em;color:var(--faint);font-weight:600;font-stretch:80%}
+.pos{color:var(--muted);font-size:.78rem;margin-left:8px;font-weight:400}
+.q-yes{color:var(--pos);font-weight:650}
+.q-no{color:var(--muted)}
+.small{font-size:.85rem;color:var(--muted)}
 
 /* report pieces shared with the older Bills-Rams page */
+.board{display:grid;gap:18px}
+.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+.team{display:grid;gap:4px;justify-items:start;min-width:0}
+.team.home{justify-items:end;text-align:right}
+.team .tm{display:flex;align-items:center;gap:12px}
+.team.home .tm{flex-direction:row-reverse}
+.team .ab{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;font-stretch:80%;line-height:1}
+.team .nm{font-weight:550}
+.team .rec{color:var(--muted);font-size:.85rem}
+.at{color:var(--faint)}
+.board .facts{display:flex;flex-wrap:wrap}
+.board .facts dl{display:contents}
 .side{white-space:nowrap}
 .side .v{display:inline-block;min-width:4.6em;font-weight:600}
-.pill{display:inline-block;min-width:3.2em;text-align:center;font-size:.76rem;font-weight:700;padding:1px 8px;border-radius:2px;margin-right:10px}
+.pill{display:inline-block;min-width:3.2em;text-align:center;font-size:.74rem;font-weight:650;padding:1px 7px;border-radius:4px;margin-right:10px}
 .t1{color:var(--t1);background:var(--t1bg)} .t2{color:var(--t2);background:var(--t2bg)}
 .t3{color:var(--t3);background:var(--t3bg)} .t4{color:var(--t4);background:var(--t4bg)}
-.bar{display:inline-block;width:72px;height:5px;background:var(--track);vertical-align:middle;overflow:hidden}
+.bar{display:inline-block;width:72px;height:4px;background:var(--track);border-radius:2px;vertical-align:middle;overflow:hidden}
 .fill{display:block;height:100%}
 .fill.buf{background:var(--buf)} .fill.lar{background:var(--lar)}
-.edge{display:inline-block;font-weight:700;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:2px;border:1px solid currentColor}
-.edge.buf{color:var(--buf)} .edge.lar{color:var(--lar)} .edge.even{color:var(--sage)}
-.tchip{font-family:var(--varsity);letter-spacing:.03em}
+.edge{display:inline-block;font-weight:650;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;border:1px solid currentColor}
+.edge.buf{color:var(--buf)} .edge.lar{color:var(--lar)} .edge.even{color:var(--muted)}
+.tchip{font-weight:750;font-stretch:80%}
 .tchip.buf{color:var(--buf)} .tchip.lar{color:var(--lar)}
-.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.84rem;color:var(--sage);align-items:center}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.82rem;color:var(--muted);align-items:center}
 .legend .pill{margin-right:4px}
-.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
-.take{border-left:2px solid var(--rule-hi);padding:2px 0 2px 16px;min-width:0}
-.take.buf{border-color:var(--buf)} .take.lar{border-color:var(--lar)}
-.take b{display:block;font-family:var(--serif);font-size:1.2rem;font-weight:600;line-height:1.2}
-.take p{margin-top:6px;color:color-mix(in srgb,var(--ivory) 88%,var(--sage))}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
-.card{background:var(--panel);border:1px solid var(--rule);border-radius:3px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px}
+.take{border-top:1px solid var(--line-2);padding-top:12px;min-width:0}
+.take b{display:block;font-weight:650}
+.take p{margin-top:6px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
 .card header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-.card h3{font-size:1.45rem}
-.card .pos{font-size:.74rem;color:var(--sage);letter-spacing:.1em;text-transform:uppercase}
-.line{font-variant-numeric:tabular-nums;font-weight:600;font-size:.94rem}
-.vsbox{display:grid;gap:2px;padding:10px 12px;background:var(--ground);border-left:2px solid var(--brass-dim);font-size:.94rem}
-.vsbox .k{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);font-weight:600}
-.verdict{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem}
+.card h3{font-size:1.05rem}
+.card .pos{font-size:.74rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.line{font-weight:550;font-size:.92rem}
+.vsbox{display:grid;gap:2px;padding:10px 12px;background:var(--bg);border-radius:6px;font-size:.92rem}
+.vsbox .k{font-size:.7rem;color:var(--muted)}
+.verdict{font-weight:650;letter-spacing:.06em;text-transform:uppercase;font-size:.74rem}
 .verdict.big{color:var(--t1)} .verdict.mid{color:var(--t3)} .verdict.low{color:var(--t4)}
 
 /* lineups */
-.lus{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
-.lu{background:var(--panel);border:1px solid var(--rule);border-radius:3px;padding:18px;display:grid;gap:12px;align-content:start;min-width:0}
+.lus{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+.lu{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:12px;align-content:start;min-width:0}
 .lu header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.lu h3{font-size:1.5rem}
-.lu .rec{font-size:.88rem;color:var(--sage)} .lu .rec b{color:var(--ivory)}
-.lu ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
-.lu .pp{color:var(--sage);font-variant-numeric:tabular-nums;font-size:.84rem}
-.lustats{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin:0;border-top:1px solid var(--rule);padding-top:12px;font-variant-numeric:tabular-nums}
-.lustats div{display:grid} .lustats dt{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage)} .lustats dd{margin:0;font-weight:700}
+.lu h3{font-size:1.05rem}
+.lu .rec{font-size:.85rem;color:var(--muted)} .lu .rec b{color:var(--text)}
+.lu ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+.lu .pp{color:var(--muted);font-size:.84rem}
+.lustats{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin:0;border-top:1px solid var(--line);padding-top:12px}
+.lustats div{display:grid} .lustats dt{font-size:.72rem;color:var(--muted)} .lustats dd{margin:0;font-weight:650}
 
-.notes{color:var(--sage);font-size:.86rem;display:grid;gap:8px;max-width:78ch;border-top:1px solid var(--rule);padding-top:20px}
+.notes{color:var(--faint);font-size:.82rem;display:grid;gap:8px;max-width:78ch;border-top:1px solid var(--line);padding-top:20px}
 .notes a{color:inherit}
 .notes ul{margin:0;padding-left:1.2em}
 @media (max-width:520px){.bar{width:44px}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 """
-
-CREST = ('<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="1"/>'
-         '<circle cx="16" cy="16" r="12.6" fill="none" stroke="currentColor" stroke-width=".6"/>'
-         '<g transform="rotate(-35 16 16)"><ellipse cx="16" cy="16" rx="8.6" ry="5.1" fill="currentColor"/>'
-         '<g style="stroke:var(--ground)" stroke-width=".9" stroke-linecap="round" fill="none">'
-         '<path d="M12.4 16h7.2M13.6 14.7v2.6M15.2 14.7v2.6M16.8 14.7v2.6M18.4 14.7v2.6"/></g></g></svg>')
 
 TABS = [("games", "Games", "index.html"), ("guesser", "Guesser", "guesser.html")]
 
@@ -196,66 +199,39 @@ def document(title: str, body: str, extra_css: str = "") -> str:
 def nav(active: str, prefix: str = "") -> str:
     cur = ' aria-current="page"'
     links = "".join(f'<a href="{prefix}{href}"{cur if key == active else ""}>{label}</a>' for key, label, href in TABS)
-    return (f'<nav class="site" aria-label="Site"><a class="brand" href="{prefix}index.html">{CREST}NFL Matchup Lab</a>'
+    return (f'<nav class="site" aria-label="Site"><a class="brand" href="{prefix}index.html">Matchup Lab</a>'
             f'<div class="tabs">{links}</div></nav>\n')
 
 
 def refresh(doc: str) -> str:
-    """Replace the theme block (or, for pages built before the theme existed, the whole old head style)."""
+    """Swap in the current theme block."""
     if 'id="lab-theme"' in doc:
         return re.sub(r'<style id="lab-theme">.*?</style>\n?', lambda m: style_block(), doc, count=1, flags=re.S)
     return doc
 
 
-# ---- team colors ------------------------------------------------------------------------------------
+# ---- team logos -------------------------------------------------------------------------------------
 
 @lru_cache(maxsize=1)
-def _colors() -> dict[str, str]:
+def _codes() -> dict[str, str]:
+    """Any code (nflverse or display) -> nflverse code, which names the logo file."""
     with open(ROOT / "config" / "teams.csv", newline="") as f:
         rows = list(csv.DictReader(f))
-    out = {}
-    for r in rows:
-        out[r["team"]] = r["color"]
-        out[r["display"]] = r["color"]
+    out = {r["team"]: r["team"] for r in rows}
+    out.update({r["display"]: r["team"] for r in rows})
     return out
 
 
-def _rgb(h: str):
-    h = h.lstrip("#")
-    return [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+def logo(team: str, size: int = 24, prefix: str = "") -> str:
+    """Team logo tile. Decorative (alt=""): the team code or name always sits next to it."""
+    code = _codes().get(str(team).upper(), str(team).upper())
+    return (f'<img class="lg" src="{prefix}logos/{e(code)}.png" alt="" width="{size}" height="{size}" '
+            f'style="--s:{size}px" loading="lazy">')
 
 
-def _lum(rgb) -> float:
-    c = [x / 12.92 if x <= 0.04045 else ((x + 0.055) / 1.055) ** 2.4 for x in rgb]
-    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
-
-
-def _contrast(a, b) -> float:
-    la, lb = sorted([_lum(a), _lum(b)], reverse=True)
-    return (la + 0.05) / (lb + 0.05)
-
-
-def _hex(rgb) -> str:
-    return "#" + "".join(f"{round(max(0, min(1, x)) * 255):02X}" for x in rgb)
-
-
-IVORY, GROUND, PANEL = _rgb("#ECE5D2"), _rgb("#0B1611"), _rgb("#11201A")
-
-
-def team_vars(team: str) -> str:
-    """CSS custom properties for a team: --tc fill, --tt text on the fill, --ti the color as text on the panel."""
-    c = _rgb(_colors().get(team, "#C8A55E"))
-    tt = IVORY if _contrast(c, IVORY) >= _contrast(c, GROUND) else GROUND
-    ink, k = c, 0.0
-    while _contrast(ink, PANEL) < 4.5 and k < 1:
-        k += 0.05
-        ink = [x + (i - x) * k for x, i in zip(c, IVORY)]
-    return f"--tc:{_hex(c)};--tt:{_hex(tt)};--ti:{_hex(ink)}"
-
-
-def pennant(team_display: str) -> str:
-    return f'<span class="pn"><span class="pennant" style="{team_vars(team_display)}">{e(team_display)}</span></span>'
-
-
-def swatch(team_display: str) -> str:
-    return f'<span class="sw" style="{team_vars(team_display)}" aria-hidden="true"></span>'
+def copy_logos(dest_dir: Path) -> None:
+    """Put the logo files at <dest_dir>/logos so pages there can use them."""
+    out = Path(dest_dir) / "logos"
+    out.mkdir(parents=True, exist_ok=True)
+    for f in LOGO_DIR.glob("*.png"):
+        shutil.copy(f, out / f.name)

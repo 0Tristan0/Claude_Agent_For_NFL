@@ -99,6 +99,7 @@ def run_games(game_ids: list[str], n_sims: int = 20000, write_pages: bool = True
         proj = P.project_game(T, gid, fits[season_of(g)], eng=eng, active_override=act)
         proj["injury_note"] = injury_note
         proj["run_at"] = now
+        proj["jerseys"] = jerseys(int(g["season"]), int(g["week"]))
         sim = S.simulate(proj, n_sims)
         sims[gid] = sim
         results[gid] = dict(proj=proj, sim=sim)
@@ -136,6 +137,23 @@ def run_games(game_ids: list[str], n_sims: int = 20000, write_pages: bool = True
             path = config.ROOT / "output" / "v0" / f"{slug(r['proj']['game'])}.html"
             pages.append(v0page.render(r["proj"], r["sim"], gl, gbest, check, path))
     return dict(results=results, legs=legs, best=best, pages=pages, fits=fits, unresolved=unresolved)
+
+
+_JERSEYS: dict = {}
+
+
+def jerseys(season: int, week: int) -> dict:
+    """Jersey number per player id from the weekly rosters (latest week up to this one). Page display only."""
+    if (season, week) not in _JERSEYS:
+        from .data import ingest
+        try:
+            r = ingest.load("rosters", seasons=[season])
+        except Exception:                       # no roster file yet: pages just omit numbers
+            r = pd.DataFrame(columns=["week", "gsis_id", "jersey_number"])
+        r = r[r["week"] <= week].dropna(subset=["gsis_id", "jersey_number"]).sort_values("week", kind="mergesort")
+        _JERSEYS[(season, week)] = (r.drop_duplicates("gsis_id", keep="last").set_index("gsis_id")["jersey_number"]
+                                    .astype(int).to_dict())
+    return _JERSEYS[(season, week)]
 
 
 def season_of(g) -> int:

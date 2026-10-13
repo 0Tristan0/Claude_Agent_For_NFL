@@ -5,3 +5,4 @@ backtests/eval/**/*.parquet
 experiments/runs/**/*.parquet
 *.egg-info/
 __pycache__/
+output/logos/
