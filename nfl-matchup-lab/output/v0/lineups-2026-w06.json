@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 6,
- "built_at": "2026-10-13 03:27:41.911799+00:00",
+ "built_at": "2026-10-13 03:41:00.921951+00:00",
  "games": {
   "2026_06_SEA_DEN": {
    "slug": "2026-w06-sea-den",
@@ -957,5 +957,264 @@
     ]
    }
   ]
+ },
+ "combined": {
+  "lineups": {
+   "3": [
+    {
+     "n": 3,
+     "recommended": false,
+     "basis": "both models agree",
+     "play_as": "Power",
+     "p_all": 0.20038781634977348,
+     "p_independent": 0.1743321528829053,
+     "power_ev": 1.0019390817488674,
+     "flex_ev": 0.9271164321347996,
+     "best_ev": 1.0019390817488674,
+     "min_power_mult": 4.990323355061254,
+     "legs": [
+      {
+       "player": "Hunter Henry",
+       "team": "NE",
+       "stat": "receptions",
+       "side": "under",
+       "line": 3.5,
+       "p_model": 0.5789765456487453,
+       "game_id": "2026_06_NYJ_NE",
+       "note": "new model 60%, old model 56% (under in 3 of last 4)"
+      },
+      {
+       "player": "J.K. Dobbins",
+       "team": "DEN",
+       "stat": "rec_yds",
+       "side": "under",
+       "line": 6.5,
+       "p_model": 0.5714084445178578,
+       "game_id": "2026_06_SEA_DEN",
+       "note": "new model 57%, old model 57% (under in 3 of last 4)"
+      },
+      {
+       "player": "Drake Maye",
+       "team": "NE",
+       "stat": "pass_yds",
+       "side": "under",
+       "line": 232.5,
+       "p_model": 0.5269505665659957,
+       "game_id": "2026_06_NYJ_NE",
+       "note": "new model 54%, old model 52% (under in 2 of last 4)"
+      }
+     ]
+    }
+   ],
+   "4": [
+    {
+     "n": 4,
+     "recommended": true,
+     "basis": "both models agree",
+     "play_as": "Power",
+     "p_all": 0.12248718765896666,
+     "p_independent": 0.0965265702905956,
+     "power_ev": 1.2248718765896665,
+     "flex_ev": 1.0521887417367926,
+     "best_ev": 1.2248718765896665,
+     "min_power_mult": 8.164119195749983,
+     "legs": [
+      {
+       "player": "Sam Darnold",
+       "team": "SEA",
+       "stat": "rush_yds",
+       "side": "over",
+       "line": 4.5,
+       "p_model": 0.5642789798434539,
+       "game_id": "2026_06_SEA_DEN",
+       "note": "new model 56%, old model 57% (over in 3 of last 4)"
+      },
+      {
+       "player": "Marvin Mims Jr.",
+       "team": "DEN",
+       "stat": "rec_yds",
+       "side": "under",
+       "line": 13.5,
+       "p_model": 0.5619851630019416,
+       "game_id": "2026_06_SEA_DEN",
+       "note": "new model 52%, old model 61% (under in 3 of last 3)"
+      },
+      {
+       "player": "Bo Nix",
+       "team": "DEN",
+       "stat": "pass_att",
+       "side": "under",
+       "line": 34.5,
+       "p_model": 0.5517470725085922,
+       "game_id": "2026_06_SEA_DEN",
+       "note": "new model 53%, old model 57% (under in 3 of last 4)"
+      },
+      {
+       "player": "Jaylen Waddle",
+       "team": "DEN",
+       "stat": "receptions",
+       "side": "under",
+       "line": 4.5,
+       "p_model": 0.5516811058914821,
+       "game_id": "2026_06_SEA_DEN",
+       "note": "new model 59%, old model 52% (under in 2 of last 4)"
+      }
+     ]
+    }
+   ],
+   "5": [
+    {
+     "n": 5,
+     "recommended": true,
+     "basis": "both models agree",
+     "play_as": "Power",
+     "p_all": 0.0659153499687824,
+     "p_independent": 0.05984532448412336,
+     "power_ev": 1.318306999375648,
+     "flex_ev": 1.2482916023635233,
+     "best_ev": 1.318306999375648,
+     "min_power_mult": 15.170973080983433,
+     "legs": [
+      {
+       "player": "Hunter Henry",
+       "team": "NE",
+       "stat": "receptions",
+       "side": "under",
+       "line": 3.5,
+       "p_model": 0.5789765456487453,
+       "game_id": "2026_06_NYJ_NE",
+       "note": "new model 60%, old model 56% (under in 3 of last 4)"
+      },
+      {
+       "player": "Najee Harris",
+       "team": "NYG",
+       "stat": "receptions",
+       "side": "under",
+       "line": 0.5,
+       "p_model": 0.57151982582667,
+       "game_id": "2026_06_NO_NYG",
+       "note": "new model 59%, old model 56% (under in 3 of last 4)"
+      },
+      {
+       "player": "J.K. Dobbins",
+       "team": "DEN",
+       "stat": "rec_yds",
+       "side": "under",
+       "line": 6.5,
+       "p_model": 0.5714084445178578,
+       "game_id": "2026_06_SEA_DEN",
+       "note": "new model 57%, old model 57% (under in 3 of last 4)"
+      },
+      {
+       "player": "Jaylen Waddle",
+       "team": "DEN",
+       "stat": "rec_yds",
+       "side": "under",
+       "line": 49.5,
+       "p_model": 0.5687852197788064,
+       "game_id": "2026_06_SEA_DEN",
+       "note": "new model 57%, old model 57% (under in 3 of last 4)"
+      },
+      {
+       "player": "Jameis Winston",
+       "team": "NYG",
+       "stat": "pass_att",
+       "side": "under",
+       "line": 32.5,
+       "p_model": 0.556471591175457,
+       "game_id": "2026_06_NO_NYG",
+       "note": "new model 54%, old model 57% (under in 3 of last 4)"
+      }
+     ]
+    }
+   ],
+   "6": [
+    {
+     "n": 6,
+     "recommended": true,
+     "basis": "both models agree",
+     "play_as": "Power",
+     "p_all": 0.038466430404225066,
+     "p_independent": 0.03408023440386801,
+     "power_ev": 1.44249114015844,
+     "flex_ev": 1.3867279138057333,
+     "best_ev": 1.44249114015844,
+     "min_power_mult": 25.996693467303434,
+     "legs": [
+      {
+       "player": "Hunter Henry",
+       "team": "NE",
+       "stat": "receptions",
+       "side": "under",
+       "line": 3.5,
+       "p_model": 0.5789765456487453,
+       "game_id": "2026_06_NYJ_NE",
+       "note": "new model 60%, old model 56% (under in 3 of last 4)"
+      },
+      {
+       "player": "Najee Harris",
+       "team": "NYG",
+       "stat": "receptions",
+       "side": "under",
+       "line": 0.5,
+       "p_model": 0.57151982582667,
+       "game_id": "2026_06_NO_NYG",
+       "note": "new model 59%, old model 56% (under in 3 of last 4)"
+      },
+      {
+       "player": "J.K. Dobbins",
+       "team": "DEN",
+       "stat": "rec_yds",
+       "side": "under",
+       "line": 6.5,
+       "p_model": 0.5714084445178578,
+       "game_id": "2026_06_SEA_DEN",
+       "note": "new model 57%, old model 57% (under in 3 of last 4)"
+      },
+      {
+       "player": "Kirk Cousins",
+       "team": "LV",
+       "stat": "pass_yds",
+       "side": "over",
+       "line": 237.5,
+       "p_model": 0.5694719616687482,
+       "game_id": "2026_06_BUF_LV",
+       "note": "new model 51%, old model 63% (over in 4 of last 4)"
+      },
+      {
+       "player": "Jaylen Waddle",
+       "team": "DEN",
+       "stat": "rec_yds",
+       "side": "under",
+       "line": 49.5,
+       "p_model": 0.5687852197788064,
+       "game_id": "2026_06_SEA_DEN",
+       "note": "new model 57%, old model 57% (under in 3 of last 4)"
+      },
+      {
+       "player": "Jameis Winston",
+       "team": "NYG",
+       "stat": "pass_att",
+       "side": "under",
+       "line": 32.5,
+       "p_model": 0.556471591175457,
+       "game_id": "2026_06_NO_NYG",
+       "note": "new model 54%, old model 57% (under in 3 of last 4)"
+      }
+     ]
+    }
+   ]
+  },
+  "seventh": {
+   "player": "Jordan Love",
+   "team": "GB",
+   "stat": "pass_att",
+   "side": "under",
+   "line": 35.5,
+   "p_model": 0.5755927716821458,
+   "p_new": 0.5806299878087362,
+   "p_old": 0.5705555555555556
+  },
+  "n_agreed": 81
  }
 }

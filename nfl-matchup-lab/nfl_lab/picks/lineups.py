@@ -175,7 +175,7 @@ def _search(pool: pd.DataFrame, n: int, sims: dict, top: int, require_ev: bool) 
         res.append(dict(legs=pool.iloc[c].drop(columns="_edge").to_dict("records"), **ev,
                         play_as="Power" if (ev["power_ev"] or 0) >= (ev["flex_ev"] or 0) + 0.03 else "Flex",
                         correlation_lift=ev["p_all"] / ev["p_independent"] if ev["p_independent"] else np.nan,
-                        best_ev=best_ev, recommended=bool(require_ev and clears),
+                        best_ev=best_ev, recommended=bool(require_ev and clears), clears=bool(clears),
                         basis="model + market" if all(l["basis"] == "model + market" for l in pool.iloc[c].to_dict("records"))
                         else "model only"))
     return res

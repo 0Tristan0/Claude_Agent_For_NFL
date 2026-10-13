@@ -91,7 +91,8 @@ def to_json(best: dict) -> dict:
             best_ev=float(L.get("best_ev", max(L["power_ev"] or 0, L["flex_ev"] or 0))),
             min_power_mult=float(L["min_power_mult"]),
             legs=[dict(player=x["player"], team=teams.display(x["team"]), stat=x["stat"], side=x["side"],
-                       line=float(x["line"]), p_model=float(x["p_model"]), game_id=x["game_id"]) for x in L["legs"]])
+                       line=float(x["line"]), p_model=float(x["p_model"]), game_id=x["game_id"],
+                       **({"note": x["note"]} if x.get("note") else {})) for x in L["legs"]])
             for L in lst]
     return out
 

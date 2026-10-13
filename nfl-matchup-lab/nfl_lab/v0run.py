@@ -169,10 +169,12 @@ def run_games(game_ids: list[str], n_sims: int = 20000, write_pages: bool = True
     from .picks import oldmodel
     old_est = oldmodel.estimates(legs, T) if len(legs) else pd.DataFrame()
     old_best = oldmodel.best_lineups(old_est)
+    from .picks import combined
+    combo = combined.best(legs, old_est, sims) if len(legs) else {"lineups": {}, "seventh": None, "n_agreed": 0}
     check = load_check()
     pages = []
     if write_pages:
-        _save_week_lineups(results, legs, best, now, multi=len(game_ids) > 1, old_best=old_best)
+        _save_week_lineups(results, legs, best, now, multi=len(game_ids) > 1, old_best=old_best, combo=combo)
         from .report import v0page
         for gid, r in results.items():
             gl = legs[legs["game_id"] == gid] if len(legs) else legs
@@ -181,10 +183,11 @@ def run_games(game_ids: list[str], n_sims: int = 20000, write_pages: bool = True
             g_old = oldmodel.best_lineups(old_est[old_est["game_id"] == gid] if len(old_est) else old_est)
             pages.append(v0page.render(r["proj"], r["sim"], gl, gbest, check, path, old_best=g_old))
     return dict(results=results, legs=legs, best=best, pages=pages, fits=fits, unresolved=unresolved,
-                old_estimates=old_est, old_best=old_best)
+                old_estimates=old_est, old_best=old_best, combined=combo)
 
 
-def _save_week_lineups(results: dict, legs: pd.DataFrame, best: dict, now, multi: bool, old_best: dict | None = None) -> None:
+def _save_week_lineups(results: dict, legs: pd.DataFrame, best: dict, now, multi: bool, old_best: dict | None = None,
+                       combo: dict | None = None) -> None:
     """Cross-game PrizePicks lineups for the site's Lineups tab (output/v0/lineups-<season>-w<week>.json).
     A single-game run only writes the file when the week has none, so it never wipes a full-slate run."""
     import json
@@ -201,7 +204,10 @@ def _save_week_lineups(results: dict, legs: pd.DataFrame, best: dict, now, multi
         games[gid] = dict(slug=slug(r["proj"]["game"]), pp_lines=n_pp)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(dict(season=season, week=week, built_at=str(now), games=games,
-                                    best=picks_html.to_json(best), old_best=old_best or {}), indent=1))
+                                    best=picks_html.to_json(best), old_best=old_best or {},
+                                    combined=dict(lineups=picks_html.to_json((combo or {}).get("lineups", {})),
+                                                  seventh=(combo or {}).get("seventh"),
+                                                  n_agreed=(combo or {}).get("n_agreed", 0))), indent=1))
 
 
 _JERSEYS: dict = {}

@@ -469,6 +469,12 @@ def latest_lineups():
 
 
 LINEUPS_CSS = """
+.more-models{display:grid;gap:24px;border-top:1px solid var(--line);padding-top:16px}
+.more-models summary{cursor:pointer;color:var(--muted);font-size:.9rem;list-style:none}
+.more-models summary::before{content:"+ ";color:var(--faint)}
+.more-models[open] summary::before{content:"\2212 "}
+.more-models summary:hover{color:var(--text)}
+.more-models[open]{gap:40px}
 .hero{display:grid;gap:8px}
 .loaded{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0 20px;border-top:1px solid var(--line-2)}
 .loaded a{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);color:var(--text);text-decoration:none;font-size:.88rem}
@@ -497,16 +503,24 @@ def lineups_page():
                      f'{theme.logo(h, 18)}<b>{e(h)}</b><span class="n{" has" if n else ""}">{n} lines</span></a>')
         msg = ("No PrizePicks lines are loaded for this week yet." if not with_lines else
                "No lineup can be built from the PrizePicks lines loaded so far.")
-        inner = (f'<section aria-labelledby="h-best"><div><h2 id="h-best">Best lineups</h2><p class="sub">One pick per player, '
-                 'at least two teams, mixing games. "Recommended" means the model expects more than $1 back per $1 even after '
-                 'allowing for simulation noise; anything else is shown so you can see how close it gets.</p></div>'
+        combo = d.get("combined") or {}
+        sev = combo.get("seventh")
+        sev_html = (f'<p class="small">Want a 7th pick? PrizePicks stops at 6, but the next-best pick both models agree on is '
+                    f'<b>{e(sev["player"])} {picks_html.SIDE[sev["side"]]} {sev["line"]:g} {e(picks_html.stat_name(sev["stat"]))}</b> '
+                    f'({sev["p_model"]:.0%}).</p>') if sev else ""
+        inner = ('<section aria-labelledby="h-best"><div><h2 id="h-best">Best parlays</h2><p class="sub">Only picks where the new '
+                 'model and the old model agree, with each pick\'s chance the average of the two. '
+                 f'{combo.get("n_agreed", 0)} picks this week pass that test.</p></div>'
+                 + picks_html.lineup_cards(combo.get("lineups") or {}, prefix="", no_lines_msg=msg) + sev_html + '</section>\n'
+                 '<details class="more-models"><summary>Each model\'s own lineups</summary>'
+                 '<section aria-labelledby="h-new"><div><h2 id="h-new">New model</h2><p class="sub">Simulation model on its own. '
+                 '"Recommended" means it expects more than $1 back per $1 even after allowing for simulation noise.</p></div>'
                  + picks_html.lineup_cards(d["best"], prefix="", no_lines_msg=msg) + '</section>\n'
-                 '<section aria-labelledby="h-old"><div><h2 id="h-old">Old model lineups</h2><p class="sub">The method from '
-                 'the original Bills-Rams report, for comparison: each player\'s hit rate at the line in his last 4 games, '
-                 'pulled toward 50%, plus a 3-point nudge when the opponent is among the 8 defenses allowing the most or '
-                 'least of that stat, averaged with the market (50% for a PrizePicks line without a sportsbook price). '
-                 'Legs are multiplied as if independent. It was not checked against past seasons.</p></div>'
-                 + picks_html.lineup_cards(d.get("old_best") or {}, prefix="", no_lines_msg=msg) + '</section>\n'
+                 '<section aria-labelledby="h-old"><div><h2 id="h-old">Old model</h2><p class="sub">The method from the original '
+                 'Bills-Rams report: each player\'s hit rate at the line in his last 4 games, pulled toward 50%, plus a 3-point '
+                 'nudge for the 8 defenses allowing the most or least of that stat, averaged with the market (50% without a '
+                 'sportsbook price). Legs are multiplied as if independent. Not checked against past seasons.</p></div>'
+                 + picks_html.lineup_cards(d.get("old_best") or {}, prefix="", no_lines_msg=msg) + '</section></details>\n'
                  f'<section aria-labelledby="h-loaded"><div><h2 id="h-loaded">PrizePicks lines loaded</h2><p class="sub">'
                  f'{with_lines} of {len(games)} games have PrizePicks lines on file. Tap a game to see its lines.</p></div>'
                  f'<div class="loaded">{rows}</div></section>\n')
@@ -516,10 +530,8 @@ def lineups_page():
             f'<header class="hero"><span class="eyebrow">PrizePicks{week_txt}</span><h1>Lineups</h1>'
             '<p class="sub">PrizePicks Power and Flex lineups built from simulated games, so picks that move together are '
             f'counted together. Only PrizePicks lines are used.{built}</p>'
-            '<p class="sub">Read these as an experiment. The model has not been graded against real PrizePicks lines yet, so '
-            'without a sportsbook price its lean is cut in half toward 50%, and its chances at lines like these were '
-            're-checked on the 2023 and 2024 seasons, where it called "Less" too often. Even so, most of its strongest '
-            'picks are still "Less" picks.</p></header>\n' + inner +
+            '<p class="sub">An experiment, not proven picks: neither model has been graded against real PrizePicks lines '
+            'yet.</p></header>\n' + inner +
             '<footer class="notes"><p>Payouts: PrizePicks standard tables (Power 2 to 6 picks, Flex 3 to 6). The app can pay '
             'less on some entries; skip a lineup if the app shows less than the listed multiplier. Estimates, not betting '
             'advice.</p></footer>\n</main>\n')
