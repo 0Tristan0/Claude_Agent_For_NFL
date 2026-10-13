@@ -76,8 +76,10 @@ def test_grade_week(tmp_path, monkeypatch):
     assert [v["hit"] for v in d["result"]["legs"].values()] == [True, True, False, True]
 
 
-def test_lineup_view_lists_each_pick_once():
+def test_the_play_lists_each_pick_once_with_its_entries():
     out = picks_html.guesser_lineups(_lu(), prefix="")
     for name in ("A", "B", "C", "D"):
         assert out.count(f"<b>{name}</b>") == 1
-    assert "Picks 1-3" in out and "Picks 1-4" in out and "Guesser $12" in out and "Guesser $8" in out
+    assert "The play" in out and "<b>$12</b> Entry A (3-pick Flex)" in out and "<b>$8</b> Entry B (4-pick Power)" in out
+    assert out.count(">A + B<") == 3 and out.count(">B only<") == 1
+    assert [x["player"] for x in picks_html.play_summary(_lu())] == ["A", "B", "C", "D"]

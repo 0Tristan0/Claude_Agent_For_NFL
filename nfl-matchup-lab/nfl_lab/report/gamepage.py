@@ -18,7 +18,10 @@ CSS = """.board2 td.why{white-space:normal;min-width:300px;max-width:520px;font-
 .tier.Lean,.tier.Coin{color:var(--muted)}
 .ut td,.ut th{white-space:nowrap}
 .adv{font-size:.78rem;color:var(--muted)}
-.adv.o{color:var(--pos)} .adv.d{color:var(--neg)}"""
+.adv.o{color:var(--pos)} .adv.d{color:var(--neg)}
+.board2 tr.inplay th,.board2 tr.inplay td{background:var(--surface)}
+.board2 tr.inplay th{box-shadow:inset 3px 0 0 var(--text)}
+.inp{color:var(--text);font-weight:600}"""
 
 
 def _pill(rank: int) -> str:
@@ -30,7 +33,8 @@ def _fmt(stat: str, v: float) -> str:
     return f"{v:.0%}" if "rate" in stat.lower() else f"{v:+.3f}" if "EPA" in stat else f"{v:.2f}"
 
 
-def _board(picks: list[dict]) -> str:
+def _board(picks: list[dict], lu: dict | None = None) -> str:
+    play = {picks_html._key(x) for x in picks_html.play_summary(lu or {})}
     if not picks:
         return ("<p class='sub'>No standard PrizePicks lines for this game yet. " + picks_html.HOW_TO_ADD + "</p>")
     rows = []
@@ -39,9 +43,12 @@ def _board(picks: list[dict]) -> str:
                else ", ".join(f"{v:g}" for v in p["log"]))
         small = " <span class='muted'>(small sample)</span>" if p["games"] < 3 else ""
         why = "".join(f"<span>{e(w)}</span>" for w in p.get("reasons", [])) or "<span>No strong matchup signal.</span>"
-        rows.append(f"<tr><th scope='row'>{theme.logo(p['team'], 18, '../')} {e(p['player'])}<span class='vs-lbl'>{e(p['position'])}</span></th>"
+        inplay = picks_html._key(p) in play
+        rows.append(f"<tr{' class=inplay' if inplay else ''}><th scope='row'>{theme.logo(p['team'], 18, '../')} {e(p['player'])}"
+                    f"<span class='vs-lbl'>{e(p['position'])}" + (" · <span class='inp'>&#9733; In the play</span>" if inplay else "")
+                    + f"</span></th>"
                     f"<td class='l'>{e(picks_html.stat_name(p['stat']))}</td><td class='num'>{p['line']:g}</td>"
-                    f"<td class='l'><b>{SIDE[p['side']]}</b></td>"
+                    f"<td class='l'>{picks_html.side_chip(p['side'])}</td>"
                     f"<td class='l'><span class='tier {p['tier'].split()[0]}'>{e(p['tier'])}</span><span class='vs-lbl'>{p['p_model']:.0%}</span></td>"
                     f"<td class='l'>{SIDE[p['side']]} in {p['hits']} of {p['games']}{small}<span class='vs-lbl'>{e(log)}</span></td>"
                     f"<td class='why'>{why}</td></tr>")
@@ -101,7 +108,7 @@ both teams (if the top 3 are all one team, the other team's best pick takes the 
 <section class="pane" id="props" data-tab="Props board" aria-labelledby="h-pb"><div><h2 id="h-pb">Props board</h2>
 <p class="sub">Every standard PrizePicks line for this game, rated with the original formula: (recent + matchup + market) / 2.
 Recent is his last 4 games at the line pulled toward 50%; matchup is this game's matchups (up to 8 points before halving);
-market is 50% when there is no sportsbook price. High is 60% or more, Med-High 57.5%, Medium 55%, Lean 52.5%.</p></div>{_board(rec.get('picks') or [])}</section>
+market is 50% when there is no sportsbook price. High is 60% or more, Med-High 57.5%, Medium 55%, Lean 52.5%. Rows marked &#9733; are in the play.</p></div>{_board(rec.get('picks') or [], lu)}</section>
 
 <section class="pane" id="units" data-tab="Unit vs unit" aria-labelledby="h-uu"><div><h2 id="h-uu">Unit vs unit</h2>
 <p class="sub">Each offense against the defense it faces tonight, recency weighted (this season counts most).</p></div>

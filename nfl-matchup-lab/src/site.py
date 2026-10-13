@@ -299,18 +299,33 @@ INDEX_CSS = """
 """
 
 
+def best_plays():
+    from nfl_lab.report import picks_html
+    recs = week_recs()
+    rows = play_rows(recs, limit=3)
+    if not rows:
+        return ""
+    return ('<section aria-labelledby="h-best"><div class="secth"><h2 id="h-best">Best plays this week</h2>'
+            '<a class="more" href="lineups.html">All plays &rarr;</a></div>'
+            '<p class="sub">The three games whose 4-pick Power the method likes most. Each play is $12 on Entry A '
+            '(top 3, Flex) and $8 on Entry B (top 4, Power), one game only.</p>'
+            f'<div class="plays">{rows}</div></section>\n')
+
+
 def index_page():
     now = datetime.now(timezone.utc)
     locks = [g for g in G if g["status"] == "pending"] + [g for g in G if g["status"] == "graded"]
     pages = game_recs()
     open_weeks = [p["week"] for p in pages if status(p, now) != "final"] or [p["week"] for p in pages]
     week = f"Week {max(open_weeks)}" if pages else "Games"
-    return (theme.head("NFL Matchup Lab") + f"<style>{INDEX_CSS}</style>\n" + '<main class="wrap">\n' + theme.nav("home") +
+    from nfl_lab.report import picks_html
+    return (theme.head("NFL Matchup Lab") + f"<style>{INDEX_CSS}{PLAYS_CSS}{picks_html.GUESSER_CSS}</style>\n" + '<main class="wrap">\n' + theme.nav("home") +
             f'<header class="hero"><span class="eyebrow">2026 season</span><h1>{week}</h1>'
             '<p class="sub">Every game rated the way the Bills-Rams Guesser picks were: each PrizePicks line gets a lean from '
             'the player\'s last 4 games, the market, and this game\'s matchups, and the top picks become that game\'s '
             'lineups. Pts is the score the betting line implies. Open a game for its lineups, props board and unit '
             'matchups.</p></header>\n'
+            + best_plays()
             + games_sections(now)
             + ('<section aria-labelledby="h-lock"><div><h2 id="h-lock">Locked picks</h2><p class="sub">Hand-built reports '
                'whose picks were committed to git before kickoff, then graded.</p></div>'
@@ -427,6 +442,63 @@ def slip(b):
 </section>""")
 
 
+def retro_tests():
+    """Before-kickoff tests of the current Guesser method on finished games (backtests/live/*-guesser-retro.json)."""
+    from nfl_lab import guesser
+    from nfl_lab.report import picks_html
+    out = []
+    for path in sorted(glob.glob(os.path.join(LIVE_DIR, "*-guesser-retro.json"))):
+        rec = json.load(open(path))
+        if not rec.get("graded"):
+            continue
+        _, wk, away, home = rec["game_id"].split("_")
+        a_d, h_d = ("LAR" if away == "LA" else away), ("LAR" if home == "LA" else home)
+        def rows(v):
+            r = ""
+            for n, lst in sorted({**v["lineups"], **(v.get("filled") or {})}.items(), key=lambda kv: int(kv[0])):
+                L = lst[0]
+                o = L.get("outcome") or {}
+                legs = "".join(
+                    f'<li><span class="mk {"hit" if x["result"]["hit"] else "miss"}">{"&#10003;" if x["result"]["hit"] else "&#10005;"}</span>'
+                    f'<span>{e(x["player"])} {picks_html.side_chip(x["side"])} {x["line"]:g} {e(picks_html.stat_name(x["stat"]))}'
+                    f' <span class="muted">({x["p_model"]:.0%})</span></span><span class="act">{e(str(x["result"]["actual"]))}</span></li>'
+                    for x in L["legs"] if x.get("result"))
+                ret = o.get("returned", 0)
+                tag = (f'<span class="tag pos">Won ${ret:.2f} per $1</span>' if ret > 1 else
+                       f'<span class="tag">Got ${ret:.2f} back per $1</span>' if ret > 0 else '<span class="tag neg">Lost</span>')
+                r += (f'<article class="entry"><header><div><h3>{n}-pick {e(L["play_as"])}</h3><span class="kind">'
+                      f'{o.get("hits", "?")} of {o.get("of", n)} hit' + (" · filled with coin flips" if L.get("filled") else "")
+                      + f'</span></div>{tag}</header><ul class="legs">{legs}</ul></article>')
+            return r
+        v1, v2 = rec["variants"]["no_prices"], rec["variants"]["with_prices"]
+        def total(v):
+            ls = [lst[0] for lst in {**v["lineups"], **(v.get("filled") or {})}.values()]
+            return len(ls), sum((L.get("outcome") or {}).get("returned", 0) for L in ls)
+        def brief(v):
+            parts = []
+            for n, lst in sorted({**v["lineups"], **(v.get("filled") or {})}.items(), key=lambda kv: int(kv[0])):
+                o = lst[0].get("outcome") or {}
+                parts.append(f'{n}-pick {lst[0]["play_as"]} {o.get("hits", "?")} of {o.get("of", n)}, '
+                             + (f'${o["returned"]:.2f} per $1' if o.get("returned") else "lost"))
+            return "; ".join(parts)
+        n1, r1 = total(v1)
+        n2, r2 = total(v2)
+        out.append(f"""<section class="slip" aria-labelledby="h-rt-{e(rec['game_id'])}">
+<header class="slip-head"><div class="sh"><span class="eyebrow">Before-kickoff test · current method</span>
+<h2 id="h-rt-{e(rec['game_id'])}">{matchup(a_d, h_d, 28)}</h2>
+<span class="fine">Week {int(wk)} · picks rated with only what was known before kickoff and committed ({e(rec.get('frozen_commit') or 'see git log')})
+before any result was read · {e(rec['graded'].get('final') or '')}</span></div><span class="tag neg">$1 on each: ${r1:.2f} back from ${n1:.0f}</span></header>
+<p class="fine">Same code as this week's lineups, run on the 13 lines saved before kickoff, with every line's market at 50% as on a
+PrizePicks board. Not part of the bankroll above. Sizes the method would not build (fewer than 5 or 6 players at Lean or better) were
+filled with the next-best coin flips and are marked.</p>
+<div class="entries">{rows(v1)}</div>
+<p class="fine">With the sportsbook prices the original report collected (instead of 50%): ${r2:.2f} back from ${n2:.0f} at $1
+each ({e(brief(v2))}). Record: <code>{e(os.path.relpath(path, ROOT))}</code>.
+The matchup rules were written after this game was played, so this is a fair test of the data, not of the rules.</p>
+</section>""")
+    return "".join(out)
+
+
 GUESSER_CSS = """
 .hero{display:grid;gap:8px}
 .ledger{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:0;margin:0;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line)}
@@ -486,14 +558,54 @@ def guesser_page():
             f'<div><dt>Paid back</dt><dd class="{"" if graded else "wait"}">{money(back) if graded else "Pending"}</dd></div>'
             f'<div><dt>Profit</dt><dd class="{prof_cls}">{prof_txt}</dd></div>'
             f'<div><dt>Bankroll now</dt><dd>{money(now)}</dd></div></dl>{pend_note}</div>\n'
-            + ("".join(s["html"] for s in slips) or '<p class="fine">No games yet.</p>') +
+            + ("".join(s["html"] for s in slips) or '<p class="fine">No games yet.</p>') + retro_tests() +
             '\n<footer class="notes"><p>Payouts use the standard PrizePicks tables in config/payouts.toml (Power pays only '
             'when every leg hits; Flex also pays when most legs hit). The app can offer lower multipliers on same-game '
             'entries; that would be noted on the slip. Pretend money, small samples, not betting advice.</p></footer>\n</main>\n')
-    return theme.document("Guesser", body, GUESSER_CSS)
+    from nfl_lab.report import picks_html
+    return theme.document("Guesser", body, GUESSER_CSS + picks_html.GUESSER_CSS)
 
 
 # ---- Lineups: cross-game PrizePicks lineups for the latest week ---------------------------------------
+
+PLAYS_CSS = """
+.plays{display:grid;border-top:1px solid var(--line-2)}
+.prow{display:grid;grid-template-columns:minmax(150px,200px) 1fr auto;gap:6px 18px;align-items:start;padding:12px 0;
+  border-bottom:1px solid var(--line);color:var(--text);text-decoration:none}
+.prow:hover{background:var(--surface)}
+.prow .pg{display:grid;gap:3px}
+.prow .pg .fine{font-size:.76rem}
+.prow ul{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:.9rem}
+.prow li b{font-weight:650}
+.prow .pev{font-size:.8rem;color:var(--muted);text-align:right;white-space:nowrap;display:grid;gap:3px}
+.prow .pev b{color:var(--text)}
+.prow .pev b.ok{color:var(--pos)}
+@media (max-width:640px){.prow{grid-template-columns:1fr}.prow .pev{text-align:left;display:flex;gap:12px}}
+"""
+
+
+def play_rows(recs, limit=None):
+    """One row per game: the play's picks (Entry A + B) in plain words, with each entry's expected return."""
+    from nfl_lab.report import picks_html
+    rows = []
+    for p in recs:
+        lu = p["meta"].get("lineups") or {}
+        if "3" not in lu or "4" not in lu:
+            continue
+        A, B = lu["3"][0], lu["4"][0]
+        k = kickoff(p)
+        picks = "".join(f'<li>{theme.logo(x["team"], 16)} <b>{e(x["player"])}</b> {picks_html.side_chip(x["side"])} '
+                        f'{x["line"]:g} {e(picks_html.stat_name(x["stat"]))} <span class="muted">{x["p_model"]:.0%}</span></li>'
+                        for x in picks_html.play_summary(lu))
+        ev = "".join(f'<span>Entry {L["entry"]} <b class="{"ok" if L["recommended"] else ""}">${L["best_ev"]:.2f}</b></span>'
+                     for L in (A, B))
+        rows.append((B["best_ev"], f'<a class="prow" href="{"lineups.html#h-" + p["file"][:-5]}"><span class="pg">'
+                     f'{matchup(p["away"], p["home"], 20)}<span class="fine">{k.strftime("%a %-I:%M %p") if k else ""} ET</span></span>'
+                     f'<ul>{picks}</ul><span class="pev">{ev}<span class="fine">back per $1</span></span></a>'))
+    if limit:
+        rows = sorted(rows, key=lambda t: -t[0])[:limit]
+    return "".join(r for _, r in rows)
+
 
 def week_recs():
     """This week's game records: the latest week with a game not yet final (else the latest week)."""
@@ -540,7 +652,10 @@ def lineups_page():
     else:
         with_lu = [p for p in recs if p["meta"].get("lineups")]
         without = [p for p in recs if not p["meta"].get("lineups")]
-        inner = ""
+        inner = ('<section aria-labelledby="h-plays"><div><h2 id="h-plays">This week\'s plays</h2><p class="sub">The play for each '
+                 'game: $12 on Entry A (the top 3 as a Flex) and $8 on Entry B (the top 4 as a Power), exactly what the '
+                 'Guesser enters. Green means the method expects more than $1 back per $1. Tap a game for the reasons.</p></div>'
+                 f'<div class="plays">{play_rows(with_lu)}</div></section>\n')
         for p in with_lu:
             m, k = p["meta"], kickoff(p)
             slug = p["file"][:-5]
@@ -561,18 +676,16 @@ def lineups_page():
         built = f' Last run {e(max(p["meta"]["built_at"] for p in recs)[:16])} UTC.'
     body = ('<main class="wrap">\n' + theme.nav("lineups") +
             f'<header class="hero"><span class="eyebrow">PrizePicks{week_txt}</span><h1>Lineups</h1>'
-            '<p class="sub">One game at a time, built the way the Bills-Rams Guesser entries were. Every standard PrizePicks '
-            'line gets the original estimate, (recent + matchup + market) / 2: his last 4 games at the line pulled toward '
-            '50%, this game\'s matchups (pass rush vs offensive line, what the defense allows to his position, run and pass '
-            'defense, game script), and the market (50% when the board has no sportsbook price). The top picks, one per player and from both teams, make Entry A (3-pick Flex) '
-            'and Entry B (4-pick Power); those are exactly what the Guesser plays, $12 and $8. The 5- and 6-pick add the next '
-            'best picks. Each pick is written once, with its reasons, in the ranked list under the entries.'
+            '<p class="sub">Built the way the Bills-Rams Guesser entries were, one game at a time. Each PrizePicks line gets '
+            '(recent + matchup + market) / 2: his last 4 games at the line pulled toward 50%, this game\'s matchups, and the '
+            'market (50% when the board has no price). The top picks, one per player and from both teams, are the play: '
+            '$12 on Entry A (top 3, Flex) and $8 on Entry B (top 4, Power).'
             f'{built}</p></header>\n' + inner +
             '<footer class="notes"><p>Payouts: PrizePicks standard tables (Power 2 to 6 picks, Flex 3 to 6). The app can pay '
             'less on some entries; skip a lineup if the app shows less than the listed multiplier. A lineup\'s chance '
             'multiplies its picks\' estimates, as the original did. Estimates, not betting advice.</p></footer>\n</main>\n'
             f'<script>{INDEX_JS}</script>\n')
-    return theme.document("Lineups", body, LINEUPS_CSS + picks_html.GUESSER_CSS)
+    return theme.document("Lineups", body, LINEUPS_CSS + PLAYS_CSS + picks_html.GUESSER_CSS)
 
 
 if __name__ == "__main__":

@@ -379,7 +379,11 @@
         "p_model": 0.6122829861111111,
         "game_id": "2026_05_BUF_LA",
         "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
-        "reasons": []
+        "reasons": [],
+        "result": {
+         "actual": "scored",
+         "hit": true
+        }
        },
        {
         "player": "Khalil Shakir",
@@ -393,7 +397,11 @@
         "note": "Medium \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
         "reasons": [
          "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
-        ]
+        ],
+        "result": {
+         "actual": "80",
+         "hit": false
+        }
        },
        {
         "player": "Kyren Williams",
@@ -408,9 +416,19 @@
         "reasons": [
          "For: BUF have the 5th worst run defense (EPA per rush allowed)",
          "For: LAR favored by 3.5: more carries to close it out"
-        ]
+        ],
+        "result": {
+         "actual": "49",
+         "hit": false
+        }
        }
-      ]
+      ],
+      "outcome": {
+       "hits": 1,
+       "of": 3,
+       "returned": 0.0,
+       "play_as": "Flex"
+      }
      }
     ],
     "4": [
@@ -438,7 +456,11 @@
         "p_model": 0.6122829861111111,
         "game_id": "2026_05_BUF_LA",
         "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
-        "reasons": []
+        "reasons": [],
+        "result": {
+         "actual": "scored",
+         "hit": true
+        }
        },
        {
         "player": "Khalil Shakir",
@@ -452,7 +474,11 @@
         "note": "Medium \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
         "reasons": [
          "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
-        ]
+        ],
+        "result": {
+         "actual": "80",
+         "hit": false
+        }
        },
        {
         "player": "Kyren Williams",
@@ -467,7 +493,11 @@
         "reasons": [
          "For: BUF have the 5th worst run defense (EPA per rush allowed)",
          "For: LAR favored by 3.5: more carries to close it out"
-        ]
+        ],
+        "result": {
+         "actual": "49",
+         "hit": false
+        }
        },
        {
         "player": "Matthew Stafford",
@@ -481,9 +511,19 @@
         "note": "Medium \u00b7 More in 3 of last 4 (155, 327, 390, 317)",
         "reasons": [
          "Against: LAR favored by 3.5: may lean on the run late"
-        ]
+        ],
+        "result": {
+         "actual": "383",
+         "hit": true
+        }
        }
-      ]
+      ],
+      "outcome": {
+       "hits": 2,
+       "of": 4,
+       "returned": 0.0,
+       "play_as": "Power"
+      }
      }
     ],
     "5": [
@@ -511,7 +551,11 @@
         "p_model": 0.6122829861111111,
         "game_id": "2026_05_BUF_LA",
         "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
-        "reasons": []
+        "reasons": [],
+        "result": {
+         "actual": "scored",
+         "hit": true
+        }
        },
        {
         "player": "Khalil Shakir",
@@ -525,7 +569,11 @@
         "note": "Medium \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
         "reasons": [
          "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
-        ]
+        ],
+        "result": {
+         "actual": "80",
+         "hit": false
+        }
        },
        {
         "player": "Kyren Williams",
@@ -540,7 +588,11 @@
         "reasons": [
          "For: BUF have the 5th worst run defense (EPA per rush allowed)",
          "For: LAR favored by 3.5: more carries to close it out"
-        ]
+        ],
+        "result": {
+         "actual": "49",
+         "hit": false
+        }
        },
        {
         "player": "Matthew Stafford",
@@ -554,7 +606,11 @@
         "note": "Medium \u00b7 More in 3 of last 4 (155, 327, 390, 317)",
         "reasons": [
          "Against: LAR favored by 3.5: may lean on the run late"
-        ]
+        ],
+        "result": {
+         "actual": "383",
+         "hit": true
+        }
        },
        {
         "player": "Colby Parkinson",
@@ -566,9 +622,19 @@
         "p_model": 0.536546875,
         "game_id": "2026_05_BUF_LA",
         "note": "Lean \u00b7 Less in 2 of last 3 (6, 15, 0)",
-        "reasons": []
+        "reasons": [],
+        "result": {
+         "actual": "3",
+         "hit": true
+        }
        }
-      ]
+      ],
+      "outcome": {
+       "hits": 3,
+       "of": 5,
+       "returned": 0.4,
+       "play_as": "Flex"
+      }
      }
     ]
    },
@@ -598,7 +664,11 @@
         "p_model": 0.6122829861111111,
         "game_id": "2026_05_BUF_LA",
         "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
-        "reasons": []
+        "reasons": [],
+        "result": {
+         "actual": "scored",
+         "hit": true
+        }
        },
        {
         "player": "Khalil Shakir",
@@ -612,7 +682,11 @@
         "note": "Medium \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
         "reasons": [
          "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
-        ]
+        ],
+        "result": {
+         "actual": "80",
+         "hit": false
+        }
        },
        {
         "player": "Kyren Williams",
@@ -627,7 +701,11 @@
         "reasons": [
          "For: BUF have the 5th worst run defense (EPA per rush allowed)",
          "For: LAR favored by 3.5: more carries to close it out"
-        ]
+        ],
+        "result": {
+         "actual": "49",
+         "hit": false
+        }
        },
        {
         "player": "Matthew Stafford",
@@ -641,7 +719,11 @@
         "note": "Medium \u00b7 More in 3 of last 4 (155, 327, 390, 317)",
         "reasons": [
          "Against: LAR favored by 3.5: may lean on the run late"
-        ]
+        ],
+        "result": {
+         "actual": "383",
+         "hit": true
+        }
        },
        {
         "player": "Colby Parkinson",
@@ -653,7 +735,11 @@
         "p_model": 0.536546875,
         "game_id": "2026_05_BUF_LA",
         "note": "Lean \u00b7 Less in 2 of last 3 (6, 15, 0)",
-        "reasons": []
+        "reasons": [],
+        "result": {
+         "actual": "3",
+         "hit": true
+        }
        },
        {
         "player": "Dalton Kincaid",
@@ -667,10 +753,20 @@
         "note": "Coin flip \u00b7 Less in 2 of last 4 (130, 95, 38, 7)",
         "reasons": [
          "For: LAR allow the 1st fewest receiving yds to TEs (21 a game)"
-        ]
+        ],
+        "result": {
+         "actual": "7",
+         "hit": true
+        }
        }
       ],
-      "filled": true
+      "filled": true,
+      "outcome": {
+       "hits": 4,
+       "of": 6,
+       "returned": 0.4,
+       "play_as": "Flex"
+      }
      }
     ]
    },
@@ -1049,7 +1145,11 @@
         "p_model": 0.6222829861111111,
         "game_id": "2026_05_BUF_LA",
         "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
-        "reasons": []
+        "reasons": [],
+        "result": {
+         "actual": "scored",
+         "hit": true
+        }
        },
        {
         "player": "Kyren Williams",
@@ -1063,7 +1163,11 @@
         "note": "High \u00b7 More in 3 of last 4 (TD, TD, no TD, TD)",
         "reasons": [
          "For: BUF allow touchdowns on 64% of red-zone trips (the 9th most)"
-        ]
+        ],
+        "result": {
+         "actual": "scored",
+         "hit": true
+        }
        },
        {
         "player": "Khalil Shakir",
@@ -1077,9 +1181,19 @@
         "note": "Med-High \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
         "reasons": [
          "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
-        ]
+        ],
+        "result": {
+         "actual": "80",
+         "hit": false
+        }
        }
-      ]
+      ],
+      "outcome": {
+       "hits": 2,
+       "of": 3,
+       "returned": 1.25,
+       "play_as": "Flex"
+      }
      }
     ],
     "4": [
@@ -1107,7 +1221,11 @@
         "p_model": 0.6222829861111111,
         "game_id": "2026_05_BUF_LA",
         "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
-        "reasons": []
+        "reasons": [],
+        "result": {
+         "actual": "scored",
+         "hit": true
+        }
        },
        {
         "player": "Kyren Williams",
@@ -1121,7 +1239,11 @@
         "note": "High \u00b7 More in 3 of last 4 (TD, TD, no TD, TD)",
         "reasons": [
          "For: BUF allow touchdowns on 64% of red-zone trips (the 9th most)"
-        ]
+        ],
+        "result": {
+         "actual": "scored",
+         "hit": true
+        }
        },
        {
         "player": "Khalil Shakir",
@@ -1135,7 +1257,11 @@
         "note": "Med-High \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
         "reasons": [
          "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
-        ]
+        ],
+        "result": {
+         "actual": "80",
+         "hit": false
+        }
        },
        {
         "player": "Matthew Stafford",
@@ -1149,9 +1275,19 @@
         "note": "Medium \u00b7 More in 3 of last 4 (155, 327, 390, 317)",
         "reasons": [
          "Against: LAR favored by 3.5: may lean on the run late"
-        ]
+        ],
+        "result": {
+         "actual": "383",
+         "hit": true
+        }
        }
-      ]
+      ],
+      "outcome": {
+       "hits": 3,
+       "of": 4,
+       "returned": 0.0,
+       "play_as": "Power"
+      }
      }
     ]
    },
@@ -1181,7 +1317,11 @@
         "p_model": 0.6222829861111111,
         "game_id": "2026_05_BUF_LA",
         "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
-        "reasons": []
+        "reasons": [],
+        "result": {
+         "actual": "scored",
+         "hit": true
+        }
        },
        {
         "player": "Kyren Williams",
@@ -1195,7 +1335,11 @@
         "note": "High \u00b7 More in 3 of last 4 (TD, TD, no TD, TD)",
         "reasons": [
          "For: BUF allow touchdowns on 64% of red-zone trips (the 9th most)"
-        ]
+        ],
+        "result": {
+         "actual": "scored",
+         "hit": true
+        }
        },
        {
         "player": "Khalil Shakir",
@@ -1209,7 +1353,11 @@
         "note": "Med-High \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
         "reasons": [
          "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
-        ]
+        ],
+        "result": {
+         "actual": "80",
+         "hit": false
+        }
        },
        {
         "player": "Matthew Stafford",
@@ -1223,7 +1371,11 @@
         "note": "Medium \u00b7 More in 3 of last 4 (155, 327, 390, 317)",
         "reasons": [
          "Against: LAR favored by 3.5: may lean on the run late"
-        ]
+        ],
+        "result": {
+         "actual": "383",
+         "hit": true
+        }
        },
        {
         "player": "Dalton Kincaid",
@@ -1237,10 +1389,20 @@
         "note": "Coin flip \u00b7 Less in 2 of last 4 (130, 95, 38, 7)",
         "reasons": [
          "For: LAR allow the 1st fewest receiving yds to TEs (21 a game)"
-        ]
+        ],
+        "result": {
+         "actual": "7",
+         "hit": true
+        }
        }
       ],
-      "filled": true
+      "filled": true,
+      "outcome": {
+       "hits": 4,
+       "of": 5,
+       "returned": 0.0,
+       "play_as": "Power"
+      }
      }
     ],
     "6": [
@@ -1268,7 +1430,11 @@
         "p_model": 0.6222829861111111,
         "game_id": "2026_05_BUF_LA",
         "note": "High \u00b7 More in 4 of last 4 (TD, TD, TD, TD)",
-        "reasons": []
+        "reasons": [],
+        "result": {
+         "actual": "scored",
+         "hit": true
+        }
        },
        {
         "player": "Kyren Williams",
@@ -1282,7 +1448,11 @@
         "note": "High \u00b7 More in 3 of last 4 (TD, TD, no TD, TD)",
         "reasons": [
          "For: BUF allow touchdowns on 64% of red-zone trips (the 9th most)"
-        ]
+        ],
+        "result": {
+         "actual": "scored",
+         "hit": true
+        }
        },
        {
         "player": "Khalil Shakir",
@@ -1296,7 +1466,11 @@
         "note": "Med-High \u00b7 Less in 3 of last 4 (40, 38, 6, 82)",
         "reasons": [
          "For: LAR allow the 2nd fewest receiving yds to WRs (107 a game)"
-        ]
+        ],
+        "result": {
+         "actual": "80",
+         "hit": false
+        }
        },
        {
         "player": "Matthew Stafford",
@@ -1310,7 +1484,11 @@
         "note": "Medium \u00b7 More in 3 of last 4 (155, 327, 390, 317)",
         "reasons": [
          "Against: LAR favored by 3.5: may lean on the run late"
-        ]
+        ],
+        "result": {
+         "actual": "383",
+         "hit": true
+        }
        },
        {
         "player": "Dalton Kincaid",
@@ -1324,7 +1502,11 @@
         "note": "Coin flip \u00b7 Less in 2 of last 4 (130, 95, 38, 7)",
         "reasons": [
          "For: LAR allow the 1st fewest receiving yds to TEs (21 a game)"
-        ]
+        ],
+        "result": {
+         "actual": "7",
+         "hit": true
+        }
        },
        {
         "player": "James Cook",
@@ -1336,10 +1518,20 @@
         "p_model": 0.508046875,
         "game_id": "2026_05_BUF_LA",
         "note": "Coin flip \u00b7 More in 2 of last 4 (3, 1, 0, 2)",
-        "reasons": []
+        "reasons": [],
+        "result": {
+         "actual": "1",
+         "hit": false
+        }
        }
       ],
-      "filled": true
+      "filled": true,
+      "outcome": {
+       "hits": 4,
+       "of": 6,
+       "returned": 0.4,
+       "play_as": "Flex"
+      }
      }
     ]
    },
@@ -1347,5 +1539,10 @@
    "injury_note": "injury report week 5"
   }
  },
- "graded": null
+ "graded": {
+  "at": "2026-10-13 16:13 UTC",
+  "final": "BUF 37, LAR 34 (OT)",
+  "source": "nflverse stats_player_week_2026"
+ },
+ "frozen_commit": "b33cb89"
 }
