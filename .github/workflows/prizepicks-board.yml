@@ -1,0 +1,35 @@
+# Downloads the PrizePicks NFL board on GitHub's servers (the cloud coding environment can't reach PrizePicks)
+# and commits it to nfl-matchup-lab/data/prizepicks/latest.json, where `python -m nfl_lab prizepicks --file` reads it.
+# Runs when nfl-matchup-lab/data/prizepicks/REQUEST changes on this branch, or by hand from the Actions tab.
+name: PrizePicks board
+on:
+  push:
+    branches: [claude/pensive-franklin-01y1am]
+    paths: [nfl-matchup-lab/data/prizepicks/REQUEST]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: prizepicks-board
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download the NFL board
+        run: |
+          out=nfl-matchup-lab/data/prizepicks
+          code=$(curl -sS -m 60 -o "$out/latest.json" -w '%{http_code}' \
+            -H 'Accept: application/json' \
+            -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36' \
+            'https://api.prizepicks.com/projections?league_id=9&per_page=1000&single_stat=true' || echo 000)
+          echo "HTTP $code, $(wc -c < "$out/latest.json") bytes"
+          head -c 300 "$out/latest.json"; echo
+          printf '{"http": %s, "fetched_at": "%s", "bytes": %s}\n' "$code" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$(wc -c < "$out/latest.json")" > "$out/latest.meta.json"
+      - name: Save it to the branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nfl-matchup-lab/data/prizepicks/latest.json nfl-matchup-lab/data/prizepicks/latest.meta.json
+          git commit -m "PrizePicks board fetched by GitHub Actions" || echo "nothing new"
+          git push
