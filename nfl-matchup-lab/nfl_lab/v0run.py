@@ -130,6 +130,7 @@ def run_games(game_ids: list[str], n_sims: int = 20000, write_pages: bool = True
     check = load_check()
     pages = []
     if write_pages:
+        _save_week_lineups(results, legs, best, now, multi=len(game_ids) > 1)
         from .report import v0page
         for gid, r in results.items():
             gl = legs[legs["game_id"] == gid] if len(legs) else legs
@@ -137,6 +138,26 @@ def run_games(game_ids: list[str], n_sims: int = 20000, write_pages: bool = True
             path = config.ROOT / "output" / "v0" / f"{slug(r['proj']['game'])}.html"
             pages.append(v0page.render(r["proj"], r["sim"], gl, gbest, check, path))
     return dict(results=results, legs=legs, best=best, pages=pages, fits=fits, unresolved=unresolved)
+
+
+def _save_week_lineups(results: dict, legs: pd.DataFrame, best: dict, now, multi: bool) -> None:
+    """Cross-game PrizePicks lineups for the site's Lineups tab (output/v0/lineups-<season>-w<week>.json).
+    A single-game run only writes the file when the week has none, so it never wipes a full-slate run."""
+    import json
+    from .report import picks_html
+    g0 = next(iter(results.values()))["proj"]["game"]
+    season, week = int(g0["season"]), int(g0["week"])
+    path = config.ROOT / "output" / "v0" / f"lineups-{season}-w{week:02d}.json"
+    if not multi and path.exists():
+        return
+    games = {}
+    for gid, r in results.items():
+        gl = legs[legs["game_id"] == gid] if len(legs) else legs
+        n_pp = int(gl.loc[gl["prizepicks"], ["player", "stat", "line"]].drop_duplicates().shape[0]) if len(gl) else 0
+        games[gid] = dict(slug=slug(r["proj"]["game"]), pp_lines=n_pp)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(dict(season=season, week=week, built_at=str(now), games=games,
+                                    best=picks_html.to_json(best)), indent=1))
 
 
 _JERSEYS: dict = {}

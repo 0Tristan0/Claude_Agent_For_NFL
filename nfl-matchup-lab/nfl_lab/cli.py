@@ -157,10 +157,11 @@ def _print_run(res, show_players=True):
     for n, lst in sorted(res["best"].items()):
         for L in lst[:1]:
             legs_txt = "; ".join(f"{x['player']} {x['stat']} {x['side']} {x['line']:g} ({x['p_model']:.0%})" for x in L["legs"])
-            print(f"\n{n}-pick: all hit {L['p_all']:.1%} (independent {L['p_independent']:.1%}), Power ${L['power_ev']:.2f}, "
-                  f"Flex ${(L['flex_ev'] or 0):.2f}, skip under {L['min_power_mult']:.1f}x\n  {legs_txt}")
+            tag = "RECOMMENDED" if L.get("recommended", True) else "not recommended (below break-even)"
+            print(f"\n{n}-pick {L['play_as']} [{tag}]: all hit {L['p_all']:.1%} (independent {L['p_independent']:.1%}), "
+                  f"Power ${(L['power_ev'] or 0):.2f}, Flex ${(L['flex_ev'] or 0):.2f}, skip under {L['min_power_mult']:.1f}x\n  {legs_txt}")
     if not any(res["best"].values()):
-        print("\nNo qualified lineups (a leg needs to beat break-even AND a no-vig market price by 3 points).")
+        print("\nNo PrizePicks lineup can be built: add PrizePicks lines (source prizepicks) to data/props.csv.")
     for p in res["pages"]:
         print("page:", p)
 

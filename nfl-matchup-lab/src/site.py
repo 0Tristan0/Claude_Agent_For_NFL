@@ -459,6 +459,63 @@ def guesser_page():
     return theme.document("Guesser", body, GUESSER_CSS)
 
 
+# ---- Lineups: cross-game PrizePicks lineups for the latest week ---------------------------------------
+
+def latest_lineups():
+    files = sorted(glob.glob(os.path.join(V0_DIR, "lineups-*-w*.json")))
+    if not files:
+        return None
+    return max((json.load(open(f)) for f in files), key=lambda d: (d["season"], d["week"]))
+
+
+LINEUPS_CSS = """
+.hero{display:grid;gap:8px}
+.loaded{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0 16px;border-top:1px solid var(--line-2)}
+.loaded a{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);color:var(--text);text-decoration:none;font-size:.88rem}
+.loaded b{font-weight:700;font-stretch:85%}
+.loaded .n{margin-left:auto;color:var(--muted)}
+.loaded .n.has{color:var(--text);font-weight:600}
+.at2{color:var(--faint);font-size:.8rem}
+"""
+
+
+def lineups_page():
+    from nfl_lab.report import picks_html
+    d = latest_lineups()
+    if d is None:
+        inner = f'<p class="sub">No week has been run yet. {picks_html.HOW_TO_ADD}</p>'
+        week_txt, built = "", ""
+    else:
+        games = d["games"]
+        with_lines = sum(1 for g in games.values() if g["pp_lines"])
+        rows = ""
+        for gid, g in sorted(games.items()):
+            _, _, a, h = gid.split("_")
+            a, h = ("LAR" if a == "LA" else a), ("LAR" if h == "LA" else h)
+            n = g["pp_lines"]
+            rows += (f'<a href="games/v0-{g["slug"]}.html#lines">{theme.logo(a, 18)}<b>{e(a)}</b><span class="at2">at</span>'
+                     f'{theme.logo(h, 18)}<b>{e(h)}</b><span class="n{" has" if n else ""}">{n} lines</span></a>')
+        msg = ("No PrizePicks lines are loaded for this week yet." if not with_lines else
+               "No lineup can be built from the PrizePicks lines loaded so far.")
+        inner = (f'<section aria-labelledby="h-best"><div><h2 id="h-best">Best lineups</h2><p class="sub">One pick per player, '
+                 'at least two teams, mixing games. "Recommended" means the model expects more than $1 back per $1 even after '
+                 'allowing for simulation noise; anything else is shown so you can see how close it gets.</p></div>'
+                 + picks_html.lineup_cards(d["best"], prefix="", no_lines_msg=msg) + '</section>\n'
+                 f'<section aria-labelledby="h-loaded"><div><h2 id="h-loaded">PrizePicks lines loaded</h2><p class="sub">'
+                 f'{with_lines} of {len(games)} games have PrizePicks lines on file. Tap a game to see its lines.</p></div>'
+                 f'<div class="loaded">{rows}</div></section>\n')
+        week_txt = f' · Week {d["week"]}'
+        built = f' Last run {e(d["built_at"][:16])} UTC.'
+    body = ('<main class="wrap">\n' + theme.nav("lineups") +
+            f'<header class="hero"><span class="eyebrow">PrizePicks{week_txt}</span><h1>Lineups</h1>'
+            '<p class="sub">PrizePicks Power and Flex lineups built from simulated games, so picks that move together are '
+            f'counted together. Only PrizePicks lines are used.{built}</p></header>\n' + inner +
+            '<footer class="notes"><p>Payouts: PrizePicks standard tables (Power 2 to 6 picks, Flex 3 to 6). The app can pay '
+            'less on some entries; skip a lineup if the app shows less than the listed multiplier. Estimates, not betting '
+            'advice.</p></footer>\n</main>\n')
+    return theme.document("Lineups", body, LINEUPS_CSS)
+
+
 if __name__ == "__main__":
     shutil.rmtree(SITE, ignore_errors=True)
     os.makedirs(os.path.join(SITE, "games"))
@@ -471,4 +528,5 @@ if __name__ == "__main__":
         open(os.path.join(SITE, "games", "v0-" + p["file"]), "w").write(theme.refresh(doc))
     open(os.path.join(SITE, "index.html"), "w").write(index_page())
     open(os.path.join(SITE, "guesser.html"), "w").write(guesser_page())
+    open(os.path.join(SITE, "lineups.html"), "w").write(lineups_page())
     print("wrote", SITE)

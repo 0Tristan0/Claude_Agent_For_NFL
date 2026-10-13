@@ -20,7 +20,7 @@ refuse_integer_cross = true   # for count stats, refuse when the two lines strad
 flag_sd = 1.5                 # model vs market gaps beyond this are flagged "check news", not "edge"
 
 [lineups]
-sizes = [3, 4, 5, 6]
+sizes = [2, 3, 4, 5, 6]            # PrizePicks: Power 2-6 picks, Flex 3-6 picks
 max_exhaustive = 50000        # combinations; above this only the legs with the biggest edges are searched
 min_ev_se = 2.0               # keep a lineup only if EV - 2 Monte Carlo SE > 1
 shrink_to_reference = 0.25    # shrink leg probs 25% toward max(market, break-even) before ranking

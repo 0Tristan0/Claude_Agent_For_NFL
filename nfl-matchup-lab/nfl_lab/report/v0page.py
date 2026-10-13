@@ -10,7 +10,7 @@ import pandas as pd
 
 from .. import config, teams
 from ..picks import payouts
-from . import theme
+from . import picks_html, theme
 
 e = html.escape
 
@@ -55,42 +55,6 @@ def _team_table(sim, team: str, jerseys: dict, implied: float) -> str:
             "<th scope='col'>Rec yds</th><th scope='col'>Rushes</th><th scope='col'>Rush yds</th>"
             "<th scope='col'>Pass yds</th><th scope='col'>Any TD</th></tr></thead><tbody>"
             + "".join(rows) + "</tbody></table></div></section>")
-
-
-def _props_table(legs: pd.DataFrame) -> str:
-    if legs is None or legs.empty:
-        return ("<p class='sub'>No lines for this game in data/props.csv yet. Paste PrizePicks lines plus a sportsbook "
-                "price for the same line to get qualified picks.</p>")
-    rows = []
-    for _, l in legs.sort_values("p_model", ascending=False).iterrows():
-        q = "Yes" if l["qualified_any"] else ("Check news: model far from line" if l.get("far_from_line") else
-                                             ("No market price" if pd.isna(l["p_market"]) else "No"))
-        rows.append(f"<tr><th scope='row'>{e(l['player'])}<span class='vs-lbl'>{e(teams.display(l['team']))} · "
-                    f"{e(l['source'])}</span></th><td class='l'>{e(l['stat'].replace('_', ' '))}</td><td class='num'>{l['line']:g}</td>"
-                    f"<td class='l'>{l['side']}</td><td class='num'>{_pct(l['p_model'])}</td><td class='num'>{_pct(l['p_market'])}</td>"
-                    f"<td class='l {'q-yes' if l['qualified_any'] else 'q-no'}'>{q}</td></tr>")
-    return ("<div class='tbl-wrap'><table class='pt'><thead><tr><th scope='col'>Player</th><th scope='col' class='l'>Stat</th>"
-            "<th scope='col'>Line</th><th scope='col' class='l'>Side</th><th scope='col'>Model</th><th scope='col'>Market (no vig)</th>"
-            "<th scope='col' class='l'>Qualifies</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table></div>")
-
-
-def _lineups(best: dict) -> str:
-    cards = []
-    for n, lst in sorted(best.items()):
-        for L in lst[:1]:
-            legs = "".join(f"<li>{e(x['player'])} {e(x['stat'].replace('_', ' '))} {x['side']} {x['line']:g} "
-                           f"<span class='pp'>{x['p_model']:.0%}</span></li>" for x in L["legs"])
-            cards.append(f"""<article class="lu"><header><h3>{n}-pick</h3><span class="rec">Play it as <b>{L['play_as']}</b></span></header>
-<ol>{legs}</ol><dl class="lustats">
-<div><dt>All hit (sim)</dt><dd>{L['p_all']:.1%}</dd></div>
-<div><dt>If legs were independent</dt><dd>{L['p_independent']:.1%}</dd></div>
-<div><dt>Return per $1 (Power)</dt><dd>${L['power_ev']:.2f}</dd></div>
-<div><dt>Return per $1 (Flex)</dt><dd>${(L['flex_ev'] or 0):.2f}</dd></div>
-<div><dt>Skip if app shows under</dt><dd>{L['min_power_mult']:.1f}x</dd></div>
-</dl></article>""")
-    if not cards:
-        return "<p class='sub'>No lineup qualifies yet. A leg needs the model to beat both the payout break-even and the no-vig market price by 3 points.</p>"
-    return "<div class='lus'>" + "".join(cards) + "</div>"
 
 
 def _trust(check: dict | None) -> str:
@@ -153,16 +117,18 @@ def render(proj: dict, sim, legs: pd.DataFrame | None, best: dict | None, check:
 {_team_table(sim, away, jerseys, tpa.implied_points)}
 {_team_table(sim, home, jerseys, tph.implied_points)}
 
-<section class="pane" id="lines" data-tab="Lines" aria-labelledby="h-props"><div><h2 id="h-props">Your lines</h2>
-<p class="sub">From data/props.csv. Model chances are calibrated on 2023 (raw sim chances were too confident at the
-extremes). When the model is very far from a real line (72% or more on one side), the line probably reflects news the
-model doesn't have, so those legs never qualify. Break-even per leg: 3-pick {min(be['power3'], be['flex3']):.1%}, 4-pick {min(be['power4'], be['flex4']):.1%},
-5-pick {min(be['power5'], be['flex5']):.1%}, 6-pick {min(be['power6'], be['flex6']):.1%}. A leg qualifies only if the model beats that and the
-no-vig market price by 3 points.</p></div>{_props_table(legs)}</section>
+<section class="pane" id="lines" data-tab="Lines" aria-labelledby="h-props"><div><h2 id="h-props">PrizePicks lines</h2>
+<p class="sub">The model's chance of More and Less at each PrizePicks line (calibrated on 2023). A pick qualifies when it clears
+the PrizePicks break-even by 3 points: 2-pick {be['power2']:.1%}, 3-pick {min(be['power3'], be['flex3']):.1%}, 4-pick {min(be['power4'], be['flex4']):.1%},
+5-pick {min(be['power5'], be['flex5']):.1%}, 6-pick {min(be['power6'], be['flex6']):.1%} per leg. With a sportsbook price on the row it must also beat that
+price by 3 points; without one the line is treated as a coin flip ("model only"). When the model is 72% or more on one
+side, the line probably reflects news the model doesn't have, so it never qualifies.</p></div>{picks_html.lines_table(legs)}</section>
 
-<section class="pane" id="lineups" data-tab="Lineups" aria-labelledby="h-lu"><div><h2 id="h-lu">Lineups</h2>
-<p class="sub">Hit chance comes from the simulated games, so legs that move together (a QB and his receiver) are counted together.
-Same-game lineups can get lower multipliers in the app: skip a lineup if the app shows less than the listed minimum.</p></div>{_lineups(best or {})}</section>
+<section class="pane" id="lineups" data-tab="Lineups" aria-labelledby="h-lu"><div><h2 id="h-lu">PrizePicks lineups</h2>
+<p class="sub">Built only from this game's PrizePicks lines, one pick per player, both teams. Hit chances come from the simulated
+games, so picks that move together (a QB and his receiver) are counted together. Same-game entries can pay less in the app:
+skip a lineup if the app shows less than the listed multiplier. The Lineups tab at the top mixes games across the week.</p></div>
+{picks_html.lineup_cards(picks_html.to_json(best or {}), no_lines_msg=("No PrizePicks lineup for this game yet." if legs is not None and len(legs) and legs["prizepicks"].any() else "No PrizePicks lines for this game yet."))}</section>
 {_trust(check).replace("{n_sims}", f"{sim.n:,}")}
 <footer class="notes"><p>Model v0: a simplified first version (team-level simulation, fixed shrinkage strengths). Data: nflverse
 play-by-play, snap counts, rosters, injuries and schedules (CC-BY 4.0); stadium time zones from the greerreNFL/Stadiums dataset;

@@ -1,0 +1,64 @@
+{
+ "season": 2026,
+ "week": 6,
+ "built_at": "2026-10-13 00:36:39.592705+00:00",
+ "games": {
+  "2026_06_SEA_DEN": {
+   "slug": "2026-w06-sea-den",
+   "pp_lines": 0
+  },
+  "2026_06_HOU_JAX": {
+   "slug": "2026-w06-hou-jax",
+   "pp_lines": 0
+  },
+  "2026_06_BAL_CLE": {
+   "slug": "2026-w06-bal-cle",
+   "pp_lines": 0
+  },
+  "2026_06_CAR_PHI": {
+   "slug": "2026-w06-car-phi",
+   "pp_lines": 0
+  },
+  "2026_06_CHI_ATL": {
+   "slug": "2026-w06-chi-atl",
+   "pp_lines": 0
+  },
+  "2026_06_NO_NYG": {
+   "slug": "2026-w06-no-nyg",
+   "pp_lines": 0
+  },
+  "2026_06_NYJ_NE": {
+   "slug": "2026-w06-nyj-ne",
+   "pp_lines": 0
+  },
+  "2026_06_PIT_TB": {
+   "slug": "2026-w06-pit-tb",
+   "pp_lines": 0
+  },
+  "2026_06_TEN_IND": {
+   "slug": "2026-w06-ten-ind",
+   "pp_lines": 0
+  },
+  "2026_06_ARI_LA": {
+   "slug": "2026-w06-ari-lar",
+   "pp_lines": 0
+  },
+  "2026_06_BUF_LV": {
+   "slug": "2026-w06-buf-lv",
+   "pp_lines": 0
+  },
+  "2026_06_LAC_KC": {
+   "slug": "2026-w06-lac-kc",
+   "pp_lines": 0
+  },
+  "2026_06_DAL_GB": {
+   "slug": "2026-w06-dal-gb",
+   "pp_lines": 0
+  },
+  "2026_06_WAS_SF": {
+   "slug": "2026-w06-was-sf",
+   "pp_lines": 0
+  }
+ },
+ "best": {}
+}

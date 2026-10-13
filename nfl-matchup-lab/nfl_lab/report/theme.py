@@ -179,6 +179,12 @@ th:first-child,td:first-child{padding-left:0}
 .lu .pp{color:var(--muted);font-size:.84rem}
 .lustats{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin:0;border-top:1px solid var(--line);padding-top:12px}
 .lustats div{display:grid} .lustats dt{font-size:.72rem;color:var(--muted)} .lustats dd{margin:0;font-weight:650}
+.lul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.lul li{display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:center}
+.lul b{font-weight:600}
+.lu.dim{opacity:.8}
+.lu .tag{font-size:.72rem;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:1px 9px;white-space:nowrap}
+.lu .tag.ok{color:var(--pos);border-color:color-mix(in srgb,var(--pos) 45%,transparent)}
 
 .notes{color:var(--faint);font-size:.82rem;display:grid;gap:8px;max-width:78ch;border-top:1px solid var(--line);padding-top:20px}
 .notes a{color:inherit}
@@ -187,7 +193,7 @@ th:first-child,td:first-child{padding-left:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 """
 
-TABS = [("home", "Home", "index.html"), ("guesser", "Guesser", "guesser.html")]
+TABS = [("home", "Home", "index.html"), ("lineups", "Lineups", "lineups.html"), ("guesser", "Guesser", "guesser.html")]
 
 
 TAB_JS = r"""

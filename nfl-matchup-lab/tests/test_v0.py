@@ -139,24 +139,45 @@ def test_calibration_shrinks_extremes():
     assert 0.6 < calibration.apply(0.8, c) < 0.8 and 0.2 < calibration.apply(0.2, c) < 0.4
 
 
-def test_qualification_needs_market_and_breakeven(v0_run):
+def test_qualification_prizepicks_only(v0_run):
     _, proj, sim = v0_run
     t = next(iter(proj["teams"]))
     pid = max((p for p, m in sim.meta.items() if m["team"] == t), key=lambda p: sim.stat(p, "rec_yds").mean())
-    med = float(np.median(sim.stat(pid, "rec_yds")))
-    base = dict(game_id=sim.game_id, player_id=pid, player="x", team=t, stat="rec_yds", line_type="standard")
-    props = pd.DataFrame([
-        dict(base, line=med - 25.5, source="book", odds_kind="american", p_over_implied=0.53, p_under_implied=0.52,
-             fair_over=0.505, fair_under=0.495),                       # model far above market: big edge
-        dict(base, line=med - 25.5, source="prizepicks", odds_kind="none", p_over_implied=np.nan,
-             p_under_implied=np.nan, fair_over=np.nan, fair_under=np.nan),   # no market price
-    ])
+    line = float(np.floor(np.quantile(sim.stat(pid, "rec_yds"), 0.33))) + 0.5     # over about two-thirds of sims
+    base = dict(game_id=sim.game_id, player_id=pid, player="x", team=t, stat="rec_yds", line_type="standard", line=line)
+    priced = dict(odds_kind="american", p_over_implied=0.53, p_under_implied=0.52, fair_over=0.505, fair_under=0.495)
+    unpriced = dict(odds_kind="none", p_over_implied=np.nan, p_under_implied=np.nan, fair_over=np.nan, fair_under=np.nan)
+    props = pd.DataFrame([dict(base, source="prizepicks", **priced), dict(base, source="prizepicks", **unpriced),
+                          dict(base, source="fanduel", **priced)])
     legs = lineups.leg_table(props, {sim.game_id: sim}, None)
-    over = legs[legs["side"] == "over"]
-    book, pp = over[over["source"] == "book"].iloc[0], over[over["source"] == "prizepicks"].iloc[0]
-    assert not pp["qualified_any"]                                     # never qualifies without a market price
-    if not book["far_from_line"]:
-        assert book["qualified_any"] == (book["p_model"] >= book["be3"] + 0.03 and book["market_edge"] >= 0.03)
+    over = legs[legs["side"] == "over"].reset_index(drop=True)
+    pp_mkt, pp_only, book = over.loc[0], over.loc[1], over.loc[2]
+    assert pp_mkt["basis"] == "model + market" and pp_only["basis"] == "model only"
+    for leg in (pp_mkt, pp_only):
+        assert leg["qualified_any"] == (not leg["far_from_line"] and leg["p_model"] >= min(leg[f"be{n}"] for n in lineups.SIZES) + 0.03
+                                        and leg["market_edge"] >= 0.03)
+    assert pp_only["market_edge"] == pytest.approx(pp_only["p_model"] - 0.5)       # PrizePicks line taken as a coin flip
+    assert not book["lineup_ok"] and not book["qualified_any"]                      # not a PrizePicks line: reference only
+
+
+def test_lineups_use_prizepicks_lines_and_always_show_best(v0_run):
+    _, proj, sim = v0_run
+    picks = []
+    for t in proj["teams"]:
+        pid = max((p for p, m in sim.meta.items() if m["team"] == t), key=lambda p: sim.stat(p, "rec_yds").mean())
+        picks.append((t, pid, float(np.floor(np.quantile(sim.stat(pid, "rec_yds"), 0.45))) + 0.5))
+    def props(source):
+        return pd.DataFrame([dict(game_id=sim.game_id, player_id=pid, player=pid, team=t, stat="rec_yds", line=line,
+                                  line_type="standard", source=source, odds_kind="none", p_over_implied=np.nan,
+                                  p_under_implied=np.nan, fair_over=np.nan, fair_under=np.nan) for t, pid, line in picks])
+    sims = {sim.game_id: sim}
+    best = lineups.best_lineups(lineups.leg_table(props("prizepicks"), sims, None), sims, sizes=(2,))
+    assert len(best[2]) >= 1                                    # something to show even when nothing clears the bar
+    L = best[2][0]
+    assert isinstance(L["recommended"], bool) and all(x["prizepicks"] for x in L["legs"])
+    assert len({x["team"] for x in L["legs"]}) == 2 and L["flex_ev"] is None   # 2-pick: Power only
+    none = lineups.best_lineups(lineups.leg_table(props("legacy_ev_py"), sims, None), sims, sizes=(2,))
+    assert none[2] == []                                        # other sources never go into lineups
 
 
 def test_quick_check_refuses_holdout(tables):
@@ -239,7 +260,7 @@ def test_pick_rules_exchange_goblin_integer(v0_run):
     _, proj, sim = v0_run
     t = next(iter(proj["teams"]))
     pid = max((p for p, m in sim.meta.items() if m["team"] == t), key=lambda p: sim.stat(p, "receptions").mean())
-    base = dict(game_id=sim.game_id, player_id=pid, player="x", team=t, stat="receptions", source="book",
+    base = dict(game_id=sim.game_id, player_id=pid, player="x", team=t, stat="receptions", source="prizepicks",
                 p_over_implied=0.30, p_under_implied=np.nan, fair_over=0.30, fair_under=0.70)
     props = pd.DataFrame([dict(base, line=1.5, odds_kind="exchange", line_type="standard"),
                           dict(base, line=1.5, odds_kind="exchange", line_type="goblin"),
