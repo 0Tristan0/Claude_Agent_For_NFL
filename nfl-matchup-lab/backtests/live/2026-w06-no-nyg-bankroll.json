@@ -2,16 +2,17 @@
   "game": "2026_06_NO_NYG",
   "label": "NO at NYG",
   "kickoff_utc": "2026-10-18 17:00 UTC",
-  "frozen_at": "2026-10-13 16:01 UTC",
+  "frozen_at": "2026-10-13 19:23 UTC",
   "bankroll": 20.0,
   "reserve_not_bet": 0.0,
   "paper_money": true,
-  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game",
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game; stakes from guesser.plan",
+  "split_rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)",
   "entries": [
     {
       "id": "A",
       "type": "flex",
-      "stake": 12.0,
+      "stake": 15.0,
       "legs": [
         "Darnell Mooney rec yds less 21.5",
         "Tyler Shough pass+rush yds more 264.5",
@@ -67,13 +68,14 @@
     },
     {
       "id": "B",
-      "type": "power",
-      "stake": 8.0,
+      "type": "flex",
+      "stake": 5.0,
       "legs": [
         "Darnell Mooney rec yds less 21.5",
         "Tyler Shough pass+rush yds more 264.5",
         "Jameis Winston pass attempts less 32.5",
-        "Cam Skattebo rush yds less 59.5"
+        "Cam Skattebo rush yds less 59.5",
+        "Najee Harris receptions less 0.5"
       ],
       "legs_detail": [
         {
@@ -128,10 +130,24 @@
           "game_id": "2026_06_NO_NYG",
           "note": "Medium \u00b7 Less in 3 of last 4 (36, 60, 58, 59)",
           "reasons": []
+        },
+        {
+          "player": "Najee Harris",
+          "player_id": "00-0036893",
+          "team": "NYG",
+          "stat": "receptions",
+          "side": "under",
+          "line": 0.5,
+          "p_model": 0.5526649305555555,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 Less in 3 of last 4 (0, 0, 0, 1)",
+          "reasons": []
         }
       ],
       "pays": {
-        "4": 10.0
+        "5": 10.0,
+        "4": 2.0,
+        "3": 0.4
       }
     }
   ],
@@ -139,9 +155,12 @@
     "A_flex3": {
       "estimate": 0.906
     },
-    "B_power4": {
-      "estimate": 0.961
+    "B_flex5": {
+      "estimate": 1.091
     }
   },
+  "expected_back": 19.04,
+  "p_profit": 0.504,
+  "p_lose_all": 0.314,
   "result": null
 }

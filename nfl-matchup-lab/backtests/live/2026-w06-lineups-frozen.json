@@ -215,5 +215,6 @@
       ],
       "result": null
     }
-  }
+  },
+  "superseded_by": "2026-w06-*-bankroll.json (Guesser method). This simulation-era record is kept for comparison only."
 }

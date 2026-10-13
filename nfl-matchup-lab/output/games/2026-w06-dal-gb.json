@@ -9,7 +9,7 @@
  "home_spread": -1.5,
  "total": 52.5,
  "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
- "built_at": "2026-10-13 16:01:46.807505+00:00",
+ "built_at": "2026-10-13 19:23:56.556911+00:00",
  "units": [
   {
    "offense": "DAL",
@@ -928,5 +928,152 @@
     ]
    }
   ]
+ },
+ "plan": {
+  "budget": 20,
+  "entries": [
+   {
+    "n": 3,
+    "play_as": "Flex",
+    "stake": 14,
+    "game": "DAL at GB",
+    "basis": "Guesser method",
+    "p_all": 0.22266540493605397,
+    "p_paid": 0.6567778519207885,
+    "best_ev": 1.0436377198370397,
+    "recommended": true,
+    "min_power_mult": 4.491043412366571,
+    "legs": [
+     {
+      "player": "Jordan Love",
+      "player_id": "00-0036264",
+      "team": "GB",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 6.5,
+      "p_model": 0.6079861111111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 Less in 4 of last 4 (0, 0, -8, 6)",
+      "reasons": []
+     },
+     {
+      "player": "Dak Prescott",
+      "player_id": "00-0033077",
+      "team": "DAL",
+      "stat": "pass_rush_yds",
+      "side": "over",
+      "line": 290.5,
+      "p_model": 0.6060329861111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 More in 4 of last 4 (305, 295, 342, 316)",
+      "reasons": [
+       "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): a hard night to throw"
+      ]
+     },
+     {
+      "player": "MarShawn Lloyd",
+      "player_id": "00-0039811",
+      "team": "GB",
+      "stat": "rush_att",
+      "side": "under",
+      "line": 10.5,
+      "p_model": 0.6043142361111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 Less in 4 of last 4 (6, 4, 7, 10)",
+      "reasons": [
+       "Against: DAL have the 2nd worst run defense (EPA per rush allowed)"
+      ]
+     }
+    ],
+    "entry": "A"
+   },
+   {
+    "n": 5,
+    "play_as": "Flex",
+    "stake": 6,
+    "game": "DAL at GB",
+    "basis": "Guesser method",
+    "p_all": 0.06891479939007708,
+    "p_paid": 0.658646898025261,
+    "best_ev": 1.3158917839032793,
+    "recommended": true,
+    "min_power_mult": 14.51067127598703,
+    "legs": [
+     {
+      "player": "Jordan Love",
+      "player_id": "00-0036264",
+      "team": "GB",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 6.5,
+      "p_model": 0.6079861111111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 Less in 4 of last 4 (0, 0, -8, 6)",
+      "reasons": []
+     },
+     {
+      "player": "Dak Prescott",
+      "player_id": "00-0033077",
+      "team": "DAL",
+      "stat": "pass_rush_yds",
+      "side": "over",
+      "line": 290.5,
+      "p_model": 0.6060329861111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 More in 4 of last 4 (305, 295, 342, 316)",
+      "reasons": [
+       "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): a hard night to throw"
+      ]
+     },
+     {
+      "player": "MarShawn Lloyd",
+      "player_id": "00-0039811",
+      "team": "GB",
+      "stat": "rush_att",
+      "side": "under",
+      "line": 10.5,
+      "p_model": 0.6043142361111111,
+      "game_id": "2026_06_DAL_GB",
+      "note": "High \u00b7 Less in 4 of last 4 (6, 4, 7, 10)",
+      "reasons": [
+       "Against: DAL have the 2nd worst run defense (EPA per rush allowed)"
+      ]
+     },
+     {
+      "player": "Jake Ferguson",
+      "player_id": "00-0038041",
+      "team": "DAL",
+      "stat": "receptions",
+      "side": "under",
+      "line": 3.5,
+      "p_model": 0.5596961805555556,
+      "game_id": "2026_06_DAL_GB",
+      "note": "Medium \u00b7 Less in 3 of last 4 (4, 3, 3, 3)",
+      "reasons": [
+       "For: GB allow the 4th fewest receiving yds to TEs (32 a game)",
+       "Against: GB pressure QBs on 25% of dropbacks (the 8th most); DAL's line allows pressure on 24% (the 11th most): more quick checkdowns"
+      ]
+     },
+     {
+      "player": "Javonte Williams",
+      "player_id": "00-0036997",
+      "team": "DAL",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 67.5,
+      "p_model": 0.5529774305555556,
+      "game_id": "2026_06_DAL_GB",
+      "note": "Medium \u00b7 Less in 3 of last 4 (30, 98, 62, 45)",
+      "reasons": []
+     }
+    ],
+    "entry": "B"
+   }
+  ],
+  "expected_back": 22.506278781138228,
+  "p_profit": 0.357022927629263,
+  "p_lose_all": 0.25590859631158075,
+  "p_any_back": 0.7440914036884193,
+  "rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)"
  }
 }

@@ -12,11 +12,10 @@ For each standard PrizePicks line in a game:
 Confidence tiers come from the estimate. Players with fewer than 3 games this season are shown but kept out of
 lineups (too small a sample, like Parkinson on the original board).
 
-Lineups use one game only: the top picks by estimate (Lean, 52.5%, or better), one per player, both teams. Entry A is the
-top 3 as a Flex (it still pays at 2 of 3), Entry B the top 4 as a Power, and the 5- and 6-pick add the next picks
-(played as whichever of Power or Flex returns more). Like the
-original, a lineup's chance multiplies the picks' estimates. The Guesser puts a pretend $20 on each game's
-Entry A ($12) and Entry B ($8), frozen before kickoff, so the Lineups tab and the Guesser always match.
+Entries use one game only: the top picks by estimate (Lean, 52.5%, or better), one per player, both teams. Like the
+original, an entry's chance multiplies the picks' estimates. The Guesser puts a pretend $20 on each game, split by
+plan() across up to 3 entries (2 to 6 picks, Power or Flex) to grow a pretend bankroll fastest; the play is frozen
+at kickoff, and the Lineups tab shows exactly that play.
 Only stats from before kickoff are used.
 """
 from __future__ import annotations
@@ -33,14 +32,15 @@ from .data import lines, live
 from .features import bundle
 from .features.asof import visible
 from .picks import matchups, oldmodel, payouts
-from .report.picks_html import GUESSER_STAKE
 
 RECENT_N, PRIOR = 4, 5
 MATCHUP_CAP = 0.08
 MIN_GAMES = 3
 MIN_PICK = 0.525                           # Lean or better: a coin flip is not a pick
 TIERS = [(0.60, "High"), (0.575, "Med-High"), (0.55, "Medium"), (0.525, "Lean"), (0.0, "Coin flip")]
-STAKES = GUESSER_STAKE                     # Entry A $12, Entry B $8
+BUDGET = 20                                # the Guesser puts $20 on each game
+REF_BANKROLL = 60                          # ...splitting it as if it were a third of a pretend $60 roll (see plan)
+MAX_ENTRIES, MIN_STAKE = 3, 2
 OUT_DIR = config.ROOT / "output" / "games"
 LIVE_DIR = config.BACKTESTS_DIR / "live"
 PP_STAT = {"rec_yds": "rec yds", "rush_yds": "rush yds", "pass_yds": "pass yds", "receptions": "receptions",
@@ -150,23 +150,108 @@ def _flex_ev(ps: list[float]) -> float | None:
                      for combo in itertools.product([0, 1], repeat=n)))
 
 
+def _pool(picks: pd.DataFrame, min_pick: float | None = None) -> pd.DataFrame:
+    """Picks a lineup may use: 3+ games this season, Lean or better, the best line per player."""
+    if picks is None or picks.empty:
+        return pd.DataFrame()
+    pool = picks[(picks["games"] >= MIN_GAMES) & (picks["p_model"] >= (MIN_PICK if min_pick is None else min_pick))]
+    return pool.sort_values("p_model", ascending=False, kind="mergesort").drop_duplicates("player_id")
+
+
+def _legs_for(pool: pd.DataFrame, n: int) -> pd.DataFrame | None:
+    """The top n picks; if they are all one team, the other team's best pick takes the last spot (PrizePicks rule)."""
+    pick = pool.head(n)
+    if len(pick) < n:
+        return None
+    if pick["team"].nunique() < 2:
+        other = pool[~pool["team"].isin(pick["team"])].head(1)
+        if other.empty:
+            return None
+        pick = pd.concat([pick.head(n - 1), other])
+    return pick
+
+
+def _leg(r) -> dict:
+    return dict(player=r.player, player_id=r.player_id, team=teams.display(r.team), stat=r.stat, side=r.side,
+                line=r.line, p_model=float(r.p_model), game_id=r.game_id, note=_note(r._asdict()), reasons=list(r.reasons))
+
+
+def _compositions(total: int, k: int, lo: int):
+    if k == 1:
+        if total >= lo:
+            yield (total,)
+        return
+    for a in range(lo, total - lo * (k - 1) + 1):
+        for rest in _compositions(total - a, k - 1, lo):
+            yield (a,) + rest
+
+
+def plan(picks: pd.DataFrame, label: str = "", budget: int = BUDGET) -> dict:
+    """How the Guesser splits its $20 on one game. Candidates: the top 2 to 6 picks, each as a Power or a Flex entry.
+    Chances come from the picks' estimates, treated as independent like the original. The split (whole dollars, up
+    to 3 entries, at least $2 each) maximizes expected log growth of a pretend $60 bankroll that must put $20 on this
+    game: so most of the money goes on the entry most likely to pay and only a little on bigger payouts."""
+    power, flex = payouts.tables()
+    pool = _pool(picks)
+    cands = []
+    for n in range(2, 7):
+        legs = _legs_for(pool, n)
+        if legs is None:
+            continue
+        for play in ("Power", "Flex"):
+            if play == "Flex" and n not in flex:
+                continue
+            cands.append((play, n, legs))
+    if not cands:
+        return {}
+    keys = list(dict.fromkeys((r.player_id, r.stat, r.line) for _, _, legs in cands for r in legs.itertuples()))
+    pk = {(r.player_id, r.stat, r.line): float(r.p_model) for _, _, legs in cands for r in legs.itertuples()}
+    P = np.array([pk[k] for k in keys])
+    outs = np.array(list(itertools.product([0, 1], repeat=len(keys))))
+    prob = np.prod(np.where(outs == 1, P, 1 - P), axis=1)
+    M = []
+    for play, n, legs in cands:
+        hits = outs[:, [keys.index((r.player_id, r.stat, r.line)) for r in legs.itertuples()]].sum(1)
+        M.append(np.where(hits == n, power[n], 0.0) if play == "Power" else
+                 np.array([flex[n].get(int(h), 0.0) for h in hits]))
+    M = np.array(M)
+    best = None
+    for k in range(1, MAX_ENTRIES + 1):
+        splits = np.array(list(_compositions(budget, k, MIN_STAKE)))
+        if not len(splits):
+            continue
+        for sub in itertools.combinations(range(len(cands)), k):
+            R = splits @ M[list(sub)]
+            obj = np.log(REF_BANKROLL - budget + R) @ prob
+            i = int(np.argmax(obj))
+            if best is None or obj[i] > best[0] + 1e-12:
+                best = (obj[i], sub, splits[i], R[i])
+    _, sub, stakes, R = best
+    entries = []
+    for j, st in sorted(zip(sub, stakes), key=lambda t: (-t[1], cands[t[0]][1])):
+        play, n, legs = cands[j]
+        p_all = float(np.prod(legs["p_model"]))
+        ev = float(M[j] @ prob)
+        entries.append(dict(n=n, play_as=play, stake=int(st), game=label, basis="Guesser method", p_all=p_all,
+                            p_paid=float(prob[M[j] > 0].sum()), best_ev=ev, recommended=bool(ev > 1.0),
+                            min_power_mult=1 / p_all, legs=[_leg(r) for r in legs.itertuples()]))
+    for e_, letter in zip(entries, "ABC"):
+        e_["entry"] = letter
+    return dict(budget=budget, entries=entries, expected_back=float(R @ prob), p_profit=float(prob[R > budget].sum()),
+                p_lose_all=float(prob[R == 0].sum()), p_any_back=float(prob[R > 0].sum()),
+                rule=f"split ${budget} to maximize expected log growth of a pretend ${REF_BANKROLL} bankroll "
+                     f"(up to {MAX_ENTRIES} entries, ${MIN_STAKE}+ each)")
+
+
 def lineups(picks: pd.DataFrame, label: str = "", sizes=(3, 4, 5, 6), min_pick: float = None) -> dict:
     """Entry A (3-pick Flex), Entry B (4-pick Power), then 5 and 6 picks: the top estimates, one per player."""
     power, _ = payouts.tables()
     out = {}
-    if picks is None or picks.empty:
-        return out
-    pool = picks[(picks["games"] >= MIN_GAMES) & (picks["p_model"] >= (MIN_PICK if min_pick is None else min_pick))]
-    pool = pool.sort_values("p_model", ascending=False, kind="mergesort").drop_duplicates("player_id")
+    pool = _pool(picks, min_pick)
     for n in sizes:
-        pick = pool.head(n)
-        if len(pick) < n:
+        pick = _legs_for(pool, n)
+        if pick is None:
             continue
-        if pick["team"].nunique() < 2:                       # PrizePicks needs both teams
-            other = pool[~pool["team"].isin(pick["team"])].head(1)
-            if other.empty:
-                continue
-            pick = pd.concat([pick.head(n - 1), other])
         ps = pick["p_model"].tolist()
         p_all = float(np.prod(ps))
         pw, fx = p_all * power[n], _flex_ev(ps)
@@ -176,9 +261,7 @@ def lineups(picks: pd.DataFrame, label: str = "", sizes=(3, 4, 5, 6), min_pick: 
         out[str(n)] = [dict(
             n=n, entry=entry, recommended=bool(best > 1.0), basis="Guesser method", play_as=play, game=label,
             p_all=p_all, p_independent=p_all, power_ev=pw, flex_ev=fx, best_ev=best, min_power_mult=1 / p_all,
-            legs=[dict(player=r.player, player_id=r.player_id, team=teams.display(r.team), stat=r.stat, side=r.side,
-                       line=r.line, p_model=float(r.p_model), game_id=r.game_id, note=_note(r._asdict()),
-                       reasons=list(r.reasons)) for r in pick.itertuples()])]
+            legs=[_leg(r) for r in pick.itertuples()])]
     return out
 
 
@@ -186,28 +269,29 @@ def leg_text(x: dict) -> str:
     return f"{x['player']} {PP_STAT.get(x['stat'], x['stat'])} {'more' if x['side'] == 'over' else 'less'} {x['line']:g}"
 
 
-def write_bankroll(g, lu: dict, now: pd.Timestamp) -> Path | None:
-    """The $20 paper bet on Entry A ($12 Flex) and Entry B ($8 Power). Never rewritten once the game has started."""
+def write_bankroll(g, pl: dict, now: pd.Timestamp) -> Path | None:
+    """The Guesser's $20 on this game, split as plan() says. Never rewritten once the game has started."""
     path = LIVE_DIR / f"{slug(g)}-bankroll.json"
     ko = pd.Timestamp(g["kickoff_utc"])
     if path.exists() and now >= ko:
         return None                                        # frozen: the game has started
-    if "3" not in lu or "4" not in lu:
-        path.unlink(missing_ok=True)                       # no entries any more (before kickoff): no bet
+    if not pl or not pl.get("entries"):
+        path.unlink(missing_ok=True)                       # no play any more (before kickoff): no bet
         return None
-    _, flex = payouts.tables()
-    power, _ = payouts.tables()
-    A, B = lu["3"][0], lu["4"][0]
-    entries = [dict(id="A", type="flex", stake=STAKES["A"], legs=[leg_text(x) for x in A["legs"]],
-                    legs_detail=A["legs"], pays={str(k): v for k, v in flex[3].items()}),
-               dict(id="B", type="power", stake=STAKES["B"], legs=[leg_text(x) for x in B["legs"]],
-                    legs_detail=B["legs"], pays={"4": power[4]})]
+    power, flex = payouts.tables()
+    entries = [dict(id=x["entry"], type=x["play_as"].lower(), stake=float(x["stake"]), legs=[leg_text(l) for l in x["legs"]],
+                    legs_detail=x["legs"], pays=({str(k): v for k, v in flex[x["n"]].items()} if x["play_as"] == "Flex"
+                                                 else {str(x["n"]): power[x["n"]]}))
+               for x in pl["entries"]]
     d = dict(game=g["game_id"], label=game_label(g), kickoff_utc=f"{ko:%Y-%m-%d %H:%M} UTC",
-             frozen_at=f"{now:%Y-%m-%d %H:%M} UTC", bankroll=20.0, reserve_not_bet=0.0, paper_money=True,
-             picks_source="Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game",
-             entries=entries, expected_return_per_dollar={"A_flex3": dict(estimate=round(A["best_ev"], 3)),
-                                                        "B_power4": dict(estimate=round(B["best_ev"], 3))},
-             result=None)
+             frozen_at=f"{now:%Y-%m-%d %H:%M} UTC", bankroll=float(pl["budget"]), reserve_not_bet=0.0, paper_money=True,
+             picks_source="Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game; "
+                          "stakes from guesser.plan",
+             split_rule=pl["rule"], entries=entries,
+             expected_return_per_dollar={f"{x['entry']}_{x['play_as'].lower()}{x['n']}": dict(estimate=round(x["best_ev"], 3))
+                                         for x in pl["entries"]},
+             expected_back=round(pl["expected_back"], 2), p_profit=round(pl["p_profit"], 3),
+             p_lose_all=round(pl["p_lose_all"], 3), result=None)
     LIVE_DIR.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(d, indent=2, default=str))
     return path
@@ -231,6 +315,7 @@ def run_week(season: int, week: int, write: bool = True) -> dict:
             continue
         picks, note = rate_game(T, eng, props, gid)
         lu = lineups(picks, game_label(g))
+        pl = plan(picks, game_label(g))
         ctx = matchups.context(T, gid, eng)
         rec = dict(game_id=gid, season=season, week=week, label=game_label(g), away=teams.display(g["away_team"]),
                    home=teams.display(g["home_team"]), kickoff_utc=str(g["kickoff_utc"]),
@@ -239,12 +324,12 @@ def run_week(season: int, week: int, write: bool = True) -> dict:
                    injury_note=note, built_at=str(now), units=unit_table(ctx, g),
                    picks=[] if picks.empty else json.loads(picks.drop(columns=["reasons"]).assign(
                        reasons=picks["reasons"]).to_json(orient="records")),
-                   lineups=lu)
+                   lineups=lu, plan=pl)
         out[gid] = rec
         if write:
             OUT_DIR.mkdir(parents=True, exist_ok=True)
             (OUT_DIR / f"{slug(g)}.json").write_text(json.dumps(rec, indent=1, default=str))
-            write_bankroll(g, lu, now)
+            write_bankroll(g, pl, now)
     return out
 
 

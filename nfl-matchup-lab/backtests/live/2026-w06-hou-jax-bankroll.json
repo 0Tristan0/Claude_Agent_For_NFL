@@ -2,11 +2,12 @@
   "game": "2026_06_HOU_JAX",
   "label": "HOU at JAX",
   "kickoff_utc": "2026-10-18 13:30 UTC",
-  "frozen_at": "2026-10-13 16:01 UTC",
+  "frozen_at": "2026-10-13 19:23 UTC",
   "bankroll": 20.0,
   "reserve_not_bet": 0.0,
   "paper_money": true,
-  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game",
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game; stakes from guesser.plan",
+  "split_rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)",
   "entries": [
     {
       "id": "A",
@@ -69,13 +70,14 @@
     },
     {
       "id": "B",
-      "type": "power",
-      "stake": 8.0,
+      "type": "flex",
+      "stake": 6.0,
       "legs": [
         "Bhayshul Tuten rush yds more 63.5",
         "Dalton Schultz rec yds less 30.5",
         "Woody Marks rush yds less 47.5",
-        "Kayshon Boutte rec yds more 30.5"
+        "Kayshon Boutte rec yds more 30.5",
+        "Trevor Lawrence pass+rush yds less 237.5"
       ],
       "legs_detail": [
         {
@@ -135,10 +137,69 @@
             "For: JAX allow the 1st most receiving yds to WRs (204 a game)",
             "Against: JAX have the 7th best pass defense (EPA per dropback allowed)"
           ]
+        },
+        {
+          "player": "Trevor Lawrence",
+          "player_id": "00-0036971",
+          "team": "JAX",
+          "stat": "pass_rush_yds",
+          "side": "under",
+          "line": 237.5,
+          "p_model": 0.5586024305555556,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "Medium \u00b7 Less in 3 of last 4 (195, 207, 227, 356)",
+          "reasons": [
+            "For: HOU have the 10th best pass defense (EPA per dropback allowed)"
+          ]
         }
       ],
       "pays": {
-        "4": 10.0
+        "5": 10.0,
+        "4": 2.0,
+        "3": 0.4
+      }
+    },
+    {
+      "id": "C",
+      "type": "power",
+      "stake": 2.0,
+      "legs": [
+        "Bhayshul Tuten rush yds more 63.5",
+        "Dalton Schultz rec yds less 30.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Bhayshul Tuten",
+          "player_id": "00-0040719",
+          "team": "JAX",
+          "stat": "rush_yds",
+          "side": "over",
+          "line": 63.5,
+          "p_model": 0.607501736111111,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
+          "reasons": [
+            "Against: HOU have the 4th best run defense (EPA per rush allowed)"
+          ]
+        },
+        {
+          "player": "Dalton Schultz",
+          "player_id": "00-0034383",
+          "team": "HOU",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 30.5,
+          "p_model": 0.5663836805555555,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
+          "reasons": [
+            "For: JAX allow the 5th fewest receiving yds to TEs (34 a game)",
+            "For: JAX have the 7th best pass defense (EPA per dropback allowed)"
+          ]
+        }
+      ],
+      "pays": {
+        "2": 3.0
       }
     }
   ],
@@ -146,9 +207,15 @@
     "A_flex3": {
       "estimate": 0.967
     },
-    "B_power4": {
-      "estimate": 1.091
+    "B_flex5": {
+      "estimate": 1.204
+    },
+    "C_power2": {
+      "estimate": 1.032
     }
   },
+  "expected_back": 20.89,
+  "p_profit": 0.43,
+  "p_lose_all": 0.285,
   "result": null
 }

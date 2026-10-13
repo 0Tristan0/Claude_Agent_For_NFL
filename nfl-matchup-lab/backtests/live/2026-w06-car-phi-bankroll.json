@@ -2,16 +2,17 @@
   "game": "2026_06_CAR_PHI",
   "label": "CAR at PHI",
   "kickoff_utc": "2026-10-18 17:00 UTC",
-  "frozen_at": "2026-10-13 16:01 UTC",
+  "frozen_at": "2026-10-13 19:23 UTC",
   "bankroll": 20.0,
   "reserve_not_bet": 0.0,
   "paper_money": true,
-  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game",
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game; stakes from guesser.plan",
+  "split_rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)",
   "entries": [
     {
       "id": "A",
       "type": "flex",
-      "stake": 12.0,
+      "stake": 18.0,
       "legs": [
         "Jalen Hurts rush yds less 25.5",
         "Bryce Young pass attempts more 33.5",
@@ -65,12 +66,10 @@
     {
       "id": "B",
       "type": "power",
-      "stake": 8.0,
+      "stake": 2.0,
       "legs": [
         "Jalen Hurts rush yds less 25.5",
-        "Bryce Young pass attempts more 33.5",
-        "Darren Waller rec yds more 25.5",
-        "Jalen Coker receptions more 4.5"
+        "Bryce Young pass attempts more 33.5"
       ],
       "legs_detail": [
         {
@@ -98,36 +97,10 @@
           "game_id": "2026_06_CAR_PHI",
           "note": "High \u00b7 More in 4 of last 4 (37, 36, 48, 41)",
           "reasons": []
-        },
-        {
-          "player": "Darren Waller",
-          "player_id": "00-0031610",
-          "team": "CAR",
-          "stat": "rec_yds",
-          "side": "over",
-          "line": 25.5,
-          "p_model": 0.6094704861111111,
-          "game_id": "2026_06_CAR_PHI",
-          "note": "High \u00b7 More in 4 of last 4 (28, 33, 51, 36)",
-          "reasons": []
-        },
-        {
-          "player": "Jalen Coker",
-          "player_id": "00-0039491",
-          "team": "CAR",
-          "stat": "receptions",
-          "side": "over",
-          "line": 4.5,
-          "p_model": 0.534609375,
-          "game_id": "2026_06_CAR_PHI",
-          "note": "Lean \u00b7 More in 2 of last 3 (8, 8, 2)",
-          "reasons": [
-            "For: PHI allow the 8th most receiving yds to WRs (172 a game)"
-          ]
         }
       ],
       "pays": {
-        "4": 10.0
+        "2": 3.0
       }
     }
   ],
@@ -135,9 +108,12 @@
     "A_flex3": {
       "estimate": 1.062
     },
-    "B_power4": {
-      "estimate": 1.227
+    "B_power2": {
+      "estimate": 1.13
     }
   },
+  "expected_back": 21.37,
+  "p_profit": 0.666,
+  "p_lose_all": 0.334,
   "result": null
 }

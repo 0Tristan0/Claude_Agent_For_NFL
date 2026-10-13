@@ -268,12 +268,13 @@ def cmd_guesser(a):
     from . import guesser
     out = guesser.run_week(a.season, a.week)
     for rec in out.values():
-        lu = rec.get("lineups") or {}
-        print(f"{rec['label']}: {len(rec.get('picks') or [])} lines rated, lineups {', '.join(sorted(lu)) or 'none'}")
-        for n in ("3", "4"):
-            for L in lu.get(n, []):
-                print(f"   Entry {L['entry']} {n}-pick {L['play_as']} (expected back per $1 {L['best_ev']:.2f}): "
-                      + "; ".join(f"{guesser.leg_text(x)} ({x['p_model']:.0%})" for x in L["legs"]))
+        pl = rec.get("plan") or {}
+        print(f"{rec['label']}: {len(rec.get('picks') or [])} lines rated" + (
+            f", $20 play expects ${pl['expected_back']:.2f} back (profit {pl['p_profit']:.0%}, lose all {pl['p_lose_all']:.0%})"
+            if pl else ", no play"))
+        for L in pl.get("entries", []):
+            print(f"   Entry {L['entry']} ${L['stake']} {L['n']}-pick {L['play_as']}: "
+                  + "; ".join(f"{guesser.leg_text(x)} ({x['p_model']:.0%})" for x in L["legs"]))
     return 0
 
 

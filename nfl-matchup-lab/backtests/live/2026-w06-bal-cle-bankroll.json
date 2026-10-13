@@ -2,16 +2,17 @@
   "game": "2026_06_BAL_CLE",
   "label": "BAL at CLE",
   "kickoff_utc": "2026-10-18 17:00 UTC",
-  "frozen_at": "2026-10-13 16:01 UTC",
+  "frozen_at": "2026-10-13 19:23 UTC",
   "bankroll": 20.0,
   "reserve_not_bet": 0.0,
   "paper_money": true,
-  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game",
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game; stakes from guesser.plan",
+  "split_rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)",
   "entries": [
     {
       "id": "A",
       "type": "flex",
-      "stake": 12.0,
+      "stake": 17.0,
       "legs": [
         "Rashod Bateman rec yds more 30.5",
         "Deshaun Watson rush attempts more 6.5",
@@ -69,12 +70,10 @@
     {
       "id": "B",
       "type": "power",
-      "stake": 8.0,
+      "stake": 3.0,
       "legs": [
         "Rashod Bateman rec yds more 30.5",
-        "Deshaun Watson rush attempts more 6.5",
-        "Zay Flowers rec yds more 60.5",
-        "Derrick Henry rush yds less 90.5"
+        "Deshaun Watson rush attempts more 6.5"
       ],
       "legs_detail": [
         {
@@ -103,40 +102,10 @@
           "game_id": "2026_06_BAL_CLE",
           "note": "Medium \u00b7 More in 3 of last 4 (7, 11, 7, 6)",
           "reasons": []
-        },
-        {
-          "player": "Zay Flowers",
-          "player_id": "00-0039064",
-          "team": "BAL",
-          "stat": "rec_yds",
-          "side": "over",
-          "line": 60.5,
-          "p_model": 0.5511336805555556,
-          "game_id": "2026_06_BAL_CLE",
-          "note": "Medium \u00b7 More in 3 of last 4 (150, 84, 118, 53)",
-          "reasons": [
-            "Against: CLE have the 2nd best pass defense (EPA per dropback allowed)",
-            "For: CLE allow the 10th most receiving yds to WRs (167 a game)"
-          ]
-        },
-        {
-          "player": "Derrick Henry",
-          "player_id": "00-0032764",
-          "team": "BAL",
-          "stat": "rush_yds",
-          "side": "under",
-          "line": 90.5,
-          "p_model": 0.5458524305555557,
-          "game_id": "2026_06_BAL_CLE",
-          "note": "Lean \u00b7 Less in 3 of last 4 (68, 89, 73, 102)",
-          "reasons": [
-            "Against: CLE have the 3rd worst run defense (EPA per rush allowed)",
-            "Against: BAL favored by 4.5: more carries to close it out"
-          ]
         }
       ],
       "pays": {
-        "4": 10.0
+        "2": 3.0
       }
     }
   ],
@@ -144,9 +113,12 @@
     "A_flex3": {
       "estimate": 0.946
     },
-    "B_power4": {
-      "estimate": 1.018
+    "B_power2": {
+      "estimate": 1.015
     }
   },
+  "expected_back": 19.12,
+  "p_profit": 0.607,
+  "p_lose_all": 0.393,
   "result": null
 }

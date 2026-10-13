@@ -9,7 +9,7 @@
  "home_spread": -12.5,
  "total": 52.5,
  "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
- "built_at": "2026-10-13 16:01:46.807505+00:00",
+ "built_at": "2026-10-13 19:23:56.556911+00:00",
  "units": [
   {
    "offense": "ARI",
@@ -187,5 +187,6 @@
    ]
   }
  ],
- "lineups": {}
+ "lineups": {},
+ "plan": {}
 }

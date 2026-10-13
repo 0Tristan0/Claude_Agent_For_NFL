@@ -2,16 +2,17 @@
   "game": "2026_06_SEA_DEN",
   "label": "SEA at DEN",
   "kickoff_utc": "2026-10-16 00:15 UTC",
-  "frozen_at": "2026-10-13 16:01 UTC",
+  "frozen_at": "2026-10-13 19:23 UTC",
   "bankroll": 20.0,
   "reserve_not_bet": 0.0,
   "paper_money": true,
-  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game",
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game; stakes from guesser.plan",
+  "split_rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)",
   "entries": [
     {
       "id": "A",
       "type": "flex",
-      "stake": 12.0,
+      "stake": 13.0,
       "legs": [
         "Bo Nix rush yds less 13.5",
         "Marvin Mims Jr. rec yds less 13.5",
@@ -68,13 +69,14 @@
     },
     {
       "id": "B",
-      "type": "power",
-      "stake": 8.0,
+      "type": "flex",
+      "stake": 7.0,
       "legs": [
         "Bo Nix rush yds less 13.5",
         "Marvin Mims Jr. rec yds less 13.5",
         "Courtland Sutton rec yds less 31.5",
-        "Cooper Kupp rec yds less 20.5"
+        "Cooper Kupp rec yds less 20.5",
+        "Jaylen Waddle rec yds less 49.5"
       ],
       "legs_detail": [
         {
@@ -133,10 +135,27 @@
             "For: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
             "For: DEN have the 5th best pass defense (EPA per dropback allowed)"
           ]
+        },
+        {
+          "player": "Jaylen Waddle",
+          "player_id": "00-0036613",
+          "team": "DEN",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 49.5,
+          "p_model": 0.5691961805555557,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "Medium \u00b7 Less in 3 of last 4 (138, 10, 35, 19)",
+          "reasons": [
+            "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+            "For: SEA have the 3rd best pass defense (EPA per dropback allowed)"
+          ]
         }
       ],
       "pays": {
-        "4": 10.0
+        "5": 10.0,
+        "4": 2.0,
+        "3": 0.4
       }
     }
   ],
@@ -144,9 +163,12 @@
     "A_flex3": {
       "estimate": 1.011
     },
-    "B_power4": {
-      "estimate": 1.203
+    "B_flex5": {
+      "estimate": 1.309
     }
   },
+  "expected_back": 22.31,
+  "p_profit": 0.35,
+  "p_lose_all": 0.264,
   "result": null
 }

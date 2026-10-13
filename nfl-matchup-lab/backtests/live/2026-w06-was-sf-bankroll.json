@@ -2,16 +2,17 @@
   "game": "2026_06_WAS_SF",
   "label": "WAS at SF",
   "kickoff_utc": "2026-10-20 00:15 UTC",
-  "frozen_at": "2026-10-13 16:01 UTC",
+  "frozen_at": "2026-10-13 19:23 UTC",
   "bankroll": 20.0,
   "reserve_not_bet": 0.0,
   "paper_money": true,
-  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game",
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game; stakes from guesser.plan",
+  "split_rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)",
   "entries": [
     {
       "id": "A",
       "type": "flex",
-      "stake": 12.0,
+      "stake": 13.0,
       "legs": [
         "Brock Purdy pass attempts less 30.5",
         "Christian McCaffrey receptions less 4.5",
@@ -69,13 +70,14 @@
     },
     {
       "id": "B",
-      "type": "power",
-      "stake": 8.0,
+      "type": "flex",
+      "stake": 7.0,
       "legs": [
         "Brock Purdy pass attempts less 30.5",
         "Christian McCaffrey receptions less 4.5",
         "Jayden Daniels pass yds less 205.5",
-        "Jacory Croskey-Merritt rush yds less 45.5"
+        "Jacory Croskey-Merritt rush yds less 45.5",
+        "George Kittle rec yds more 61.5"
       ],
       "legs_detail": [
         {
@@ -134,10 +136,28 @@
           "reasons": [
             "For: WAS underdog by 7.5: may abandon the run if behind"
           ]
+        },
+        {
+          "player": "George Kittle",
+          "player_id": "00-0033288",
+          "team": "SF",
+          "stat": "rec_yds",
+          "side": "over",
+          "line": 61.5,
+          "p_model": 0.5600086805555555,
+          "game_id": "2026_06_WAS_SF",
+          "note": "Medium \u00b7 More in 3 of last 4 (80, 82, 70, 24)",
+          "reasons": [
+            "For: WAS allow the 5th most receiving yds to TEs (74 a game)",
+            "For: WAS have the 7th worst pass defense (EPA per dropback allowed)",
+            "Against: WAS pressure QBs on 23% of dropbacks (the 15th most); SF's line allows pressure on 16% (the 1st least): fewer checkdowns"
+          ]
         }
       ],
       "pays": {
-        "4": 10.0
+        "5": 10.0,
+        "4": 2.0,
+        "3": 0.4
       }
     }
   ],
@@ -145,9 +165,12 @@
     "A_flex3": {
       "estimate": 1.037
     },
-    "B_power4": {
-      "estimate": 1.241
+    "B_flex5": {
+      "estimate": 1.324
     }
   },
+  "expected_back": 22.75,
+  "p_profit": 0.357,
+  "p_lose_all": 0.257,
   "result": null
 }

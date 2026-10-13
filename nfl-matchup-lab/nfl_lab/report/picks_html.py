@@ -19,7 +19,6 @@ PP_STAT = {"rec_yds": "Receiving Yards", "rush_yds": "Rush Yards", "pass_yds": "
            "pass_tds": "Pass TDs", "pass_att": "Pass Attempts", "completions": "Pass Completions",
            "rush_att": "Rush Attempts", "ints": "INT", "pass_rush_yds": "Pass+Rush Yds"}
 SIDE = {"over": "More", "under": "Less"}
-GUESSER_STAKE = {"A": 12.0, "B": 8.0}       # the Guesser's pretend $20 per game (nfl_lab/guesser.py STAKES)
 
 HOW_TO_ADD = ("Add PrizePicks lines to <code>data/props.csv</code> with source <code>prizepicks</code> (player, team, stat, "
               "line), or send me screenshots of the PrizePicks board and I'll enter them. A sportsbook price for the same "
@@ -138,9 +137,6 @@ def lineup_cards(best_json: dict, prefix: str = "../", no_lines_msg: str = "") -
                    "per $1, which is below break-even.</p>")
             skip = (f"<div><dt>Skip if the app pays under</dt><dd>{L['min_power_mult']:.1f}x</dd></div>"
                     if L["recommended"] and L["play_as"] == "Power" else "")
-            stake = GUESSER_STAKE.get(L.get("entry") or "")
-            if stake and L.get("basis") == "Guesser method":
-                skip += f"<div><dt>Guesser stake</dt><dd>${stake:.2f}</dd></div>"
             game = f"<span class='small'>{e(L['game'])}</span>" if L.get("game") else ""
             cards.append(f"""<article class="lu{'' if L['recommended'] else ' dim'}"><header><div><h3>{('Entry ' + L['entry'] + ' · ') if L.get('entry') else ''}{n}-pick {L['play_as']}</h3>{game}</div>{tag}</header>
 <ol class="lul">{legs}</ol><dl class="lustats">
@@ -188,7 +184,27 @@ GUESSER_CSS = """.gl{display:grid;gap:16px}
 .ent .eh b{font-size:.92rem}
 .ent .ek,.ent .ef{font-size:.78rem;color:var(--muted)}
 .ent .ef b{color:var(--text);font-weight:600}
-.ents-h{font-size:.78rem;color:var(--muted);margin:0}"""
+.ents-h{font-size:.78rem;color:var(--muted);margin:0}
+.slips{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px;padding:12px 16px 16px}
+.slp{border:1px solid var(--line-2);border-radius:8px;background:var(--bg);display:grid;align-content:start}
+.slp header{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:10px 12px 6px}
+.slp header b{font-size:.95rem}
+.slp header span{font-size:.85rem;color:var(--muted)}
+.slp header span b{color:var(--text)}
+.slp .amt{font-size:1.35rem;font-weight:750;font-stretch:88%;color:var(--text)}
+.sl{list-style:none;margin:0;padding:2px 12px 8px;display:grid;gap:6px}
+.sl li{display:grid;grid-template-columns:18px 1fr auto;gap:8px;align-items:start;font-size:.92rem;line-height:1.35}
+.sl .lg{margin-top:2px}
+.sl .ln{font-weight:700}
+.sl .pc{color:var(--muted);font-size:.82rem}
+.sl .res{display:block;font-size:.8rem;font-weight:600}
+.sl .res.hit{color:var(--pos)} .sl .res.miss{color:var(--neg)}
+.slp footer{padding:8px 12px 10px;border-top:1px solid var(--line);font-size:.78rem;color:var(--muted)}
+.slp footer .ok,.play .stakes .ok{color:var(--pos)} .slp footer .no,.play .stakes .no{color:var(--neg)}
+.whyh{font-size:.85rem;color:var(--muted);font-weight:600;margin:0 0 6px}
+.oth summary{cursor:pointer;color:var(--muted);font-size:.85rem}
+.oth[open] summary{margin-bottom:8px}
+.ent b{font-size:.9rem}"""
 
 
 def side_chip(side: str) -> str:
@@ -219,66 +235,76 @@ def _pick_li(i: int, x: dict, prefix: str, tag: str = "", reasons: bool = True) 
             + f"</span><span class='pc'>{x['p_model']:.0%}<small>{e(tier[0])}</small></span></li>")
 
 
-def guesser_lineups(lu: dict, prefix: str = "../", no_lines_msg: str = "") -> str:
-    """One game's Guesser lineups. First 'The play': the picks in Entry A ($12 Flex) and Entry B ($8 Power), each
-    written once in large type with More/Less, its estimate and reasons. Then the bigger 5- and 6-pick entries."""
-    sizes = sorted((n for n in lu if lu[n]), key=int)
-    if not sizes:
-        return f"<p class='sub'>{no_lines_msg or 'No PrizePicks lineup can be built yet.'} {HOW_TO_ADD}</p>"
-    A, B = (lu.get("3") or [None])[0], (lu.get("4") or [None])[0]
-    core = [L for L in (A, B) if L]
-    legs = {}
-    for L in core:
+def _pays(L: dict) -> str:
+    from ..picks import payouts
+    power, flex = payouts.tables()
+    st, n = L["stake"], L["n"]
+    if L["play_as"] == "Power":
+        return f"Pays ${st * power[n]:,.2f} if all {n} hit"
+    return "Pays " + " · ".join(f"{k} of {n}: ${st * v:,.2f}" for k, v in sorted(flex[n].items(), reverse=True) if v)
+
+
+def _slip_leg(x: dict, prefix: str) -> str:
+    res = x.get("result")
+    mark = ("" if not res else f"<span class='res {'hit' if res['hit'] else 'miss'}'>{'&#10003;' if res['hit'] else '&#10005;'} "
+            f"{e(str(res['actual']))}</span>")
+    return (f"<li>{theme.logo(x['team'], 18, prefix)}<span><b>{e(x['player'])}</b> {side_chip(x['side'])} "
+            f"<span class='ln'>{x['line']:g}</span> {e(stat_name(x['stat']))}{mark}</span><span class='pc'>{x['p_model']:.0%}</span></li>")
+
+
+def entry_slip(L: dict, prefix: str = "../") -> str:
+    """One entry of the Guesser's play: stake, type and legs, ready to copy into the app."""
+    o = L.get("outcome")
+    if o:
+        foot = (f"<b class='ok'>Won ${o['returned']:,.2f}</b>" if o["returned"] > 0 else "<b class='no'>Lost</b>") + \
+               f" · {o['hits']} of {o['of']} hit"
+    else:
+        foot = f"{_pays(L)} · pays something {L['p_paid']:.0%} of the time"
+    return (f"<article class='slp'><header><span><b>Entry {e(L['entry'])}</b> · {L['n']}-pick {e(L['play_as'])}</span>"
+            f"<span class='amt'>${L['stake']:.0f}</span></header><ol class='sl'>{''.join(_slip_leg(x, prefix) for x in L['legs'])}</ol>"
+            f"<footer>{foot}</footer></article>")
+
+
+def guesser_play(pl: dict, lu: dict | None = None, prefix: str = "../", no_lines_msg: str = "") -> str:
+    """One game's play: the Guesser's $20 split into entries (from guesser.plan), then why each pick, once."""
+    if not pl or not pl.get("entries"):
+        return f"<p class='sub'>{no_lines_msg or 'No play for this game yet.'}</p>"
+    ents = pl["entries"]
+    graded = all(L.get("outcome") for L in ents)
+    if graded:
+        back = sum(L["outcome"]["returned"] for L in ents)
+        summ = f"<b class='{'ok' if back > pl['budget'] else 'no'}'>${back:,.2f} back</b> on ${pl['budget']}"
+    else:
+        summ = (f"expect <b class='{'ok' if pl['expected_back'] > pl['budget'] else 'no'}'>${pl['expected_back']:.2f}</b> back · "
+                f"profit {pl['p_profit']:.0%} of the time · lose all {pl['p_lose_all']:.0%}")
+    seen, why = {}, []
+    for L in ents:
         for x in L["legs"]:
-            legs.setdefault(_key(x), x)
-    order = sorted(legs.values(), key=lambda x: -x["p_model"])
-    ina = {_key(x) for x in (A or {}).get("legs", [])}
-    inb = {_key(x) for x in (B or {}).get("legs", [])}
-    def tag(x):
-        k = _key(x)
-        return "A + B" if k in ina and k in inb else "A only" if k in ina else "B only" if k in inb else ""
-    rows = "".join(_pick_li(i, x, prefix, tag(x) if A and B else "") for i, x in enumerate(order, 1))
-    stakes = " + ".join(f"<b>${GUESSER_STAKE[L['entry']]:.0f}</b> Entry {L['entry']} ({L['n']}-pick {e(L['play_as'])})"
-                        for L in core if L.get("entry"))
-    foot = []
-    for L in core:
-        o = L.get("outcome")
-        name = f"Entry {L['entry']}" if L.get("entry") else f"{L['n']}-pick"
-        if o:
-            foot.append(f"{name}: <b class='{'ok' if o['returned'] > 0 else 'no'}'>"
-                        + (f"won ${o['returned']:.2f} per $1" if o["returned"] > 0 else "lost") + f"</b> ({o['hits']} of {o['of']})")
-        else:
-            foot.append(f"{name}: <b class='{'ok' if L['recommended'] else 'no'}'>${L['best_ev']:.2f}</b> expected back per $1"
-                        f" · all hit {L['p_all']:.0%}")
-    weak = all(not L["recommended"] for L in core) and not any(L.get("outcome") for L in core)
-    play = (f"<article class='play'><header><h3><span class='star' aria-hidden='true'>&#9733;</span>The play</h3>"
-            f"<span class='stakes'>{stakes}</span></header><ol class='pl'>{rows}</ol>"
-            + ("<p class='warn'>Both entries are below break-even at these estimates: the method expects to lose here. "
-               "The Guesser still plays it so every game is graded the same way.</p>" if weak else "")
-            + f"<footer>{''.join(f'<span>{t}</span>' for t in foot)}</footer></article>")
-    more = []
-    for n in sizes:
-        if n in ("3", "4"):
-            continue
-        L = lu[n][0]
-        extra = [x for x in L["legs"] if _key(x) not in legs]
-        add = "; ".join(f"{x['player']} {'More' if x['side'] == 'over' else 'Less'} {x['line']:g} {stat_name(x['stat'])} "
-                        f"({x['p_model']:.0%})" for x in extra)
-        o = L.get("outcome")
-        val = (f"<b>{'won $' + format(o['returned'], '.2f') + ' per $1' if o['returned'] > 0 else 'lost'}</b> ({o['hits']} of {o['of']})"
-               if o else f"<b>${L['best_ev']:.2f}</b> expected back per $1 · all hit {L['p_all']:.1%}")
-        more.append(f"<div class='ent'><div class='eh'><b>{n}-pick {e(L['play_as'])}</b></div>"
-                    f"<span class='ek'>The play's picks + {e(add) if add else 'the same picks'}</span><span class='ef'>{val}</span></div>")
-    bigger = (f"<p class='ents-h'>Bigger entries (not played by the Guesser; far less likely to hit)</p><div class='ents'>{''.join(more)}</div>"
-              if more else "")
-    return f"<div class='gl'>{play}{bigger}</div>"
+            seen.setdefault(_key(x), (x, []))[1].append(L["entry"])
+    rows = "".join(
+        f"<li>{theme.logo(x['team'], 18, prefix)}<span class='what'><b>{e(x['player'])}</b> {side_chip(x['side'])} "
+        f"<span class='ln'>{x['line']:g}</span> {e(stat_name(x['stat']))}<span class='in'>in {' '.join(es)}</span>"
+        + (f"<span class='sub2'>{e(' · '.join((x.get('note') or '').split(' · ')[1:]))}</span>" if x.get("note") else "")
+        + "".join(f"<span class='why'>{e(w)}</span>" for w in x.get("reasons", []))
+        + f"</span><span class='pc'>{x['p_model']:.0%}<small>{e((x.get('note') or '').split(' · ')[0])}</small></span></li>"
+        for x, es in sorted(seen.values(), key=lambda t: -t[0]["p_model"]))
+    others = ""
+    if lu:
+        tiles = "".join(f"<div class='ent'><b>{n}-pick {e(L['play_as'])}</b><span class='ef'>${L['best_ev']:.2f} expected back per $1"
+                        f" · all hit {L['p_all']:.1%}</span></div>" for n, lst in sorted(lu.items(), key=lambda kv: int(kv[0]))
+                        for L in lst[:1])
+        others = (f"<details class='oth'><summary>Other lineup sizes (not played)</summary><div class='ents'>{tiles}</div></details>"
+                  if tiles else "")
+    return (f"<div class='gl'><article class='play'><header><h3><span class='star' aria-hidden='true'>&#9733;</span>"
+            f"The play: ${pl['budget']}</h3><span class='stakes'>{summ}</span></header>"
+            f"<div class='slips'>{''.join(entry_slip(L, prefix) for L in ents)}</div></article>"
+            f"<div><h4 class='whyh'>Why these picks</h4><ol class='pl'>{rows}</ol></div>{others}</div>")
 
 
-def play_summary(lu: dict) -> list[dict]:
-    """The play's picks in order (for the week's summary lists)."""
+def play_summary(pl: dict) -> list[dict]:
+    """Every pick in the play, once, best first."""
     out = {}
-    for n in ("3", "4"):
-        for L in lu.get(n) or []:
-            for x in L["legs"]:
-                out.setdefault(_key(x), x)
+    for L in (pl or {}).get("entries", []):
+        for x in L["legs"]:
+            out.setdefault(_key(x), x)
     return sorted(out.values(), key=lambda x: -x["p_model"])

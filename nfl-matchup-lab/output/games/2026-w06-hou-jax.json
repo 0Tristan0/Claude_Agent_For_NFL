@@ -9,7 +9,7 @@
  "home_spread": -3.0,
  "total": 42.5,
  "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
- "built_at": "2026-10-13 16:01:46.807505+00:00",
+ "built_at": "2026-10-13 19:23:56.556911+00:00",
  "units": [
   {
    "offense": "HOU",
@@ -1276,5 +1276,204 @@
     ]
    }
   ]
+ },
+ "plan": {
+  "budget": 20,
+  "entries": [
+   {
+    "n": 3,
+    "play_as": "Flex",
+    "stake": 12,
+    "game": "HOU at JAX",
+    "basis": "Guesser method",
+    "p_all": 0.1941065917339019,
+    "p_paid": 0.6180941864293557,
+    "best_ev": 0.9667243247705966,
+    "recommended": false,
+    "min_power_mult": 5.151808555635691,
+    "legs": [
+     {
+      "player": "Bhayshul Tuten",
+      "player_id": "00-0040719",
+      "team": "JAX",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 63.5,
+      "p_model": 0.607501736111111,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
+      "reasons": [
+       "Against: HOU have the 4th best run defense (EPA per rush allowed)"
+      ]
+     },
+     {
+      "player": "Dalton Schultz",
+      "player_id": "00-0034383",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 30.5,
+      "p_model": 0.5663836805555555,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
+      "reasons": [
+       "For: JAX allow the 5th fewest receiving yds to TEs (34 a game)",
+       "For: JAX have the 7th best pass defense (EPA per dropback allowed)"
+      ]
+     },
+     {
+      "player": "Woody Marks",
+      "player_id": "00-0040583",
+      "team": "HOU",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 47.5,
+      "p_model": 0.5641336805555556,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "Medium \u00b7 Less in 3 of last 4 (8, 15, 22, 62)",
+      "reasons": [
+       "For: JAX have the 3rd best run defense (EPA per rush allowed)"
+      ]
+     }
+    ],
+    "entry": "A"
+   },
+   {
+    "n": 5,
+    "play_as": "Flex",
+    "stake": 6,
+    "game": "HOU at JAX",
+    "basis": "Guesser method",
+    "p_all": 0.06096142856274781,
+    "p_paid": 0.6328106586178031,
+    "best_ev": 1.2044273111109263,
+    "recommended": true,
+    "min_power_mult": 16.403815061038088,
+    "legs": [
+     {
+      "player": "Bhayshul Tuten",
+      "player_id": "00-0040719",
+      "team": "JAX",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 63.5,
+      "p_model": 0.607501736111111,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
+      "reasons": [
+       "Against: HOU have the 4th best run defense (EPA per rush allowed)"
+      ]
+     },
+     {
+      "player": "Dalton Schultz",
+      "player_id": "00-0034383",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 30.5,
+      "p_model": 0.5663836805555555,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
+      "reasons": [
+       "For: JAX allow the 5th fewest receiving yds to TEs (34 a game)",
+       "For: JAX have the 7th best pass defense (EPA per dropback allowed)"
+      ]
+     },
+     {
+      "player": "Woody Marks",
+      "player_id": "00-0040583",
+      "team": "HOU",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 47.5,
+      "p_model": 0.5641336805555556,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "Medium \u00b7 Less in 3 of last 4 (8, 15, 22, 62)",
+      "reasons": [
+       "For: JAX have the 3rd best run defense (EPA per rush allowed)"
+      ]
+     },
+     {
+      "player": "Kayshon Boutte",
+      "player_id": "00-0038608",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 30.5,
+      "p_model": 0.5622274305555556,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "Medium \u00b7 More in 3 of last 4 (37, 21, 36, 38)",
+      "reasons": [
+       "For: JAX allow the 1st most receiving yds to WRs (204 a game)",
+       "Against: JAX have the 7th best pass defense (EPA per dropback allowed)"
+      ]
+     },
+     {
+      "player": "Trevor Lawrence",
+      "player_id": "00-0036971",
+      "team": "JAX",
+      "stat": "pass_rush_yds",
+      "side": "under",
+      "line": 237.5,
+      "p_model": 0.5586024305555556,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "Medium \u00b7 Less in 3 of last 4 (195, 207, 227, 356)",
+      "reasons": [
+       "For: HOU have the 10th best pass defense (EPA per dropback allowed)"
+      ]
+     }
+    ],
+    "entry": "B"
+   },
+   {
+    "n": 2,
+    "play_as": "Power",
+    "stake": 2,
+    "game": "HOU at JAX",
+    "basis": "Guesser method",
+    "p_all": 0.3440790692425009,
+    "p_paid": 0.3440790692425009,
+    "best_ev": 1.0322372077275026,
+    "recommended": true,
+    "min_power_mult": 2.9063087220083634,
+    "legs": [
+     {
+      "player": "Bhayshul Tuten",
+      "player_id": "00-0040719",
+      "team": "JAX",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 63.5,
+      "p_model": 0.607501736111111,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
+      "reasons": [
+       "Against: HOU have the 4th best run defense (EPA per rush allowed)"
+      ]
+     },
+     {
+      "player": "Dalton Schultz",
+      "player_id": "00-0034383",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 30.5,
+      "p_model": 0.5663836805555555,
+      "game_id": "2026_06_HOU_JAX",
+      "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
+      "reasons": [
+       "For: JAX allow the 5th fewest receiving yds to TEs (34 a game)",
+       "For: JAX have the 7th best pass defense (EPA per dropback allowed)"
+      ]
+     }
+    ],
+    "entry": "C"
+   }
+  ],
+  "expected_back": 20.89173017936772,
+  "p_profit": 0.43013669790046627,
+  "p_lose_all": 0.28526147727705614,
+  "p_any_back": 0.7147385227229439,
+  "rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)"
  }
 }

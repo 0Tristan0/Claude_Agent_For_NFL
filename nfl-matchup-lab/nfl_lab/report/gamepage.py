@@ -13,12 +13,18 @@ SIDE = {"over": "More", "under": "Less"}
 
 CSS = """.board2 td.why{white-space:normal;min-width:300px;max-width:520px;font-size:.84rem;color:var(--muted)}
 .board2 td.why span{display:block}
+.board2 td.pk2{white-space:nowrap}
 .tier{font-size:.78rem;font-weight:600}
 .tier.High{color:var(--pos)} .tier.Med-High{color:var(--t2)} .tier.Medium{color:var(--t3)}
 .tier.Lean,.tier.Coin{color:var(--muted)}
 .ut td,.ut th{white-space:nowrap}
 .adv{font-size:.78rem;color:var(--muted)}
 .adv.o{color:var(--pos)} .adv.d{color:var(--neg)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.how summary{cursor:pointer;color:var(--muted);font-size:.85rem}
+@media (max-width:560px){.match{grid-template-columns:1fr auto 1fr}.ms.home{flex-direction:row-reverse;text-align:right}
+  .vsat{display:block}.match .lg{--s:40px!important;width:40px;height:40px}.ms{gap:10px}}
+.how[open] summary{margin-bottom:6px}
 .board2 tr.inplay th,.board2 tr.inplay td{background:var(--surface)}
 .board2 tr.inplay th{box-shadow:inset 3px 0 0 var(--text)}
 .inp{color:var(--text);font-weight:600}"""
@@ -33,8 +39,8 @@ def _fmt(stat: str, v: float) -> str:
     return f"{v:.0%}" if "rate" in stat.lower() else f"{v:+.3f}" if "EPA" in stat else f"{v:.2f}"
 
 
-def _board(picks: list[dict], lu: dict | None = None) -> str:
-    play = {picks_html._key(x) for x in picks_html.play_summary(lu or {})}
+def _board(picks: list[dict], pl: dict | None = None) -> str:
+    play = {picks_html._key(x) for x in picks_html.play_summary(pl or {})}
     if not picks:
         return ("<p class='sub'>No standard PrizePicks lines for this game yet. " + picks_html.HOW_TO_ADD + "</p>")
     rows = []
@@ -47,13 +53,12 @@ def _board(picks: list[dict], lu: dict | None = None) -> str:
         rows.append(f"<tr{' class=inplay' if inplay else ''}><th scope='row'>{theme.logo(p['team'], 18, '../')} {e(p['player'])}"
                     f"<span class='vs-lbl'>{e(p['position'])}" + (" · <span class='inp'>&#9733; In the play</span>" if inplay else "")
                     + f"</span></th>"
-                    f"<td class='l'>{e(picks_html.stat_name(p['stat']))}</td><td class='num'>{p['line']:g}</td>"
-                    f"<td class='l'>{picks_html.side_chip(p['side'])}</td>"
-                    f"<td class='l'><span class='tier {p['tier'].split()[0]}'>{e(p['tier'])}</span><span class='vs-lbl'>{p['p_model']:.0%}</span></td>"
+                    f"<td class='l pk2'>{picks_html.side_chip(p['side'])} <b>{p['line']:g}</b> {e(picks_html.stat_name(p['stat']))}</td>"
+                    f"<td class='l'><b>{p['p_model']:.0%}</b><span class='vs-lbl tier {p['tier'].split()[0]}'>{e(p['tier'])}</span></td>"
                     f"<td class='l'>{SIDE[p['side']]} in {p['hits']} of {p['games']}{small}<span class='vs-lbl'>{e(log)}</span></td>"
                     f"<td class='why'>{why}</td></tr>")
-    return ("<div class='tbl-wrap'><table class='pt board2'><thead><tr><th scope='col'>Player</th><th scope='col' class='l'>Prop</th>"
-            "<th scope='col'>Line</th><th scope='col' class='l'>Lean</th><th scope='col' class='l'>Confidence</th>"
+    return ("<div class='tbl-wrap'><table class='pt board2'><thead><tr><th scope='col'>Player</th><th scope='col' class='l'>Pick</th>"
+            "<th scope='col' class='l'>Chance</th>"
             "<th scope='col' class='l'>Last 4</th><th scope='col' class='l'>Why</th></tr></thead><tbody>"
             + "".join(rows) + "</tbody></table></div>")
 
@@ -91,6 +96,12 @@ def render(rec: dict, out_path: Path) -> Path:
     else:
         line = "No market line yet"
     lu = rec.get("lineups") or {}
+    pl = rec.get("plan") or {}
+    n_lean = len({p["player_id"] for p in rec.get("picks") or [] if p["p_model"] >= 0.525 and p["games"] >= 3})
+    no_play = ("No standard PrizePicks lines for this game yet." if not rec.get("picks") else
+               f"{len(rec['picks'])} line{'s' if len(rec['picks']) != 1 else ''} on file, but only {n_lean} player"
+               f"{'s' if n_lean != 1 else ''} rated Lean (52.5%) or better from both teams, so no play yet. A fresh "
+               "PrizePicks board closer to kickoff may add more.")
     body = f"""<main class="wrap">
 {theme.nav("home", "../")}<header class="head"><a class="back" href="../index.html">&larr; All games</a>
 <div class="meta"><span>Week {rec['week']}</span><span>{kick:%a %b %-d, %-I:%M %p} ET</span></div>
@@ -99,16 +110,19 @@ def render(rec: dict, out_path: Path) -> Path:
 <dl class="facts"><div class="wide"><dt>Line</dt><dd>{e(line)}</dd></div>
 <div class="wide"><dt>Injuries</dt><dd>{e(rec.get('injury_note') or 'not checked')}</dd></div></dl></header>
 
-<section class="pane" id="lineups" data-tab="Lineups" aria-labelledby="h-lu"><div><h2 id="h-lu">Lineups</h2>
-<p class="sub">Built the way the Bills-Rams $20 entries were: the top picks by estimate from this game only, one per player,
-both teams (if the top 3 are all one team, the other team's best pick takes the 3rd spot). Entry A is the top 3 as a Flex
-($12 in the Guesser), Entry B the top 4 as a Power ($8). The 5- and 6-pick add the next picks. A lineup's chance multiplies its picks' estimates.</p></div>
-{picks_html.guesser_lineups(lu, no_lines_msg="Not enough standard PrizePicks lines for this game yet.")}</section>
+<section class="pane" id="play" data-tab="The play" aria-labelledby="h-lu"><h2 id="h-lu" class="sr-only">The play</h2>
+{picks_html.guesser_play(pl, lu, no_lines_msg=no_play)}
+<details class="how"><summary>How the play is made</summary><p class="sub">Each standard PrizePicks line gets an estimate the way
+the original Bills-Rams report did it: (recent + matchup + market) / 2, where recent is his last 4 games at the line pulled toward
+50%, matchup is this game's matchups, and market is 50% when the board has no price. The best line per player (3+ games, 52.5% or
+better) is a pick; entries are the top picks from this game only, both teams. The Guesser then splits $20 across up to 3 entries
+(2 to 6 picks, Power or Flex) to grow a pretend bankroll fastest, which puts most of it on the entry most likely to pay. Chances
+multiply the picks' estimates as if independent.</p></details></section>
 
 <section class="pane" id="props" data-tab="Props board" aria-labelledby="h-pb"><div><h2 id="h-pb">Props board</h2>
 <p class="sub">Every standard PrizePicks line for this game, rated with the original formula: (recent + matchup + market) / 2.
 Recent is his last 4 games at the line pulled toward 50%; matchup is this game's matchups (up to 8 points before halving);
-market is 50% when there is no sportsbook price. High is 60% or more, Med-High 57.5%, Medium 55%, Lean 52.5%. Rows marked &#9733; are in the play.</p></div>{_board(rec.get('picks') or [], lu)}</section>
+market is 50% when there is no sportsbook price. High is 60% or more, Med-High 57.5%, Medium 55%, Lean 52.5%. Rows marked &#9733; are in the play.</p></div>{_board(rec.get('picks') or [], pl)}</section>
 
 <section class="pane" id="units" data-tab="Unit vs unit" aria-labelledby="h-uu"><div><h2 id="h-uu">Unit vs unit</h2>
 <p class="sub">Each offense against the defense it faces tonight, recency weighted (this season counts most).</p></div>

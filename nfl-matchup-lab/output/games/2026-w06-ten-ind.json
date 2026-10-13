@@ -9,7 +9,7 @@
  "home_spread": -7.0,
  "total": 44.5,
  "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
- "built_at": "2026-10-13 16:01:46.807505+00:00",
+ "built_at": "2026-10-13 19:23:56.556911+00:00",
  "units": [
   {
    "offense": "TEN",
@@ -401,5 +401,71 @@
     ]
    }
   ]
+ },
+ "plan": {
+  "budget": 20,
+  "entries": [
+   {
+    "n": 3,
+    "play_as": "Flex",
+    "stake": 20,
+    "game": "TEN at IND",
+    "basis": "Guesser method",
+    "p_all": 0.17257018677929956,
+    "p_paid": 0.5847577604836462,
+    "best_ev": 0.9035173873838575,
+    "recommended": false,
+    "min_power_mult": 5.7947436846603315,
+    "legs": [
+     {
+      "player": "Daniel Jones",
+      "player_id": "00-0035710",
+      "team": "IND",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 7.5,
+      "p_model": 0.5599305555555556,
+      "game_id": "2026_06_TEN_IND",
+      "note": "Medium \u00b7 Less in 3 of last 4 (10, 5, 2, 4)",
+      "reasons": [
+       "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): fewer reasons to run"
+      ]
+     },
+     {
+      "player": "Cam Ward",
+      "player_id": "00-0040676",
+      "team": "TEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 11.5,
+      "p_model": 0.5555555555555556,
+      "game_id": "2026_06_TEN_IND",
+      "note": "Medium \u00b7 Less in 3 of last 4 (7, 2, 27, 2)",
+      "reasons": []
+     },
+     {
+      "player": "Tony Pollard",
+      "player_id": "00-0035261",
+      "team": "TEN",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 49.5,
+      "p_model": 0.5547586805555556,
+      "game_id": "2026_06_TEN_IND",
+      "note": "Medium \u00b7 More in 3 of last 4 (64, 74, 48, 52)",
+      "reasons": [
+       "Against: TEN underdog by 7: may abandon the run if behind",
+       "For: IND have the 7th worst run defense (EPA per rush allowed)"
+      ]
+     }
+    ],
+    "entry": "A"
+   }
+  ],
+  "expected_back": 18.07034774767715,
+  "p_profit": 0.5847577604836462,
+  "p_lose_all": 0.4152422395163537,
+  "p_any_back": 0.5847577604836462,
+  "rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)"
  }
 }
