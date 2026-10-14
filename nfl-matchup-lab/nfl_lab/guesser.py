@@ -377,6 +377,8 @@ def run_week(season: int, week: int, write: bool = True, only: str | None = None
                    home_spread=float(-g["spread_line"]) if g["spread_line"] == g["spread_line"] else None,
                    total=float(g["total_line"]) if g["total_line"] == g["total_line"] else None,
                    injury_note=note, built_at=str(now), units=unit_table(ctx, g),
+                   news=json.loads(live.news(gid, g["kickoff_utc"]).to_json(orient="records", date_format="iso")),
+                   overrides=json.loads(live.overrides(gid).to_json(orient="records")),
                    picks=[] if picks.empty else json.loads(picks.drop(columns=["reasons"]).assign(
                        reasons=picks["reasons"]).to_json(orient="records")),
                    lineups=lu, plan=pl)

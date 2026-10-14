@@ -25,6 +25,8 @@ CSS = """.board2 td.why{white-space:normal;min-width:300px;max-width:520px;font-
 @media (max-width:560px){.match{grid-template-columns:1fr auto 1fr}.ms.home{flex-direction:row-reverse;text-align:right}
   .vsat{display:block}.match .lg{--s:40px!important;width:40px;height:40px}.ms{gap:10px}}
 .how[open] summary{margin-bottom:6px}
+.news{margin:0;padding-left:18px;display:grid;gap:6px;font-size:.88rem}
+.news .src{color:var(--muted);font-size:.8rem}
 .board2 tr.inplay th,.board2 tr.inplay td{background:var(--surface)}
 .board2 tr.inplay th{box-shadow:inset 3px 0 0 var(--text)}
 .inp{color:var(--text);font-weight:600}"""
@@ -85,6 +87,29 @@ def _units(units: list[dict]) -> str:
             "the defense's is pressure created.</span></div>" + "".join(out))
 
 
+def _news(rec: dict) -> str:
+    """The injury news and beat reports applied to this game (data/news.csv, data/overrides.csv), with sources."""
+    news, ov = rec.get("news") or [], [o for o in rec.get("overrides") or [] if o.get("game_id")]
+    if not news and not ov:
+        return ""
+    items = "".join(f"<li><b>{e(o['player'])}</b> ruled {e(o['status'])}{': ' + e(o['note']) if o.get('note') else ''}"
+                    f"{' <span class=src>(' + e(o['source']) + ')</span>' if o.get('source') else ''}</li>" for o in ov)
+    seen = set()
+    for n in news:
+        k = (n["player"], n["reason"])
+        if k in seen:
+            continue
+        seen.add(k)
+        stats = sorted({x["stat"] for x in news if (x["player"], x["reason"]) == k})
+        what = "all his props" if "*" in stats else ", ".join(picks_html.stat_name(s) for s in stats)
+        lean = "More" if n["more_adj"] > 0 else "Less"
+        items += (f"<li><b>{e(n['player'])}</b> ({e(what)}, leans {lean} by {abs(n['more_adj']) * 50:.1f} pts): {e(n['reason'])}"
+                  f" <span class=src>({e(n['source'])})</span></li>")
+    when = max((n["captured_at"] for n in news), default="")[:16].replace("T", " ")
+    return (f"<details class='how' open><summary>Latest news used{' (as of ' + e(when) + ' UTC)' if when else ''}</summary>"
+            f"<ul class='news'>{items}</ul></details>")
+
+
 def render(rec: dict, out_path: Path) -> Path:
     a, h = rec["away"], rec["home"]
     kick = pd.Timestamp(rec["kickoff_utc"]).tz_convert("America/New_York")
@@ -112,6 +137,7 @@ def render(rec: dict, out_path: Path) -> Path:
 
 <section class="pane" id="play" data-tab="The play" aria-labelledby="h-lu"><h2 id="h-lu" class="sr-only">The play</h2>
 {picks_html.guesser_play(pl, lu, no_lines_msg=no_play)}
+{_news(rec)}
 <details class="how"><summary>How the play is made</summary><p class="sub">Each standard PrizePicks line gets an estimate the way
 the original Bills-Rams report did it: (recent + matchup + market) / 2, where recent is his last 4 games at the line pulled toward
 50%, matchup is this game's matchups, and market is 50% when the board has no price. The best line per player (3+ games, 52.5% or
