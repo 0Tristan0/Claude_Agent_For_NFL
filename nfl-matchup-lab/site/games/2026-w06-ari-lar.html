@@ -195,6 +195,8 @@ th:first-child,td:first-child{padding-left:0}
 @media (max-width:560px){.match{grid-template-columns:1fr auto 1fr}.ms.home{flex-direction:row-reverse;text-align:right}
   .vsat{display:block}.match .lg{--s:40px!important;width:40px;height:40px}.ms{gap:10px}}
 .how[open] summary{margin-bottom:6px}
+.news{margin:0;padding-left:18px;display:grid;gap:6px;font-size:.88rem}
+.news .src{color:var(--muted);font-size:.8rem}
 .board2 tr.inplay th,.board2 tr.inplay td{background:var(--surface)}
 .board2 tr.inplay th{box-shadow:inset 3px 0 0 var(--text)}
 .inp{color:var(--text);font-weight:600}.gl{display:grid;gap:16px}
@@ -267,6 +269,7 @@ th:first-child,td:first-child{padding-left:0}
 
 <section class="pane" id="play" data-tab="The play" aria-labelledby="h-lu"><h2 id="h-lu" class="sr-only">The play</h2>
 <p class='sub'>3 lines on file, but only 0 players rated Lean (52.5%) or better from both teams, so no play yet. A fresh PrizePicks board closer to kickoff may add more.</p>
+
 <details class="how"><summary>How the play is made</summary><p class="sub">Each standard PrizePicks line gets an estimate the way
 the original Bills-Rams report did it: (recent + matchup + market) / 2, where recent is his last 4 games at the line pulled toward
 50%, matchup is this game's matchups, and market is 50% when the board has no price. The best line per player (3+ games, 52.5% or
