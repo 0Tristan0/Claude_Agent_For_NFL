@@ -242,5 +242,7 @@ def test_props_unknown_stat_raises(tmp_path):
 
 def test_seeded_props_file_parses():
     p = lines.fair_probs(lines.load_props())
-    assert len(p) >= 13 and (p["odds_kind"].isin(["legacy_blend", "none", ""])).all()
+    assert len(p) >= 13 and (p["odds_kind"].isin(["legacy_blend", "none", "", "american"])).all()
     assert (p.loc[p["odds_kind"] == "legacy_blend", "market_note"] == "legacy blended estimate (reference only)").all()
+    am = p[p["odds_kind"] == "american"]                       # sportsbook prices: a fair chance between 0 and 1
+    assert am["fair_over"].between(0.01, 0.99).all() and am["market_note"].str.contains("two-way|one-sided").all()
