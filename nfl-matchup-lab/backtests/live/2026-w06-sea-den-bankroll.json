@@ -2,7 +2,7 @@
   "game": "2026_06_SEA_DEN",
   "label": "SEA at DEN",
   "kickoff_utc": "2026-10-16 00:15 UTC",
-  "frozen_at": "2026-10-14 19:30 UTC",
+  "frozen_at": "2026-10-14 23:04 UTC",
   "bankroll": 20.0,
   "reserve_not_bet": 0.0,
   "paper_money": true,
@@ -16,7 +16,7 @@
       "legs": [
         "Marvin Mims Jr. rec yds less 13.5",
         "Bo Nix rush yds less 13.5",
-        "Sam Darnold rush yds more 4.5"
+        "Jaxon Smith-Njigba rec yds more 89.5"
       ],
       "legs_detail": [
         {
@@ -48,17 +48,19 @@
           "reasons": []
         },
         {
-          "player": "Sam Darnold",
-          "player_id": "00-0034869",
+          "player": "Jaxon Smith-Njigba",
+          "player_id": "00-0038543",
           "team": "SEA",
-          "stat": "rush_yds",
+          "stat": "rec_yds",
           "side": "over",
-          "line": 4.5,
-          "p_model": 0.5663783571698291,
+          "line": 89.5,
+          "p_model": 0.5679774305555556,
           "game_id": "2026_06_SEA_DEN",
-          "note": "Medium \u00b7 More in 3 of last 4 (0, 5, 6, 5)",
+          "note": "Medium \u00b7 More in 3 of last 4 (155, 128, 76, 102)",
           "reasons": [
-            "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): more scrambles"
+            "Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+            "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+            "For: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation and leads the NFL in receiving yards; books list him at 91.5-93.5, above this line"
           ]
         }
       ],
@@ -76,7 +78,7 @@
         "Bo Nix rush yds less 13.5",
         "Courtland Sutton rec yds less 31.5",
         "Jaylen Waddle rec yds less 49.5",
-        "Sam Darnold rush yds more 4.5"
+        "Jaxon Smith-Njigba rec yds more 89.5"
       ],
       "legs_detail": [
         {
@@ -140,17 +142,19 @@
           ]
         },
         {
-          "player": "Sam Darnold",
-          "player_id": "00-0034869",
+          "player": "Jaxon Smith-Njigba",
+          "player_id": "00-0038543",
           "team": "SEA",
-          "stat": "rush_yds",
+          "stat": "rec_yds",
           "side": "over",
-          "line": 4.5,
-          "p_model": 0.5663783571698291,
+          "line": 89.5,
+          "p_model": 0.5679774305555556,
           "game_id": "2026_06_SEA_DEN",
-          "note": "Medium \u00b7 More in 3 of last 4 (0, 5, 6, 5)",
+          "note": "Medium \u00b7 More in 3 of last 4 (155, 128, 76, 102)",
           "reasons": [
-            "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): more scrambles"
+            "Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+            "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+            "For: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation and leads the NFL in receiving yards; books list him at 91.5-93.5, above this line"
           ]
         }
       ],
@@ -163,14 +167,14 @@
   ],
   "expected_return_per_dollar": {
     "A_flex3": {
-      "estimate": 1.019
+      "estimate": 1.02
     },
     "B_flex5": {
-      "estimate": 1.359
+      "estimate": 1.362
     }
   },
-  "expected_back": 23.44,
-  "p_profit": 0.359,
-  "p_lose_all": 0.257,
+  "expected_back": 23.48,
+  "p_profit": 0.36,
+  "p_lose_all": 0.256,
   "result": null
 }
