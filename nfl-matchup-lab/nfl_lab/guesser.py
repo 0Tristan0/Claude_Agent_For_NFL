@@ -35,6 +35,7 @@ from .picks import matchups, oldmodel, payouts
 
 RECENT_N, PRIOR = 4, 5
 MATCHUP_CAP = 0.08
+NEWS_CAP = 0.10                            # matchup + news, before the estimate is halved with the market
 MIN_GAMES = 3
 MIN_PICK = 0.525                           # Lean or better: a coin flip is not a pick
 TIERS = [(0.60, "High"), (0.575, "Med-High"), (0.55, "Medium"), (0.525, "Lean"), (0.0, "Coin flip")]
@@ -95,8 +96,17 @@ def rate_game(T: dict, eng, props: pd.DataFrame, game_id: str, ov: pd.DataFrame 
     if board.empty:
         return pd.DataFrame(), ""
     out, note = v0run._outs(T, g, ko)
-    ov = ov if ov is not None else live.overrides()
+    ov = ov if ov is not None else live.overrides(game_id)
     bo, starters = v0run.board_overrides(props, g)
+    # a player on the saved board who has since been ruled out (injury report or your overrides) stays out
+    hist = visible(T["player_games"], ko)
+    out_names = set(hist.loc[hist["player_id"].isin(out), "player_name"].map(lines.norm_name))
+    if len(ov):
+        out_names |= set(ov.loc[ov["status"] == "out", "player"].map(lines.norm_name))
+    bo = bo[~bo["player"].map(lines.norm_name).isin(out_names)]
+    board = board[~board["player"].map(lines.norm_name).isin(out_names)]
+    books = _book_prices(props, g)
+    nudges = live.news(game_id, ko)
     act = v0run._active_with_overrides(T, g, ko, out, pd.concat([ov, bo], ignore_index=True), starters,
                                        quiet=set(bo["player"]))
     cands = pd.concat([a.assign(team=t) for t, a in act.items()], ignore_index=True)
@@ -119,19 +129,62 @@ def rate_game(T: dict, eng, props: pd.DataFrame, game_id: str, ov: pd.DataFrame 
             hits = int((vals > r["line"]).sum() if side == "over" else (vals < r["line"]).sum())
             recent = recent_rate(hits, n)
             fo = r.get("fair_over", np.nan)
+            src = "price on the line"
+            if fo is None or fo != fo:
+                fo, src = books.get((lines.norm_name(r["player"]), r["stat"], float(r["line"])), (np.nan, "50%: no price"))
             mkt = (float(fo) if side == "over" else 1 - float(fo)) if fo == fo and fo is not None else 0.5
             rows.append(dict(game_id=game_id, player_id=r["player_id"], player=r["player"], team=r["team"],
                              position=pos.get(r["player_id"], ""), stat=r["stat"], line=float(r["line"]), side=side,
                              hits=hits, games=n, log=[float(x) for x in vals], recent=recent, market=mkt,
-                             p_model=recent, captured_at=str(r["captured_at"])))
+                             market_src=src, p_model=recent, captured_at=str(r["captured_at"])))
     df = pd.DataFrame(rows)
     if df.empty:
         return df, note
     df = matchups.adjust(df, matchups.context(T, game_id, eng), pos, cap=MATCHUP_CAP)   # p_model = recent + matchup
+    df = _apply_news(df, nudges)                                                         # + news (capped with matchup)
     df["p_model"] = (df["p_model"] + df["market"]) / 2                                   # half our read, half the market
     df = df.sort_values("p_model", ascending=False, kind="mergesort").drop_duplicates(["player_id", "stat", "line"])
     df["tier"] = df["p_model"].map(tier)
     return df.reset_index(drop=True), note
+
+
+def _book_prices(props: pd.DataFrame, g) -> dict:
+    """No-vig chance of More from sportsbook rows saved before kickoff, by (player, stat, line). Several books at the
+    same line are averaged. Only exact line matches are used (a different line is a different bet)."""
+    if props is None or props.empty or "fair_over" not in props:
+        return {}
+    ko = g["kickoff_utc"]
+    bk = props[~props["source"].str.lower().isin(["prizepicks", "legacy_ev_py"])
+               & props["team"].isin([g["home_team"], g["away_team"]]) & props["game_id"].isin(["", g["game_id"]])
+               & (props["captured_at"] < ko) & (props["captured_at"] > ko - pd.Timedelta(days=7)) & props["fair_over"].notna()]
+    if bk.empty:
+        return {}
+    bk = bk.sort_values("captured_at").drop_duplicates(["player", "stat", "line", "source"], keep="last")
+    out = {}
+    for (pl, st, ln), grp in bk.groupby([bk["player"].map(lines.norm_name), "stat", "line"]):
+        out[(pl, st, float(ln))] = (float(grp["fair_over"].mean()), "no-vig " + ", ".join(sorted(set(grp["source"]))))
+    return out
+
+
+def _apply_news(df: pd.DataFrame, nudges: pd.DataFrame) -> pd.DataFrame:
+    """Add hand nudges from data/news.csv to p_model (recent + matchup), keeping matchup + news within NEWS_CAP."""
+    if nudges is None or nudges.empty or df.empty:
+        return df
+    df = df.copy()
+    adj, reasons = [], []
+    for _, r in df.iterrows():
+        m = nudges[(nudges["player"].map(lines.norm_name) == lines.norm_name(r["player"]))
+                   & nudges["stat"].isin(["*", r["stat"]])]
+        sign = 1 if r["side"] == "over" else -1
+        a = float((m["more_adj"] * sign).sum()) if len(m) else 0.0
+        a = float(np.clip(r["p_matchup"] + a, -NEWS_CAP, NEWS_CAP) - r["p_matchup"])
+        adj.append(a)
+        reasons.append(list(r["reasons"]) + [("For: " if s * sign > 0 else "Against: ") + "News: " + why
+                                             for s, why in zip(m["more_adj"], m["reason"]) if s])
+    df["p_news"] = adj
+    df["p_model"] = np.clip(df["p_model"] + df["p_news"], 0.01, 0.99)
+    df["reasons"] = reasons
+    return df
 
 
 def _note(r) -> str:
@@ -297,7 +350,7 @@ def write_bankroll(g, pl: dict, now: pd.Timestamp) -> Path | None:
     return path
 
 
-def run_week(season: int, week: int, write: bool = True) -> dict:
+def run_week(season: int, week: int, write: bool = True, only: str | None = None) -> dict:
     """Rate every game of the week that has PrizePicks lines; write per-game results and Guesser entries."""
     from . import v0run
     T = v0run.load_tables()
@@ -310,6 +363,8 @@ def run_week(season: int, week: int, write: bool = True) -> dict:
     out = {}
     for _, g in gl.iterrows():
         gid = g["game_id"]
+        if only and only not in (gid, slug(g)):
+            continue
         if now >= g["kickoff_utc"] and (OUT_DIR / f"{slug(g)}.json").exists():
             out[gid] = json.loads((OUT_DIR / f"{slug(g)}.json").read_text())   # started: keep what was frozen
             continue

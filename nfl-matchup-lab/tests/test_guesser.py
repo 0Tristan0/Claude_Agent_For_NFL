@@ -117,3 +117,33 @@ def test_the_play_shows_each_entry_with_its_stake_and_each_pick_once():
     for name in used:
         assert why.count(f"<b>{name}</b>") == 1
     assert [x["player"] for x in picks_html.play_summary(pl)] == sorted(used, key=lambda n: "abcd".index(n.lower()))
+
+
+def test_news_nudges_move_the_side_they_favor_and_stay_capped():
+    df = _picks([dict(player_id="a", player="Ann Bee", team="KC", p_model=0.60, side="over", stat="rec_yds"),
+                 dict(player_id="b", player="Cal Dee", team="BUF", p_model=0.60, side="under", stat="rec_yds")])
+    df["p_matchup"], df["reasons"] = [0.0, 0.07], [[], []]
+    nudges = pd.DataFrame([dict(player="Ann Bee", stat="*", more_adj=0.04, reason="WR1 out: more targets"),
+                           dict(player="Cal Dee", stat="rec_yds", more_adj=-0.06, reason="role cut")])
+    out = guesser._apply_news(df, nudges)
+    assert out.loc[0, "p_model"] == pytest.approx(0.64)                  # More pick, nudge toward More
+    assert out.loc[1, "p_news"] == pytest.approx(guesser.NEWS_CAP - 0.07)  # Less pick, capped with its matchup
+    assert out.loc[0, "reasons"] == ["For: News: WR1 out: more targets"]
+    assert out.loc[1, "reasons"] == ["For: News: role cut"]
+
+
+def test_book_prices_match_exact_lines_only():
+    from nfl_lab.data import lines
+    ko = pd.Timestamp("2026-10-18 17:00", tz="UTC")
+    g = pd.Series(dict(game_id="G", home_team="KC", away_team="BUF", kickoff_utc=ko))
+    props = pd.DataFrame([dict(player="Ann Bee", team="KC", stat="rec_yds", line=40.5, source="draftkings", game_id="",
+                               captured_at=ko - pd.Timedelta(hours=3), fair_over=0.44),
+                          dict(player="Ann Bee", team="KC", stat="rec_yds", line=40.5, source="fanduel", game_id="",
+                               captured_at=ko - pd.Timedelta(hours=2), fair_over=0.46),
+                          dict(player="Ann Bee", team="KC", stat="rec_yds", line=41.5, source="betmgm", game_id="",
+                               captured_at=ko - pd.Timedelta(hours=2), fair_over=0.40),
+                          dict(player="Ann Bee", team="KC", stat="rec_yds", line=40.5, source="caesars", game_id="",
+                               captured_at=ko + pd.Timedelta(hours=1), fair_over=0.10)])       # after kickoff: ignored
+    got = guesser._book_prices(props, g)
+    assert got[(lines.norm_name("Ann Bee"), "rec_yds", 40.5)][0] == pytest.approx(0.45)
+    assert got[(lines.norm_name("Ann Bee"), "rec_yds", 41.5)][0] == pytest.approx(0.40)

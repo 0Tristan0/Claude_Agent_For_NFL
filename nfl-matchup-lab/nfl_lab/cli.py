@@ -266,7 +266,7 @@ def cmd_retro(a):
 
 def cmd_guesser(a):
     from . import guesser
-    out = guesser.run_week(a.season, a.week)
+    out = guesser.run_week(a.season, a.week, only=getattr(a, "game", None))
     for rec in out.values():
         pl = rec.get("plan") or {}
         print(f"{rec['label']}: {len(rec.get('picks') or [])} lines rated" + (
@@ -368,6 +368,8 @@ def main(argv=None) -> int:
         s = sub.add_parser(name)
         s.add_argument("--week", type=int, required=True)
         s.add_argument("--season", type=int, default=config.LIVE_SEASON)
+        if name == "guesser":
+            s.add_argument("--game", help="only this game (game id like 2026_06_SEA_DEN, or slug 2026-w06-sea-den)")
         s.set_defaults(fn=fn)
     s = sub.add_parser("guesser-retro", help="before-kickoff test of the Guesser method on a finished game")
     s.add_argument("--game", required=True)
