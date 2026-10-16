@@ -341,7 +341,7 @@ def last_game(link_prefix=""):
             parts.append(f'{n}-pick: {o.get("hits", "?")} of {o.get("of", n)}'
                          + (f' (${o["returned"]:.2f} per $1)' if o.get("returned") else " (lost)"))
         test = (f'<p>Current method, tested with picks made before kickoff: {e("; ".join(parts))}. '
-                f'<a class="more" href="{link_prefix}guesser.html#last">Details &rarr;</a></p>')
+                f'<a class="more" href="{link_prefix}guesser.html#earlier">Details &rarr;</a></p>')
     page = f'games/{os.path.basename(b["_path"]).replace("-bankroll.json", ".html")}'
     rep = (f'<a class="more" href="{link_prefix}{page}">Original report &rarr;</a>'
            if os.path.exists(os.path.join(SITE, page)) else "")
@@ -589,10 +589,11 @@ def guesser_page():
             f'<div><dt>Profit</dt><dd class="{prof_cls}">{prof_txt}</dd></div>'
             f'<div><dt>Waiting</dt><dd>{len(waiting)} game{"" if len(waiting) == 1 else "s"}</dd></div></dl></div>\n'
             + ('<section aria-labelledby="h-last2" id="last"><h2 id="h-last2">Last game</h2>'
-               + "".join(s["html"] for s in graded[:1]) + retro_tests() + '</section>\n' if graded else "")
+               + "".join(s["html"] for s in graded[:1]) + '</section>\n' if graded else "")
             + ('<section aria-labelledby="h-up"><h2 id="h-up">This week</h2>' + "".join(s["html"] for s in waiting)
                + '</section>\n' if waiting else "")
-            + ("".join(s["html"] for s in graded[1:]))
+            + ('<section aria-labelledby="h-earlier" id="earlier"><h2 id="h-earlier">Earlier games</h2>'
+               + "".join(s["html"] for s in graded[1:]) + retro_tests() + '</section>\n' if len(graded) > 1 else retro_tests())
             + '\n<footer class="notes"><p>Payouts use the standard PrizePicks tables in config/payouts.toml (Power pays only '
             'when every leg hits; Flex also pays when most legs hit). The app can offer lower multipliers on same-game '
             'entries. How the $20 is split: <code>nfl_lab/guesser.py</code> plan(). Pretend money, small samples, not '

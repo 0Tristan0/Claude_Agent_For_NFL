@@ -176,5 +176,32 @@
   "expected_back": 23.48,
   "p_profit": 0.36,
   "p_lose_all": 0.256,
-  "result": null
+  "result": {
+    "final": "DEN 17, SEA 14 (OT)",
+    "graded_at": "2026-10-16 14:02 UTC",
+    "provisional": false,
+    "source": "nflverse stats_player_week_2026",
+    "legs": {
+      "Marvin Mims Jr. rec yds less 13.5": {
+        "actual": 13.0,
+        "hit": true
+      },
+      "Bo Nix rush yds less 13.5": {
+        "actual": 2.0,
+        "hit": true
+      },
+      "Jaxon Smith-Njigba rec yds more 89.5": {
+        "actual": 134.0,
+        "hit": true
+      },
+      "Courtland Sutton rec yds less 31.5": {
+        "actual": 19.0,
+        "hit": true
+      },
+      "Jaylen Waddle rec yds less 49.5": {
+        "actual": 24.0,
+        "hit": true
+      }
+    }
+  }
 }

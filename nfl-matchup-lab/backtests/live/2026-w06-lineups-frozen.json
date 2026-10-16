@@ -42,7 +42,29 @@
           "p_model": 0.51
         }
       ],
-      "result": null
+      "result": {
+        "hits": 1,
+        "of": 3,
+        "returned": 0.0,
+        "play_as": "Power",
+        "final": "DEN 17, SEA 14 (OT)",
+        "legs": {
+          "Jaylen Waddle rec_yds under 49.5": {
+            "actual": "24",
+            "hit": true
+          },
+          "Sam Darnold pass_yds under 218.5": {
+            "actual": "278",
+            "hit": false
+          },
+          "Jaxon Smith-Njigba rec_yds under 89.5": {
+            "actual": "134",
+            "hit": false
+          }
+        },
+        "graded_at": "2026-10-16 14:05 UTC",
+        "source": "nflverse stats_player_week_2026"
+      }
     },
     "4": {
       "game": "SEA at DEN",
@@ -90,7 +112,33 @@
           "p_model": 0.51
         }
       ],
-      "result": null
+      "result": {
+        "hits": 1,
+        "of": 4,
+        "returned": 0.0,
+        "play_as": "Power",
+        "final": "DEN 17, SEA 14 (OT)",
+        "legs": {
+          "Jaylen Waddle rec_yds under 49.5": {
+            "actual": "24",
+            "hit": true
+          },
+          "Sam Darnold pass_yds under 218.5": {
+            "actual": "278",
+            "hit": false
+          },
+          "Rashid Shaheed rec_yds under 22.5": {
+            "actual": "66",
+            "hit": false
+          },
+          "Jaxon Smith-Njigba rec_yds under 89.5": {
+            "actual": "134",
+            "hit": false
+          }
+        },
+        "graded_at": "2026-10-16 14:05 UTC",
+        "source": "nflverse stats_player_week_2026"
+      }
     },
     "5": {
       "game": "DAL at GB",
