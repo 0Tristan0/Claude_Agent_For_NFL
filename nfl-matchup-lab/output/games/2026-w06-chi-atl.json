@@ -1,0 +1,327 @@
+{
+ "game_id": "2026_06_CHI_ATL",
+ "season": 2026,
+ "week": 6,
+ "label": "CHI at ATL",
+ "away": "CHI",
+ "home": "ATL",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": 1.5,
+ "total": 52.5,
+ "injury_note": "injury report week 6",
+ "built_at": "2026-10-18 00:04:59.107565+00:00",
+ "units": [
+  {
+   "offense": "CHI",
+   "defense": "ATL",
+   "stat": "EPA per dropback",
+   "off_value": 0.11988333111127907,
+   "def_value": -0.02768416278990888,
+   "off_rank": 11,
+   "def_rank": 8
+  },
+  {
+   "offense": "CHI",
+   "defense": "ATL",
+   "stat": "EPA per rush",
+   "off_value": -0.03450327174081011,
+   "def_value": -0.07938561105319544,
+   "off_rank": 14,
+   "def_rank": 15
+  },
+  {
+   "offense": "CHI",
+   "defense": "ATL",
+   "stat": "Explosive pass rate",
+   "off_value": 0.09672902796543466,
+   "def_value": 0.07920080280673955,
+   "off_rank": 6,
+   "def_rank": 14
+  },
+  {
+   "offense": "CHI",
+   "defense": "ATL",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.2216459190391084,
+   "def_value": 0.23737910773278048,
+   "off_rank": 14,
+   "def_rank": 13
+  },
+  {
+   "offense": "CHI",
+   "defense": "ATL",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.45548642241497805,
+   "def_value": 0.5762360635306494,
+   "off_rank": 31,
+   "def_rank": 17
+  },
+  {
+   "offense": "ATL",
+   "defense": "CHI",
+   "stat": "EPA per dropback",
+   "off_value": -0.015564458400736985,
+   "def_value": 0.051427570007707916,
+   "off_rank": 21,
+   "def_rank": 15
+  },
+  {
+   "offense": "ATL",
+   "defense": "CHI",
+   "stat": "EPA per rush",
+   "off_value": 0.0005826202604670284,
+   "def_value": 0.04401668615147792,
+   "off_rank": 8,
+   "def_rank": 32
+  },
+  {
+   "offense": "ATL",
+   "defense": "CHI",
+   "stat": "Explosive pass rate",
+   "off_value": 0.08310700688153365,
+   "def_value": 0.09790332329480955,
+   "off_rank": 14,
+   "def_rank": 28
+  },
+  {
+   "offense": "ATL",
+   "defense": "CHI",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.18784147575323,
+   "def_value": 0.2613297171801074,
+   "off_rank": 5,
+   "def_rank": 3
+  },
+  {
+   "offense": "ATL",
+   "defense": "CHI",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.6459084406256672,
+   "def_value": 0.5663006657431531,
+   "off_rank": 6,
+   "def_rank": 13
+  }
+ ],
+ "news": [
+  {
+   "game_id": "2026_06_CHI_ATL",
+   "player": "Bijan Robinson",
+   "team": "ATL",
+   "stat": "rush_yds",
+   "more_adj": 0.02,
+   "reason": "Workhorse who leads the NFL in rushing (about 116 a game): 17 carries for 86 in Week 5",
+   "source": "Fantasy Footballers, Newsweek, Squawka",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_CHI_ATL",
+   "player": "Brian Robinson Jr.",
+   "team": "ATL",
+   "stat": "rush_yds",
+   "more_adj": -0.03,
+   "reason": "Fewest carries of his season (7 for 16) in Week 5 as Bijan takes the work",
+   "source": "Fantasy Footballers",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_CHI_ATL",
+   "player": "Brian Robinson Jr.",
+   "team": "ATL",
+   "stat": "rush_att",
+   "more_adj": -0.03,
+   "reason": "Fewest carries of his season (7 for 16) in Week 5 as Bijan takes the work",
+   "source": "Fantasy Footballers",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_CHI_ATL",
+   "player": "Jahan Dotson",
+   "team": "ATL",
+   "stat": "rec_yds",
+   "more_adj": -0.02,
+   "reason": "Only about 3.6 targets a game this season",
+   "source": "Fantasy Footballers, RotoWire",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  }
+ ],
+ "overrides": [],
+ "picks": [
+  {
+   "game_id": "2026_06_CHI_ATL",
+   "player_id": "00-0038542",
+   "player": "Bijan Robinson",
+   "team": "ATL",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 83.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    72.0,
+    194.0,
+    145.0,
+    86.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5728211806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01453125,
+   "p_news": 0.02,
+   "tier": "Medium",
+   "reasons": [
+    "For: CHI have the 1st worst run defense (EPA per rush allowed)",
+    "For: News: Workhorse who leads the NFL in rushing (about 116 a game): 17 carries for 86 in Week 5"
+   ]
+  },
+  {
+   "game_id": "2026_06_CHI_ATL",
+   "player_id": "00-0038542",
+   "player": "Bijan Robinson",
+   "team": "ATL",
+   "position": "RB",
+   "stat": "rec_yds",
+   "line": 26.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    9.0,
+    19.0,
+    2.0,
+    32.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5565711806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00203125,
+   "p_news": 0.0,
+   "tier": "Medium",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_CHI_ATL",
+   "player_id": "00-0037746",
+   "player": "Brian Robinson Jr.",
+   "team": "ATL",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 28.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    51.0,
+    50.0,
+    62.0,
+    16.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5478211806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01453125,
+   "p_news": -0.03,
+   "tier": "Lean",
+   "reasons": [
+    "For: CHI have the 1st worst run defense (EPA per rush allowed)",
+    "Against: News: Fewest carries of his season (7 for 16) in Week 5 as Bijan takes the work"
+   ]
+  },
+  {
+   "game_id": "2026_06_CHI_ATL",
+   "player_id": "00-0037746",
+   "player": "Brian Robinson Jr.",
+   "team": "ATL",
+   "position": "RB",
+   "stat": "rush_att",
+   "line": 7.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    11.0,
+    10.0,
+    14.0,
+    7.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5478211806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01453125,
+   "p_news": -0.03,
+   "tier": "Lean",
+   "reasons": [
+    "For: CHI have the 1st worst run defense (EPA per rush allowed)",
+    "Against: News: Fewest carries of his season (7 for 16) in Week 5 as Bijan takes the work"
+   ]
+  },
+  {
+   "game_id": "2026_06_CHI_ATL",
+   "player_id": "00-0037741",
+   "player": "Jahan Dotson",
+   "team": "ATL",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 22.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    11.0,
+    11.0,
+    54.0,
+    54.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.509765625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00046875,
+   "p_news": 0.02,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: News: Only about 3.6 targets a game this season"
+   ]
+  },
+  {
+   "game_id": "2026_06_CHI_ATL",
+   "player_id": "00-0038542",
+   "player": "Bijan Robinson",
+   "team": "ATL",
+   "position": "RB",
+   "stat": "rush_att",
+   "line": 17.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    16.0,
+    29.0,
+    19.0,
+    17.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.507265625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01453125,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: CHI have the 1st worst run defense (EPA per rush allowed)"
+   ]
+  }
+ ],
+ "lineups": {},
+ "plan": {}
+}

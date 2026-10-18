@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_06_CAR_PHI",
+ "season": 2026,
+ "week": 6,
+ "away": "CAR",
+ "home": "PHI",
+ "kickoff_et": "Sun Oct 18, 1:00 PM ET",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": -1.5,
+ "total": 41.5,
+ "away_implied": 20.0,
+ "home_implied": 21.5,
+ "home_win": 0.548,
+ "median_score": [
+  19.9,
+  20.85
+ ]
+}

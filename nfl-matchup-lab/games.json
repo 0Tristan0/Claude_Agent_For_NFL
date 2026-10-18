@@ -1,0 +1,35 @@
+{
+  "games": [
+    {
+      "slug": "2026-w05-buf-lar",
+      "week": 5,
+      "date": "2026-10-12",
+      "label": "Monday Night Football",
+      "away": "BUF", "home": "LAR",
+      "away_name": "Buffalo Bills", "home_name": "Los Angeles Rams",
+      "venue": "SoFi Stadium",
+      "report": "output/bills-rams-mnf.html",
+      "frozen_at": "2026-10-12 17:56 UTC",
+      "frozen_commit": "3068909",
+      "status": "pending",
+      "picks": "Allen TD yes, Stafford over 274.5 pass yds, K. Williams over 19.5 rec yds (3-pick core)",
+      "result": null
+    },
+    {
+      "slug": "2026-w05-sf-sea",
+      "week": 5,
+      "date": "2026-10-11",
+      "label": "Sunday",
+      "away": "SF", "home": "SEA",
+      "away_name": "San Francisco 49ers", "home_name": "Seattle Seahawks",
+      "venue": "Lumen Field",
+      "report": null,
+      "results_file": "backtests/sea_sf_results.md",
+      "status": "graded",
+      "blind": false,
+      "final": "SF 32, SEA 29",
+      "game_lines": {"hit": 2, "total": 3, "note": "Winner and spread hit, total missed by 15 (model 45.5, actual 61)"},
+      "props": {"hit": 4, "total": 7, "units": 1.5}
+    }
+  ]
+}

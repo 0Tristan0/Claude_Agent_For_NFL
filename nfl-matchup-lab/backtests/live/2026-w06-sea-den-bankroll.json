@@ -1,0 +1,207 @@
+{
+  "game": "2026_06_SEA_DEN",
+  "label": "SEA at DEN",
+  "kickoff_utc": "2026-10-16 00:15 UTC",
+  "frozen_at": "2026-10-14 23:04 UTC",
+  "bankroll": 20.0,
+  "reserve_not_bet": 0.0,
+  "paper_money": true,
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game; stakes from guesser.plan",
+  "split_rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)",
+  "entries": [
+    {
+      "id": "A",
+      "type": "flex",
+      "stake": 11.0,
+      "legs": [
+        "Marvin Mims Jr. rec yds less 13.5",
+        "Bo Nix rush yds less 13.5",
+        "Jaxon Smith-Njigba rec yds more 89.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Marvin Mims Jr.",
+          "player_id": "00-0038976",
+          "team": "DEN",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 13.5,
+          "p_model": 0.618515625,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "High \u00b7 Less in 3 of last 3 (0, 10, 6)",
+          "reasons": [
+            "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+            "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+            "For: News: With Pat Bryant on IR, Troy Franklin (not Mims) took the WR3 snaps; Mims played 27% of snaps in Week 4"
+          ]
+        },
+        {
+          "player": "Bo Nix",
+          "player_id": "00-0039732",
+          "team": "DEN",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 13.5,
+          "p_model": 0.6076736111111112,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "High \u00b7 Less in 4 of last 4 (6, 7, 10, 10)",
+          "reasons": []
+        },
+        {
+          "player": "Jaxon Smith-Njigba",
+          "player_id": "00-0038543",
+          "team": "SEA",
+          "stat": "rec_yds",
+          "side": "over",
+          "line": 89.5,
+          "p_model": 0.5679774305555556,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "Medium \u00b7 More in 3 of last 4 (155, 128, 76, 102)",
+          "reasons": [
+            "Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+            "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+            "For: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation and leads the NFL in receiving yards; books list him at 91.5-93.5, above this line"
+          ]
+        }
+      ],
+      "pays": {
+        "3": 2.25,
+        "2": 1.25
+      }
+    },
+    {
+      "id": "B",
+      "type": "flex",
+      "stake": 9.0,
+      "legs": [
+        "Marvin Mims Jr. rec yds less 13.5",
+        "Bo Nix rush yds less 13.5",
+        "Courtland Sutton rec yds less 31.5",
+        "Jaylen Waddle rec yds less 49.5",
+        "Jaxon Smith-Njigba rec yds more 89.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Marvin Mims Jr.",
+          "player_id": "00-0038976",
+          "team": "DEN",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 13.5,
+          "p_model": 0.618515625,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "High \u00b7 Less in 3 of last 3 (0, 10, 6)",
+          "reasons": [
+            "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+            "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+            "For: News: With Pat Bryant on IR, Troy Franklin (not Mims) took the WR3 snaps; Mims played 27% of snaps in Week 4"
+          ]
+        },
+        {
+          "player": "Bo Nix",
+          "player_id": "00-0039732",
+          "team": "DEN",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 13.5,
+          "p_model": 0.6076736111111112,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "High \u00b7 Less in 4 of last 4 (6, 7, 10, 10)",
+          "reasons": []
+        },
+        {
+          "player": "Courtland Sutton",
+          "player_id": "00-0034348",
+          "team": "DEN",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 31.5,
+          "p_model": 0.5837586805555556,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "Med-High \u00b7 Less in 3 of last 4 (25, 46, 4, 18)",
+          "reasons": [
+            "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+            "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+            "For: News: Played 81% of snaps but saw only 3 targets (2 for 18 and a TD) as Denver's passing game shrank"
+          ]
+        },
+        {
+          "player": "Jaylen Waddle",
+          "player_id": "00-0036613",
+          "team": "DEN",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 49.5,
+          "p_model": 0.5803211805555556,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "Med-High \u00b7 Less in 3 of last 4 (138, 10, 35, 19)",
+          "reasons": [
+            "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+            "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+            "For: News: 2 catches on 5 targets for 19 yards in Week 5, 2 or fewer catches in 3 of 5 games; Denver now leans on the run. The walking-boot report was from Week 3 and he is healthy"
+          ]
+        },
+        {
+          "player": "Jaxon Smith-Njigba",
+          "player_id": "00-0038543",
+          "team": "SEA",
+          "stat": "rec_yds",
+          "side": "over",
+          "line": 89.5,
+          "p_model": 0.5679774305555556,
+          "game_id": "2026_06_SEA_DEN",
+          "note": "Medium \u00b7 More in 3 of last 4 (155, 128, 76, 102)",
+          "reasons": [
+            "Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+            "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+            "For: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation and leads the NFL in receiving yards; books list him at 91.5-93.5, above this line"
+          ]
+        }
+      ],
+      "pays": {
+        "5": 10.0,
+        "4": 2.0,
+        "3": 0.4
+      }
+    }
+  ],
+  "expected_return_per_dollar": {
+    "A_flex3": {
+      "estimate": 1.02
+    },
+    "B_flex5": {
+      "estimate": 1.362
+    }
+  },
+  "expected_back": 23.48,
+  "p_profit": 0.36,
+  "p_lose_all": 0.256,
+  "result": {
+    "final": "DEN 17, SEA 14 (OT)",
+    "graded_at": "2026-10-16 14:02 UTC",
+    "provisional": false,
+    "source": "nflverse stats_player_week_2026",
+    "legs": {
+      "Marvin Mims Jr. rec yds less 13.5": {
+        "actual": 13.0,
+        "hit": true
+      },
+      "Bo Nix rush yds less 13.5": {
+        "actual": 2.0,
+        "hit": true
+      },
+      "Jaxon Smith-Njigba rec yds more 89.5": {
+        "actual": 134.0,
+        "hit": true
+      },
+      "Courtland Sutton rec yds less 31.5": {
+        "actual": 19.0,
+        "hit": true
+      },
+      "Jaylen Waddle rec yds less 49.5": {
+        "actual": 24.0,
+        "hit": true
+      }
+    }
+  }
+}

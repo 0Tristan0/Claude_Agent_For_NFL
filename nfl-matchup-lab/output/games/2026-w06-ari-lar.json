@@ -1,0 +1,192 @@
+{
+ "game_id": "2026_06_ARI_LA",
+ "season": 2026,
+ "week": 6,
+ "label": "ARI at LAR",
+ "away": "ARI",
+ "home": "LAR",
+ "kickoff_utc": "2026-10-18 20:05:00+00:00",
+ "home_spread": -12.5,
+ "total": 52.5,
+ "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
+ "built_at": "2026-10-13 19:23:56.556911+00:00",
+ "units": [
+  {
+   "offense": "ARI",
+   "defense": "LAR",
+   "stat": "EPA per dropback",
+   "off_value": -0.038255909553900375,
+   "def_value": -0.0013267679181490242,
+   "off_rank": 24,
+   "def_rank": 11
+  },
+  {
+   "offense": "ARI",
+   "defense": "LAR",
+   "stat": "EPA per rush",
+   "off_value": -0.07377843702113909,
+   "def_value": -0.11413670575171544,
+   "off_rank": 18,
+   "def_rank": 9
+  },
+  {
+   "offense": "ARI",
+   "defense": "LAR",
+   "stat": "Explosive pass rate",
+   "off_value": 0.05467426260193675,
+   "def_value": 0.06559514733423681,
+   "off_rank": 31,
+   "def_rank": 7
+  },
+  {
+   "offense": "ARI",
+   "defense": "LAR",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.23534729730074258,
+   "def_value": 0.25453996731981304,
+   "off_rank": 21,
+   "def_rank": 7
+  },
+  {
+   "offense": "ARI",
+   "defense": "LAR",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5946189531196229,
+   "def_value": 0.5903827523099283,
+   "off_rank": 13,
+   "def_rank": 19
+  },
+  {
+   "offense": "LAR",
+   "defense": "ARI",
+   "stat": "EPA per dropback",
+   "off_value": 0.13135963584407925,
+   "def_value": 0.251898472607392,
+   "off_rank": 10,
+   "def_rank": 31
+  },
+  {
+   "offense": "LAR",
+   "defense": "ARI",
+   "stat": "EPA per rush",
+   "off_value": 0.046157093247981514,
+   "def_value": -0.13734751893053976,
+   "off_rank": 5,
+   "def_rank": 6
+  },
+  {
+   "offense": "LAR",
+   "defense": "ARI",
+   "stat": "Explosive pass rate",
+   "off_value": 0.09874181609999313,
+   "def_value": 0.10924498739146674,
+   "off_rank": 4,
+   "def_rank": 30
+  },
+  {
+   "offense": "LAR",
+   "defense": "ARI",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.18131338708159192,
+   "def_value": 0.18164873658804828,
+   "off_rank": 2,
+   "def_rank": 30
+  },
+  {
+   "offense": "LAR",
+   "defense": "ARI",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5535969893596574,
+   "def_value": 0.7239559998640627,
+   "off_rank": 19,
+   "def_rank": 31
+  }
+ ],
+ "picks": [
+  {
+   "game_id": "2026_06_ARI_LA",
+   "player_id": "00-0041027",
+   "player": "Jeremiyah Love",
+   "team": "ARI",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 44.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    29.0,
+    90.0,
+    63.0,
+    22.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.511015625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.02203125,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: ARI underdog by 12.5: may abandon the run if behind",
+    "For: LAR have the 9th best run defense (EPA per rush allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_ARI_LA",
+   "player_id": "00-0033119",
+   "player": "Jacoby Brissett",
+   "team": "ARI",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 8.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    7.0,
+    4.0,
+    18.0,
+    19.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.504375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00875,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: LAR pressure QBs on 25% of dropbacks (the 7th most); ARI's line allows pressure on 24% (the 12th most): more scrambles"
+   ]
+  },
+  {
+   "game_id": "2026_06_ARI_LA",
+   "player_id": "00-0033119",
+   "player": "Jacoby Brissett",
+   "team": "ARI",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 259.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    95.0,
+    280.0,
+    166.0,
+    292.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "p_model": 0.500546875,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00109375,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: ARI underdog by 12.5: likely throwing to catch up",
+    "Against: LAR pressure QBs on 25% of dropbacks (the 7th most); ARI's line allows pressure on 24% (the 12th most): a hard night to throw"
+   ]
+  }
+ ],
+ "lineups": {},
+ "plan": {}
+}

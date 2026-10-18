@@ -1,0 +1,168 @@
+{
+  "game": "2026_06_NO_NYG",
+  "label": "NO at NYG",
+  "kickoff_utc": "2026-10-18 17:00 UTC",
+  "frozen_at": "2026-10-18 00:05 UTC",
+  "bankroll": 20.0,
+  "reserve_not_bet": 0.0,
+  "paper_money": true,
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game; stakes from guesser.plan",
+  "split_rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)",
+  "entries": [
+    {
+      "id": "A",
+      "type": "flex",
+      "stake": 15.0,
+      "legs": [
+        "Najee Harris receptions less 0.5",
+        "Jameis Winston pass attempts less 32.5",
+        "Tyler Shough pass attempts more 33.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Najee Harris",
+          "player_id": "00-0036893",
+          "team": "NYG",
+          "stat": "receptions",
+          "side": "under",
+          "line": 0.5,
+          "p_model": 0.5721961805555555,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 Less in 3 of last 4 (0, 0, 0, 1)",
+          "reasons": [
+            "For: News: Handcuff: about 20% of snaps since Week 3 and no touches after a lost fumble in Week 4"
+          ]
+        },
+        {
+          "player": "Jameis Winston",
+          "player_id": "00-0031503",
+          "team": "NYG",
+          "stat": "pass_att",
+          "side": "under",
+          "line": 32.5,
+          "p_model": 0.5655555555555556,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 Less in 3 of last 4 (27, 22, 29, 54)",
+          "reasons": [
+            "For: News: J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%"
+          ]
+        },
+        {
+          "player": "Tyler Shough",
+          "player_id": "00-0040743",
+          "team": "NO",
+          "stat": "pass_att",
+          "side": "over",
+          "line": 33.5,
+          "p_model": 0.5555555555555556,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 More in 3 of last 4 (34, 42, 48, 25)",
+          "reasons": []
+        }
+      ],
+      "pays": {
+        "3": 2.25,
+        "2": 1.25
+      }
+    },
+    {
+      "id": "B",
+      "type": "flex",
+      "stake": 5.0,
+      "legs": [
+        "Najee Harris receptions less 0.5",
+        "Jameis Winston pass attempts less 32.5",
+        "Darnell Mooney rec yds less 21.5",
+        "Tyler Shough pass attempts more 33.5",
+        "Cam Skattebo rush yds less 59.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Najee Harris",
+          "player_id": "00-0036893",
+          "team": "NYG",
+          "stat": "receptions",
+          "side": "under",
+          "line": 0.5,
+          "p_model": 0.5721961805555555,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 Less in 3 of last 4 (0, 0, 0, 1)",
+          "reasons": [
+            "For: News: Handcuff: about 20% of snaps since Week 3 and no touches after a lost fumble in Week 4"
+          ]
+        },
+        {
+          "player": "Jameis Winston",
+          "player_id": "00-0031503",
+          "team": "NYG",
+          "stat": "pass_att",
+          "side": "under",
+          "line": 32.5,
+          "p_model": 0.5655555555555556,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 Less in 3 of last 4 (27, 22, 29, 54)",
+          "reasons": [
+            "For: News: J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%"
+          ]
+        },
+        {
+          "player": "Darnell Mooney",
+          "player_id": "00-0036309",
+          "team": "NYG",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 21.5,
+          "p_model": 0.5565711805555555,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 Less in 3 of last 4 (48, 20, 0, 14)",
+          "reasons": [
+            "For: NO allow the 8th fewest receiving yds to WRs (130 a game)"
+          ]
+        },
+        {
+          "player": "Tyler Shough",
+          "player_id": "00-0040743",
+          "team": "NO",
+          "stat": "pass_att",
+          "side": "over",
+          "line": 33.5,
+          "p_model": 0.5555555555555556,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Medium \u00b7 More in 3 of last 4 (34, 42, 48, 25)",
+          "reasons": []
+        },
+        {
+          "player": "Cam Skattebo",
+          "player_id": "00-0040715",
+          "team": "NYG",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 59.5,
+          "p_model": 0.5448524305555555,
+          "game_id": "2026_06_NO_NYG",
+          "note": "Lean \u00b7 Less in 3 of last 4 (36, 60, 58, 59)",
+          "reasons": [
+            "Against: News: Workhorse at about 69% of snaps; New Orleans is without LBs Kaden Elliss and Anfernee Jennings"
+          ]
+        }
+      ],
+      "pays": {
+        "5": 10.0,
+        "4": 2.0,
+        "3": 0.4
+      }
+    }
+  ],
+  "expected_return_per_dollar": {
+    "A_flex3": {
+      "estimate": 0.925
+    },
+    "B_flex5": {
+      "estimate": 1.112
+    }
+  },
+  "expected_back": 19.43,
+  "p_profit": 0.512,
+  "p_lose_all": 0.306,
+  "result": null
+}

@@ -1,0 +1,31 @@
+# Prop vocabulary: names as they appear in apps and books -> internal stat keys.
+[aliases]
+"pass yards" = "pass_yds"
+"passing yards" = "pass_yds"
+"pass yds" = "pass_yds"
+"pass attempts" = "pass_att"
+"pass completions" = "completions"
+"completions" = "completions"
+"pass tds" = "pass_tds"
+"passing touchdowns" = "pass_tds"
+"interceptions" = "ints"
+"ints thrown" = "ints"
+"rush yards" = "rush_yds"
+"rushing yards" = "rush_yds"
+"rush yds" = "rush_yds"
+"rush attempts" = "rush_att"
+"carries" = "rush_att"
+"receiving yards" = "rec_yds"
+"rec yds" = "rec_yds"
+"receptions" = "receptions"
+"catches" = "receptions"
+"rush+rec yds" = "rush_rec_yds"
+"rush + rec yards" = "rush_rec_yds"
+"anytime td" = "anytime_td"
+"rush+rec tds" = "rush_rec_tds"
+"pass+rush yds" = "pass_rush_yds"
+"anytime tds" = "anytime_td"
+"rush + rec tds" = "rush_rec_tds"
+
+[count_stats]
+keys = ["pass_att", "completions", "pass_tds", "ints", "rush_att", "receptions", "anytime_td", "rush_rec_tds"]

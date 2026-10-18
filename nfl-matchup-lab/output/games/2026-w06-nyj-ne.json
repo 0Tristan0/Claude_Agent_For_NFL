@@ -1,0 +1,492 @@
+{
+ "game_id": "2026_06_NYJ_NE",
+ "season": 2026,
+ "week": 6,
+ "label": "NYJ at NE",
+ "away": "NYJ",
+ "home": "NE",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": -7.5,
+ "total": 43.5,
+ "injury_note": "injury report week 6",
+ "built_at": "2026-10-18 00:05:12.730131+00:00",
+ "units": [
+  {
+   "offense": "NYJ",
+   "defense": "NE",
+   "stat": "EPA per dropback",
+   "off_value": -0.10747844351296312,
+   "def_value": -0.049292049760128805,
+   "off_rank": 30,
+   "def_rank": 6
+  },
+  {
+   "offense": "NYJ",
+   "defense": "NE",
+   "stat": "EPA per rush",
+   "off_value": -0.09666229570615135,
+   "def_value": -0.04907037160095023,
+   "off_rank": 21,
+   "def_rank": 20
+  },
+  {
+   "offense": "NYJ",
+   "defense": "NE",
+   "stat": "Explosive pass rate",
+   "off_value": 0.06024266149631307,
+   "def_value": 0.07094710316229627,
+   "off_rank": 29,
+   "def_rank": 11
+  },
+  {
+   "offense": "NYJ",
+   "defense": "NE",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.2397799153003491,
+   "def_value": 0.22289578884769665,
+   "off_rank": 25,
+   "def_rank": 20
+  },
+  {
+   "offense": "NYJ",
+   "defense": "NE",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.41907305704850817,
+   "def_value": 0.5542859962758784,
+   "off_rank": 32,
+   "def_rank": 12
+  },
+  {
+   "offense": "NE",
+   "defense": "NYJ",
+   "stat": "EPA per dropback",
+   "off_value": 0.15649567244555743,
+   "def_value": 0.10527126688467489,
+   "off_rank": 8,
+   "def_rank": 25
+  },
+  {
+   "offense": "NE",
+   "defense": "NYJ",
+   "stat": "EPA per rush",
+   "off_value": -0.09047622973044382,
+   "def_value": -0.09416030962718688,
+   "off_rank": 19,
+   "def_rank": 13
+  },
+  {
+   "offense": "NE",
+   "defense": "NYJ",
+   "stat": "Explosive pass rate",
+   "off_value": 0.09845537186882641,
+   "def_value": 0.09554107445026785,
+   "off_rank": 4,
+   "def_rank": 25
+  },
+  {
+   "offense": "NE",
+   "defense": "NYJ",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.23813174063487658,
+   "def_value": 0.19874000635868716,
+   "off_rank": 24,
+   "def_rank": 24
+  },
+  {
+   "offense": "NE",
+   "defense": "NYJ",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5640260478433402,
+   "def_value": 0.5816872721318921,
+   "off_rank": 17,
+   "def_rank": 18
+  }
+ ],
+ "news": [
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player": "Drake Maye",
+   "team": "NE",
+   "stat": "pass_yds",
+   "more_adj": 0.03,
+   "reason": "Books moved his passing line to 236.5-238.5, above this line; full practice all week after 374 yards and 4 TDs last week",
+   "source": "SportsBettingDime, Football Nation, SI",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player": "Drake Maye",
+   "team": "NE",
+   "stat": "pass_rush_yds",
+   "more_adj": 0.03,
+   "reason": "Books moved his passing line to 236.5-238.5, above this line; full practice all week after 374 yards and 4 TDs last week",
+   "source": "SportsBettingDime, Football Nation, SI",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player": "Hunter Henry",
+   "team": "NE",
+   "stat": "*",
+   "more_adj": -0.02,
+   "reason": "A.J. Brown (ankle, questionable) is back from IR, which would take targets",
+   "source": "Pats Pulpit Friday report",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player": "Eli Raridon",
+   "team": "NE",
+   "stat": "*",
+   "more_adj": -0.02,
+   "reason": "A.J. Brown's return would cut into the second tight end's targets",
+   "source": "Pats Pulpit Friday report",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player": "Geno Smith",
+   "team": "NYJ",
+   "stat": "pass_yds",
+   "more_adj": 0.01,
+   "reason": "Jets are 7-point underdogs and likely trailing, though WR Adonai Mitchell and RB Breece Hall are out",
+   "source": "SI, CBS; Jets Friday report",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  }
+ ],
+ "overrides": [],
+ "picks": [
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player_id": "00-0033090",
+   "player": "Hunter Henry",
+   "team": "NE",
+   "position": "TE",
+   "stat": "receptions",
+   "line": 3.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    3.0,
+    1.0,
+    5.0,
+    3.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5703211806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00953125,
+   "p_news": 0.02,
+   "tier": "Medium",
+   "reasons": [
+    "For: NYJ allow the 7th fewest receiving yds to TEs (38 a game)",
+    "Against: NYJ have the 8th worst pass defense (EPA per dropback allowed)",
+    "For: NE favored by 7.5: fewer passes late",
+    "For: News: A.J. Brown (ankle, questionable) is back from IR, which would take targets"
+   ]
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player_id": "00-0033090",
+   "player": "Hunter Henry",
+   "team": "NE",
+   "position": "TE",
+   "stat": "rec_yds",
+   "line": 37.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    40.0,
+    5.0,
+    62.0,
+    44.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5407899306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00953125,
+   "p_news": -0.02,
+   "tier": "Lean",
+   "reasons": [
+    "Against: NYJ allow the 7th fewest receiving yds to TEs (38 a game)",
+    "For: NYJ have the 8th worst pass defense (EPA per dropback allowed)",
+    "Against: NE favored by 7.5: fewer passes late",
+    "Against: News: A.J. Brown (ankle, questionable) is back from IR, which would take targets"
+   ]
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player_id": "00-0039851",
+   "player": "Drake Maye",
+   "team": "NE",
+   "position": "QB",
+   "stat": "pass_rush_yds",
+   "line": 257.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    225.0,
+    217.0,
+    323.0,
+    399.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.518984375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00796875,
+   "p_news": 0.03,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: NYJ have the 8th worst pass defense (EPA per dropback allowed)",
+    "For: News: Books moved his passing line to 236.5-238.5, above this line; full practice all week after 374 yards and 4 TDs last week"
+   ]
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player_id": "00-0041395",
+   "player": "Eli Raridon",
+   "team": "NE",
+   "position": "TE",
+   "stat": "rec_yds",
+   "line": 12.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    2.0,
+    30.0,
+    12.0,
+    57.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.514765625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00953125,
+   "p_news": 0.02,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: NYJ allow the 7th fewest receiving yds to TEs (38 a game)",
+    "Against: NYJ have the 8th worst pass defense (EPA per dropback allowed)",
+    "For: NE favored by 7.5: fewer passes late",
+    "For: News: A.J. Brown's return would cut into the second tight end's targets"
+   ]
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player_id": "00-0039851",
+   "player": "Drake Maye",
+   "team": "NE",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 232.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    208.0,
+    199.0,
+    269.0,
+    374.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.513359375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00328125,
+   "p_news": 0.03,
+   "tier": "Coin flip",
+   "reasons": [
+    "Against: NE favored by 7.5: may lean on the run late",
+    "For: NYJ have the 8th worst pass defense (EPA per dropback allowed)",
+    "For: News: Books moved his passing line to 236.5-238.5, above this line; full practice all week after 374 yards and 4 TDs last week"
+   ]
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player_id": "00-0039851",
+   "player": "Drake Maye",
+   "team": "NE",
+   "position": "QB",
+   "stat": "pass_att",
+   "line": 27.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    22.0,
+    25.0,
+    37.0,
+    34.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.505625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01125,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: NE favored by 7.5: may lean on the run late"
+   ]
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player_id": "00-0039851",
+   "player": "Drake Maye",
+   "team": "NE",
+   "position": "QB",
+   "stat": "pass_tds",
+   "line": 1.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    0.0,
+    0.0,
+    3.0,
+    4.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5046875,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.009375,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: NYJ have the 8th worst pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player_id": "00-0030565",
+   "player": "Geno Smith",
+   "team": "NYJ",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 202.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    247.0,
+    321.0,
+    119.0,
+    182.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.504140625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00171875,
+   "p_news": 0.01,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: NYJ underdog by 7.5: likely throwing to catch up",
+    "Against: NE have the 6th best pass defense (EPA per dropback allowed)",
+    "For: News: Jets are 7-point underdogs and likely trailing, though WR Adonai Mitchell and RB Breece Hall are out"
+   ]
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player_id": "00-0039851",
+   "player": "Drake Maye",
+   "team": "NE",
+   "position": "QB",
+   "stat": "completions",
+   "line": 19.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    14.0,
+    14.0,
+    22.0,
+    26.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.501640625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00328125,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: NE favored by 7.5: may lean on the run late",
+    "Against: NYJ have the 8th worst pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player_id": "00-0030565",
+   "player": "Geno Smith",
+   "team": "NYJ",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 8.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    17.0,
+    12.0,
+    0.0,
+    7.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5015625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.003125,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_NYJ_NE",
+   "player_id": "00-0039851",
+   "player": "Drake Maye",
+   "team": "NE",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 24.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    17.0,
+    18.0,
+    54.0,
+    25.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": []
+  }
+ ],
+ "lineups": {},
+ "plan": {}
+}

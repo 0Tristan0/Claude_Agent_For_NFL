@@ -1,0 +1,294 @@
+"""Shared look for every page on the site: the CSS, the top navigation and team logos.
+
+Pages inline the CSS in a <style id="lab-theme"> block so each HTML file works on its own; src/site.py
+swaps that block for the current one when it copies pages into site/, so a restyle never needs a re-run
+of the simulations. Logos live in assets/logos (nflverse team codes) and are copied next to the pages.
+"""
+from __future__ import annotations
+
+import csv
+import html
+import re
+import shutil
+from functools import lru_cache
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+LOGO_DIR = ROOT / "assets" / "logos"
+e = html.escape
+
+FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
+         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
+         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;'
+         '1,62..125,100..900&display=swap">\n')
+
+CSS = r"""
+/* Layout: a quiet scoreboard. Near-black and neutral grays, white type, hairlines instead of boxes;
+   team logos are the only color on the page. One family (Archivo), narrowed for numbers and team codes. */
+:root{
+  color-scheme:dark;
+  --bg:#0A0A0B; --surface:#111113; --raise:#18181B; --line:#222226; --line-2:#2F2F34;
+  --text:#EDEDEF; --muted:#8C8C93; --faint:#5F5F66;
+  --pos:#86C29C; --neg:#DE8A80; --warn:#D2B87C;
+  --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  /* token names the older report pages use */
+  --fg:var(--text); --track:#26262B; --display:var(--sans); --body:var(--sans);
+  --t1:#8FC9A3; --t1bg:#16221A; --t2:#B8C493; --t2bg:#1D2118; --t3:#D3BA7E; --t3bg:#25201A; --t4:#DE8A80; --t4bg:#291A18;
+  --buf:#93A6C9; --lar:#CDB97F; --lar-strong:#CDB97F;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-variant-numeric:tabular-nums}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:0 72px;display:grid;gap:56px}
+@media (min-width:760px){.wrap{padding-inline:32px}}
+h1,h2,h3{margin:0;line-height:1.1;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,5vw,2.75rem);font-weight:750;font-stretch:88%}
+h2{font-size:1.15rem;font-weight:650}
+h3{font-size:1rem;font-weight:650}
+p{margin:0}
+.sub{color:var(--muted);margin-top:6px;max-width:68ch;font-size:.93rem}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+section{display:grid;gap:16px;min-width:0}
+a{color:var(--text);text-underline-offset:3px;text-decoration-color:var(--line-2)}
+a:hover{text-decoration-color:var(--text)}
+code{font-size:.88em;color:var(--text)}
+:focus-visible{outline:2px solid var(--text);outline-offset:2px;border-radius:2px}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+
+/* top navigation */
+.site{display:flex;justify-content:space-between;align-items:center;gap:8px 20px;flex-wrap:wrap;min-height:60px;border-bottom:1px solid var(--line)}
+.brand{font-weight:800;font-stretch:80%;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:var(--text)}
+.tabs{display:flex;gap:22px}
+.tabs a{font-size:.88rem;font-weight:500;color:var(--muted);text-decoration:none;padding-block:19px;border-bottom:1px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--text)}
+.tabs a[aria-current="page"]{color:var(--text);border-bottom-color:var(--text)}
+.back{font-size:.85rem;color:var(--muted);text-decoration:none;justify-self:start}
+.back:hover{color:var(--text)}
+
+/* section tabs inside a game page (built by TAB_JS from section.pane; without script every section shows) */
+.subtabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;
+  background:var(--bg);border-bottom:1px solid var(--line);margin-bottom:-28px}
+.subtabs::-webkit-scrollbar{display:none}
+.subtabs button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--muted);
+  font:inherit;font-size:.88rem;font-weight:550;padding:12px 12px 11px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;cursor:pointer}
+.subtabs button:first-child{padding-left:0}
+.subtabs button:hover{color:var(--text)}
+.subtabs button[aria-selected="true"]{color:var(--text);border-bottom-color:var(--text)}
+
+/* logos */
+.lg{display:inline-block;width:var(--s,24px);height:var(--s,24px);border-radius:calc(var(--s,24px) * .22);vertical-align:middle;flex:none;object-fit:cover;background:var(--raise)}
+
+/* game header */
+.head{display:grid;gap:22px}
+.head .meta{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--muted);font-size:.85rem}
+.head .meta .v0tag{color:var(--text)}
+.match{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.ms{display:flex;align-items:center;gap:14px;min-width:0}
+.ms.home{flex-direction:row-reverse;text-align:right}
+.ms .who{display:grid;gap:2px;min-width:0}
+.ms .code{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;font-stretch:80%;line-height:1;letter-spacing:.01em}
+.ms .nm{color:var(--muted);font-size:.9rem}
+.vsat{color:var(--faint);font-size:.9rem}
+.wp{display:grid;gap:6px}
+.wpbar{display:flex;height:4px;border-radius:2px;overflow:hidden;gap:2px}
+.wpbar span{display:block;height:100%}
+.wpbar .a{background:var(--faint)} .wpbar .h{background:var(--text)}
+.wp .lbl{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:14px 24px;border-top:1px solid var(--line);padding-top:18px;margin:0}
+.facts div{display:grid;gap:2px;min-width:0}
+.facts dt{font-size:.72rem;color:var(--muted)}
+.facts dd{margin:0;font-weight:550}
+.facts .wide{grid-column:1/-1}
+@media (max-width:560px){.match{grid-template-columns:1fr}.ms.home{flex-direction:row;text-align:left}.vsat{display:none}}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border-top:1px solid var(--line-2)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums}
+caption{text-align:left;padding:0 0 12px;font-weight:650;font-size:1rem;caption-side:top}
+caption .lg{margin-right:10px;vertical-align:-6px}
+thead th{font-size:.72rem;font-weight:500;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody th{text-align:left;font-weight:550;padding:9px 12px;vertical-align:top}
+tbody td{padding:9px 12px;vertical-align:middle}
+tbody tr+tr>*{border-top:1px solid var(--line)}
+tbody tr:hover>*{background:var(--surface)}
+th:first-child,td:first-child{padding-left:0}
+.vs-lbl{display:block;font-weight:400;font-size:.76rem;color:var(--muted)}
+.pt td,.pt th{white-space:nowrap}
+.pt .num{text-align:right}
+.pt thead th:not(:first-child){text-align:right}
+.pt thead th.l,.pt td.l{text-align:left}
+.rng{color:var(--faint);font-size:.78rem;margin-left:6px}
+.jn{display:inline-block;width:2.3em;color:var(--faint);font-weight:600;font-stretch:80%}
+.pos{color:var(--muted);font-size:.78rem;margin-left:8px;font-weight:400}
+.q-yes{color:var(--pos);font-weight:650}
+.q-no{color:var(--muted)}
+.small{font-size:.85rem;color:var(--muted)}
+
+/* report pieces shared with the older Bills-Rams page */
+.board{display:grid;gap:18px}
+.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+.team{display:grid;gap:4px;justify-items:start;min-width:0}
+.team.home{justify-items:end;text-align:right}
+.team .tm{display:flex;align-items:center;gap:12px}
+.team.home .tm{flex-direction:row-reverse}
+.team .ab{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;font-stretch:80%;line-height:1}
+.team .nm{font-weight:550}
+.team .rec{color:var(--muted);font-size:.85rem}
+.at{color:var(--faint)}
+.board .facts{display:flex;flex-wrap:wrap}
+.board .facts dl{display:contents}
+.side{white-space:nowrap}
+.side .v{display:inline-block;min-width:4.6em;font-weight:600}
+.pill{display:inline-block;min-width:3.2em;text-align:center;font-size:.74rem;font-weight:650;padding:1px 7px;border-radius:4px;margin-right:10px}
+.t1{color:var(--t1);background:var(--t1bg)} .t2{color:var(--t2);background:var(--t2bg)}
+.t3{color:var(--t3);background:var(--t3bg)} .t4{color:var(--t4);background:var(--t4bg)}
+.bar{display:inline-block;width:72px;height:4px;background:var(--track);border-radius:2px;vertical-align:middle;overflow:hidden}
+.fill{display:block;height:100%}
+.fill.buf{background:var(--buf)} .fill.lar{background:var(--lar)}
+.edge{display:inline-block;font-weight:650;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;border:1px solid currentColor}
+.edge.buf{color:var(--buf)} .edge.lar{color:var(--lar)} .edge.even{color:var(--muted)}
+.tchip{font-weight:750;font-stretch:80%}
+.tchip.buf{color:var(--buf)} .tchip.lar{color:var(--lar)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.82rem;color:var(--muted);align-items:center}
+.legend .pill{margin-right:4px}
+.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px}
+.take{border-top:1px solid var(--line-2);padding-top:12px;min-width:0}
+.take b{display:block;font-weight:650}
+.take p{margin-top:6px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.card header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card h3{font-size:1.05rem}
+.card .pos{font-size:.74rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.line{font-weight:550;font-size:.92rem}
+.vsbox{display:grid;gap:2px;padding:10px 12px;background:var(--bg);border-radius:6px;font-size:.92rem}
+.vsbox .k{font-size:.7rem;color:var(--muted)}
+.verdict{font-weight:650;letter-spacing:.06em;text-transform:uppercase;font-size:.74rem}
+.verdict.big{color:var(--t1)} .verdict.mid{color:var(--t3)} .verdict.low{color:var(--t4)}
+
+/* lineups */
+.lus{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+.lu{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:12px;align-content:start;min-width:0}
+.lu header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.lu h3{font-size:1.05rem}
+.lu .rec{font-size:.85rem;color:var(--muted)} .lu .rec b{color:var(--text)}
+.lu ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+.lu .pp{color:var(--muted);font-size:.84rem}
+.lustats{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin:0;border-top:1px solid var(--line);padding-top:12px}
+.lustats div{display:grid} .lustats dt{font-size:.72rem;color:var(--muted)} .lustats dd{margin:0;font-weight:650}
+.lul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.lul li{display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:center}
+.lul b{font-weight:600}
+.lu.dim{opacity:.8}
+.lu .tag{font-size:.72rem;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:1px 9px;white-space:nowrap}
+.lu .tag.ok{color:var(--pos);border-color:color-mix(in srgb,var(--pos) 45%,transparent)}
+.res.hit{color:var(--pos)} .res.miss{color:var(--neg)}
+.vs-lbl.why{color:var(--text);opacity:.82}
+.retro{border:1px solid var(--line-2);border-radius:8px;padding:12px 14px;color:var(--muted);font-size:.9rem}
+.retro b{color:var(--text)}
+
+.notes{color:var(--faint);font-size:.82rem;display:grid;gap:8px;max-width:78ch;border-top:1px solid var(--line);padding-top:20px}
+.notes a{color:inherit}
+.notes ul{margin:0;padding-left:1.2em}
+@media (max-width:520px){.bar{width:44px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+"""
+
+TABS = [("home", "Home", "index.html"), ("lineups", "Lineups", "lineups.html"), ("guesser", "Guesser", "guesser.html")]
+
+
+TAB_JS = r"""
+(function(){
+  var panes=[].slice.call(document.querySelectorAll('section.pane'));
+  if(panes.length<2) return;
+  var bar=document.createElement('div');
+  bar.className='subtabs'; bar.setAttribute('role','tablist'); bar.setAttribute('aria-label','Sections');
+  panes[0].parentNode.insertBefore(bar,panes[0]);
+  var tabs=panes.map(function(p,i){
+    var b=document.createElement('button');
+    b.type='button'; b.id='tab-'+p.id; b.setAttribute('role','tab'); b.setAttribute('aria-controls',p.id);
+    if(p.dataset.logo){var im=document.createElement('img'); im.src=p.dataset.logo; im.alt=''; im.className='lg'; im.style.setProperty('--s','18px'); b.appendChild(im);}
+    var h=p.querySelector('h2');
+    b.appendChild(document.createTextNode(p.dataset.tab||(h?h.textContent:'Section '+(i+1))));
+    p.setAttribute('role','tabpanel'); p.setAttribute('aria-labelledby',b.id);
+    b.addEventListener('click',function(){show(i,true);});
+    b.addEventListener('keydown',function(ev){
+      var n=panes.length, j=ev.key==='ArrowRight'?(i+1)%n:ev.key==='ArrowLeft'?(i+n-1)%n:ev.key==='Home'?0:ev.key==='End'?n-1:-1;
+      if(j>=0){ev.preventDefault(); show(j,true); tabs[j].focus();}
+    });
+    bar.appendChild(b); return b;
+  });
+  function show(i,user){
+    panes.forEach(function(p,j){p.hidden=j!==i; tabs[j].setAttribute('aria-selected',j===i?'true':'false'); tabs[j].tabIndex=j===i?0:-1;});
+    if(!user) return;
+    try{history.replaceState(null,'','#'+panes[i].id);}catch(e){}
+    try{tabs[i].scrollIntoView({block:'nearest',inline:'nearest'});}catch(e){}
+    var top=bar.getBoundingClientRect().top;
+    if(top<=1){window.scrollTo(0,window.scrollY+panes[i].getBoundingClientRect().top-bar.offsetHeight-12);}
+  }
+  function fromHash(){var want=(location.hash||'').slice(1), k=-1; panes.forEach(function(p,j){if(p.id===want) k=j;}); return k;}
+  window.addEventListener('hashchange',function(){var k=fromHash(); if(k>=0) show(k,false);});
+  show(Math.max(0,fromHash()),false);
+})();
+"""
+
+
+def style_block() -> str:
+    return f'<style id="lab-theme">{CSS}</style>\n'
+
+
+def head(title: str) -> str:
+    """<title>, fonts and theme CSS (for the index fragment, which the publisher wraps)."""
+    return f"<title>{e(title)}</title>\n{FONTS}{style_block()}"
+
+
+def document(title: str, body: str, extra_css: str = "") -> str:
+    """A full HTML document (game pages and the Guesser page are published as extra files)."""
+    return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+            '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
+            + head(title) + (f"<style>{extra_css}</style>\n" if extra_css else "")
+            + "</head>\n<body>\n" + body + f"<script>{TAB_JS}</script>\n</body>\n</html>\n")
+
+
+def nav(active: str, prefix: str = "") -> str:
+    cur = ' aria-current="page"'
+    links = "".join(f'<a href="{prefix}{href}"{cur if key == active else ""}>{label}</a>' for key, label, href in TABS)
+    return (f'<nav class="site" aria-label="Site"><a class="brand" href="{prefix}index.html">Matchup Lab</a>'
+            f'<div class="tabs">{links}</div></nav>\n')
+
+
+def refresh(doc: str) -> str:
+    """Swap in the current theme block."""
+    if 'id="lab-theme"' in doc:
+        return re.sub(r'<style id="lab-theme">.*?</style>\n?', lambda m: style_block(), doc, count=1, flags=re.S)
+    return doc
+
+
+# ---- team logos -------------------------------------------------------------------------------------
+
+@lru_cache(maxsize=1)
+def _codes() -> dict[str, str]:
+    """Any code (nflverse or display) -> nflverse code, which names the logo file."""
+    with open(ROOT / "config" / "teams.csv", newline="") as f:
+        rows = list(csv.DictReader(f))
+    out = {r["team"]: r["team"] for r in rows}
+    out.update({r["display"]: r["team"] for r in rows})
+    return out
+
+
+def logo(team: str, size: int = 24, prefix: str = "") -> str:
+    """Team logo tile. Decorative (alt=""): the team code or name always sits next to it."""
+    code = _codes().get(str(team).upper(), str(team).upper())
+    return (f'<img class="lg" src="{prefix}logos/{e(code)}.png" alt="" width="{size}" height="{size}" '
+            f'style="--s:{size}px" loading="lazy">')
+
+
+def copy_logos(dest_dir: Path) -> None:
+    """Put the logo files at <dest_dir>/logos so pages there can use them."""
+    out = Path(dest_dir) / "logos"
+    out.mkdir(parents=True, exist_ok=True)
+    for f in LOGO_DIR.glob("*.png"):
+        shutil.copy(f, out / f.name)

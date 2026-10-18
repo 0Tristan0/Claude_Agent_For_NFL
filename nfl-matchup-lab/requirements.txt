@@ -1,0 +1,9 @@
+# Exact versions used to build and test nfl_lab (Python 3.13). numpy is pinned because
+# Generator streams are only reproducible within a numpy version.
+pandas==3.0.5
+numpy==2.5.3
+pyarrow==26.0.0
+scipy==1.18.1
+requests==2.34.2
+tzdata
+pytest==9.1.1

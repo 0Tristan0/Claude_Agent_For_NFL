@@ -1,0 +1,9 @@
+data/raw/
+data/tables/
+data/sims/
+backtests/eval/**/*.parquet
+experiments/runs/**/*.parquet
+*.egg-info/
+__pycache__/
+output/logos/
+data/prizepicks/

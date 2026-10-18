@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BUF at LAR, Week 5 report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
+<style id="lab-theme">
+/* Layout: a quiet scoreboard. Near-black and neutral grays, white type, hairlines instead of boxes;
+   team logos are the only color on the page. One family (Archivo), narrowed for numbers and team codes. */
+:root{
+  color-scheme:dark;
+  --bg:#0A0A0B; --surface:#111113; --raise:#18181B; --line:#222226; --line-2:#2F2F34;
+  --text:#EDEDEF; --muted:#8C8C93; --faint:#5F5F66;
+  --pos:#86C29C; --neg:#DE8A80; --warn:#D2B87C;
+  --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  /* token names the older report pages use */
+  --fg:var(--text); --track:#26262B; --display:var(--sans); --body:var(--sans);
+  --t1:#8FC9A3; --t1bg:#16221A; --t2:#B8C493; --t2bg:#1D2118; --t3:#D3BA7E; --t3bg:#25201A; --t4:#DE8A80; --t4bg:#291A18;
+  --buf:#93A6C9; --lar:#CDB97F; --lar-strong:#CDB97F;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-variant-numeric:tabular-nums}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:0 72px;display:grid;gap:56px}
+@media (min-width:760px){.wrap{padding-inline:32px}}
+h1,h2,h3{margin:0;line-height:1.1;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,5vw,2.75rem);font-weight:750;font-stretch:88%}
+h2{font-size:1.15rem;font-weight:650}
+h3{font-size:1rem;font-weight:650}
+p{margin:0}
+.sub{color:var(--muted);margin-top:6px;max-width:68ch;font-size:.93rem}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+section{display:grid;gap:16px;min-width:0}
+a{color:var(--text);text-underline-offset:3px;text-decoration-color:var(--line-2)}
+a:hover{text-decoration-color:var(--text)}
+code{font-size:.88em;color:var(--text)}
+:focus-visible{outline:2px solid var(--text);outline-offset:2px;border-radius:2px}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+
+/* top navigation */
+.site{display:flex;justify-content:space-between;align-items:center;gap:8px 20px;flex-wrap:wrap;min-height:60px;border-bottom:1px solid var(--line)}
+.brand{font-weight:800;font-stretch:80%;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:var(--text)}
+.tabs{display:flex;gap:22px}
+.tabs a{font-size:.88rem;font-weight:500;color:var(--muted);text-decoration:none;padding-block:19px;border-bottom:1px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--text)}
+.tabs a[aria-current="page"]{color:var(--text);border-bottom-color:var(--text)}
+.back{font-size:.85rem;color:var(--muted);text-decoration:none;justify-self:start}
+.back:hover{color:var(--text)}
+
+/* section tabs inside a game page (built by TAB_JS from section.pane; without script every section shows) */
+.subtabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;
+  background:var(--bg);border-bottom:1px solid var(--line);margin-bottom:-28px}
+.subtabs::-webkit-scrollbar{display:none}
+.subtabs button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--muted);
+  font:inherit;font-size:.88rem;font-weight:550;padding:12px 12px 11px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;cursor:pointer}
+.subtabs button:first-child{padding-left:0}
+.subtabs button:hover{color:var(--text)}
+.subtabs button[aria-selected="true"]{color:var(--text);border-bottom-color:var(--text)}
+
+/* logos */
+.lg{display:inline-block;width:var(--s,24px);height:var(--s,24px);border-radius:calc(var(--s,24px) * .22);vertical-align:middle;flex:none;object-fit:cover;background:var(--raise)}
+
+/* game header */
+.head{display:grid;gap:22px}
+.head .meta{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--muted);font-size:.85rem}
+.head .meta .v0tag{color:var(--text)}
+.match{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.ms{display:flex;align-items:center;gap:14px;min-width:0}
+.ms.home{flex-direction:row-reverse;text-align:right}
+.ms .who{display:grid;gap:2px;min-width:0}
+.ms .code{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;font-stretch:80%;line-height:1;letter-spacing:.01em}
+.ms .nm{color:var(--muted);font-size:.9rem}
+.vsat{color:var(--faint);font-size:.9rem}
+.wp{display:grid;gap:6px}
+.wpbar{display:flex;height:4px;border-radius:2px;overflow:hidden;gap:2px}
+.wpbar span{display:block;height:100%}
+.wpbar .a{background:var(--faint)} .wpbar .h{background:var(--text)}
+.wp .lbl{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:14px 24px;border-top:1px solid var(--line);padding-top:18px;margin:0}
+.facts div{display:grid;gap:2px;min-width:0}
+.facts dt{font-size:.72rem;color:var(--muted)}
+.facts dd{margin:0;font-weight:550}
+.facts .wide{grid-column:1/-1}
+@media (max-width:560px){.match{grid-template-columns:1fr}.ms.home{flex-direction:row;text-align:left}.vsat{display:none}}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border-top:1px solid var(--line-2)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums}
+caption{text-align:left;padding:0 0 12px;font-weight:650;font-size:1rem;caption-side:top}
+caption .lg{margin-right:10px;vertical-align:-6px}
+thead th{font-size:.72rem;font-weight:500;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody th{text-align:left;font-weight:550;padding:9px 12px;vertical-align:top}
+tbody td{padding:9px 12px;vertical-align:middle}
+tbody tr+tr>*{border-top:1px solid var(--line)}
+tbody tr:hover>*{background:var(--surface)}
+th:first-child,td:first-child{padding-left:0}
+.vs-lbl{display:block;font-weight:400;font-size:.76rem;color:var(--muted)}
+.pt td,.pt th{white-space:nowrap}
+.pt .num{text-align:right}
+.pt thead th:not(:first-child){text-align:right}
+.pt thead th.l,.pt td.l{text-align:left}
+.rng{color:var(--faint);font-size:.78rem;margin-left:6px}
+.jn{display:inline-block;width:2.3em;color:var(--faint);font-weight:600;font-stretch:80%}
+.pos{color:var(--muted);font-size:.78rem;margin-left:8px;font-weight:400}
+.q-yes{color:var(--pos);font-weight:650}
+.q-no{color:var(--muted)}
+.small{font-size:.85rem;color:var(--muted)}
+
+/* report pieces shared with the older Bills-Rams page */
+.board{display:grid;gap:18px}
+.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+.team{display:grid;gap:4px;justify-items:start;min-width:0}
+.team.home{justify-items:end;text-align:right}
+.team .tm{display:flex;align-items:center;gap:12px}
+.team.home .tm{flex-direction:row-reverse}
+.team .ab{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;font-stretch:80%;line-height:1}
+.team .nm{font-weight:550}
+.team .rec{color:var(--muted);font-size:.85rem}
+.at{color:var(--faint)}
+.board .facts{display:flex;flex-wrap:wrap}
+.board .facts dl{display:contents}
+.side{white-space:nowrap}
+.side .v{display:inline-block;min-width:4.6em;font-weight:600}
+.pill{display:inline-block;min-width:3.2em;text-align:center;font-size:.74rem;font-weight:650;padding:1px 7px;border-radius:4px;margin-right:10px}
+.t1{color:var(--t1);background:var(--t1bg)} .t2{color:var(--t2);background:var(--t2bg)}
+.t3{color:var(--t3);background:var(--t3bg)} .t4{color:var(--t4);background:var(--t4bg)}
+.bar{display:inline-block;width:72px;height:4px;background:var(--track);border-radius:2px;vertical-align:middle;overflow:hidden}
+.fill{display:block;height:100%}
+.fill.buf{background:var(--buf)} .fill.lar{background:var(--lar)}
+.edge{display:inline-block;font-weight:650;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;border:1px solid currentColor}
+.edge.buf{color:var(--buf)} .edge.lar{color:var(--lar)} .edge.even{color:var(--muted)}
+.tchip{font-weight:750;font-stretch:80%}
+.tchip.buf{color:var(--buf)} .tchip.lar{color:var(--lar)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.82rem;color:var(--muted);align-items:center}
+.legend .pill{margin-right:4px}
+.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px}
+.take{border-top:1px solid var(--line-2);padding-top:12px;min-width:0}
+.take b{display:block;font-weight:650}
+.take p{margin-top:6px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.card header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card h3{font-size:1.05rem}
+.card .pos{font-size:.74rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.line{font-weight:550;font-size:.92rem}
+.vsbox{display:grid;gap:2px;padding:10px 12px;background:var(--bg);border-radius:6px;font-size:.92rem}
+.vsbox .k{font-size:.7rem;color:var(--muted)}
+.verdict{font-weight:650;letter-spacing:.06em;text-transform:uppercase;font-size:.74rem}
+.verdict.big{color:var(--t1)} .verdict.mid{color:var(--t3)} .verdict.low{color:var(--t4)}
+
+/* lineups */
+.lus{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+.lu{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:12px;align-content:start;min-width:0}
+.lu header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.lu h3{font-size:1.05rem}
+.lu .rec{font-size:.85rem;color:var(--muted)} .lu .rec b{color:var(--text)}
+.lu ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+.lu .pp{color:var(--muted);font-size:.84rem}
+.lustats{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin:0;border-top:1px solid var(--line);padding-top:12px}
+.lustats div{display:grid} .lustats dt{font-size:.72rem;color:var(--muted)} .lustats dd{margin:0;font-weight:650}
+.lul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.lul li{display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:center}
+.lul b{font-weight:600}
+.lu.dim{opacity:.8}
+.lu .tag{font-size:.72rem;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:1px 9px;white-space:nowrap}
+.lu .tag.ok{color:var(--pos);border-color:color-mix(in srgb,var(--pos) 45%,transparent)}
+.res.hit{color:var(--pos)} .res.miss{color:var(--neg)}
+.vs-lbl.why{color:var(--text);opacity:.82}
+.retro{border:1px solid var(--line-2);border-radius:8px;padding:12px 14px;color:var(--muted);font-size:.9rem}
+.retro b{color:var(--text)}
+
+.notes{color:var(--faint);font-size:.82rem;display:grid;gap:8px;max-width:78ch;border-top:1px solid var(--line);padding-top:20px}
+.notes a{color:inherit}
+.notes ul{margin:0;padding-left:1.2em}
+@media (max-width:520px){.bar{width:44px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<nav class="site" aria-label="Site"><a class="brand" href="../index.html">Matchup Lab</a><div class="tabs"><a href="../index.html" aria-current="page">Home</a><a href="../lineups.html">Lineups</a><a href="../guesser.html">Guesser</a></div></nav>
+
+  <div class="board" aria-label="Game info"><a class="back" href="../index.html">&larr; All games</a>
+    <span class="eyebrow">Monday Night Football · Week 5 · SoFi Stadium</span>
+    <div class="teams">
+      <div class="team away"><span class="tm"><img class="lg" src="../logos/BUF.png" alt="" width="52" height="52" style="--s:52px" loading="lazy"><span class="ab">BUF</span></span><span class="nm">Buffalo Bills</span><span class="rec">3-1 · 1st AFC East</span></div>
+      <span class="at">at</span>
+      <div class="team home"><span class="tm"><img class="lg" src="../logos/LA.png" alt="" width="52" height="52" style="--s:52px" loading="lazy"><span class="ab">LAR</span></span><span class="nm">Los Angeles Rams</span><span class="rec">2-2 · 3rd NFC West</span></div>
+    </div>
+    <div class="facts"><dl>
+      <div><dt>Kickoff</dt><dd>5:15 PM PT · ESPN/ABC</dd></div>
+      <div><dt>Spread</dt><dd>Rams −3.5</dd></div>
+      <div><dt>Total</dt><dd>54.5</dd></div>
+      <div><dt>Win prob.</dt><dd>LAR 63% · BUF 37%</dd></div>
+      <div><dt>Out</dt><dd>BUF DT Ed Oliver, WR Joshua Palmer · LAR Myles Garrett (IR)</dd></div>
+    </dl></div>
+  </div>
+
+  <section class="pane" id="summary" data-tab="Summary" aria-labelledby="h-big">
+    <h2 id="h-big">The short version</h2>
+    <div class="takes">
+      <div class="take lar"><b>Biggest mismatch: Rams passing game</b><p>The Rams throw for the 2nd most yards in the league and face a Bills pass D that ranks 29th in yards and TDs allowed. This is where the game tilts.</p></div>
+      <div class="take buf"><b>Bills path: run it and let Allen move</b><p>The Rams are #1 against the pass but closer to average against the run. Buffalo gets 5.05 yards a carry (3rd) and Allen has 7 rushing TDs.</p></div>
+      <div class="take"><b>Swing factor: turnovers</b><p>Stafford has 6 INTs (tied 29th), but Buffalo barely forces picks (25th). The Bills gave the ball away 7 times in their last two games.</p></div>
+    </div>
+  </section>
+
+  <section class="pane" id="units" data-tab="Unit vs unit" aria-labelledby="h-unit">
+    <div>
+      <h2 id="h-unit">Unit vs unit</h2>
+      <p class="sub">Each row lines up one offense stat with the matching stat for the defense it faces tonight. Ranks are out of 32 teams. The bar gets longer the better the rank.</p>
+    </div>
+    <div class="legend"><span><span class="pill t1">1-8</span>Top quarter</span><span><span class="pill t2">9-16</span>Above avg</span><span><span class="pill t3">17-24</span>Below avg</span><span><span class="pill t4">25-32</span>Bottom quarter</span><span>T = tied</span></div>
+    <div class="tbl-wrap"><table class="mt">
+<caption>Bills offense against the Rams defense</caption>
+<thead><tr><th scope="col">Stat</th><th scope="col"><span class="tchip buf">BUF</span> offense</th><th scope="col"><span class="tchip lar">LAR</span> defense</th><th scope="col">Edge</th></tr></thead>
+<tbody><tr>
+<th scope="row">Points / game<span class="vs-lbl">vs points allowed / game</span></th>
+<td class="side"><span class="v">31.8</span><span class="pill t1">#2</span><span class="bar"><span class="fill buf" style="width:97%"></span></span></td>
+<td class="side"><span class="v">20.8</span><span class="pill t1">#8</span><span class="bar"><span class="fill lar" style="width:78%"></span></span></td>
+<td class="e"><span class="edge buf">BUF O</span></td></tr>
+<tr>
+<th scope="row">Total yards / game<span class="vs-lbl">vs total yards allowed / game</span></th>
+<td class="side"><span class="v">386.2</span><span class="pill t1">#7</span><span class="bar"><span class="fill buf" style="width:81%"></span></span></td>
+<td class="side"><span class="v">247.5</span><span class="pill t1">#1</span><span class="bar"><span class="fill lar" style="width:100%"></span></span></td>
+<td class="e"><span class="edge lar">LAR D</span></td></tr>
+<tr>
+<th scope="row">Pass yards / game<span class="vs-lbl">vs pass yards allowed / game</span></th>
+<td class="side"><span class="v">247.2</span><span class="pill t2">#10</span><span class="bar"><span class="fill buf" style="width:72%"></span></span></td>
+<td class="side"><span class="v">145.5</span><span class="pill t1">#1</span><span class="bar"><span class="fill lar" style="width:100%"></span></span></td>
+<td class="e"><span class="edge lar">LAR D</span></td></tr>
+<tr>
+<th scope="row">Yards / pass att<span class="vs-lbl">vs yards / pass att allowed</span></th>
+<td class="side"><span class="v">8.73</span><span class="pill t1">#3</span><span class="bar"><span class="fill buf" style="width:94%"></span></span></td>
+<td class="side"><span class="v">4.84</span><span class="pill t1">#1</span><span class="bar"><span class="fill lar" style="width:100%"></span></span></td>
+<td class="e"><span class="edge even">Even</span></td></tr>
+<tr>
+<th scope="row">Completion %<span class="vs-lbl">vs completion % allowed</span></th>
+<td class="side"><span class="v">66.4%</span><span class="pill t2">#13</span><span class="bar"><span class="fill buf" style="width:62%"></span></span></td>
+<td class="side"><span class="v">53.5%</span><span class="pill t1">#2</span><span class="bar"><span class="fill lar" style="width:97%"></span></span></td>
+<td class="e"><span class="edge lar">LAR D</span></td></tr>
+<tr>
+<th scope="row">Passer rating<span class="vs-lbl">vs passer rating allowed</span></th>
+<td class="side"><span class="v">100.1</span><span class="pill t2">#9</span><span class="bar"><span class="fill buf" style="width:75%"></span></span></td>
+<td class="side"><span class="v">75.4</span><span class="pill t1">#2</span><span class="bar"><span class="fill lar" style="width:97%"></span></span></td>
+<td class="e"><span class="edge lar">LAR D</span></td></tr>
+<tr>
+<th scope="row">Sacks allowed / game<span class="vs-lbl">vs sacks / game</span></th>
+<td class="side"><span class="v">2.25</span><span class="pill t3">#18T</span><span class="bar"><span class="fill buf" style="width:47%"></span></span></td>
+<td class="side"><span class="v">1.75</span><span class="pill t4">#26</span><span class="bar"><span class="fill lar" style="width:22%"></span></span></td>
+<td class="e"><span class="edge buf">BUF O</span></td></tr>
+<tr>
+<th scope="row">INTs thrown / game<span class="vs-lbl">vs ints / game</span></th>
+<td class="side"><span class="v">0.75</span><span class="pill t2">#16T</span><span class="bar"><span class="fill buf" style="width:53%"></span></span></td>
+<td class="side"><span class="v">0.75</span><span class="pill t2">#13T</span><span class="bar"><span class="fill lar" style="width:62%"></span></span></td>
+<td class="e"><span class="edge even">Even</span></td></tr>
+<tr>
+<th scope="row">Rush yards / game<span class="vs-lbl">vs rush yards allowed / game</span></th>
+<td class="side"><span class="v">139.0</span><span class="pill t1">#6</span><span class="bar"><span class="fill buf" style="width:84%"></span></span></td>
+<td class="side"><span class="v">102.0</span><span class="pill t2">#13</span><span class="bar"><span class="fill lar" style="width:62%"></span></span></td>
+<td class="e"><span class="edge buf">BUF O</span></td></tr>
+<tr>
+<th scope="row">Yards / carry<span class="vs-lbl">vs yards / carry allowed</span></th>
+<td class="side"><span class="v">5.05</span><span class="pill t1">#3T</span><span class="bar"><span class="fill buf" style="width:94%"></span></span></td>
+<td class="side"><span class="v">3.96</span><span class="pill t2">#12</span><span class="bar"><span class="fill lar" style="width:66%"></span></span></td>
+<td class="e"><span class="edge buf">BUF O</span></td></tr></tbody></table></div>
+    <div class="tbl-wrap"><table class="mt">
+<caption>Rams offense against the Bills defense</caption>
+<thead><tr><th scope="col">Stat</th><th scope="col"><span class="tchip lar">LAR</span> offense</th><th scope="col"><span class="tchip buf">BUF</span> defense</th><th scope="col">Edge</th></tr></thead>
+<tbody><tr>
+<th scope="row">Points / game<span class="vs-lbl">vs points allowed / game</span></th>
+<td class="side"><span class="v">21.2</span><span class="pill t3">#23</span><span class="bar"><span class="fill lar" style="width:31%"></span></span></td>
+<td class="side"><span class="v">26.8</span><span class="pill t4">#25</span><span class="bar"><span class="fill buf" style="width:25%"></span></span></td>
+<td class="e"><span class="edge even">Even</span></td></tr>
+<tr>
+<th scope="row">Total yards / game<span class="vs-lbl">vs total yards allowed / game</span></th>
+<td class="side"><span class="v">417.0</span><span class="pill t1">#1</span><span class="bar"><span class="fill lar" style="width:100%"></span></span></td>
+<td class="side"><span class="v">372.2</span><span class="pill t4">#27</span><span class="bar"><span class="fill buf" style="width:19%"></span></span></td>
+<td class="e"><span class="edge lar">LAR O</span></td></tr>
+<tr>
+<th scope="row">Pass yards / game<span class="vs-lbl">vs pass yards allowed / game</span></th>
+<td class="side"><span class="v">290.2</span><span class="pill t1">#2</span><span class="bar"><span class="fill lar" style="width:97%"></span></span></td>
+<td class="side"><span class="v">256.2</span><span class="pill t4">#29</span><span class="bar"><span class="fill buf" style="width:12%"></span></span></td>
+<td class="e"><span class="edge lar">LAR O</span></td></tr>
+<tr>
+<th scope="row">Yards / pass att<span class="vs-lbl">vs yards / pass att allowed</span></th>
+<td class="side"><span class="v">7.28</span><span class="pill t2">#16</span><span class="bar"><span class="fill lar" style="width:53%"></span></span></td>
+<td class="side"><span class="v">7.46</span><span class="pill t3">#22T</span><span class="bar"><span class="fill buf" style="width:34%"></span></span></td>
+<td class="e"><span class="edge lar">LAR O</span></td></tr>
+<tr>
+<th scope="row">Completion %<span class="vs-lbl">vs completion % allowed</span></th>
+<td class="side"><span class="v">61.2%</span><span class="pill t3">#24T</span><span class="bar"><span class="fill lar" style="width:28%"></span></span></td>
+<td class="side"><span class="v">63.9%</span><span class="pill t2">#16</span><span class="bar"><span class="fill buf" style="width:53%"></span></span></td>
+<td class="e"><span class="edge buf">BUF D</span></td></tr>
+<tr>
+<th scope="row">Passer rating<span class="vs-lbl">vs passer rating allowed</span></th>
+<td class="side"><span class="v">80.4</span><span class="pill t4">#25T</span><span class="bar"><span class="fill lar" style="width:25%"></span></span></td>
+<td class="side"><span class="v">103.4</span><span class="pill t4">#25T</span><span class="bar"><span class="fill buf" style="width:25%"></span></span></td>
+<td class="e"><span class="edge even">Even</span></td></tr>
+<tr>
+<th scope="row">Sacks allowed / game<span class="vs-lbl">vs sacks / game</span></th>
+<td class="side"><span class="v">1.50</span><span class="pill t1">#6T</span><span class="bar"><span class="fill lar" style="width:84%"></span></span></td>
+<td class="side"><span class="v">2.50</span><span class="pill t2">#11</span><span class="bar"><span class="fill buf" style="width:69%"></span></span></td>
+<td class="e"><span class="edge lar">LAR O</span></td></tr>
+<tr>
+<th scope="row">INTs thrown / game<span class="vs-lbl">vs ints / game</span></th>
+<td class="side"><span class="v">1.50</span><span class="pill t4">#29T</span><span class="bar"><span class="fill lar" style="width:12%"></span></span></td>
+<td class="side"><span class="v">0.50</span><span class="pill t4">#25</span><span class="bar"><span class="fill buf" style="width:25%"></span></span></td>
+<td class="e"><span class="edge buf">BUF D</span></td></tr>
+<tr>
+<th scope="row">Rush yards / game<span class="vs-lbl">vs rush yards allowed / game</span></th>
+<td class="side"><span class="v">126.8</span><span class="pill t2">#11</span><span class="bar"><span class="fill lar" style="width:69%"></span></span></td>
+<td class="side"><span class="v">116.0</span><span class="pill t3">#18</span><span class="bar"><span class="fill buf" style="width:47%"></span></span></td>
+<td class="e"><span class="edge lar">LAR O</span></td></tr>
+<tr>
+<th scope="row">Yards / carry<span class="vs-lbl">vs yards / carry allowed</span></th>
+<td class="side"><span class="v">4.83</span><span class="pill t1">#7</span><span class="bar"><span class="fill lar" style="width:81%"></span></span></td>
+<td class="side"><span class="v">4.03</span><span class="pill t2">#15</span><span class="bar"><span class="fill buf" style="width:56%"></span></span></td>
+<td class="e"><span class="edge lar">LAR O</span></td></tr></tbody></table></div>
+  </section>
+
+  <section class="pane" id="coverage" data-tab="Coverage" aria-labelledby="h-cov">
+    <div>
+      <h2 id="h-cov">Pass coverage head to head</h2>
+      <p class="sub">Both secondaries side by side. The Rams are top 2 in four of these. The Bills are bottom 8 in four.</p>
+    </div>
+    <div class="tbl-wrap"><table class="mt">
+      <thead><tr><th scope="col">Coverage stat</th><th scope="col"><span class="tchip buf">BUF</span> defense</th><th scope="col"><span class="tchip lar">LAR</span> defense</th></tr></thead>
+      <tbody>
+<tr><th scope="row">Pass yards allowed / game</th>
+<td class="side"><span class="v">256.2</span><span class="pill t4">#29</span><span class="bar"><span class="fill buf" style="width:12%"></span></span></td>
+<td class="side"><span class="v">145.5</span><span class="pill t1">#1</span><span class="bar"><span class="fill lar" style="width:100%"></span></span></td></tr>
+<tr><th scope="row">Yards / pass att allowed</th>
+<td class="side"><span class="v">7.46</span><span class="pill t3">#22T</span><span class="bar"><span class="fill buf" style="width:34%"></span></span></td>
+<td class="side"><span class="v">4.84</span><span class="pill t1">#1</span><span class="bar"><span class="fill lar" style="width:100%"></span></span></td></tr>
+<tr><th scope="row">Completion % allowed</th>
+<td class="side"><span class="v">63.9%</span><span class="pill t2">#16</span><span class="bar"><span class="fill buf" style="width:53%"></span></span></td>
+<td class="side"><span class="v">53.5%</span><span class="pill t1">#2</span><span class="bar"><span class="fill lar" style="width:97%"></span></span></td></tr>
+<tr><th scope="row">Passer rating allowed</th>
+<td class="side"><span class="v">103.4</span><span class="pill t4">#25T</span><span class="bar"><span class="fill buf" style="width:25%"></span></span></td>
+<td class="side"><span class="v">75.4</span><span class="pill t1">#2</span><span class="bar"><span class="fill lar" style="width:97%"></span></span></td></tr>
+<tr><th scope="row">Pass TDs allowed / game</th>
+<td class="side"><span class="v">2.50</span><span class="pill t4">#29</span><span class="bar"><span class="fill buf" style="width:12%"></span></span></td>
+<td class="side"><span class="v">1.75</span><span class="pill t3">#21</span><span class="bar"><span class="fill lar" style="width:38%"></span></span></td></tr>
+<tr><th scope="row">INTs / game</th>
+<td class="side"><span class="v">0.50</span><span class="pill t4">#25</span><span class="bar"><span class="fill buf" style="width:25%"></span></span></td>
+<td class="side"><span class="v">0.75</span><span class="pill t2">#13T</span><span class="bar"><span class="fill lar" style="width:62%"></span></span></td></tr>
+<tr><th scope="row">Sacks / game</th>
+<td class="side"><span class="v">2.50</span><span class="pill t2">#11</span><span class="bar"><span class="fill buf" style="width:69%"></span></span></td>
+<td class="side"><span class="v">1.75</span><span class="pill t4">#26</span><span class="bar"><span class="fill lar" style="width:22%"></span></span></td></tr>
+      </tbody></table></div>
+  </section>
+
+  <section class="pane" id="players" data-tab="Players" aria-labelledby="h-play">
+    <div>
+      <h2 id="h-play">Who can cash in</h2>
+      <p class="sub">Top players on each side matched against the spot where the other team is weakest.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <header><h3>Puka Nacua</h3><span class="pos"><span class="tchip lar">LAR</span> WR</span></header>
+        <div class="line">14 rec · 199 yds in 2 games · 99.5 yds/g</div>
+        <div class="vsbox"><span class="k">Attacks</span>Bills pass D: 29th in pass yds allowed, tied 25th in passer rating allowed, 26th in EPA per dropback</div>
+        <p>Back from injury and went for 9 catches, 125 yards and a TD at Philly last week. His prop is set at 94.5 receiving yards.</p>
+        <span class="verdict big">Big edge</span>
+      </article>
+      <article class="card">
+        <header><h3>Davante Adams</h3><span class="pos"><span class="tchip lar">LAR</span> WR</span></header>
+        <div class="line">22 rec · 390 yds · 17.7 avg · 2 TD</div>
+        <div class="vsbox"><span class="k">Attacks</span>Bills allow 7.46 yds per pass (tied 22nd) and 2.5 pass TDs a game (29th)</div>
+        <p>With teams rolling coverage to Nacua, Adams is the downfield threat. His 17.7 yards a catch fits a secondary that gives up chunk plays.</p>
+        <span class="verdict big">Big edge</span>
+      </article>
+      <article class="card">
+        <header><h3>James Cook</h3><span class="pos"><span class="tchip buf">BUF</span> RB</span></header>
+        <div class="line">70 car · 421 yds · 6.01 avg · 3 TD · #3 in NFL</div>
+        <div class="vsbox"><span class="k">Attacks</span>Rams run D: 13th in rush yds allowed, 12th in yds per carry. Middle of the pack next to their #1 pass D</div>
+        <p>Running at the Rams is the easiest way to avoid their coverage. Prop line is 75.5 rushing yards.</p>
+        <span class="verdict mid">Solid edge</span>
+      </article>
+      <article class="card">
+        <header><h3>Josh Allen</h3><span class="pos"><span class="tchip buf">BUF</span> QB</span></header>
+        <div class="line">1,039 pass yds · 8.73 yds/att (3rd) · 7 rush TD (tied 1st)</div>
+        <div class="vsbox"><span class="k">Attacks</span>Rams pass rush: 1.75 sacks a game (26th), with Myles Garrett on IR</div>
+        <p>He has 13 of the Bills' 16 offensive TDs. A light Rams rush gives him time to extend plays and scramble near the goal line.</p>
+        <span class="verdict mid">Solid edge</span>
+      </article>
+      <article class="card">
+        <header><h3>Dalton Kincaid</h3><span class="pos"><span class="tchip buf">BUF</span> TE</span></header>
+        <div class="line">15 rec · 270 yds · 18.0 avg · 1 TD</div>
+        <div class="vsbox"><span class="k">Attacks</span>Rams linebackers Nate Landman and Omar Speights in coverage</div>
+        <p>SI flagged the Rams LBs as a soft spot, but the numbers say otherwise: the Rams have allowed the fewest TE yards in the NFL (85 on 12 catches). Kincaid also has only 3 catches for 45 yards the last two weeks.</p>
+        <span class="verdict low">Rams win this one</span>
+      </article>
+      <article class="card">
+        <header><h3>Gregory Rousseau</h3><span class="pos"><span class="tchip buf">BUF</span> EDGE</span></header>
+        <div class="line">6.0 sacks · #2 in NFL</div>
+        <div class="vsbox"><span class="k">Attacks</span>Stafford's 6 INTs (tied 29th). Rams allow only 1.5 sacks a game (6th)</div>
+        <p>Strength vs strength up front, but pressure is Buffalo's best shot at forcing a bad throw. Losing Ed Oliver inside makes it harder.</p>
+        <span class="verdict low">Watch</span>
+      </article>
+    </div>
+  </section>
+
+
+<style>
+.pt{min-width:860px}
+.pt td{vertical-align:top}
+.pt .num{font-weight:700;font-size:1.05rem;white-space:nowrap}
+.dots{display:inline-flex;gap:4px;margin-right:8px;vertical-align:middle}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;border:1.5px solid var(--line)}
+.dot.hit{background:var(--t1);border-color:var(--t1)}
+.dot.miss{background:var(--t4bg);border-color:var(--t4)}
+.dot.dnp{background:transparent;border-style:dashed}
+.hr{font-weight:700;white-space:nowrap}
+.lean{display:block;font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap}
+.conf{display:block;font-size:.8rem;color:var(--muted)}
+.c-hi{color:var(--t1)} .c-mh{color:var(--t2)} .c-md{color:var(--t3)} .c-cf,.c-lo{color:var(--muted)}
+.why{font-size:.92rem;max-width:44ch;min-width:28ch}
+.caveat{color:var(--muted);font-size:.9rem;margin:0}
+.mus{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.mu{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:8px;align-content:start;min-width:0}
+.mu-top{display:grid;gap:2px;font-weight:600}
+.mu .vs{font-family:var(--display);color:var(--muted);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase}
+.mu p{margin:0;font-size:.95rem}
+.win{justify-self:start;font-family:var(--display);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.95rem;padding:2px 10px;border-radius:4px;border:1.5px solid currentColor}
+.win.lar{color:var(--lar)} .win.buf{color:var(--buf)} .win.even{color:var(--muted)}
+</style>
+  <section class="pane" id="matchups" data-tab="1-on-1" aria-labelledby="h-1v1">
+    <div>
+      <h2 id="h-1v1">1-on-1 matchups</h2>
+      <p class="sub">Who should win each key battle, based on the ranks above and this week's previews. Rams win 5, Bills win 2, one is even.</p>
+    </div>
+    <div class="mus"><article class="mu"><div class="mu-top"><span><span class="tchip lar">LAR</span> Puka Nacua</span><span class="vs">vs</span><span><span class="tchip buf">BUF</span> Bills slot / nickel (Dee Alford questionable)</span></div><span class="win lar">Edge: Rams</span><p>Nacua moves around and plays inside, so Buffalo can't shadow him. Bills are 29th in pass yds allowed and 30th in success rate allowed.</p></article><article class="mu"><div class="mu-top"><span><span class="tchip lar">LAR</span> Davante Adams</span><span class="vs">vs</span><span><span class="tchip buf">BUF</span> CBs Christian Benford & Maxwell Hairston</span></div><span class="win lar">Edge: Rams</span><p>Adams works outside and is the red zone target. Benford returns from a toe injury; if he's limited, rookie Davison Igbinosun plays. Adams has 10.3 yds per target, a career best.</p></article><article class="mu"><div class="mu-top"><span><span class="tchip buf">BUF</span> Keon Coleman</span><span class="vs">vs</span><span><span class="tchip lar">LAR</span> CB Trent McDuffie</span></div><span class="win lar">Edge: Rams</span><p>CBS expects McDuffie to travel with Coleman. Rams allow 53.5% completions (2nd) and 4.84 yds per attempt (1st).</p></article><article class="mu"><div class="mu-top"><span><span class="tchip buf">BUF</span> Dalton Kincaid</span><span class="vs">vs</span><span><span class="tchip lar">LAR</span> Rams LBs / TE coverage</span></div><span class="win lar">Edge: Rams</span><p>Rams have allowed the fewest TE yards in the league. Kincaid's usage has dropped two weeks in a row.</p></article><article class="mu"><div class="mu-top"><span><span class="tchip buf">BUF</span> Greg Rousseau</span><span class="vs">vs</span><span><span class="tchip lar">LAR</span> Rams pass protection</span></div><span class="win even">Toss-up</span><p>Rousseau leads the NFL in sacks (6) with 29 pressures. Rams allow only 1.5 sacks a game (6th), but Stafford was sacked 4 times at Denver. Ed Oliver being out helps the Rams.</p></article><article class="mu"><div class="mu-top"><span><span class="tchip buf">BUF</span> James Cook</span><span class="vs">vs</span><span><span class="tchip lar">LAR</span> Rams run defense (Aaron Donald back)</span></div><span class="win buf">Edge: Bills</span><p>Cook leads the NFL with 15 runs of 10+ yards. Rams use light boxes and rank 15th in EPA per run vs 2nd per pass.</p></article><article class="mu"><div class="mu-top"><span><span class="tchip lar">LAR</span> Kyren Williams & Blake Corum</span><span class="vs">vs</span><span><span class="tchip buf">BUF</span> Bills tackling, no Ed Oliver</span></div><span class="win lar">Edge: Rams</span><p>Bills give up 3.05 yards after contact per carry. Williams leads the NFL with a 64.8% rushing success rate.</p></article><article class="mu"><div class="mu-top"><span><span class="tchip buf">BUF</span> Josh Allen in the red zone</span><span class="vs">vs</span><span><span class="tchip lar">LAR</span> Rams red zone D</span></div><span class="win buf">Edge: Bills</span><p>6 TDs on 9 red zone carries. Rams give up a TD on 58.3% of red zone trips.</p></article></div>
+  </section>
+
+
+  <section class="pane" id="props" data-tab="Props" aria-labelledby="h-props">
+    <div>
+      <h2 id="h-props">Props board</h2>
+      <p class="sub">PrizePicks only published two lines for this game outside the app (Cook 75.5 rush yds and Nacua 94.5 rec yds). The rest are sportsbook lines from the same day; PrizePicks usually sits within a point or two of these, so check the app before you lock anything in. Dots show each game this season, green if that side would have hit.</p>
+    </div>
+    <div class="tbl-wrap"><table class="pt">
+      <thead><tr><th scope="col">Player / prop</th><th scope="col">Line</th><th scope="col">This season</th><th scope="col">Lean</th><th scope="col">Why</th></tr></thead>
+      <tbody><tr>
+<th scope="row"><span class="tchip buf">BUF</span> Josh Allen<span class="vs-lbl">Anytime TD · Books (no PP line posted)</span></th>
+<td class="num">Yes</td>
+<td><span class="dots"><span class="dot hit" title="TD2"></span><span class="dot hit" title="TD2"></span><span class="dot hit" title="TD2"></span><span class="dot hit" title="TD1"></span></span><span class="hr">Yes 4/4</span><span class="vs-lbl">2 TD · 2 TD · 2 TD · 1 TD</span></td>
+<td><span class="lean c-hi">Yes</span><span class="conf">High</span></td>
+<td class="why">Scored a rushing TD in all 4 games. 6 TDs on 9 red zone carries. Rams allow a TD on 58.3% of red zone trips and are only 12th in yards per carry allowed.</td></tr><tr>
+<th scope="row"><span class="tchip lar">LAR</span> Matthew Stafford<span class="vs-lbl">Pass yards · Books / Covers</span></th>
+<td class="num">274.5</td>
+<td><span class="dots"><span class="dot miss" title="155"></span><span class="dot hit" title="327"></span><span class="dot hit" title="390"></span><span class="dot hit" title="317"></span></span><span class="hr">Over 3/4</span><span class="vs-lbl">155 · 327 · 390 · 317</span></td>
+<td><span class="lean c-hi">Over</span><span class="conf">High</span></td>
+<td class="why">Over in 3 of 4, the only miss was the opener vs SF. Bills are 29th in pass yards allowed (274 gross a game). Rams throw 41 times a game. Risk: Rousseau pressure.</td></tr><tr>
+<th scope="row"><span class="tchip lar">LAR</span> Kyren Williams<span class="vs-lbl">Receiving yards · Books / Yahoo</span></th>
+<td class="num">19.5</td>
+<td><span class="dots"><span class="dot hit" title="24"></span><span class="dot miss" title="12"></span><span class="dot hit" title="70"></span><span class="dot hit" title="67"></span></span><span class="hr">Over 3/4</span><span class="vs-lbl">24 · 12 · 70 · 67</span></td>
+<td><span class="lean c-hi">Over</span><span class="conf">High</span></td>
+<td class="why">Over in 3 of 4 and 67+ the last two weeks. Bills allow the 6th most catches to RBs, and their pass rush forces quick checkdowns.</td></tr><tr>
+<th scope="row"><span class="tchip buf">BUF</span> Dalton Kincaid<span class="vs-lbl">Receiving yards · Books / Yahoo</span></th>
+<td class="num">57.5</td>
+<td><span class="dots"><span class="dot miss" title="130"></span><span class="dot miss" title="95"></span><span class="dot hit" title="38"></span><span class="dot hit" title="7"></span></span><span class="hr">Under 2/4</span><span class="vs-lbl">130 · 95 · 38 · 7</span></td>
+<td><span class="lean c-hi">Under</span><span class="conf">High</span></td>
+<td class="why">Under the last 2 games (38, 7) with his route share dropping. Rams allow the fewest TE yards in the NFL: 85 total on 12 catches.</td></tr><tr>
+<th scope="row"><span class="tchip buf">BUF</span> Josh Allen<span class="vs-lbl">Pass yards · Books / Covers</span></th>
+<td class="num">249.5</td>
+<td><span class="dots"><span class="dot miss" title="334"></span><span class="dot hit" title="248"></span><span class="dot hit" title="204"></span><span class="dot miss" title="253"></span></span><span class="hr">Under 2/4</span><span class="vs-lbl">334 · 248 · 204 · 253</span></td>
+<td><span class="lean c-mh">Under</span><span class="conf">Med-High</span></td>
+<td class="why">Under in 2 of 4. Rams are #1 in pass yards allowed (145.5 net a game) and #1 in yards per attempt allowed (4.84). Covers' model says over; the ranks say under.</td></tr><tr>
+<th scope="row"><span class="tchip lar">LAR</span> Kyren Williams<span class="vs-lbl">Rush yards · Books / Covers</span></th>
+<td class="num">69.5</td>
+<td><span class="dots"><span class="dot miss" title="41"></span><span class="dot hit" title="85"></span><span class="dot hit" title="88"></span><span class="dot hit" title="80"></span></span><span class="hr">Over 3/4</span><span class="vs-lbl">41 · 85 · 88 · 80</span></td>
+<td><span class="lean c-md">Over</span><span class="conf">Medium</span></td>
+<td class="why">Over in 3 of 4. Bills are 18th in rush yards allowed, give up 3.05 yards after contact a carry, and are missing DT Ed Oliver. Risk: Corum takes about 38% of carries, and two models lean under.</td></tr><tr>
+<th scope="row"><span class="tchip lar">LAR</span> Kyren Williams<span class="vs-lbl">Anytime TD · Books</span></th>
+<td class="num">Yes</td>
+<td><span class="dots"><span class="dot hit" title="TD1"></span><span class="dot hit" title="TD1"></span><span class="dot miss" title="TD0"></span><span class="dot hit" title="TD2"></span></span><span class="hr">Yes 3/4</span><span class="vs-lbl">1 TD · 1 TD · 0 TD · 2 TD</span></td>
+<td><span class="lean c-md">Yes</span><span class="conf">Medium</span></td>
+<td class="why">Scored in 3 of 4. Rams are 3.5-point favorites at home. The price is steep (around -170).</td></tr><tr>
+<th scope="row"><span class="tchip lar">LAR</span> Puka Nacua<span class="vs-lbl">Receiving yards · PrizePicks</span></th>
+<td class="num">94.5</td>
+<td><span class="dots"><span class="dot miss" title="74"></span><span class="dot dnp" title="Did not play"></span><span class="dot dnp" title="Did not play"></span><span class="dot hit" title="125"></span></span><span class="hr">Over 1/2</span><span class="vs-lbl">74 · DNP · DNP · 125</span></td>
+<td><span class="lean c-md">Over</span><span class="conf">Medium</span></td>
+<td class="why">Best matchup on the board (Bills 29th vs the pass), but the line is high, he has only 2 games played, and Adams splits targets. Over in 1 of 2.</td></tr><tr>
+<th scope="row"><span class="tchip buf">BUF</span> James Cook<span class="vs-lbl">Rush yards · PrizePicks</span></th>
+<td class="num">75.5</td>
+<td><span class="dots"><span class="dot miss" title="57"></span><span class="dot hit" title="135"></span><span class="dot hit" title="154"></span><span class="dot miss" title="75"></span></span><span class="hr">Over 2/4</span><span class="vs-lbl">57 · 135 · 154 · 75</span></td>
+<td><span class="lean c-cf">Slight over</span><span class="conf">Coin flip</span></td>
+<td class="why">Over in 2 of 4 and missed by half a yard in Week 4. Rams run D is 13th, much softer than their pass D, so Buffalo should lean on him. Covers projects 66. Aaron Donald returning hurts.</td></tr><tr>
+<th scope="row"><span class="tchip buf">BUF</span> Khalil Shakir<span class="vs-lbl">Receiving yards · Books / Covers</span></th>
+<td class="num">49.5</td>
+<td><span class="dots"><span class="dot miss" title="50"></span><span class="dot hit" title="38"></span><span class="dot hit" title="6"></span><span class="dot miss" title="82"></span></span><span class="hr">Under 2/4</span><span class="vs-lbl">50 · 38 · 6 · 82</span></td>
+<td><span class="lean c-cf">Slight under</span><span class="conf">Coin flip</span></td>
+<td class="why">Under in 2 of 4 against the #1 pass D. If DJ Moore sits, Shakir's targets go up, which is why this is close.</td></tr><tr>
+<th scope="row"><span class="tchip buf">BUF</span> James Cook<span class="vs-lbl">Receptions · Books / Covers</span></th>
+<td class="num">1.5</td>
+<td><span class="dots"><span class="dot hit" title="3"></span><span class="dot miss" title="1"></span><span class="dot miss" title="0"></span><span class="dot hit" title="2"></span></span><span class="hr">Over 2/4</span><span class="vs-lbl">3 · 1 · 0 · 2</span></td>
+<td><span class="lean c-lo">Pass</span><span class="conf">Low</span></td>
+<td class="why">Over in 2 of 4. No clear edge either way.</td></tr><tr>
+<th scope="row"><span class="tchip lar">LAR</span> Matthew Stafford<span class="vs-lbl">Rush yards · Books / Predictem</span></th>
+<td class="num">9.5</td>
+<td><span class="dots"><span class="dot hit" title="-1"></span><span class="dot hit" title="-1"></span><span class="dot miss" title="13"></span><span class="dot miss" title="10"></span></span><span class="hr">Under 2/4</span><span class="vs-lbl">-1 · -1 · 13 · 10</span></td>
+<td><span class="lean c-lo">Pass</span><span class="conf">Low</span></td>
+<td class="why">Under in 2 of 4. Two kneel-downs or one scramble decides it.</td></tr><tr>
+<th scope="row"><span class="tchip lar">LAR</span> Colby Parkinson<span class="vs-lbl">Receiving yards · Books / Covers</span></th>
+<td class="num">14.5</td>
+<td><span class="dots"><span class="dot miss" title="6"></span><span class="dot hit" title="15"></span><span class="dot dnp" title="Did not play"></span><span class="dot dnp" title="Did not play"></span></span><span class="hr">Over 1/2</span><span class="vs-lbl">6 · 15 · DNP · DNP</span></td>
+<td><span class="lean c-lo">Pass</span><span class="conf">Low</span></td>
+<td class="why">Only 2 games played this year. Not enough to go on.</td></tr></tbody></table></div>
+    <div class="takes">
+      <div class="take"><b>Strongest plays</b><p>Allen anytime TD, Stafford over 274.5 pass yds, Kyren Williams over 19.5 rec yds, Kincaid under 57.5 rec yds. Each has both the game logs and the matchup ranks pointing the same way.</p></div>
+      <div class="take"><b>Where ranks beat the models</b><p>Allen under 249.5 pass yds. The Rams have the #1 pass D by yards and yards per attempt, so the over projection from Covers looks too high.</p></div>
+      <div class="take"><b>Game total check</b><p>Averaging each offense's points with what the other D allows gives about BUF 26, LAR 24, or 50 total. That leans under 54.5 and makes Bills +3.5 interesting, though CBS and AP both pick the Rams.</p></div>
+    </div>
+    <p class="caveat">Four games is a small sample, and none of this is a guarantee. Treat it as a read on the matchup, not a sure thing.</p>
+  </section>
+
+<style>
+.meter{position:relative;display:block;width:160px;height:10px;background:var(--track);border-radius:5px}
+.mfill{position:absolute;left:0;top:0;bottom:0;background:var(--lar);border-radius:5px}
+.mline{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--fg)}
+.lus{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.lu{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.lu header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.lu h3{font-size:1.6rem}
+.lu .rec{font-size:.9rem;color:var(--muted)} .lu .rec b{color:var(--fg)}
+.lu ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
+.lu .pp{color:var(--muted);font-variant-numeric:tabular-nums;font-size:.85rem}
+.lustats{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:0;border-top:1px solid var(--line);padding-top:10px;font-variant-numeric:tabular-nums}
+.lustats div{display:grid} .lustats dt{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)} .lustats dd{margin:0;font-weight:700}
+.lu p{margin:0;font-size:.93rem}
+.warn{border:1.5px solid var(--t3);background:var(--t3bg);color:var(--fg);border-radius:8px;padding:12px 14px;max-width:80ch}
+.warn b{color:var(--t3)}
+</style>
+  <section class="pane" id="payouts" data-tab="Payouts" aria-labelledby="h-pay">
+    <div>
+      <h2 id="h-pay">Payout check</h2>
+      <p class="sub">On PrizePicks every pick needs to hit more often than the payout implies. With standard Power payouts (3-pick 5x, 4-pick 10x, 5-pick 20x, 6-pick 37.5x) a pick has to hit about 58.5% of the time in a 3-pick, 56.2% in a 4-pick, and 54.7% in a 6-pick. My hit estimate is half this season's game log (pulled toward 50% because it's only 4 games) plus the matchup, and half what the betting market says. The two black lines on each bar mark those break-evens.</p>
+    </div>
+    <div class="warn"><b>Check the multiplier in the app first.</b> PrizePicks says lineups with several players from the same game can get lower, non-standard payouts, and every pick here is from one game. Each lineup below lists the lowest multiplier where it still makes sense.</div>
+    <div class="tbl-wrap"><table class="pt">
+      <thead><tr><th scope="col">Pick</th><th scope="col">My est.</th><th scope="col">Market</th><th scope="col">vs break-even</th><th scope="col">Worth the payout?</th></tr></thead>
+      <tbody><tr><th scope="row">Allen Rush+Rec TDs O 0.5<span class="vs-lbl">Market: +100 to -124 at books, 52¢ Polymarket</span></th>
+<td class="num">64%</td><td class="num">52%</td>
+<td><span class="meter"><span class="mfill" style="width:64%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-hi">Worth it in any size</span></td></tr><tr><th scope="row">K. Williams Rush+Rec TDs O 0.5<span class="vs-lbl">Market: -170 at books</span></th>
+<td class="num">62%</td><td class="num">60%</td>
+<td><span class="meter"><span class="mfill" style="width:62%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-hi">Worth it in any size</span></td></tr><tr><th scope="row">Stafford Pass Yds O 274.5<span class="vs-lbl">Market: 54¢ Polymarket, 55% Kalshi</span></th>
+<td class="num">59%</td><td class="num">55%</td>
+<td><span class="meter"><span class="mfill" style="width:59%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-hi">Worth it in any size</span></td></tr><tr><th scope="row">K. Williams Rec Yds O 19.5<span class="vs-lbl">Market: -114 FanDuel</span></th>
+<td class="num">58%</td><td class="num">52%</td>
+<td><span class="meter"><span class="mfill" style="width:58%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-mh">Worth it in 4+ pick</span></td></tr><tr><th scope="row">Kincaid Rec Yds U 57.5<span class="vs-lbl">Market: -115 bet365</span></th>
+<td class="num">55%</td><td class="num">52%</td>
+<td><span class="meter"><span class="mfill" style="width:55%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-md">Only in 5-6 pick</span></td></tr><tr><th scope="row">Allen Pass Yds U 249.5<span class="vs-lbl">Market: 48% over on Kalshi</span></th>
+<td class="num">55%</td><td class="num">52%</td>
+<td><span class="meter"><span class="mfill" style="width:55%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-md">Only in 5-6 pick</span></td></tr><tr><th scope="row">K. Williams Rush Yds O 69.5<span class="vs-lbl">Market: under 52-53% on Kalshi/Polymarket</span></th>
+<td class="num">54%</td><td class="num">48%</td>
+<td><span class="meter"><span class="mfill" style="width:54%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-lo">Below break-even</span></td></tr><tr><th scope="row">Shakir Rec Yds U 49.5<span class="vs-lbl">Market: 45% over on Kalshi</span></th>
+<td class="num">53%</td><td class="num">55%</td>
+<td><span class="meter"><span class="mfill" style="width:53%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-lo">Below break-even</span></td></tr><tr><th scope="row">Parkinson Rec Yds O 14.5<span class="vs-lbl">Market: 56% on Kalshi</span></th>
+<td class="num">53%</td><td class="num">56%</td>
+<td><span class="meter"><span class="mfill" style="width:53%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-lo">Below break-even</span></td></tr><tr><th scope="row">Nacua Rec Yds O 94.5<span class="vs-lbl">Market: o90 at -140 Predictem</span></th>
+<td class="num">52%</td><td class="num">52%</td>
+<td><span class="meter"><span class="mfill" style="width:52%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-lo">Below break-even</span></td></tr><tr><th scope="row">Cook Receptions O 1.5<span class="vs-lbl">Market: 53% on Kalshi</span></th>
+<td class="num">52%</td><td class="num">53%</td>
+<td><span class="meter"><span class="mfill" style="width:52%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-lo">Below break-even</span></td></tr><tr><th scope="row">Cook Rush Yds O 75.5<span class="vs-lbl">Market: Covers projects 66</span></th>
+<td class="num">51%</td><td class="num">50%</td>
+<td><span class="meter"><span class="mfill" style="width:51%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-lo">Below break-even</span></td></tr><tr><th scope="row">Stafford Rush Yds U 9.5<span class="vs-lbl">Market: no price found</span></th>
+<td class="num">50%</td><td class="num">50%</td>
+<td><span class="meter"><span class="mfill" style="width:50%"></span><span class="mline" style="left:54.7%"></span><span class="mline" style="left:58.5%"></span></span></td>
+<td><span class="lean c-lo">Below break-even</span></td></tr></tbody></table></div>
+  </section>
+
+  <section class="pane" id="lineups" data-tab="Lineups" aria-labelledby="h-lu">
+    <div>
+      <h2 id="h-lu">Lineups</h2>
+      <p class="sub">Built from the picks that clear break-even, strongest first. "Return per $1" is the average payback if my estimates are right; above $1.00 means the payout is worth the risk. Even so, the 6-pick only hits about 1 time in 28.</p>
+    </div>
+    <div class="lus"><article class="lu">
+<header><h3>3-pick</h3><span class="rec">Play it as <b>Power</b></span></header>
+<ol><li>Allen Rush+Rec TDs O 0.5 <span class='pp'>64%</span></li><li>Stafford Pass Yds O 274.5 <span class='pp'>59%</span></li><li>K. Williams Rec Yds O 19.5 <span class='pp'>58%</span></li></ol>
+<dl class="lustats">
+<div><dt>All hit</dt><dd>22.1%</dd></div>
+<div><dt>Power pays</dt><dd>5x</dd></div>
+<div><dt>Return per $1 (Power)</dt><dd>$1.10</dd></div>
+<div><dt>Return per $1 (Flex)</dt><dd>$1.04</dd></div>
+<div><dt>Skip if app shows under</dt><dd>4.5x</dd></div>
+</dl>
+<p>Allen scores, Stafford airs it out, and Kyren catches checkdowns. Stafford and Kyren receiving rise together when the Rams throw a lot.</p></article><article class="lu">
+<header><h3>4-pick</h3><span class="rec">Play it as <b>Power</b></span></header>
+<ol><li>Allen Rush+Rec TDs O 0.5 <span class='pp'>64%</span></li><li>Stafford Pass Yds O 274.5 <span class='pp'>59%</span></li><li>K. Williams Rec Yds O 19.5 <span class='pp'>58%</span></li><li>Kincaid Rec Yds U 57.5 <span class='pp'>55%</span></li></ol>
+<dl class="lustats">
+<div><dt>All hit</dt><dd>12.2%</dd></div>
+<div><dt>Power pays</dt><dd>10x</dd></div>
+<div><dt>Return per $1 (Power)</dt><dd>$1.22</dd></div>
+<div><dt>Return per $1 (Flex)</dt><dd>$1.11</dd></div>
+<div><dt>Skip if app shows under</dt><dd>8.2x</dd></div>
+</dl>
+<p>Adds Kincaid under. The Rams have allowed the fewest TE yards in the league and his role is shrinking.</p></article><article class="lu">
+<header><h3>5-pick</h3><span class="rec">Play it as <b>Power</b></span></header>
+<ol><li>Allen Rush+Rec TDs O 0.5 <span class='pp'>64%</span></li><li>Stafford Pass Yds O 274.5 <span class='pp'>59%</span></li><li>K. Williams Rec Yds O 19.5 <span class='pp'>58%</span></li><li>Kincaid Rec Yds U 57.5 <span class='pp'>55%</span></li><li>Allen Pass Yds U 249.5 <span class='pp'>55%</span></li></ol>
+<dl class="lustats">
+<div><dt>All hit</dt><dd>6.7%</dd></div>
+<div><dt>Power pays</dt><dd>20x</dd></div>
+<div><dt>Return per $1 (Power)</dt><dd>$1.34</dd></div>
+<div><dt>Return per $1 (Flex)</dt><dd>$1.29</dd></div>
+<div><dt>Skip if app shows under</dt><dd>15x</dd></div>
+</dl>
+<p>Adds Allen under 249.5 pass yds. It pairs well with his TD leg: if the Rams take away the pass, Allen runs it in.</p></article><article class="lu">
+<header><h3>6-pick</h3><span class="rec">Play it as <b>Flex</b></span></header>
+<ol><li>Allen Rush+Rec TDs O 0.5 <span class='pp'>64%</span></li><li>Stafford Pass Yds O 274.5 <span class='pp'>59%</span></li><li>K. Williams Rec Yds O 19.5 <span class='pp'>58%</span></li><li>Kincaid Rec Yds U 57.5 <span class='pp'>55%</span></li><li>Allen Pass Yds U 249.5 <span class='pp'>55%</span></li><li>K. Williams Rush Yds O 69.5 <span class='pp'>54%</span></li></ol>
+<dl class="lustats">
+<div><dt>All hit</dt><dd>3.6%</dd></div>
+<div><dt>Power pays</dt><dd>37.5x</dd></div>
+<div><dt>Return per $1 (Power)</dt><dd>$1.35</dd></div>
+<div><dt>Return per $1 (Flex)</dt><dd>$1.34</dd></div>
+<div><dt>Skip if app shows under</dt><dd>27.8x</dd></div>
+</dl>
+<p>Adds Kyren over 69.5 rush yds, the weakest leg. If Kyren TD shows as a standard line in the app, swap it in (about 62%).</p></article></div>
+    <p class="caveat">These estimates come from four games of data and could easily be off by several points per pick. Only put in what you're fine losing.</p>
+  </section>
+
+  <footer class="notes">
+    <p>Team stats and player stats from FootballDB as of Oct 12, 2026. Ranks are computed across all 32 teams using per-game or per-play numbers, since some teams have played 4 games and others 5. Through four games these samples are small, so ranks can move fast. EPA, betting lines, props and injury notes come from the previews linked below.</p>
+    <ul>
+      <li><a href="https://www.footballdb.com/statistics/nfl/team-stats/offense-totals">FootballDB team offense</a> · <a href="https://www.footballdb.com/statistics/nfl/team-stats/defense-totals">team defense</a> · <a href="https://www.footballdb.com/statistics/nfl/team-stats/defense-passing/2026/regular-season">pass defense</a></li>
+      <li>Player game logs: FootballDB pages for <a href="https://www.footballdb.com/players/josh-allen-allenjo06/gamelogs/2026">Allen</a>, <a href="https://www.footballdb.com/players/james-cook-cookja05/gamelogs/2026">Cook</a>, <a href="https://www.footballdb.com/players/matthew-stafford-staffma01/gamelogs/2026">Stafford</a>, <a href="https://www.footballdb.com/players/kyren-williams-williky05/gamelogs/2026">K. Williams</a>, <a href="https://www.footballdb.com/players/puka-nacua-nacuapu01/gamelogs/2026">Nacua</a>, <a href="https://www.footballdb.com/players/dalton-kincaid-kincada01/gamelogs/2026">Kincaid</a>, <a href="https://www.footballdb.com/players/khalil-shakir-shakikh01/gamelogs/2026">Shakir</a>, <a href="https://www.footballdb.com/players/colby-parkinson-parkico01/gamelogs/2026">Parkinson</a></li>
+      <li>Payouts: <a href="https://intercom.help/prizepicks/en/articles/9047668-payouts-explained">PrizePicks payouts explained</a></li>
+      <li>Prop lines: <a href="https://www.covers.com/nfl/bills-vs-rams-player-props-computer-projections-week-5-2026">Covers</a> · <a href="https://sports.yahoo.com/articles/bills-vs-rams-player-props-020040979.html">Yahoo</a> · <a href="https://ats.io/nfl/bills-vs-rams-monday-night-football-player-props-10-12-2026/">ats.io</a> · <a href="https://www.predictem.com/nfl/bills-vs-rams-mnf-player-props-best-prop-bets-for-monday-night-football/">Predictem</a> · Matchups: <a href="https://www.cbssports.com/nfl/news/rams-vs-bills-how-to-watch-prediction-odds-monday-night-football/">CBS preview</a> · <a href="https://clutchpoints.com/nfl/nfl-stories/rams-beat-eagles-lots-sort-out-beat-bills-week-5">ClutchPoints</a></li>
+      <li><a href="https://www.prizepicks.com/playbook-article/bills-vs-rams-prediction-spread-nfl-picks-monday-night-football-october-12">PrizePicks preview</a> · <a href="https://www.cbssports.com/betting/news/monday-night-football-prediction-odds-time-rams-bills-expert-picks-bets/">CBS Sports odds</a> · <a href="https://www.si.com/nfl/rams/onsi/rams-vs-bills-week-5-preview-prediction-matchups">SI Rams preview</a> · <a href="https://www.foxnews.com/outkick-betting/bills-vs-rams-monday-night-football-potential-super-bowl-preview-week-5">OutKick preview</a> · <a href="https://sports.yahoo.com/articles/pro-picks-rams-edge-bills-221324099.html">AP Pro Picks</a></li>
+    </ul>
+  </footer>
+</main>
+<script>
+(function(){
+  var panes=[].slice.call(document.querySelectorAll('section.pane'));
+  if(panes.length<2) return;
+  var bar=document.createElement('div');
+  bar.className='subtabs'; bar.setAttribute('role','tablist'); bar.setAttribute('aria-label','Sections');
+  panes[0].parentNode.insertBefore(bar,panes[0]);
+  var tabs=panes.map(function(p,i){
+    var b=document.createElement('button');
+    b.type='button'; b.id='tab-'+p.id; b.setAttribute('role','tab'); b.setAttribute('aria-controls',p.id);
+    if(p.dataset.logo){var im=document.createElement('img'); im.src=p.dataset.logo; im.alt=''; im.className='lg'; im.style.setProperty('--s','18px'); b.appendChild(im);}
+    var h=p.querySelector('h2');
+    b.appendChild(document.createTextNode(p.dataset.tab||(h?h.textContent:'Section '+(i+1))));
+    p.setAttribute('role','tabpanel'); p.setAttribute('aria-labelledby',b.id);
+    b.addEventListener('click',function(){show(i,true);});
+    b.addEventListener('keydown',function(ev){
+      var n=panes.length, j=ev.key==='ArrowRight'?(i+1)%n:ev.key==='ArrowLeft'?(i+n-1)%n:ev.key==='Home'?0:ev.key==='End'?n-1:-1;
+      if(j>=0){ev.preventDefault(); show(j,true); tabs[j].focus();}
+    });
+    bar.appendChild(b); return b;
+  });
+  function show(i,user){
+    panes.forEach(function(p,j){p.hidden=j!==i; tabs[j].setAttribute('aria-selected',j===i?'true':'false'); tabs[j].tabIndex=j===i?0:-1;});
+    if(!user) return;
+    try{history.replaceState(null,'','#'+panes[i].id);}catch(e){}
+    try{tabs[i].scrollIntoView({block:'nearest',inline:'nearest'});}catch(e){}
+    var top=bar.getBoundingClientRect().top;
+    if(top<=1){window.scrollTo(0,window.scrollY+panes[i].getBoundingClientRect().top-bar.offsetHeight-12);}
+  }
+  function fromHash(){var want=(location.hash||'').slice(1), k=-1; panes.forEach(function(p,j){if(p.id===want) k=j;}); return k;}
+  window.addEventListener('hashchange',function(){var k=fromHash(); if(k>=0) show(k,false);});
+  show(Math.max(0,fromHash()),false);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<title>Bills at Rams MNF Matchup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: scoreboard header, then two unit-vs-unit tables, a coverage comparison, and player exploit cards. Rank pills run green (top 8) to red (bottom 8). */
+:root{
+  --bg:#F2F4F1; --surface:#FFFFFF; --fg:#16201B; --muted:#5A6A61; --line:#D8DFD9;
+  --buf:#C60C30; --lar:#B87E00; --lar-strong:#E5A100;
+  --t1:#1E8049; --t1bg:#DDF0E3; --t2:#4E7A2E; --t2bg:#EAF2DE; --t3:#9A6A00; --t3bg:#F7ECD3; --t4:#B33A25; --t4bg:#F8E0DA;
+  --track:#E6EBE7;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1512; --surface:#17201B; --fg:#E7EDE9; --muted:#97A69D; --line:#2B3730;
+  --buf:#FF5A70; --lar:#FFB52E; --lar-strong:#FFB52E;
+  --t1:#6FD796; --t1bg:#163323; --t2:#A9CF7E; --t2bg:#212E17; --t3:#F2C35E; --t3bg:#352A11; --t4:#FF8B74; --t4bg:#3A1B15;
+  --track:#25302A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1512; --surface:#17201B; --fg:#E7EDE9; --muted:#97A69D; --line:#2B3730;
+  --buf:#FF5A70; --lar:#FFB52E; --lar-strong:#FFB52E;
+  --t1:#6FD796; --t1bg:#163323; --t2:#A9CF7E; --t2bg:#212E17; --t3:#F2C35E; --t3bg:#352A11; --t4:#FF8B74; --t4bg:#3A1B15;
+  --track:#25302A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.05}
+h2{font-size:1.9rem;font-weight:700;letter-spacing:.01em;text-transform:uppercase}
+.sub{color:var(--muted);margin:6px 0 0;max-width:68ch}
+.eyebrow{font-family:var(--display);font-weight:600;font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+section{display:grid;gap:14px;min-width:0}
+
+/* scoreboard */
+.board{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;gap:16px}
+.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+.team{display:grid;gap:2px}
+.team.home{text-align:right}
+.team .ab{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,9vw,4.2rem);line-height:.9}
+.team.away .ab{color:var(--buf)} .team.home .ab{color:var(--lar-strong)}
+.team .nm{font-weight:600}
+.team .rec{color:var(--muted);font-variant-numeric:tabular-nums}
+.at{font-family:var(--display);font-size:1.4rem;color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 20px;border-top:1px solid var(--line);padding-top:14px;font-variant-numeric:tabular-nums}
+.facts div{display:grid}
+.facts dt{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:0;font-weight:600}
+.facts dl{display:contents}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums}
+caption{text-align:left;padding:14px 16px 4px;font-family:var(--display);font-weight:600;font-size:1.15rem;letter-spacing:.02em}
+thead th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;text-align:left;padding:10px 16px;border-bottom:1px solid var(--line)}
+tbody th{text-align:left;font-weight:600;padding:10px 16px;vertical-align:top;width:28%}
+tbody td{padding:10px 16px;vertical-align:middle}
+tbody tr+tr th,tbody tr+tr td{border-top:1px solid var(--line)}
+.vs-lbl{display:block;font-weight:400;font-size:.8rem;color:var(--muted)}
+.side{white-space:nowrap}
+.side .v{display:inline-block;min-width:4.6em;font-weight:600}
+.pill{display:inline-block;min-width:3.2em;text-align:center;font-size:.8rem;font-weight:700;padding:1px 8px;border-radius:999px;margin-right:10px}
+.t1{color:var(--t1);background:var(--t1bg)} .t2{color:var(--t2);background:var(--t2bg)}
+.t3{color:var(--t3);background:var(--t3bg)} .t4{color:var(--t4);background:var(--t4bg)}
+.bar{display:inline-block;width:72px;height:6px;background:var(--track);border-radius:3px;vertical-align:middle;overflow:hidden}
+.fill{display:block;height:100%;border-radius:3px}
+.fill.buf{background:var(--buf)} .fill.lar{background:var(--lar)}
+.edge{display:inline-block;font-family:var(--display);font-weight:700;font-size:.95rem;letter-spacing:.04em;text-transform:uppercase;padding:2px 10px;border-radius:4px;border:1.5px solid currentColor}
+.edge.buf{color:var(--buf)} .edge.lar{color:var(--lar)} .edge.even{color:var(--muted)}
+.tchip{font-family:var(--display);font-weight:700;letter-spacing:.04em}
+.tchip.buf{color:var(--buf)} .tchip.lar{color:var(--lar)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:.85rem;color:var(--muted);align-items:center}
+.legend .pill{margin-right:4px}
+
+/* takeaways */
+.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.take{border-left:4px solid var(--line);padding:4px 0 4px 14px;min-width:0}
+.take.buf{border-color:var(--buf)} .take.lar{border-color:var(--lar)}
+.take b{display:block;font-family:var(--display);font-size:1.15rem;letter-spacing:.02em;text-transform:uppercase}
+.take p{margin:4px 0 0}
+
+/* player cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.card header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card h3{font-size:1.45rem;font-weight:700}
+.card .pos{font-size:.8rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.line{font-variant-numeric:tabular-nums;font-weight:600;font-size:.95rem}
+.vsbox{display:grid;gap:2px;padding:10px 12px;border-radius:6px;background:var(--bg);font-size:.95rem}
+.vsbox .k{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.card p{margin:0}
+.verdict{font-family:var(--display);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.95rem}
+.verdict.big{color:var(--t1)} .verdict.mid{color:var(--t3)} .verdict.low{color:var(--t4)}
+
+.notes{color:var(--muted);font-size:.9rem;display:grid;gap:6px;max-width:75ch}
+.notes a{color:inherit}
+.notes ul{margin:0;padding-left:1.2em}
+:focus-visible{outline:2px solid var(--lar);outline-offset:2px}
+@media (max-width:520px){ .team .nm{font-size:.9rem} .bar{width:44px} }
+</style>
+
+<main class="wrap">
+  <div class="board" aria-label="Game info">
+    <span class="eyebrow">Monday Night Football · Week 5 · SoFi Stadium</span>
+    <div class="teams">
+      <div class="team away"><span class="ab">BUF</span><span class="nm">Buffalo Bills</span><span class="rec">3-1 · 1st AFC East</span></div>
+      <span class="at">at</span>
+      <div class="team home"><span class="ab">LAR</span><span class="nm">Los Angeles Rams</span><span class="rec">2-2 · 3rd NFC West</span></div>
+    </div>
+    <div class="facts"><dl>
+      <div><dt>Kickoff</dt><dd>5:15 PM PT · ESPN/ABC</dd></div>
+      <div><dt>Spread</dt><dd>Rams −3.5</dd></div>
+      <div><dt>Total</dt><dd>54.5</dd></div>
+      <div><dt>Win prob.</dt><dd>LAR 63% · BUF 37%</dd></div>
+      <div><dt>Out</dt><dd>BUF DT Ed Oliver, WR Joshua Palmer · LAR Myles Garrett (IR)</dd></div>
+    </dl></div>
+  </div>
+
+  <section aria-labelledby="h-big">
+    <h2 id="h-big">The short version</h2>
+    <div class="takes">
+      <div class="take lar"><b>Biggest mismatch: Rams passing game</b><p>The Rams throw for the 2nd most yards in the league and face a Bills pass D that ranks 29th in yards and TDs allowed. This is where the game tilts.</p></div>
+      <div class="take buf"><b>Bills path: run it and let Allen move</b><p>The Rams are #1 against the pass but closer to average against the run. Buffalo gets 5.05 yards a carry (3rd) and Allen has 7 rushing TDs.</p></div>
+      <div class="take"><b>Swing factor: turnovers</b><p>Stafford has 6 INTs (tied 29th), but Buffalo barely forces picks (25th). The Bills gave the ball away 7 times in their last two games.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-unit">
+    <div>
+      <h2 id="h-unit">Unit vs unit</h2>
+      <p class="sub">Each row lines up one offense stat with the matching stat for the defense it faces tonight. Ranks are out of 32 teams. The bar gets longer the better the rank.</p>
+    </div>
+    <div class="legend"><span><span class="pill t1">1-8</span>Top quarter</span><span><span class="pill t2">9-16</span>Above avg</span><span><span class="pill t3">17-24</span>Below avg</span><span><span class="pill t4">25-32</span>Bottom quarter</span><span>T = tied</span></div>
+    {{BUF_TABLE}}
+    {{LAR_TABLE}}
+  </section>
+
+  <section aria-labelledby="h-cov">
+    <div>
+      <h2 id="h-cov">Pass coverage head to head</h2>
+      <p class="sub">Both secondaries side by side. The Rams are top 2 in four of these. The Bills are bottom 8 in four.</p>
+    </div>
+    <div class="tbl-wrap"><table class="mt">
+      <thead><tr><th scope="col">Coverage stat</th><th scope="col"><span class="tchip buf">BUF</span> defense</th><th scope="col"><span class="tchip lar">LAR</span> defense</th></tr></thead>
+      <tbody>
+{{COV_ROWS}}
+      </tbody></table></div>
+  </section>
+
+  <section aria-labelledby="h-play">
+    <div>
+      <h2 id="h-play">Who can cash in</h2>
+      <p class="sub">Top players on each side matched against the spot where the other team is weakest.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <header><h3>Puka Nacua</h3><span class="pos"><span class="tchip lar">LAR</span> WR</span></header>
+        <div class="line">14 rec · 199 yds in 2 games · 99.5 yds/g</div>
+        <div class="vsbox"><span class="k">Attacks</span>Bills pass D: 29th in pass yds allowed, tied 25th in passer rating allowed, 26th in EPA per dropback</div>
+        <p>Back from injury and went for 9 catches, 125 yards and a TD at Philly last week. His prop is set at 94.5 receiving yards.</p>
+        <span class="verdict big">Big edge</span>
+      </article>
+      <article class="card">
+        <header><h3>Davante Adams</h3><span class="pos"><span class="tchip lar">LAR</span> WR</span></header>
+        <div class="line">22 rec · 390 yds · 17.7 avg · 2 TD</div>
+        <div class="vsbox"><span class="k">Attacks</span>Bills allow 7.46 yds per pass (tied 22nd) and 2.5 pass TDs a game (29th)</div>
+        <p>With teams rolling coverage to Nacua, Adams is the downfield threat. His 17.7 yards a catch fits a secondary that gives up chunk plays.</p>
+        <span class="verdict big">Big edge</span>
+      </article>
+      <article class="card">
+        <header><h3>James Cook</h3><span class="pos"><span class="tchip buf">BUF</span> RB</span></header>
+        <div class="line">70 car · 421 yds · 6.01 avg · 3 TD · #3 in NFL</div>
+        <div class="vsbox"><span class="k">Attacks</span>Rams run D: 13th in rush yds allowed, 12th in yds per carry. Middle of the pack next to their #1 pass D</div>
+        <p>Running at the Rams is the easiest way to avoid their coverage. Prop line is 75.5 rushing yards.</p>
+        <span class="verdict mid">Solid edge</span>
+      </article>
+      <article class="card">
+        <header><h3>Josh Allen</h3><span class="pos"><span class="tchip buf">BUF</span> QB</span></header>
+        <div class="line">1,039 pass yds · 8.73 yds/att (3rd) · 7 rush TD (tied 1st)</div>
+        <div class="vsbox"><span class="k">Attacks</span>Rams pass rush: 1.75 sacks a game (26th), with Myles Garrett on IR</div>
+        <p>He has 13 of the Bills' 16 offensive TDs. A light Rams rush gives him time to extend plays and scramble near the goal line.</p>
+        <span class="verdict mid">Solid edge</span>
+      </article>
+      <article class="card">
+        <header><h3>Dalton Kincaid</h3><span class="pos"><span class="tchip buf">BUF</span> TE</span></header>
+        <div class="line">15 rec · 270 yds · 18.0 avg · 1 TD</div>
+        <div class="vsbox"><span class="k">Attacks</span>Rams linebackers Nate Landman and Omar Speights in coverage</div>
+        <p>SI flagged the Rams LBs as a soft spot, but the numbers say otherwise: the Rams have allowed the fewest TE yards in the NFL (85 on 12 catches). Kincaid also has only 3 catches for 45 yards the last two weeks.</p>
+        <span class="verdict low">Rams win this one</span>
+      </article>
+      <article class="card">
+        <header><h3>Gregory Rousseau</h3><span class="pos"><span class="tchip buf">BUF</span> EDGE</span></header>
+        <div class="line">6.0 sacks · #2 in NFL</div>
+        <div class="vsbox"><span class="k">Attacks</span>Stafford's 6 INTs (tied 29th). Rams allow only 1.5 sacks a game (6th)</div>
+        <p>Strength vs strength up front, but pressure is Buffalo's best shot at forcing a bad throw. Losing Ed Oliver inside makes it harder.</p>
+        <span class="verdict low">Watch</span>
+      </article>
+    </div>
+  </section>
+
+{{ONEONE}}
+
+{{PROPS}}
+
+  <footer class="notes">
+    <p>Team stats and player stats from FootballDB as of Oct 12, 2026. Ranks are computed across all 32 teams using per-game or per-play numbers, since some teams have played 4 games and others 5. Through four games these samples are small, so ranks can move fast. EPA, betting lines, props and injury notes come from the previews linked below.</p>
+    <ul>
+      <li><a href="https://www.footballdb.com/statistics/nfl/team-stats/offense-totals">FootballDB team offense</a> · <a href="https://www.footballdb.com/statistics/nfl/team-stats/defense-totals">team defense</a> · <a href="https://www.footballdb.com/statistics/nfl/team-stats/defense-passing/2026/regular-season">pass defense</a></li>
+      <li>Player game logs: FootballDB pages for <a href="https://www.footballdb.com/players/josh-allen-allenjo06/gamelogs/2026">Allen</a>, <a href="https://www.footballdb.com/players/james-cook-cookja05/gamelogs/2026">Cook</a>, <a href="https://www.footballdb.com/players/matthew-stafford-staffma01/gamelogs/2026">Stafford</a>, <a href="https://www.footballdb.com/players/kyren-williams-williky05/gamelogs/2026">K. Williams</a>, <a href="https://www.footballdb.com/players/puka-nacua-nacuapu01/gamelogs/2026">Nacua</a>, <a href="https://www.footballdb.com/players/dalton-kincaid-kincada01/gamelogs/2026">Kincaid</a>, <a href="https://www.footballdb.com/players/khalil-shakir-shakikh01/gamelogs/2026">Shakir</a>, <a href="https://www.footballdb.com/players/colby-parkinson-parkico01/gamelogs/2026">Parkinson</a></li>
+      <li>Prop lines: <a href="https://www.covers.com/nfl/bills-vs-rams-player-props-computer-projections-week-5-2026">Covers</a> · <a href="https://sports.yahoo.com/articles/bills-vs-rams-player-props-020040979.html">Yahoo</a> · <a href="https://ats.io/nfl/bills-vs-rams-monday-night-football-player-props-10-12-2026/">ats.io</a> · <a href="https://www.predictem.com/nfl/bills-vs-rams-mnf-player-props-best-prop-bets-for-monday-night-football/">Predictem</a> · Matchups: <a href="https://www.cbssports.com/nfl/news/rams-vs-bills-how-to-watch-prediction-odds-monday-night-football/">CBS preview</a> · <a href="https://clutchpoints.com/nfl/nfl-stories/rams-beat-eagles-lots-sort-out-beat-bills-week-5">ClutchPoints</a></li>
+      <li><a href="https://www.prizepicks.com/playbook-article/bills-vs-rams-prediction-spread-nfl-picks-monday-night-football-october-12">PrizePicks preview</a> · <a href="https://www.cbssports.com/betting/news/monday-night-football-prediction-odds-time-rams-bills-expert-picks-bets/">CBS Sports odds</a> · <a href="https://www.si.com/nfl/rams/onsi/rams-vs-bills-week-5-preview-prediction-matchups">SI Rams preview</a> · <a href="https://www.foxnews.com/outkick-betting/bills-vs-rams-monday-night-football-potential-super-bowl-preview-week-5">OutKick preview</a> · <a href="https://sports.yahoo.com/articles/pro-picks-rams-edge-bills-221324099.html">AP Pro Picks</a></li>
+    </ul>
+  </footer>
+</main>

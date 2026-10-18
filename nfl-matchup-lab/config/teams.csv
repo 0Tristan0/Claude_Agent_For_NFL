@@ -1,0 +1,33 @@
+team,display,name,conference,division,color
+ARI,ARI,Arizona Cardinals,NFC,West,#97233F
+ATL,ATL,Atlanta Falcons,NFC,South,#A71930
+BAL,BAL,Baltimore Ravens,AFC,North,#241773
+BUF,BUF,Buffalo Bills,AFC,East,#C60C30
+CAR,CAR,Carolina Panthers,NFC,South,#0085CA
+CHI,CHI,Chicago Bears,NFC,North,#C83803
+CIN,CIN,Cincinnati Bengals,AFC,North,#FB4F14
+CLE,CLE,Cleveland Browns,AFC,North,#FF3C00
+DAL,DAL,Dallas Cowboys,NFC,East,#003594
+DEN,DEN,Denver Broncos,AFC,West,#FB4F14
+DET,DET,Detroit Lions,NFC,North,#0076B6
+GB,GB,Green Bay Packers,NFC,North,#203731
+HOU,HOU,Houston Texans,AFC,South,#A71930
+IND,IND,Indianapolis Colts,AFC,South,#002C5F
+JAX,JAX,Jacksonville Jaguars,AFC,South,#006778
+KC,KC,Kansas City Chiefs,AFC,West,#E31837
+LA,LAR,Los Angeles Rams,NFC,West,#B87E00
+LAC,LAC,Los Angeles Chargers,AFC,West,#0080C6
+LV,LV,Las Vegas Raiders,AFC,West,#5C5F61
+MIA,MIA,Miami Dolphins,AFC,East,#008E97
+MIN,MIN,Minnesota Vikings,NFC,North,#4F2683
+NE,NE,New England Patriots,AFC,East,#002244
+NO,NO,New Orleans Saints,NFC,South,#9F8958
+NYG,NYG,New York Giants,NFC,East,#0B2265
+NYJ,NYJ,New York Jets,AFC,East,#125740
+PHI,PHI,Philadelphia Eagles,NFC,East,#004C54
+PIT,PIT,Pittsburgh Steelers,AFC,North,#B98C00
+SEA,SEA,Seattle Seahawks,NFC,West,#2E7D32
+SF,SF,San Francisco 49ers,NFC,West,#AA0000
+TB,TB,Tampa Bay Buccaneers,NFC,South,#D50A0A
+TEN,TEN,Tennessee Titans,AFC,South,#4B92DB
+WAS,WAS,Washington Commanders,NFC,East,#5A1414

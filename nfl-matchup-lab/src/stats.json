@@ -1,0 +1,296 @@
+{
+ "o_ppg": {
+  "label": "Points / game",
+  "higher_better": true,
+  "BUF": {
+   "val": "31.8",
+   "rank": 2,
+   "tie": false
+  },
+  "LAR": {
+   "val": "21.2",
+   "rank": 23,
+   "tie": false
+  }
+ },
+ "o_ypg": {
+  "label": "Total yards / game",
+  "higher_better": true,
+  "BUF": {
+   "val": "386.2",
+   "rank": 7,
+   "tie": false
+  },
+  "LAR": {
+   "val": "417.0",
+   "rank": 1,
+   "tie": false
+  }
+ },
+ "o_pypg": {
+  "label": "Pass yards / game",
+  "higher_better": true,
+  "BUF": {
+   "val": "247.2",
+   "rank": 10,
+   "tie": false
+  },
+  "LAR": {
+   "val": "290.2",
+   "rank": 2,
+   "tie": false
+  }
+ },
+ "o_ypa": {
+  "label": "Yards / pass att",
+  "higher_better": true,
+  "BUF": {
+   "val": "8.73",
+   "rank": 3,
+   "tie": false
+  },
+  "LAR": {
+   "val": "7.28",
+   "rank": 16,
+   "tie": false
+  }
+ },
+ "o_cmp": {
+  "label": "Completion %",
+  "higher_better": true,
+  "BUF": {
+   "val": "66.4%",
+   "rank": 13,
+   "tie": false
+  },
+  "LAR": {
+   "val": "61.2%",
+   "rank": 24,
+   "tie": true
+  }
+ },
+ "o_rate": {
+  "label": "Passer rating",
+  "higher_better": true,
+  "BUF": {
+   "val": "100.1",
+   "rank": 9,
+   "tie": false
+  },
+  "LAR": {
+   "val": "80.4",
+   "rank": 25,
+   "tie": true
+  }
+ },
+ "o_int": {
+  "label": "INTs thrown / game",
+  "higher_better": false,
+  "BUF": {
+   "val": "0.75",
+   "rank": 16,
+   "tie": true
+  },
+  "LAR": {
+   "val": "1.50",
+   "rank": 29,
+   "tie": true
+  }
+ },
+ "o_sk": {
+  "label": "Sacks allowed / game",
+  "higher_better": false,
+  "BUF": {
+   "val": "2.25",
+   "rank": 18,
+   "tie": true
+  },
+  "LAR": {
+   "val": "1.50",
+   "rank": 6,
+   "tie": true
+  }
+ },
+ "o_rypg": {
+  "label": "Rush yards / game",
+  "higher_better": true,
+  "BUF": {
+   "val": "139.0",
+   "rank": 6,
+   "tie": false
+  },
+  "LAR": {
+   "val": "126.8",
+   "rank": 11,
+   "tie": false
+  }
+ },
+ "o_ypc": {
+  "label": "Yards / carry",
+  "higher_better": true,
+  "BUF": {
+   "val": "5.05",
+   "rank": 3,
+   "tie": true
+  },
+  "LAR": {
+   "val": "4.83",
+   "rank": 7,
+   "tie": false
+  }
+ },
+ "d_ppg": {
+  "label": "Points allowed / game",
+  "higher_better": false,
+  "BUF": {
+   "val": "26.8",
+   "rank": 25,
+   "tie": false
+  },
+  "LAR": {
+   "val": "20.8",
+   "rank": 8,
+   "tie": false
+  }
+ },
+ "d_ypg": {
+  "label": "Total yards allowed / game",
+  "higher_better": false,
+  "BUF": {
+   "val": "372.2",
+   "rank": 27,
+   "tie": false
+  },
+  "LAR": {
+   "val": "247.5",
+   "rank": 1,
+   "tie": false
+  }
+ },
+ "d_pypg": {
+  "label": "Pass yards allowed / game",
+  "higher_better": false,
+  "BUF": {
+   "val": "256.2",
+   "rank": 29,
+   "tie": false
+  },
+  "LAR": {
+   "val": "145.5",
+   "rank": 1,
+   "tie": false
+  }
+ },
+ "d_ypa": {
+  "label": "Yards / pass att allowed",
+  "higher_better": false,
+  "BUF": {
+   "val": "7.46",
+   "rank": 22,
+   "tie": true
+  },
+  "LAR": {
+   "val": "4.84",
+   "rank": 1,
+   "tie": false
+  }
+ },
+ "d_cmp": {
+  "label": "Completion % allowed",
+  "higher_better": false,
+  "BUF": {
+   "val": "63.9%",
+   "rank": 16,
+   "tie": false
+  },
+  "LAR": {
+   "val": "53.5%",
+   "rank": 2,
+   "tie": false
+  }
+ },
+ "d_rate": {
+  "label": "Passer rating allowed",
+  "higher_better": false,
+  "BUF": {
+   "val": "103.4",
+   "rank": 25,
+   "tie": true
+  },
+  "LAR": {
+   "val": "75.4",
+   "rank": 2,
+   "tie": false
+  }
+ },
+ "d_ptd": {
+  "label": "Pass TDs allowed / game",
+  "higher_better": false,
+  "BUF": {
+   "val": "2.50",
+   "rank": 29,
+   "tie": false
+  },
+  "LAR": {
+   "val": "1.75",
+   "rank": 21,
+   "tie": false
+  }
+ },
+ "d_int": {
+  "label": "INTs / game",
+  "higher_better": true,
+  "BUF": {
+   "val": "0.50",
+   "rank": 25,
+   "tie": false
+  },
+  "LAR": {
+   "val": "0.75",
+   "rank": 13,
+   "tie": true
+  }
+ },
+ "d_sk": {
+  "label": "Sacks / game",
+  "higher_better": true,
+  "BUF": {
+   "val": "2.50",
+   "rank": 11,
+   "tie": false
+  },
+  "LAR": {
+   "val": "1.75",
+   "rank": 26,
+   "tie": false
+  }
+ },
+ "d_rypg": {
+  "label": "Rush yards allowed / game",
+  "higher_better": false,
+  "BUF": {
+   "val": "116.0",
+   "rank": 18,
+   "tie": false
+  },
+  "LAR": {
+   "val": "102.0",
+   "rank": 13,
+   "tie": false
+  }
+ },
+ "d_ypc": {
+  "label": "Yards / carry allowed",
+  "higher_better": false,
+  "BUF": {
+   "val": "4.03",
+   "rank": 15,
+   "tie": false
+  },
+  "LAR": {
+   "val": "3.96",
+   "rank": 12,
+   "tie": false
+  }
+ }
+}
