@@ -2,7 +2,7 @@
   "game": "2026_06_BAL_CLE",
   "label": "BAL at CLE",
   "kickoff_utc": "2026-10-18 17:00 UTC",
-  "frozen_at": "2026-10-13 19:23 UTC",
+  "frozen_at": "2026-10-18 00:04 UTC",
   "bankroll": 20.0,
   "reserve_not_bet": 0.0,
   "paper_money": true,
@@ -16,7 +16,7 @@
       "legs": [
         "Rashod Bateman rec yds more 30.5",
         "Deshaun Watson rush attempts more 6.5",
-        "Zay Flowers rec yds more 60.5"
+        "Derrick Henry rush yds less 90.5"
       ],
       "legs_detail": [
         {
@@ -26,12 +26,13 @@
           "stat": "rec_yds",
           "side": "over",
           "line": 30.5,
-          "p_model": 0.6091892361111111,
+          "p_model": 0.5991267361111111,
           "game_id": "2026_06_BAL_CLE",
-          "note": "High \u00b7 More in 4 of last 4 (88, 37, 46, 62)",
+          "note": "Med-High \u00b7 More in 4 of last 4 (88, 37, 46, 62)",
           "reasons": [
             "Against: CLE have the 2nd best pass defense (EPA per dropback allowed)",
-            "For: CLE allow the 10th most receiving yds to WRs (167 a game)"
+            "For: CLE allow the 10th most receiving yds to WRs (167 a game)",
+            "Against: News: No production found with Huntley at QB in Week 5; Lamar is out again"
           ]
         },
         {
@@ -47,18 +48,19 @@
           "reasons": []
         },
         {
-          "player": "Zay Flowers",
-          "player_id": "00-0039064",
+          "player": "Derrick Henry",
+          "player_id": "00-0032764",
           "team": "BAL",
-          "stat": "rec_yds",
-          "side": "over",
-          "line": 60.5,
-          "p_model": 0.5511336805555556,
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 90.5,
+          "p_model": 0.5419774305555556,
           "game_id": "2026_06_BAL_CLE",
-          "note": "Medium \u00b7 More in 3 of last 4 (150, 84, 118, 53)",
+          "note": "Lean \u00b7 Less in 3 of last 4 (68, 89, 73, 102)",
           "reasons": [
-            "Against: CLE have the 2nd best pass defense (EPA per dropback allowed)",
-            "For: CLE allow the 10th most receiving yds to WRs (167 a game)"
+            "Against: CLE have the 3rd worst run defense (EPA per rush allowed)",
+            "Against: News: Lamar Jackson is out again (Tyler Huntley starts): with Huntley in Week 5 Henry ran 24 times for 102",
+            "For: News: Books list him at 87.5-89.5, below this line"
           ]
         }
       ],
@@ -83,12 +85,13 @@
           "stat": "rec_yds",
           "side": "over",
           "line": 30.5,
-          "p_model": 0.6091892361111111,
+          "p_model": 0.5991267361111111,
           "game_id": "2026_06_BAL_CLE",
-          "note": "High \u00b7 More in 4 of last 4 (88, 37, 46, 62)",
+          "note": "Med-High \u00b7 More in 4 of last 4 (88, 37, 46, 62)",
           "reasons": [
             "Against: CLE have the 2nd best pass defense (EPA per dropback allowed)",
-            "For: CLE allow the 10th most receiving yds to WRs (167 a game)"
+            "For: CLE allow the 10th most receiving yds to WRs (167 a game)",
+            "Against: News: No production found with Huntley at QB in Week 5; Lamar is out again"
           ]
         },
         {
@@ -111,14 +114,14 @@
   ],
   "expected_return_per_dollar": {
     "A_flex3": {
-      "estimate": 0.946
+      "estimate": 0.928
     },
     "B_power2": {
-      "estimate": 1.015
+      "estimate": 0.999
     }
   },
-  "expected_back": 19.12,
-  "p_profit": 0.607,
-  "p_lose_all": 0.393,
+  "expected_back": 18.77,
+  "p_profit": 0.598,
+  "p_lose_all": 0.402,
   "result": null
 }

@@ -7,9 +7,9 @@
  "home": "NYG",
  "kickoff_utc": "2026-10-18 17:00:00+00:00",
  "home_spread": 1.5,
- "total": 45.5,
- "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
- "built_at": "2026-10-13 19:23:56.556911+00:00",
+ "total": 46.5,
+ "injury_note": "injury report week 6",
+ "built_at": "2026-10-18 00:05:05.607234+00:00",
  "units": [
   {
    "offense": "NO",
@@ -17,7 +17,7 @@
    "stat": "EPA per dropback",
    "off_value": -0.011533235881684457,
    "def_value": -0.018739729646270634,
-   "off_rank": 20,
+   "off_rank": 19,
    "def_rank": 9
   },
   {
@@ -35,17 +35,17 @@
    "stat": "Explosive pass rate",
    "off_value": 0.06420635560502157,
    "def_value": 0.0818141795043126,
-   "off_rank": 28,
-   "def_rank": 19
+   "off_rank": 27,
+   "def_rank": 18
   },
   {
    "offense": "NO",
    "defense": "NYG",
    "stat": "Pressure rate (PFR)",
-   "off_value": 0.20773603215820455,
-   "def_value": 0.1948863289909254,
-   "off_rank": 8,
-   "def_rank": 27
+   "off_value": 0.20962008330560553,
+   "def_value": 0.20893077063738094,
+   "off_rank": 11,
+   "def_rank": 21
   },
   {
    "offense": "NO",
@@ -54,7 +54,7 @@
    "off_value": 0.6403957937983911,
    "def_value": 0.6039545892789715,
    "off_rank": 8,
-   "def_rank": 21
+   "def_rank": 20
   },
   {
    "offense": "NYG",
@@ -63,7 +63,7 @@
    "off_value": 0.06666739987095294,
    "def_value": 0.08663005285692596,
    "off_rank": 15,
-   "def_rank": 22
+   "def_rank": 21
   },
   {
    "offense": "NYG",
@@ -81,16 +81,16 @@
    "off_value": 0.07576975071620946,
    "def_value": 0.08029722177917992,
    "off_rank": 21,
-   "def_rank": 18
+   "def_rank": 17
   },
   {
    "offense": "NYG",
    "defense": "NO",
    "stat": "Pressure rate (PFR)",
-   "off_value": 0.24053183916636164,
-   "def_value": 0.21573580909705614,
-   "off_rank": 24,
-   "def_rank": 20
+   "off_value": 0.22846849285061466,
+   "def_value": 0.19603057819480652,
+   "off_rank": 18,
+   "def_rank": 25
   },
   {
    "offense": "NYG",
@@ -98,11 +98,180 @@
    "stat": "Red-zone TD rate",
    "off_value": 0.5566389152021561,
    "def_value": 0.5739437091390046,
-   "off_rank": 18,
+   "off_rank": 20,
    "def_rank": 15
   }
  ],
+ "news": [
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player": "Isaiah Likely",
+   "team": "NYG",
+   "stat": "*",
+   "more_adj": 0.03,
+   "reason": "TE Theo Johnson is out, so more tight end snaps and targets go to Likely",
+   "source": "Giants.com, Big Blue View (Oct 16)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player": "Jameis Winston",
+   "team": "NYG",
+   "stat": "pass_att",
+   "more_adj": -0.02,
+   "reason": "J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%",
+   "source": "Giants coverage (Oct 14-16)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player": "Jameis Winston",
+   "team": "NYG",
+   "stat": "completions",
+   "more_adj": -0.02,
+   "reason": "J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%",
+   "source": "Giants coverage (Oct 14-16)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player": "Jameis Winston",
+   "team": "NYG",
+   "stat": "rush_yds",
+   "more_adj": -0.02,
+   "reason": "J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%",
+   "source": "Giants coverage (Oct 14-16)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player": "Najee Harris",
+   "team": "NYG",
+   "stat": "*",
+   "more_adj": -0.03,
+   "reason": "Handcuff: about 20% of snaps since Week 3 and no touches after a lost fumble in Week 4",
+   "source": "RotoBaller, NBC Sports",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player": "Cam Skattebo",
+   "team": "NYG",
+   "stat": "rush_att",
+   "more_adj": 0.02,
+   "reason": "Workhorse at about 69% of snaps; New Orleans is without LBs Kaden Elliss and Anfernee Jennings",
+   "source": "RotoBaller; Saints Friday report",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player": "Cam Skattebo",
+   "team": "NYG",
+   "stat": "rush_yds",
+   "more_adj": 0.02,
+   "reason": "Workhorse at about 69% of snaps; New Orleans is without LBs Kaden Elliss and Anfernee Jennings",
+   "source": "RotoBaller; Saints Friday report",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  }
+ ],
+ "overrides": [
+  {
+   "player": "Theo Johnson",
+   "team": "NYG",
+   "status": "out",
+   "game_id": "2026_06_NO_NYG",
+   "source": "Giants.com Week 6 tracker, Big Blue View (Oct 16)",
+   "note": "Ruled out Friday (neck)"
+  }
+ ],
  "picks": [
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player_id": "00-0036893",
+   "player": "Najee Harris",
+   "team": "NYG",
+   "position": "RB",
+   "stat": "receptions",
+   "line": 0.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5721961806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00328125,
+   "p_news": 0.03,
+   "tier": "Medium",
+   "reasons": [
+    "For: News: Handcuff: about 20% of snaps since Week 3 and no touches after a lost fumble in Week 4"
+   ]
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player_id": "00-0031503",
+   "player": "Jameis Winston",
+   "team": "NYG",
+   "position": "QB",
+   "stat": "pass_att",
+   "line": 32.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    27.0,
+    22.0,
+    29.0,
+    54.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5655555556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "p_news": 0.02,
+   "tier": "Medium",
+   "reasons": [
+    "For: News: J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%"
+   ]
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player_id": "00-0031503",
+   "player": "Jameis Winston",
+   "team": "NYG",
+   "position": "QB",
+   "stat": "completions",
+   "line": 20.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    11.0,
+    14.0,
+    18.0,
+    33.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5612586806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00859375,
+   "p_news": 0.02,
+   "tier": "Medium",
+   "reasons": [
+    "For: News: J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%"
+   ]
+  },
   {
    "game_id": "2026_06_NO_NYG",
    "player_id": "00-0036309",
@@ -122,13 +291,42 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5589149306,
+   "market_src": "50%: no price",
+   "p_model": 0.5565711806,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00671875,
+   "p_matchup": 0.00203125,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": [
-    "For: NO allow the 9th fewest receiving yds to WRs (130 a game)"
+    "For: NO allow the 8th fewest receiving yds to WRs (130 a game)"
    ]
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player_id": "00-0040743",
+   "player": "Tyler Shough",
+   "team": "NO",
+   "position": "QB",
+   "stat": "pass_att",
+   "line": 33.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    34.0,
+    42.0,
+    48.0,
+    25.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5555555556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "p_news": 0.0,
+   "tier": "Medium",
+   "reasons": []
   },
   {
    "game_id": "2026_06_NO_NYG",
@@ -149,12 +347,13 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5579774306,
+   "market_src": "50%: no price",
+   "p_model": 0.5551649306,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00484375,
+   "p_matchup": -0.00078125,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": [
-    "For: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): a clean pocket",
     "Against: NYG have the 9th best pass defense (EPA per dropback allowed)"
    ]
   },
@@ -177,139 +376,15 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5579774306,
+   "market_src": "50%: no price",
+   "p_model": 0.5551649306,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00484375,
+   "p_matchup": -0.00078125,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": [
-    "For: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): a clean pocket",
     "Against: NYG have the 9th best pass defense (EPA per dropback allowed)"
    ]
-  },
-  {
-   "game_id": "2026_06_NO_NYG",
-   "player_id": "00-0031503",
-   "player": "Jameis Winston",
-   "team": "NYG",
-   "position": "QB",
-   "stat": "pass_att",
-   "line": 32.5,
-   "side": "under",
-   "hits": 3,
-   "games": 4,
-   "log": [
-    27.0,
-    22.0,
-    29.0,
-    54.0
-   ],
-   "recent": 0.6111111111,
-   "market": 0.5,
-   "p_model": 0.5555555556,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.0,
-   "tier": "Medium",
-   "reasons": []
-  },
-  {
-   "game_id": "2026_06_NO_NYG",
-   "player_id": "00-0040743",
-   "player": "Tyler Shough",
-   "team": "NO",
-   "position": "QB",
-   "stat": "pass_att",
-   "line": 33.5,
-   "side": "over",
-   "hits": 3,
-   "games": 4,
-   "log": [
-    34.0,
-    42.0,
-    48.0,
-    25.0
-   ],
-   "recent": 0.6111111111,
-   "market": 0.5,
-   "p_model": 0.5555555556,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.0,
-   "tier": "Medium",
-   "reasons": []
-  },
-  {
-   "game_id": "2026_06_NO_NYG",
-   "player_id": "00-0040715",
-   "player": "Cam Skattebo",
-   "team": "NYG",
-   "position": "RB",
-   "stat": "rush_yds",
-   "line": 59.5,
-   "side": "under",
-   "hits": 3,
-   "games": 4,
-   "log": [
-    36.0,
-    60.0,
-    58.0,
-    59.0
-   ],
-   "recent": 0.6111111111,
-   "market": 0.5,
-   "p_model": 0.5548524306,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.00140625,
-   "tier": "Medium",
-   "reasons": []
-  },
-  {
-   "game_id": "2026_06_NO_NYG",
-   "player_id": "00-0031503",
-   "player": "Jameis Winston",
-   "team": "NYG",
-   "position": "QB",
-   "stat": "completions",
-   "line": 20.5,
-   "side": "under",
-   "hits": 3,
-   "games": 4,
-   "log": [
-    11.0,
-    14.0,
-    18.0,
-    33.0
-   ],
-   "recent": 0.6111111111,
-   "market": 0.5,
-   "p_model": 0.5542274306,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.00265625,
-   "tier": "Medium",
-   "reasons": []
-  },
-  {
-   "game_id": "2026_06_NO_NYG",
-   "player_id": "00-0036893",
-   "player": "Najee Harris",
-   "team": "NYG",
-   "position": "RB",
-   "stat": "receptions",
-   "line": 0.5,
-   "side": "under",
-   "hits": 3,
-   "games": 4,
-   "log": [
-    0.0,
-    0.0,
-    0.0,
-    1.0
-   ],
-   "recent": 0.6111111111,
-   "market": 0.5,
-   "p_model": 0.5526649306,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.00578125,
-   "tier": "Medium",
-   "reasons": []
   },
   {
    "game_id": "2026_06_NO_NYG",
@@ -330,13 +405,43 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5510243056,
+   "market_src": "50%: no price",
+   "p_model": 0.5543055556,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.0090625,
+   "p_matchup": -0.0025,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": [
-    "Against: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): a clean pocket",
     "For: NYG have the 9th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player_id": "00-0040715",
+   "player": "Cam Skattebo",
+   "team": "NYG",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 59.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    36.0,
+    60.0,
+    58.0,
+    59.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5448524306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00140625,
+   "p_news": -0.02,
+   "tier": "Lean",
+   "reasons": [
+    "Against: News: Workhorse at about 69% of snaps; New Orleans is without LBs Kaden Elliss and Anfernee Jennings"
    ]
   },
   {
@@ -358,39 +463,131 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.509765625,
+   "market_src": "50%: no price",
+   "p_model": 0.520859375,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.01953125,
+   "p_matchup": 0.01171875,
+   "p_news": 0.03,
    "tier": "Coin flip",
    "reasons": [
-    "For: NO allow the 7th most receiving yds to TEs (71 a game)"
+    "For: NO allow the 7th most receiving yds to TEs (71 a game)",
+    "For: News: TE Theo Johnson is out, so more tight end snaps and targets go to Likely"
    ]
   },
   {
    "game_id": "2026_06_NO_NYG",
-   "player_id": "00-0039847",
-   "player": "Theo Johnson",
+   "player_id": "00-0036893",
+   "player": "Najee Harris",
    "team": "NYG",
-   "position": "TE",
-   "stat": "rec_yds",
-   "line": 8.5,
+   "position": "RB",
+   "stat": "rush_att",
+   "line": 5.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    4.0,
+    9.0,
+    9.0,
+    5.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.514296875,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00140625,
+   "p_news": 0.03,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: News: Handcuff: about 20% of snaps since Week 3 and no touches after a lost fumble in Week 4"
+   ]
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player_id": "00-0036893",
+   "player": "Najee Harris",
+   "team": "NYG",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 19.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    6.0,
+    52.0,
+    30.0,
+    9.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.514296875,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00140625,
+   "p_news": 0.03,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: News: Handcuff: about 20% of snaps since Week 3 and no touches after a lost fumble in Week 4"
+   ]
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player_id": "00-0031503",
+   "player": "Jameis Winston",
+   "team": "NYG",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 5.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    1.0,
+    14.0,
+    0.0,
+    27.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5121875,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.004375,
+   "p_news": 0.02,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: News: J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%"
+   ]
+  },
+  {
+   "game_id": "2026_06_NO_NYG",
+   "player_id": "00-0040715",
+   "player": "Cam Skattebo",
+   "team": "NYG",
+   "position": "RB",
+   "stat": "rush_att",
+   "line": 14.5,
    "side": "over",
    "hits": 2,
    "games": 4,
    "log": [
-    0.0,
-    0.0,
-    11.0,
-    35.0
+    12.0,
+    20.0,
+    18.0,
+    13.0
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.509765625,
+   "market_src": "50%: no price",
+   "p_model": 0.510703125,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.01953125,
+   "p_matchup": 0.00140625,
+   "p_news": 0.02,
    "tier": "Coin flip",
    "reasons": [
-    "For: NO allow the 7th most receiving yds to TEs (71 a game)"
+    "For: News: Workhorse at about 69% of snaps; New Orleans is without LBs Kaden Elliss and Anfernee Jennings"
    ]
   },
   {
@@ -412,12 +609,13 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.508515625,
+   "market_src": "50%: no price",
+   "p_model": 0.506328125,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.01703125,
+   "p_matchup": 0.01265625,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": [
-    "For: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): fewer checkdowns",
     "For: NYG have the 9th best pass defense (EPA per dropback allowed)"
    ]
   },
@@ -440,93 +638,15 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.508515625,
+   "market_src": "50%: no price",
+   "p_model": 0.506328125,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.01703125,
+   "p_matchup": 0.01265625,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": [
-    "For: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): fewer checkdowns",
     "For: NYG have the 9th best pass defense (EPA per dropback allowed)"
    ]
-  },
-  {
-   "game_id": "2026_06_NO_NYG",
-   "player_id": "00-0040743",
-   "player": "Tyler Shough",
-   "team": "NO",
-   "position": "QB",
-   "stat": "rush_yds",
-   "line": 10.5,
-   "side": "under",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    23.0,
-    36.0,
-    5.0,
-    0.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.5059375,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.011875,
-   "tier": "Coin flip",
-   "reasons": [
-    "For: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): fewer reasons to run"
-   ]
-  },
-  {
-   "game_id": "2026_06_NO_NYG",
-   "player_id": "00-0041042",
-   "player": "Malachi Fields",
-   "team": "NYG",
-   "position": "WR",
-   "stat": "rec_yds",
-   "line": 26.5,
-   "side": "under",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    30.0,
-    19.0,
-    52.0,
-    20.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.503359375,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00671875,
-   "tier": "Coin flip",
-   "reasons": [
-    "For: NO allow the 9th fewest receiving yds to WRs (130 a game)"
-   ]
-  },
-  {
-   "game_id": "2026_06_NO_NYG",
-   "player_id": "00-0040715",
-   "player": "Cam Skattebo",
-   "team": "NYG",
-   "position": "RB",
-   "stat": "rec_yds",
-   "line": 14.5,
-   "side": "over",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    19.0,
-    40.0,
-    8.0,
-    12.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.502890625,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00578125,
-   "tier": "Coin flip",
-   "reasons": []
   },
   {
    "game_id": "2026_06_NO_NYG",
@@ -547,9 +667,11 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.501328125,
+   "market_src": "50%: no price",
+   "p_model": 0.504296875,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00265625,
+   "p_matchup": 0.00859375,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": []
   },
@@ -572,59 +694,38 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.501328125,
+   "market_src": "50%: no price",
+   "p_model": 0.504296875,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00265625,
+   "p_matchup": 0.00859375,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": []
   },
   {
    "game_id": "2026_06_NO_NYG",
-   "player_id": "00-0031503",
-   "player": "Jameis Winston",
-   "team": "NYG",
+   "player_id": "00-0040743",
+   "player": "Tyler Shough",
+   "team": "NO",
    "position": "QB",
    "stat": "rush_yds",
-   "line": 5.5,
-   "side": "over",
+   "line": 10.5,
+   "side": "under",
    "hits": 2,
    "games": 4,
    "log": [
-    1.0,
-    14.0,
-    0.0,
-    27.0
+    23.0,
+    36.0,
+    5.0,
+    0.0
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.50125,
+   "market_src": "50%: no price",
+   "p_model": 0.503125,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.0025,
-   "tier": "Coin flip",
-   "reasons": []
-  },
-  {
-   "game_id": "2026_06_NO_NYG",
-   "player_id": "00-0036893",
-   "player": "Najee Harris",
-   "team": "NYG",
-   "position": "RB",
-   "stat": "rush_att",
-   "line": 5.5,
-   "side": "over",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    4.0,
-    9.0,
-    9.0,
-    5.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.500703125,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00140625,
+   "p_matchup": 0.00625,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": []
   },
@@ -634,49 +735,55 @@
    "player": "Cam Skattebo",
    "team": "NYG",
    "position": "RB",
-   "stat": "rush_att",
+   "stat": "rec_yds",
    "line": 14.5,
-   "side": "over",
+   "side": "under",
    "hits": 2,
    "games": 4,
    "log": [
-    12.0,
-    20.0,
-    18.0,
-    13.0
+    19.0,
+    40.0,
+    8.0,
+    12.0
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.500703125,
+   "market_src": "50%: no price",
+   "p_model": 0.501640625,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00140625,
+   "p_matchup": 0.00328125,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": []
   },
   {
    "game_id": "2026_06_NO_NYG",
-   "player_id": "00-0036893",
-   "player": "Najee Harris",
+   "player_id": "00-0041042",
+   "player": "Malachi Fields",
    "team": "NYG",
-   "position": "RB",
-   "stat": "rush_yds",
-   "line": 19.5,
-   "side": "over",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 26.5,
+   "side": "under",
    "hits": 2,
    "games": 4,
    "log": [
-    6.0,
-    52.0,
     30.0,
-    9.0
+    19.0,
+    52.0,
+    20.0
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.500703125,
+   "market_src": "50%: no price",
+   "p_model": 0.501015625,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00140625,
+   "p_matchup": 0.00203125,
+   "p_news": 0.0,
    "tier": "Coin flip",
-   "reasons": []
+   "reasons": [
+    "For: NO allow the 8th fewest receiving yds to WRs (130 a game)"
+   ]
   },
   {
    "game_id": "2026_06_NO_NYG",
@@ -697,9 +804,11 @@
    ],
    "recent": 0.5,
    "market": 0.5,
+   "market_src": "50%: no price",
    "p_model": 0.5,
    "captured_at": "2026-10-13 01:01:37+00:00",
    "p_matchup": 0.0,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": []
   }
@@ -713,40 +822,25 @@
     "basis": "Guesser method",
     "play_as": "Flex",
     "game": "NO at NYG",
-    "p_all": 0.1732566204725143,
-    "p_independent": 0.1732566204725143,
-    "power_ev": 0.8662831023625716,
-    "flex_ev": 0.9055621605704353,
-    "best_ev": 0.9055621605704353,
-    "min_power_mult": 5.771785212436609,
+    "p_all": 0.17978262710048012,
+    "p_independent": 0.17978262710048012,
+    "power_ev": 0.8989131355024006,
+    "flex_ev": 0.9249423426247428,
+    "best_ev": 0.9249423426247428,
+    "min_power_mult": 5.562272707479695,
     "legs": [
      {
-      "player": "Darnell Mooney",
-      "player_id": "00-0036309",
+      "player": "Najee Harris",
+      "player_id": "00-0036893",
       "team": "NYG",
-      "stat": "rec_yds",
+      "stat": "receptions",
       "side": "under",
-      "line": 21.5,
-      "p_model": 0.5589149305555556,
+      "line": 0.5,
+      "p_model": 0.5721961805555555,
       "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 Less in 3 of last 4 (48, 20, 0, 14)",
+      "note": "Medium \u00b7 Less in 3 of last 4 (0, 0, 0, 1)",
       "reasons": [
-       "For: NO allow the 9th fewest receiving yds to WRs (130 a game)"
-      ]
-     },
-     {
-      "player": "Tyler Shough",
-      "player_id": "00-0040743",
-      "team": "NO",
-      "stat": "pass_rush_yds",
-      "side": "over",
-      "line": 264.5,
-      "p_model": 0.5579774305555556,
-      "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 More in 3 of last 4 (275, 291, 291, 96)",
-      "reasons": [
-       "For: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): a clean pocket",
-       "Against: NYG have the 9th best pass defense (EPA per dropback allowed)"
+       "For: News: Handcuff: about 20% of snaps since Week 3 and no touches after a lost fumble in Week 4"
       ]
      },
      {
@@ -756,9 +850,23 @@
       "stat": "pass_att",
       "side": "under",
       "line": 32.5,
-      "p_model": 0.5555555555555556,
+      "p_model": 0.5655555555555556,
       "game_id": "2026_06_NO_NYG",
       "note": "Medium \u00b7 Less in 3 of last 4 (27, 22, 29, 54)",
+      "reasons": [
+       "For: News: J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%"
+      ]
+     },
+     {
+      "player": "Tyler Shough",
+      "player_id": "00-0040743",
+      "team": "NO",
+      "stat": "pass_att",
+      "side": "over",
+      "line": 33.5,
+      "p_model": 0.5555555555555556,
+      "game_id": "2026_06_NO_NYG",
+      "note": "Medium \u00b7 More in 3 of last 4 (34, 42, 48, 25)",
       "reasons": []
      }
     ]
@@ -768,44 +876,29 @@
    {
     "n": 4,
     "entry": "B",
-    "recommended": false,
+    "recommended": true,
     "basis": "Guesser method",
     "play_as": "Power",
     "game": "NO at NYG",
-    "p_all": 0.096131856979016,
-    "p_independent": 0.096131856979016,
-    "power_ev": 0.96131856979016,
-    "flex_ev": 0.9397344552659598,
-    "best_ev": 0.96131856979016,
-    "min_power_mult": 10.402378893172568,
+    "p_all": 0.10006182900869344,
+    "p_independent": 0.10006182900869344,
+    "power_ev": 1.0006182900869345,
+    "flex_ev": 0.9674789057542441,
+    "best_ev": 1.0006182900869345,
+    "min_power_mult": 9.993820919594818,
     "legs": [
      {
-      "player": "Darnell Mooney",
-      "player_id": "00-0036309",
+      "player": "Najee Harris",
+      "player_id": "00-0036893",
       "team": "NYG",
-      "stat": "rec_yds",
+      "stat": "receptions",
       "side": "under",
-      "line": 21.5,
-      "p_model": 0.5589149305555556,
+      "line": 0.5,
+      "p_model": 0.5721961805555555,
       "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 Less in 3 of last 4 (48, 20, 0, 14)",
+      "note": "Medium \u00b7 Less in 3 of last 4 (0, 0, 0, 1)",
       "reasons": [
-       "For: NO allow the 9th fewest receiving yds to WRs (130 a game)"
-      ]
-     },
-     {
-      "player": "Tyler Shough",
-      "player_id": "00-0040743",
-      "team": "NO",
-      "stat": "pass_rush_yds",
-      "side": "over",
-      "line": 264.5,
-      "p_model": 0.5579774305555556,
-      "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 More in 3 of last 4 (275, 291, 291, 96)",
-      "reasons": [
-       "For: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): a clean pocket",
-       "Against: NYG have the 9th best pass defense (EPA per dropback allowed)"
+       "For: News: Handcuff: about 20% of snaps since Week 3 and no touches after a lost fumble in Week 4"
       ]
      },
      {
@@ -815,21 +908,37 @@
       "stat": "pass_att",
       "side": "under",
       "line": 32.5,
-      "p_model": 0.5555555555555556,
+      "p_model": 0.5655555555555556,
       "game_id": "2026_06_NO_NYG",
       "note": "Medium \u00b7 Less in 3 of last 4 (27, 22, 29, 54)",
-      "reasons": []
+      "reasons": [
+       "For: News: J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%"
+      ]
      },
      {
-      "player": "Cam Skattebo",
-      "player_id": "00-0040715",
+      "player": "Darnell Mooney",
+      "player_id": "00-0036309",
       "team": "NYG",
-      "stat": "rush_yds",
+      "stat": "rec_yds",
       "side": "under",
-      "line": 59.5,
-      "p_model": 0.5548524305555556,
+      "line": 21.5,
+      "p_model": 0.5565711805555555,
       "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 Less in 3 of last 4 (36, 60, 58, 59)",
+      "note": "Medium \u00b7 Less in 3 of last 4 (48, 20, 0, 14)",
+      "reasons": [
+       "For: NO allow the 8th fewest receiving yds to WRs (130 a game)"
+      ]
+     },
+     {
+      "player": "Tyler Shough",
+      "player_id": "00-0040743",
+      "team": "NO",
+      "stat": "pass_att",
+      "side": "over",
+      "line": 33.5,
+      "p_model": 0.5555555555555556,
+      "game_id": "2026_06_NO_NYG",
+      "note": "Medium \u00b7 More in 3 of last 4 (34, 42, 48, 25)",
       "reasons": []
      }
     ]
@@ -843,40 +952,25 @@
     "basis": "Guesser method",
     "play_as": "Flex",
     "game": "NO at NYG",
-    "p_all": 0.053128706061484475,
-    "p_independent": 0.053128706061484475,
-    "power_ev": 1.0625741212296895,
-    "flex_ev": 1.0911151103196346,
-    "best_ev": 1.0911151103196346,
-    "min_power_mult": 18.822216352167995,
+    "p_all": 0.054518930741221015,
+    "p_independent": 0.054518930741221015,
+    "power_ev": 1.0903786148244203,
+    "flex_ev": 1.1115675008220147,
+    "best_ev": 1.1115675008220147,
+    "min_power_mult": 18.342252615822375,
     "legs": [
      {
-      "player": "Darnell Mooney",
-      "player_id": "00-0036309",
+      "player": "Najee Harris",
+      "player_id": "00-0036893",
       "team": "NYG",
-      "stat": "rec_yds",
+      "stat": "receptions",
       "side": "under",
-      "line": 21.5,
-      "p_model": 0.5589149305555556,
+      "line": 0.5,
+      "p_model": 0.5721961805555555,
       "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 Less in 3 of last 4 (48, 20, 0, 14)",
+      "note": "Medium \u00b7 Less in 3 of last 4 (0, 0, 0, 1)",
       "reasons": [
-       "For: NO allow the 9th fewest receiving yds to WRs (130 a game)"
-      ]
-     },
-     {
-      "player": "Tyler Shough",
-      "player_id": "00-0040743",
-      "team": "NO",
-      "stat": "pass_rush_yds",
-      "side": "over",
-      "line": 264.5,
-      "p_model": 0.5579774305555556,
-      "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 More in 3 of last 4 (275, 291, 291, 96)",
-      "reasons": [
-       "For: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): a clean pocket",
-       "Against: NYG have the 9th best pass defense (EPA per dropback allowed)"
+       "For: News: Handcuff: about 20% of snaps since Week 3 and no touches after a lost fumble in Week 4"
       ]
      },
      {
@@ -886,9 +980,37 @@
       "stat": "pass_att",
       "side": "under",
       "line": 32.5,
-      "p_model": 0.5555555555555556,
+      "p_model": 0.5655555555555556,
       "game_id": "2026_06_NO_NYG",
       "note": "Medium \u00b7 Less in 3 of last 4 (27, 22, 29, 54)",
+      "reasons": [
+       "For: News: J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%"
+      ]
+     },
+     {
+      "player": "Darnell Mooney",
+      "player_id": "00-0036309",
+      "team": "NYG",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 21.5,
+      "p_model": 0.5565711805555555,
+      "game_id": "2026_06_NO_NYG",
+      "note": "Medium \u00b7 Less in 3 of last 4 (48, 20, 0, 14)",
+      "reasons": [
+       "For: NO allow the 8th fewest receiving yds to WRs (130 a game)"
+      ]
+     },
+     {
+      "player": "Tyler Shough",
+      "player_id": "00-0040743",
+      "team": "NO",
+      "stat": "pass_att",
+      "side": "over",
+      "line": 33.5,
+      "p_model": 0.5555555555555556,
+      "game_id": "2026_06_NO_NYG",
+      "note": "Medium \u00b7 More in 3 of last 4 (34, 42, 48, 25)",
       "reasons": []
      },
      {
@@ -898,22 +1020,12 @@
       "stat": "rush_yds",
       "side": "under",
       "line": 59.5,
-      "p_model": 0.5548524305555556,
+      "p_model": 0.5448524305555555,
       "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 Less in 3 of last 4 (36, 60, 58, 59)",
-      "reasons": []
-     },
-     {
-      "player": "Najee Harris",
-      "player_id": "00-0036893",
-      "team": "NYG",
-      "stat": "receptions",
-      "side": "under",
-      "line": 0.5,
-      "p_model": 0.5526649305555555,
-      "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 Less in 3 of last 4 (0, 0, 0, 1)",
-      "reasons": []
+      "note": "Lean \u00b7 Less in 3 of last 4 (36, 60, 58, 59)",
+      "reasons": [
+       "Against: News: Workhorse at about 69% of snaps; New Orleans is without LBs Kaden Elliss and Anfernee Jennings"
+      ]
      }
     ]
    }
@@ -928,39 +1040,24 @@
     "stake": 15,
     "game": "NO at NYG",
     "basis": "Guesser method",
-    "p_all": 0.1732566204725143,
-    "p_paid": 0.5858444320783367,
-    "best_ev": 0.9055621605704353,
+    "p_all": 0.17978262710048012,
+    "p_paid": 0.5961277724194102,
+    "best_ev": 0.9249423426247428,
     "recommended": false,
-    "min_power_mult": 5.771785212436609,
+    "min_power_mult": 5.562272707479695,
     "legs": [
      {
-      "player": "Darnell Mooney",
-      "player_id": "00-0036309",
+      "player": "Najee Harris",
+      "player_id": "00-0036893",
       "team": "NYG",
-      "stat": "rec_yds",
+      "stat": "receptions",
       "side": "under",
-      "line": 21.5,
-      "p_model": 0.5589149305555556,
+      "line": 0.5,
+      "p_model": 0.5721961805555555,
       "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 Less in 3 of last 4 (48, 20, 0, 14)",
+      "note": "Medium \u00b7 Less in 3 of last 4 (0, 0, 0, 1)",
       "reasons": [
-       "For: NO allow the 9th fewest receiving yds to WRs (130 a game)"
-      ]
-     },
-     {
-      "player": "Tyler Shough",
-      "player_id": "00-0040743",
-      "team": "NO",
-      "stat": "pass_rush_yds",
-      "side": "over",
-      "line": 264.5,
-      "p_model": 0.5579774305555556,
-      "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 More in 3 of last 4 (275, 291, 291, 96)",
-      "reasons": [
-       "For: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): a clean pocket",
-       "Against: NYG have the 9th best pass defense (EPA per dropback allowed)"
+       "For: News: Handcuff: about 20% of snaps since Week 3 and no touches after a lost fumble in Week 4"
       ]
      },
      {
@@ -970,9 +1067,23 @@
       "stat": "pass_att",
       "side": "under",
       "line": 32.5,
-      "p_model": 0.5555555555555556,
+      "p_model": 0.5655555555555556,
       "game_id": "2026_06_NO_NYG",
       "note": "Medium \u00b7 Less in 3 of last 4 (27, 22, 29, 54)",
+      "reasons": [
+       "For: News: J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%"
+      ]
+     },
+     {
+      "player": "Tyler Shough",
+      "player_id": "00-0040743",
+      "team": "NO",
+      "stat": "pass_att",
+      "side": "over",
+      "line": 33.5,
+      "p_model": 0.5555555555555556,
+      "game_id": "2026_06_NO_NYG",
+      "note": "Medium \u00b7 More in 3 of last 4 (34, 42, 48, 25)",
       "reasons": []
      }
     ],
@@ -984,39 +1095,24 @@
     "stake": 5,
     "game": "NO at NYG",
     "basis": "Guesser method",
-    "p_all": 0.053128706061484475,
-    "p_paid": 0.6041135675791937,
-    "best_ev": 1.0911151103196346,
+    "p_all": 0.054518930741221015,
+    "p_paid": 0.6095232755816453,
+    "best_ev": 1.1115675008220147,
     "recommended": true,
-    "min_power_mult": 18.822216352167995,
+    "min_power_mult": 18.342252615822375,
     "legs": [
      {
-      "player": "Darnell Mooney",
-      "player_id": "00-0036309",
+      "player": "Najee Harris",
+      "player_id": "00-0036893",
       "team": "NYG",
-      "stat": "rec_yds",
+      "stat": "receptions",
       "side": "under",
-      "line": 21.5,
-      "p_model": 0.5589149305555556,
+      "line": 0.5,
+      "p_model": 0.5721961805555555,
       "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 Less in 3 of last 4 (48, 20, 0, 14)",
+      "note": "Medium \u00b7 Less in 3 of last 4 (0, 0, 0, 1)",
       "reasons": [
-       "For: NO allow the 9th fewest receiving yds to WRs (130 a game)"
-      ]
-     },
-     {
-      "player": "Tyler Shough",
-      "player_id": "00-0040743",
-      "team": "NO",
-      "stat": "pass_rush_yds",
-      "side": "over",
-      "line": 264.5,
-      "p_model": 0.5579774305555556,
-      "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 More in 3 of last 4 (275, 291, 291, 96)",
-      "reasons": [
-       "For: NYG pressure QBs on 19% of dropbacks (the 6th least); NO's line allows pressure on 21% (the 8th least): a clean pocket",
-       "Against: NYG have the 9th best pass defense (EPA per dropback allowed)"
+       "For: News: Handcuff: about 20% of snaps since Week 3 and no touches after a lost fumble in Week 4"
       ]
      },
      {
@@ -1026,9 +1122,37 @@
       "stat": "pass_att",
       "side": "under",
       "line": 32.5,
-      "p_model": 0.5555555555555556,
+      "p_model": 0.5655555555555556,
       "game_id": "2026_06_NO_NYG",
       "note": "Medium \u00b7 Less in 3 of last 4 (27, 22, 29, 54)",
+      "reasons": [
+       "For: News: J.J. McCarthy's change-of-pace package will take some snaps (Harbaugh); Winston is completing 57.6%"
+      ]
+     },
+     {
+      "player": "Darnell Mooney",
+      "player_id": "00-0036309",
+      "team": "NYG",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 21.5,
+      "p_model": 0.5565711805555555,
+      "game_id": "2026_06_NO_NYG",
+      "note": "Medium \u00b7 Less in 3 of last 4 (48, 20, 0, 14)",
+      "reasons": [
+       "For: NO allow the 8th fewest receiving yds to WRs (130 a game)"
+      ]
+     },
+     {
+      "player": "Tyler Shough",
+      "player_id": "00-0040743",
+      "team": "NO",
+      "stat": "pass_att",
+      "side": "over",
+      "line": 33.5,
+      "p_model": 0.5555555555555556,
+      "game_id": "2026_06_NO_NYG",
+      "note": "Medium \u00b7 More in 3 of last 4 (34, 42, 48, 25)",
       "reasons": []
      },
      {
@@ -1038,31 +1162,21 @@
       "stat": "rush_yds",
       "side": "under",
       "line": 59.5,
-      "p_model": 0.5548524305555556,
+      "p_model": 0.5448524305555555,
       "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 Less in 3 of last 4 (36, 60, 58, 59)",
-      "reasons": []
-     },
-     {
-      "player": "Najee Harris",
-      "player_id": "00-0036893",
-      "team": "NYG",
-      "stat": "receptions",
-      "side": "under",
-      "line": 0.5,
-      "p_model": 0.5526649305555555,
-      "game_id": "2026_06_NO_NYG",
-      "note": "Medium \u00b7 Less in 3 of last 4 (0, 0, 0, 1)",
-      "reasons": []
+      "note": "Lean \u00b7 Less in 3 of last 4 (36, 60, 58, 59)",
+      "reasons": [
+       "Against: News: Workhorse at about 69% of snaps; New Orleans is without LBs Kaden Elliss and Anfernee Jennings"
+      ]
      }
     ],
     "entry": "B"
    }
   ],
-  "expected_back": 19.0390079601547,
-  "p_profit": 0.5036857721005161,
-  "p_lose_all": 0.3137277724429857,
-  "p_any_back": 0.6862722275570143,
+  "expected_back": 19.431972643481217,
+  "p_profit": 0.5120986847288257,
+  "p_lose_all": 0.3064476367277702,
+  "p_any_back": 0.6935523632722298,
   "rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)"
  }
 }

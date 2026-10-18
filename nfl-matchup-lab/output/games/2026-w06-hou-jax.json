@@ -6,10 +6,10 @@
  "away": "HOU",
  "home": "JAX",
  "kickoff_utc": "2026-10-18 13:30:00+00:00",
- "home_spread": -3.0,
+ "home_spread": -2.5,
  "total": 42.5,
- "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
- "built_at": "2026-10-13 19:23:56.556911+00:00",
+ "injury_note": "injury report week 6",
+ "built_at": "2026-10-18 00:04:37.580775+00:00",
  "units": [
   {
    "offense": "HOU",
@@ -35,17 +35,17 @@
    "stat": "Explosive pass rate",
    "off_value": 0.09366303849181074,
    "def_value": 0.0655129261586768,
-   "off_rank": 9,
-   "def_rank": 6
+   "off_rank": 8,
+   "def_rank": 7
   },
   {
    "offense": "HOU",
    "defense": "JAX",
    "stat": "Pressure rate (PFR)",
-   "off_value": 0.2269045786746357,
-   "def_value": 0.2207645376246743,
-   "off_rank": 17,
-   "def_rank": 18
+   "off_value": 0.20981814747667837,
+   "def_value": 0.23919186679030197,
+   "off_rank": 12,
+   "def_rank": 12
   },
   {
    "offense": "HOU",
@@ -62,7 +62,7 @@
    "stat": "EPA per dropback",
    "off_value": 0.1648187095085604,
    "def_value": -0.016431844074302614,
-   "off_rank": 6,
+   "off_rank": 7,
    "def_rank": 10
   },
   {
@@ -87,10 +87,10 @@
    "offense": "JAX",
    "defense": "HOU",
    "stat": "Pressure rate (PFR)",
-   "off_value": 0.2219017083517147,
-   "def_value": 0.23520071063028392,
-   "off_rank": 14,
-   "def_rank": 14
+   "off_value": 0.23039640306721745,
+   "def_value": 0.25311628405109304,
+   "off_rank": 20,
+   "def_rank": 6
   },
   {
    "offense": "JAX",
@@ -102,6 +102,179 @@
    "def_rank": 14
   }
  ],
+ "news": [
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Woody Marks",
+   "team": "HOU",
+   "stat": "receptions",
+   "more_adj": 0.04,
+   "reason": "Lead back with David Montgomery out (did not travel to London): played 85% of snaps after Montgomery left last game, 15 carries for 62 and 4 of 4 catches for 23",
+   "source": "Houston Chronicle, Yahoo snap counts (Oct 14-16)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Woody Marks",
+   "team": "HOU",
+   "stat": "rec_yds",
+   "more_adj": 0.04,
+   "reason": "Lead back with David Montgomery out (did not travel to London): played 85% of snaps after Montgomery left last game, 15 carries for 62 and 4 of 4 catches for 23",
+   "source": "Houston Chronicle, Yahoo snap counts (Oct 14-16)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Woody Marks",
+   "team": "HOU",
+   "stat": "rush_rec_yds",
+   "more_adj": 0.04,
+   "reason": "Lead back with David Montgomery out (did not travel to London): played 85% of snaps after Montgomery left last game, 15 carries for 62 and 4 of 4 catches for 23",
+   "source": "Houston Chronicle, Yahoo snap counts (Oct 14-16)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Woody Marks",
+   "team": "HOU",
+   "stat": "rush_yds",
+   "more_adj": 0.02,
+   "reason": "Lead back with Montgomery out, but Jacksonville has been stout against the run",
+   "source": "Houston Chronicle; Sportsbook Review",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Marvin Harrison Jr.",
+   "team": "HOU",
+   "stat": "*",
+   "more_adj": -0.05,
+   "reason": "Texans debut after the trade: Ryans says he gets a limited package and won't play all 60 snaps",
+   "source": "ESPN, RotoBaller (Oct 15-16)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Nico Collins",
+   "team": "HOU",
+   "stat": "rec_yds",
+   "more_adj": 0.03,
+   "reason": "Jacksonville CB Montaric Brown is out and CB Jaylon Jones questionable; books have him at 72.5-74.5, above this line",
+   "source": "Jaguars Friday report; FanDuel, DraftKings, BetMGM via Football Nation",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "C.J. Stroud",
+   "team": "HOU",
+   "stat": "pass_yds",
+   "more_adj": 0.02,
+   "reason": "Jacksonville is short at corner (Brown out) and 30th in pass yards allowed",
+   "source": "Covers, NBC Sports previews",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "C.J. Stroud",
+   "team": "HOU",
+   "stat": "pass_rush_yds",
+   "more_adj": 0.02,
+   "reason": "Jacksonville is short at corner (Brown out) and 30th in pass yards allowed",
+   "source": "Covers, NBC Sports previews",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Trevor Lawrence",
+   "team": "JAX",
+   "stat": "pass_yds",
+   "more_adj": 0.01,
+   "reason": "Houston S/DB Jalen Pitre is out and books list him at 225-228.5, above this line; but Jacksonville lost LT Anton Harrison to IR",
+   "source": "Texans Friday report; Covers; News4Jax",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Trevor Lawrence",
+   "team": "JAX",
+   "stat": "pass_rush_yds",
+   "more_adj": 0.01,
+   "reason": "Houston S/DB Jalen Pitre is out and books list him at 225-228.5, above this line; but Jacksonville lost LT Anton Harrison to IR",
+   "source": "Texans Friday report; Covers; News4Jax",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Parker Washington",
+   "team": "JAX",
+   "stat": "receptions",
+   "more_adj": 0.03,
+   "reason": "Jacksonville's clear No. 1 receiver now: 82% of snaps, 9 targets, 6 for 124 and 2 TDs in Week 5; Houston's Pitre is out",
+   "source": "New Era Prep snap counts; Yahoo (Oct 12-14)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Parker Washington",
+   "team": "JAX",
+   "stat": "rec_yds",
+   "more_adj": 0.03,
+   "reason": "Jacksonville's clear No. 1 receiver now: 82% of snaps, 9 targets, 6 for 124 and 2 TDs in Week 5; Houston's Pitre is out",
+   "source": "New Era Prep snap counts; Yahoo (Oct 12-14)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Brian Thomas Jr.",
+   "team": "JAX",
+   "stat": "receptions",
+   "more_adj": -0.03,
+   "reason": "Role cut: 51% of snaps and no catches in Week 5 as Jacksonville uses more two-TE sets (coach Coen)",
+   "source": "Yahoo, CBS Sports, RotoBaller (Oct 12-14)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Brian Thomas Jr.",
+   "team": "JAX",
+   "stat": "rec_yds",
+   "more_adj": -0.03,
+   "reason": "Role cut: 51% of snaps and no catches in Week 5 as Jacksonville uses more two-TE sets (coach Coen)",
+   "source": "Yahoo, CBS Sports, RotoBaller (Oct 12-14)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Bhayshul Tuten",
+   "team": "JAX",
+   "stat": "rush_yds",
+   "more_adj": 0.02,
+   "reason": "Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5",
+   "source": "DraftSharks, Yahoo snap counts",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Bhayshul Tuten",
+   "team": "JAX",
+   "stat": "rush_rec_yds",
+   "more_adj": 0.02,
+   "reason": "Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5",
+   "source": "DraftSharks, Yahoo snap counts",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player": "Chris Rodriguez Jr.",
+   "team": "JAX",
+   "stat": "rush_yds",
+   "more_adj": -0.02,
+   "reason": "Tuten is taking over the backfield (68% of snaps in Week 5)",
+   "source": "DraftSharks, Yahoo snap counts",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  }
+ ],
+ "overrides": [],
  "picks": [
   {
    "game_id": "2026_06_HOU_JAX",
@@ -122,12 +295,15 @@
    ],
    "recent": 0.7222222222,
    "market": 0.5,
-   "p_model": 0.6075017361,
+   "market_src": "50%: no price",
+   "p_model": 0.6152517361,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.00721875,
+   "p_matchup": -0.01171875,
+   "p_news": 0.02,
    "tier": "High",
    "reasons": [
-    "Against: HOU have the 4th best run defense (EPA per rush allowed)"
+    "Against: HOU have the 4th best run defense (EPA per rush allowed)",
+    "For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5"
    ]
   },
   {
@@ -149,12 +325,15 @@
    ],
    "recent": 0.7222222222,
    "market": 0.5,
-   "p_model": 0.5996267361,
+   "market_src": "50%: no price",
+   "p_model": 0.6040017361,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.02296875,
-   "tier": "Med-High",
+   "p_matchup": -0.01421875,
+   "p_news": 0.0,
+   "tier": "High",
    "reasons": [
     "Against: HOU allow the 3rd fewest receiving yds to RBs (17 a game)",
+    "For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): more quick checkdowns",
     "Against: HOU have the 10th best pass defense (EPA per dropback allowed)"
    ]
   },
@@ -177,9 +356,11 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5663836806,
+   "market_src": "50%: no price",
+   "p_model": 0.5671961806,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.02165625,
+   "p_matchup": 0.02328125,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": [
     "For: JAX allow the 5th fewest receiving yds to TEs (34 a game)",
@@ -188,29 +369,62 @@
   },
   {
    "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0040583",
-   "player": "Woody Marks",
+   "player_id": "00-0039163",
+   "player": "C.J. Stroud",
    "team": "HOU",
-   "position": "RB",
-   "stat": "rush_yds",
-   "line": 47.5,
-   "side": "under",
+   "position": "QB",
+   "stat": "pass_rush_yds",
+   "line": 265.5,
+   "side": "over",
    "hits": 3,
    "games": 4,
    "log": [
-    8.0,
-    15.0,
-    22.0,
-    62.0
+    382.0,
+    177.0,
+    359.0,
+    266.0
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5641336806,
+   "market_src": "50%: no price",
+   "p_model": 0.5611024306,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.01715625,
+   "p_matchup": -0.00890625,
+   "p_news": 0.02,
    "tier": "Medium",
    "reasons": [
-    "For: JAX have the 3rd best run defense (EPA per rush allowed)"
+    "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+    "For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed"
+   ]
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player_id": "00-0039163",
+   "player": "C.J. Stroud",
+   "team": "HOU",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 255.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    353.0,
+    167.0,
+    347.0,
+    261.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5611024306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00890625,
+   "p_news": 0.02,
+   "tier": "Medium",
+   "reasons": [
+    "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+    "For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed"
    ]
   },
   {
@@ -232,13 +446,47 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5622274306,
+   "market_src": "50%: no price",
+   "p_model": 0.5607899306,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.01334375,
+   "p_matchup": 0.01046875,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": [
     "For: JAX allow the 1st most receiving yds to WRs (204 a game)",
     "Against: JAX have the 7th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player_id": "00-0040719",
+   "player": "Bhayshul Tuten",
+   "team": "JAX",
+   "position": "RB",
+   "stat": "rush_rec_yds",
+   "line": 75.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    62.0,
+    90.0,
+    91.0,
+    96.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5584461806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01421875,
+   "p_news": 0.02,
+   "tier": "Medium",
+   "reasons": [
+    "Against: HOU allow the 3rd fewest receiving yds to RBs (17 a game)",
+    "For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): more quick checkdowns",
+    "Against: HOU have the 10th best pass defense (EPA per dropback allowed)",
+    "For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5"
    ]
   },
   {
@@ -260,38 +508,17 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5586024306,
+   "market_src": "50%: no price",
+   "p_model": 0.5579774306,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00609375,
+   "p_matchup": 0.01484375,
+   "p_news": -0.01,
    "tier": "Medium",
    "reasons": [
-    "For: HOU have the 10th best pass defense (EPA per dropback allowed)"
+    "For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): a hard night to throw",
+    "For: HOU have the 10th best pass defense (EPA per dropback allowed)",
+    "Against: News: Houston S/DB Jalen Pitre is out and books list him at 225-228.5, above this line; but Jacksonville lost LT Anton Harrison to IR"
    ]
-  },
-  {
-   "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0036971",
-   "player": "Trevor Lawrence",
-   "team": "JAX",
-   "position": "QB",
-   "stat": "pass_att",
-   "line": 31.5,
-   "side": "under",
-   "hits": 3,
-   "games": 4,
-   "log": [
-    29.0,
-    29.0,
-    23.0,
-    39.0
-   ],
-   "recent": 0.6111111111,
-   "market": 0.5,
-   "p_model": 0.5578055556,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.0045,
-   "tier": "Medium",
-   "reasons": []
   },
   {
    "game_id": "2026_06_HOU_JAX",
@@ -312,9 +539,11 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
+   "market_src": "50%: no price",
    "p_model": 0.5555555556,
    "captured_at": "2026-10-13 01:01:37+00:00",
    "p_matchup": 0.0,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": []
   },
@@ -337,66 +566,40 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5552430556,
+   "market_src": "50%: no price",
+   "p_model": 0.5555555556,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.000625,
+   "p_matchup": 0.0,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": []
   },
   {
    "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0040583",
-   "player": "Woody Marks",
-   "team": "HOU",
-   "position": "RB",
-   "stat": "rush_rec_yds",
-   "line": 64.5,
+   "player_id": "00-0036971",
+   "player": "Trevor Lawrence",
+   "team": "JAX",
+   "position": "QB",
+   "stat": "pass_att",
+   "line": 31.5,
    "side": "under",
    "hits": 3,
    "games": 4,
    "log": [
-    35.0,
-    21.0,
-    22.0,
-    85.0
+    29.0,
+    29.0,
+    23.0,
+    39.0
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5543836806,
+   "market_src": "50%: no price",
+   "p_model": 0.5555555556,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.00234375,
+   "p_matchup": 0.0,
+   "p_news": 0.0,
    "tier": "Medium",
-   "reasons": [
-    "Against: JAX allow the 7th most receiving yds to RBs (40 a game)",
-    "For: JAX have the 7th best pass defense (EPA per dropback allowed)"
-   ]
-  },
-  {
-   "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0039163",
-   "player": "C.J. Stroud",
-   "team": "HOU",
-   "position": "QB",
-   "stat": "pass_yds",
-   "line": 255.5,
-   "side": "over",
-   "hits": 3,
-   "games": 4,
-   "log": [
-    353.0,
-    167.0,
-    347.0,
-    261.0
-   ],
-   "recent": 0.6111111111,
-   "market": 0.5,
-   "p_model": 0.5536649306,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.00378125,
-   "tier": "Medium",
-   "reasons": [
-    "Against: JAX have the 7th best pass defense (EPA per dropback allowed)"
-   ]
+   "reasons": []
   },
   {
    "game_id": "2026_06_HOU_JAX",
@@ -417,37 +620,72 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5533055556,
+   "market_src": "50%: no price",
+   "p_model": 0.5555555556,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.0045,
+   "p_matchup": 0.0,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": []
   },
   {
    "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0039163",
-   "player": "C.J. Stroud",
+   "player_id": "00-0040583",
+   "player": "Woody Marks",
    "team": "HOU",
-   "position": "QB",
-   "stat": "pass_rush_yds",
-   "line": 265.5,
-   "side": "over",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 47.5,
+   "side": "under",
    "hits": 3,
    "games": 4,
    "log": [
-    382.0,
-    177.0,
-    359.0,
-    266.0
+    8.0,
+    15.0,
+    22.0,
+    62.0
    ],
    "recent": 0.6111111111,
-   "market": 0.5,
-   "p_model": 0.5514149306,
+   "market": 0.5012531328,
+   "market_src": "no-vig sportsbookreview",
+   "p_model": 0.552510247,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.00828125,
+   "p_matchup": 0.01265625,
+   "p_news": -0.02,
    "tier": "Medium",
    "reasons": [
-    "Against: JAX have the 7th best pass defense (EPA per dropback allowed)"
+    "For: JAX have the 3rd best run defense (EPA per rush allowed)",
+    "Against: News: Lead back with Montgomery out, but Jacksonville has been stout against the run"
+   ]
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player_id": "00-0036554",
+   "player": "Nico Collins",
+   "team": "HOU",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 71.5,
+   "side": "over",
+   "hits": 2,
+   "games": 3,
+   "log": [
+    75.0,
+    118.0,
+    56.0
+   ],
+   "recent": 0.5625,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.551484375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01046875,
+   "p_news": 0.03,
+   "tier": "Medium",
+   "reasons": [
+    "For: JAX allow the 1st most receiving yds to WRs (204 a game)",
+    "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+    "For: News: Jacksonville CB Montaric Brown is out and CB Jaylon Jones questionable; books have him at 72.5-74.5, above this line"
    ]
   },
   {
@@ -469,122 +707,109 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5440711806,
+   "market_src": "50%: no price",
+   "p_model": 0.5484461806,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.02296875,
+   "p_matchup": -0.01421875,
+   "p_news": 0.0,
    "tier": "Lean",
    "reasons": [
     "Against: HOU allow the 3rd fewest receiving yds to RBs (17 a game)",
+    "For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): more quick checkdowns",
     "Against: HOU have the 10th best pass defense (EPA per dropback allowed)"
    ]
   },
   {
    "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0040719",
-   "player": "Bhayshul Tuten",
-   "team": "JAX",
+   "player_id": "00-0040583",
+   "player": "Woody Marks",
+   "team": "HOU",
    "position": "RB",
    "stat": "rush_rec_yds",
-   "line": 75.5,
-   "side": "over",
+   "line": 64.5,
+   "side": "under",
    "hits": 3,
    "games": 4,
    "log": [
-    62.0,
-    90.0,
-    91.0,
-    96.0
+    35.0,
+    21.0,
+    22.0,
+    85.0
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5440711806,
+   "market_src": "50%: no price",
+   "p_model": 0.5340711806,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.02296875,
+   "p_matchup": -0.00296875,
+   "p_news": -0.04,
    "tier": "Lean",
    "reasons": [
-    "Against: HOU allow the 3rd fewest receiving yds to RBs (17 a game)",
-    "Against: HOU have the 10th best pass defense (EPA per dropback allowed)"
+    "Against: JAX allow the 7th most receiving yds to RBs (40 a game)",
+    "For: JAX have the 7th best pass defense (EPA per dropback allowed)",
+    "Against: News: Lead back with David Montgomery out (did not travel to London): played 85% of snaps after Montgomery left last game, 15 carries for 62 and 4 of 4 catches for 23"
    ]
   },
   {
    "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0036554",
-   "player": "Nico Collins",
+   "player_id": "00-0040583",
+   "player": "Woody Marks",
    "team": "HOU",
-   "position": "WR",
-   "stat": "rec_yds",
-   "line": 71.5,
+   "position": "RB",
+   "stat": "receptions",
+   "line": 2.5,
    "side": "over",
    "hits": 2,
-   "games": 3,
+   "games": 4,
    "log": [
-    75.0,
-    118.0,
-    56.0
+    5.0,
+    1.0,
+    0.0,
+    4.0
    ],
-   "recent": 0.5625,
+   "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.537921875,
+   "market_src": "50%: no price",
+   "p_model": 0.521484375,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.01334375,
-   "tier": "Lean",
+   "p_matchup": 0.00296875,
+   "p_news": 0.04,
+   "tier": "Coin flip",
    "reasons": [
-    "For: JAX allow the 1st most receiving yds to WRs (204 a game)",
-    "Against: JAX have the 7th best pass defense (EPA per dropback allowed)"
+    "For: JAX allow the 7th most receiving yds to RBs (40 a game)",
+    "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+    "For: News: Lead back with David Montgomery out (did not travel to London): played 85% of snaps after Montgomery left last game, 15 carries for 62 and 4 of 4 catches for 23"
    ]
   },
   {
    "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0041503",
-   "player": "Nate Boerkircher",
-   "team": "JAX",
-   "position": "TE",
+   "player_id": "00-0040583",
+   "player": "Woody Marks",
+   "team": "HOU",
+   "position": "RB",
    "stat": "rec_yds",
-   "line": 5.5,
-   "side": "under",
+   "line": 12.5,
+   "side": "over",
    "hits": 2,
    "games": 4,
    "log": [
+    27.0,
+    6.0,
     0.0,
-    0.0,
-    15.0,
-    20.0
+    23.0
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.506984375,
+   "market_src": "50%: no price",
+   "p_model": 0.521484375,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.01396875,
+   "p_matchup": 0.00296875,
+   "p_news": 0.04,
    "tier": "Coin flip",
    "reasons": [
-    "For: HOU have the 10th best pass defense (EPA per dropback allowed)"
-   ]
-  },
-  {
-   "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0038935",
-   "player": "Brenton Strange",
-   "team": "JAX",
-   "position": "TE",
-   "stat": "rec_yds",
-   "line": 37.5,
-   "side": "under",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    17.0,
-    32.0,
-    95.0,
-    68.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.506984375,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.01396875,
-   "tier": "Coin flip",
-   "reasons": [
-    "For: HOU have the 10th best pass defense (EPA per dropback allowed)"
+    "For: JAX allow the 7th most receiving yds to RBs (40 a game)",
+    "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+    "For: News: Lead back with David Montgomery out (did not travel to London): played 85% of snaps after Montgomery left last game, 15 carries for 62 and 4 of 4 catches for 23"
    ]
   },
   {
@@ -595,7 +820,7 @@
    "position": "WR",
    "stat": "rec_yds",
    "line": 23.5,
-   "side": "over",
+   "side": "under",
    "hits": 2,
    "games": 4,
    "log": [
@@ -606,40 +831,16 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.506671875,
+   "market_src": "50%: no price",
+   "p_model": 0.519765625,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.01334375,
+   "p_matchup": -0.01046875,
+   "p_news": 0.05,
    "tier": "Coin flip",
    "reasons": [
-    "For: JAX allow the 1st most receiving yds to WRs (204 a game)",
-    "Against: JAX have the 7th best pass defense (EPA per dropback allowed)"
-   ]
-  },
-  {
-   "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0036971",
-   "player": "Trevor Lawrence",
-   "team": "JAX",
-   "position": "QB",
-   "stat": "pass_yds",
-   "line": 223.5,
-   "side": "under",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    189.0,
-    182.0,
-    227.0,
-    331.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.505296875,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.01059375,
-   "tier": "Coin flip",
-   "reasons": [
-    "For: HOU have the 10th best pass defense (EPA per dropback allowed)"
+    "Against: JAX allow the 1st most receiving yds to WRs (204 a game)",
+    "For: JAX have the 7th best pass defense (EPA per dropback allowed)",
+    "For: News: Texans debut after the trade: Ryans says he gets a limited package and won't play all 60 snaps"
    ]
   },
   {
@@ -661,13 +862,79 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.504265625,
+   "market_src": "50%: no price",
+   "p_model": 0.516015625,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00853125,
+   "p_matchup": 0.00203125,
+   "p_news": 0.03,
    "tier": "Coin flip",
    "reasons": [
     "For: HOU allow the 3rd most receiving yds to WRs (191 a game)",
-    "Against: HOU have the 10th best pass defense (EPA per dropback allowed)"
+    "Against: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): less time for deep throws (his targets travel 13 yds)",
+    "Against: HOU have the 10th best pass defense (EPA per dropback allowed)",
+    "For: News: Jacksonville's clear No. 1 receiver now: 82% of snaps, 9 targets, 6 for 124 and 2 TDs in Week 5; Houston's Pitre is out"
+   ]
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player_id": "00-0038606",
+   "player": "Parker Washington",
+   "team": "JAX",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 61.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    98.0,
+    40.0,
+    7.0,
+    124.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.516015625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00203125,
+   "p_news": 0.03,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: HOU allow the 3rd most receiving yds to WRs (191 a game)",
+    "Against: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): less time for deep throws (his targets travel 13 yds)",
+    "Against: HOU have the 10th best pass defense (EPA per dropback allowed)",
+    "For: News: Jacksonville's clear No. 1 receiver now: 82% of snaps, 9 targets, 6 for 124 and 2 TDs in Week 5; Houston's Pitre is out"
+   ]
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player_id": "00-0038611",
+   "player": "Chris Rodriguez Jr.",
+   "team": "JAX",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 18.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    13.0,
+    37.0,
+    35.0,
+    5.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.515859375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01171875,
+   "p_news": 0.02,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: HOU have the 4th best run defense (EPA per rush allowed)",
+    "For: News: Tuten is taking over the backfield (68% of snaps in Week 5)"
    ]
   },
   {
@@ -678,7 +945,7 @@
    "position": "WR",
    "stat": "rec_yds",
    "line": 14.5,
-   "side": "over",
+   "side": "under",
    "hits": 2,
    "games": 4,
    "log": [
@@ -689,13 +956,47 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.504265625,
+   "market_src": "50%: no price",
+   "p_model": 0.509609375,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00853125,
+   "p_matchup": -0.01078125,
+   "p_news": 0.03,
    "tier": "Coin flip",
    "reasons": [
-    "For: HOU allow the 3rd most receiving yds to WRs (191 a game)",
-    "Against: HOU have the 10th best pass defense (EPA per dropback allowed)"
+    "Against: HOU allow the 3rd most receiving yds to WRs (191 a game)",
+    "For: HOU have the 10th best pass defense (EPA per dropback allowed)",
+    "For: News: Role cut: 51% of snaps and no catches in Week 5 as Jacksonville uses more two-TE sets (coach Coen)"
+   ]
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player_id": "00-0039893",
+   "player": "Brian Thomas Jr.",
+   "team": "JAX",
+   "position": "WR",
+   "stat": "receptions",
+   "line": 1.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    3.0,
+    1.0,
+    2.0,
+    0.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.509609375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01078125,
+   "p_news": 0.03,
+   "tier": "Coin flip",
+   "reasons": [
+    "Against: HOU allow the 3rd most receiving yds to WRs (191 a game)",
+    "For: HOU have the 10th best pass defense (EPA per dropback allowed)",
+    "For: News: Role cut: 51% of snaps and no catches in Week 5 as Jacksonville uses more two-TE sets (coach Coen)"
    ]
   },
   {
@@ -717,37 +1018,11 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.504265625,
+   "market_src": "50%: no price",
+   "p_model": 0.505390625,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00853125,
-   "tier": "Coin flip",
-   "reasons": [
-    "For: HOU allow the 3rd most receiving yds to WRs (191 a game)",
-    "Against: HOU have the 10th best pass defense (EPA per dropback allowed)"
-   ]
-  },
-  {
-   "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0039893",
-   "player": "Brian Thomas Jr.",
-   "team": "JAX",
-   "position": "WR",
-   "stat": "receptions",
-   "line": 1.5,
-   "side": "over",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    3.0,
-    1.0,
-    2.0,
-    0.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.504265625,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00853125,
+   "p_matchup": 0.01078125,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": [
     "For: HOU allow the 3rd most receiving yds to WRs (191 a game)",
@@ -773,68 +1048,15 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.504265625,
+   "market_src": "50%: no price",
+   "p_model": 0.505390625,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00853125,
+   "p_matchup": 0.01078125,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": [
     "For: HOU allow the 3rd most receiving yds to WRs (191 a game)",
     "Against: HOU have the 10th best pass defense (EPA per dropback allowed)"
-   ]
-  },
-  {
-   "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0038606",
-   "player": "Parker Washington",
-   "team": "JAX",
-   "position": "WR",
-   "stat": "rec_yds",
-   "line": 61.5,
-   "side": "over",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    98.0,
-    40.0,
-    7.0,
-    124.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.504265625,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00853125,
-   "tier": "Coin flip",
-   "reasons": [
-    "For: HOU allow the 3rd most receiving yds to WRs (191 a game)",
-    "Against: HOU have the 10th best pass defense (EPA per dropback allowed)"
-   ]
-  },
-  {
-   "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0038611",
-   "player": "Chris Rodriguez Jr.",
-   "team": "JAX",
-   "position": "RB",
-   "stat": "rush_yds",
-   "line": 18.5,
-   "side": "under",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    13.0,
-    37.0,
-    35.0,
-    5.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.503609375,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00721875,
-   "tier": "Coin flip",
-   "reasons": [
-    "For: HOU have the 4th best run defense (EPA per rush allowed)"
    ]
   },
   {
@@ -856,68 +1078,14 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.501890625,
+   "market_src": "50%: no price",
+   "p_model": 0.504453125,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00378125,
+   "p_matchup": 0.00890625,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": [
     "For: JAX have the 7th best pass defense (EPA per dropback allowed)"
-   ]
-  },
-  {
-   "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0040583",
-   "player": "Woody Marks",
-   "team": "HOU",
-   "position": "RB",
-   "stat": "receptions",
-   "line": 2.5,
-   "side": "over",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    5.0,
-    1.0,
-    0.0,
-    4.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.501171875,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00234375,
-   "tier": "Coin flip",
-   "reasons": [
-    "For: JAX allow the 7th most receiving yds to RBs (40 a game)",
-    "Against: JAX have the 7th best pass defense (EPA per dropback allowed)"
-   ]
-  },
-  {
-   "game_id": "2026_06_HOU_JAX",
-   "player_id": "00-0040583",
-   "player": "Woody Marks",
-   "team": "HOU",
-   "position": "RB",
-   "stat": "rec_yds",
-   "line": 12.5,
-   "side": "over",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    27.0,
-    6.0,
-    0.0,
-    23.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.501171875,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00234375,
-   "tier": "Coin flip",
-   "reasons": [
-    "For: JAX allow the 7th most receiving yds to RBs (40 a game)",
-    "Against: JAX have the 7th best pass defense (EPA per dropback allowed)"
    ]
   },
   {
@@ -939,11 +1107,106 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.504375,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.0,
+   "p_matchup": 0.00875,
+   "p_news": 0.0,
    "tier": "Coin flip",
-   "reasons": []
+   "reasons": [
+    "For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): more scrambles"
+   ]
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player_id": "00-0036971",
+   "player": "Trevor Lawrence",
+   "team": "JAX",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 223.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    189.0,
+    182.0,
+    227.0,
+    331.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.502421875,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01484375,
+   "p_news": -0.01,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): a hard night to throw",
+    "For: HOU have the 10th best pass defense (EPA per dropback allowed)",
+    "Against: News: Houston S/DB Jalen Pitre is out and books list him at 225-228.5, above this line; but Jacksonville lost LT Anton Harrison to IR"
+   ]
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player_id": "00-0041503",
+   "player": "Nate Boerkircher",
+   "team": "JAX",
+   "position": "TE",
+   "stat": "rec_yds",
+   "line": 5.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    0.0,
+    0.0,
+    15.0,
+    20.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.501484375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00296875,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "Against: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): more quick checkdowns",
+    "For: HOU have the 10th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_HOU_JAX",
+   "player_id": "00-0038935",
+   "player": "Brenton Strange",
+   "team": "JAX",
+   "position": "TE",
+   "stat": "rec_yds",
+   "line": 37.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    17.0,
+    32.0,
+    95.0,
+    68.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.501484375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00296875,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "Against: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): more quick checkdowns",
+    "For: HOU have the 10th best pass defense (EPA per dropback allowed)"
+   ]
   }
  ],
  "lineups": {
@@ -955,12 +1218,12 @@
     "basis": "Guesser method",
     "play_as": "Flex",
     "game": "HOU at JAX",
-    "p_all": 0.1941065917339019,
-    "p_independent": 0.1941065917339019,
-    "power_ev": 0.9705329586695095,
-    "flex_ev": 0.9667243247705966,
-    "best_ev": 0.9667243247705966,
-    "min_power_mult": 5.151808555635691,
+    "p_all": 0.19580703695479285,
+    "p_independent": 0.19580703695479285,
+    "power_ev": 0.9790351847739642,
+    "flex_ev": 0.9718429881295817,
+    "best_ev": 0.9718429881295817,
+    "min_power_mult": 5.107068752748023,
     "legs": [
      {
       "player": "Bhayshul Tuten",
@@ -969,11 +1232,12 @@
       "stat": "rush_yds",
       "side": "over",
       "line": 63.5,
-      "p_model": 0.607501736111111,
+      "p_model": 0.6152517361111112,
       "game_id": "2026_06_HOU_JAX",
       "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
       "reasons": [
-       "Against: HOU have the 4th best run defense (EPA per rush allowed)"
+       "Against: HOU have the 4th best run defense (EPA per rush allowed)",
+       "For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5"
       ]
      },
      {
@@ -983,7 +1247,7 @@
       "stat": "rec_yds",
       "side": "under",
       "line": 30.5,
-      "p_model": 0.5663836805555555,
+      "p_model": 0.5671961805555557,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
       "reasons": [
@@ -992,17 +1256,18 @@
       ]
      },
      {
-      "player": "Woody Marks",
-      "player_id": "00-0040583",
+      "player": "C.J. Stroud",
+      "player_id": "00-0039163",
       "team": "HOU",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 47.5,
-      "p_model": 0.5641336805555556,
+      "stat": "pass_rush_yds",
+      "side": "over",
+      "line": 265.5,
+      "p_model": 0.5611024305555556,
       "game_id": "2026_06_HOU_JAX",
-      "note": "Medium \u00b7 Less in 3 of last 4 (8, 15, 22, 62)",
+      "note": "Medium \u00b7 More in 3 of last 4 (382, 177, 359, 266)",
       "reasons": [
-       "For: JAX have the 3rd best run defense (EPA per rush allowed)"
+       "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+       "For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed"
       ]
      }
     ]
@@ -1016,12 +1281,12 @@
     "basis": "Guesser method",
     "play_as": "Power",
     "game": "HOU at JAX",
-    "p_all": 0.10913205032444791,
-    "p_independent": 0.10913205032444791,
-    "power_ev": 1.091320503244479,
-    "flex_ev": 1.0306882476660033,
-    "best_ev": 1.091320503244479,
-    "min_power_mult": 9.163210963479706,
+    "p_all": 0.10980661465616738,
+    "p_independent": 0.10980661465616738,
+    "power_ev": 1.098066146561674,
+    "flex_ev": 1.0355555613460332,
+    "best_ev": 1.098066146561674,
+    "min_power_mult": 9.106919497803078,
     "legs": [
      {
       "player": "Bhayshul Tuten",
@@ -1030,11 +1295,12 @@
       "stat": "rush_yds",
       "side": "over",
       "line": 63.5,
-      "p_model": 0.607501736111111,
+      "p_model": 0.6152517361111112,
       "game_id": "2026_06_HOU_JAX",
       "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
       "reasons": [
-       "Against: HOU have the 4th best run defense (EPA per rush allowed)"
+       "Against: HOU have the 4th best run defense (EPA per rush allowed)",
+       "For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5"
       ]
      },
      {
@@ -1044,7 +1310,7 @@
       "stat": "rec_yds",
       "side": "under",
       "line": 30.5,
-      "p_model": 0.5663836805555555,
+      "p_model": 0.5671961805555557,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
       "reasons": [
@@ -1053,17 +1319,18 @@
       ]
      },
      {
-      "player": "Woody Marks",
-      "player_id": "00-0040583",
+      "player": "C.J. Stroud",
+      "player_id": "00-0039163",
       "team": "HOU",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 47.5,
-      "p_model": 0.5641336805555556,
+      "stat": "pass_rush_yds",
+      "side": "over",
+      "line": 265.5,
+      "p_model": 0.5611024305555556,
       "game_id": "2026_06_HOU_JAX",
-      "note": "Medium \u00b7 Less in 3 of last 4 (8, 15, 22, 62)",
+      "note": "Medium \u00b7 More in 3 of last 4 (382, 177, 359, 266)",
       "reasons": [
-       "For: JAX have the 3rd best run defense (EPA per rush allowed)"
+       "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+       "For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed"
       ]
      },
      {
@@ -1073,7 +1340,7 @@
       "stat": "rec_yds",
       "side": "over",
       "line": 30.5,
-      "p_model": 0.5622274305555556,
+      "p_model": 0.5607899305555556,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 More in 3 of last 4 (37, 21, 36, 38)",
       "reasons": [
@@ -1092,12 +1359,12 @@
     "basis": "Guesser method",
     "play_as": "Power",
     "game": "HOU at JAX",
-    "p_all": 0.06096142856274781,
-    "p_independent": 0.06096142856274781,
-    "power_ev": 1.2192285712549562,
-    "flex_ev": 1.2044273111109263,
-    "best_ev": 1.2192285712549562,
-    "min_power_mult": 16.403815061038088,
+    "p_all": 0.06126961270385229,
+    "p_independent": 0.06126961270385229,
+    "power_ev": 1.2253922540770459,
+    "flex_ev": 1.2090505369847273,
+    "best_ev": 1.2253922540770459,
+    "min_power_mult": 16.321304409634788,
     "legs": [
      {
       "player": "Bhayshul Tuten",
@@ -1106,11 +1373,12 @@
       "stat": "rush_yds",
       "side": "over",
       "line": 63.5,
-      "p_model": 0.607501736111111,
+      "p_model": 0.6152517361111112,
       "game_id": "2026_06_HOU_JAX",
       "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
       "reasons": [
-       "Against: HOU have the 4th best run defense (EPA per rush allowed)"
+       "Against: HOU have the 4th best run defense (EPA per rush allowed)",
+       "For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5"
       ]
      },
      {
@@ -1120,7 +1388,7 @@
       "stat": "rec_yds",
       "side": "under",
       "line": 30.5,
-      "p_model": 0.5663836805555555,
+      "p_model": 0.5671961805555557,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
       "reasons": [
@@ -1129,17 +1397,18 @@
       ]
      },
      {
-      "player": "Woody Marks",
-      "player_id": "00-0040583",
+      "player": "C.J. Stroud",
+      "player_id": "00-0039163",
       "team": "HOU",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 47.5,
-      "p_model": 0.5641336805555556,
+      "stat": "pass_rush_yds",
+      "side": "over",
+      "line": 265.5,
+      "p_model": 0.5611024305555556,
       "game_id": "2026_06_HOU_JAX",
-      "note": "Medium \u00b7 Less in 3 of last 4 (8, 15, 22, 62)",
+      "note": "Medium \u00b7 More in 3 of last 4 (382, 177, 359, 266)",
       "reasons": [
-       "For: JAX have the 3rd best run defense (EPA per rush allowed)"
+       "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+       "For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed"
       ]
      },
      {
@@ -1149,7 +1418,7 @@
       "stat": "rec_yds",
       "side": "over",
       "line": 30.5,
-      "p_model": 0.5622274305555556,
+      "p_model": 0.5607899305555556,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 More in 3 of last 4 (37, 21, 36, 38)",
       "reasons": [
@@ -1164,11 +1433,13 @@
       "stat": "pass_rush_yds",
       "side": "under",
       "line": 237.5,
-      "p_model": 0.5586024305555556,
+      "p_model": 0.5579774305555556,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 Less in 3 of last 4 (195, 207, 227, 356)",
       "reasons": [
-       "For: HOU have the 10th best pass defense (EPA per dropback allowed)"
+       "For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): a hard night to throw",
+       "For: HOU have the 10th best pass defense (EPA per dropback allowed)",
+       "Against: News: Houston S/DB Jalen Pitre is out and books list him at 225-228.5, above this line; but Jacksonville lost LT Anton Harrison to IR"
       ]
      }
     ]
@@ -1182,12 +1453,12 @@
     "basis": "Guesser method",
     "play_as": "Flex",
     "game": "HOU at JAX",
-    "p_all": 0.03384840986621182,
-    "p_independent": 0.03384840986621182,
-    "power_ev": 1.2693153699829434,
-    "flex_ev": 1.271405500110266,
-    "best_ev": 1.271405500110266,
-    "min_power_mult": 29.543485320361256,
+    "p_all": 0.033852088846859446,
+    "p_independent": 0.033852088846859446,
+    "power_ev": 1.2694533317572292,
+    "flex_ev": 1.2717116229097223,
+    "best_ev": 1.2717116229097223,
+    "min_power_mult": 29.54027459055227,
     "legs": [
      {
       "player": "Bhayshul Tuten",
@@ -1196,11 +1467,12 @@
       "stat": "rush_yds",
       "side": "over",
       "line": 63.5,
-      "p_model": 0.607501736111111,
+      "p_model": 0.6152517361111112,
       "game_id": "2026_06_HOU_JAX",
       "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
       "reasons": [
-       "Against: HOU have the 4th best run defense (EPA per rush allowed)"
+       "Against: HOU have the 4th best run defense (EPA per rush allowed)",
+       "For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5"
       ]
      },
      {
@@ -1210,7 +1482,7 @@
       "stat": "rec_yds",
       "side": "under",
       "line": 30.5,
-      "p_model": 0.5663836805555555,
+      "p_model": 0.5671961805555557,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
       "reasons": [
@@ -1219,17 +1491,18 @@
       ]
      },
      {
-      "player": "Woody Marks",
-      "player_id": "00-0040583",
+      "player": "C.J. Stroud",
+      "player_id": "00-0039163",
       "team": "HOU",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 47.5,
-      "p_model": 0.5641336805555556,
+      "stat": "pass_rush_yds",
+      "side": "over",
+      "line": 265.5,
+      "p_model": 0.5611024305555556,
       "game_id": "2026_06_HOU_JAX",
-      "note": "Medium \u00b7 Less in 3 of last 4 (8, 15, 22, 62)",
+      "note": "Medium \u00b7 More in 3 of last 4 (382, 177, 359, 266)",
       "reasons": [
-       "For: JAX have the 3rd best run defense (EPA per rush allowed)"
+       "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+       "For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed"
       ]
      },
      {
@@ -1239,7 +1512,7 @@
       "stat": "rec_yds",
       "side": "over",
       "line": 30.5,
-      "p_model": 0.5622274305555556,
+      "p_model": 0.5607899305555556,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 More in 3 of last 4 (37, 21, 36, 38)",
       "reasons": [
@@ -1254,24 +1527,29 @@
       "stat": "pass_rush_yds",
       "side": "under",
       "line": 237.5,
-      "p_model": 0.5586024305555556,
+      "p_model": 0.5579774305555556,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 Less in 3 of last 4 (195, 207, 227, 356)",
       "reasons": [
-       "For: HOU have the 10th best pass defense (EPA per dropback allowed)"
+       "For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): a hard night to throw",
+       "For: HOU have the 10th best pass defense (EPA per dropback allowed)",
+       "Against: News: Houston S/DB Jalen Pitre is out and books list him at 225-228.5, above this line; but Jacksonville lost LT Anton Harrison to IR"
       ]
      },
      {
-      "player": "C.J. Stroud",
-      "player_id": "00-0039163",
+      "player": "Woody Marks",
+      "player_id": "00-0040583",
       "team": "HOU",
       "stat": "rush_yds",
-      "side": "over",
-      "line": 9.5,
-      "p_model": 0.5552430555555556,
+      "side": "under",
+      "line": 47.5,
+      "p_model": 0.5525102469715957,
       "game_id": "2026_06_HOU_JAX",
-      "note": "Medium \u00b7 More in 3 of last 4 (29, 10, 12, 5)",
-      "reasons": []
+      "note": "Medium \u00b7 Less in 3 of last 4 (8, 15, 22, 62)",
+      "reasons": [
+       "For: JAX have the 3rd best run defense (EPA per rush allowed)",
+       "Against: News: Lead back with Montgomery out, but Jacksonville has been stout against the run"
+      ]
      }
     ]
    }
@@ -1286,11 +1564,11 @@
     "stake": 12,
     "game": "HOU at JAX",
     "basis": "Guesser method",
-    "p_all": 0.1941065917339019,
-    "p_paid": 0.6180941864293557,
-    "best_ev": 0.9667243247705966,
+    "p_all": 0.19580703695479285,
+    "p_paid": 0.6208287609398311,
+    "best_ev": 0.9718429881295817,
     "recommended": false,
-    "min_power_mult": 5.151808555635691,
+    "min_power_mult": 5.107068752748023,
     "legs": [
      {
       "player": "Bhayshul Tuten",
@@ -1299,11 +1577,12 @@
       "stat": "rush_yds",
       "side": "over",
       "line": 63.5,
-      "p_model": 0.607501736111111,
+      "p_model": 0.6152517361111112,
       "game_id": "2026_06_HOU_JAX",
       "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
       "reasons": [
-       "Against: HOU have the 4th best run defense (EPA per rush allowed)"
+       "Against: HOU have the 4th best run defense (EPA per rush allowed)",
+       "For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5"
       ]
      },
      {
@@ -1313,7 +1592,7 @@
       "stat": "rec_yds",
       "side": "under",
       "line": 30.5,
-      "p_model": 0.5663836805555555,
+      "p_model": 0.5671961805555557,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
       "reasons": [
@@ -1322,17 +1601,18 @@
       ]
      },
      {
-      "player": "Woody Marks",
-      "player_id": "00-0040583",
+      "player": "C.J. Stroud",
+      "player_id": "00-0039163",
       "team": "HOU",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 47.5,
-      "p_model": 0.5641336805555556,
+      "stat": "pass_rush_yds",
+      "side": "over",
+      "line": 265.5,
+      "p_model": 0.5611024305555556,
       "game_id": "2026_06_HOU_JAX",
-      "note": "Medium \u00b7 Less in 3 of last 4 (8, 15, 22, 62)",
+      "note": "Medium \u00b7 More in 3 of last 4 (382, 177, 359, 266)",
       "reasons": [
-       "For: JAX have the 3rd best run defense (EPA per rush allowed)"
+       "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+       "For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed"
       ]
      }
     ],
@@ -1344,11 +1624,11 @@
     "stake": 6,
     "game": "HOU at JAX",
     "basis": "Guesser method",
-    "p_all": 0.06096142856274781,
-    "p_paid": 0.6328106586178031,
-    "best_ev": 1.2044273111109263,
+    "p_all": 0.06126961270385229,
+    "p_paid": 0.6340914489651313,
+    "best_ev": 1.2090505369847269,
     "recommended": true,
-    "min_power_mult": 16.403815061038088,
+    "min_power_mult": 16.321304409634788,
     "legs": [
      {
       "player": "Bhayshul Tuten",
@@ -1357,11 +1637,12 @@
       "stat": "rush_yds",
       "side": "over",
       "line": 63.5,
-      "p_model": 0.607501736111111,
+      "p_model": 0.6152517361111112,
       "game_id": "2026_06_HOU_JAX",
       "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
       "reasons": [
-       "Against: HOU have the 4th best run defense (EPA per rush allowed)"
+       "Against: HOU have the 4th best run defense (EPA per rush allowed)",
+       "For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5"
       ]
      },
      {
@@ -1371,7 +1652,7 @@
       "stat": "rec_yds",
       "side": "under",
       "line": 30.5,
-      "p_model": 0.5663836805555555,
+      "p_model": 0.5671961805555557,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
       "reasons": [
@@ -1380,17 +1661,18 @@
       ]
      },
      {
-      "player": "Woody Marks",
-      "player_id": "00-0040583",
+      "player": "C.J. Stroud",
+      "player_id": "00-0039163",
       "team": "HOU",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 47.5,
-      "p_model": 0.5641336805555556,
+      "stat": "pass_rush_yds",
+      "side": "over",
+      "line": 265.5,
+      "p_model": 0.5611024305555556,
       "game_id": "2026_06_HOU_JAX",
-      "note": "Medium \u00b7 Less in 3 of last 4 (8, 15, 22, 62)",
+      "note": "Medium \u00b7 More in 3 of last 4 (382, 177, 359, 266)",
       "reasons": [
-       "For: JAX have the 3rd best run defense (EPA per rush allowed)"
+       "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+       "For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed"
       ]
      },
      {
@@ -1400,7 +1682,7 @@
       "stat": "rec_yds",
       "side": "over",
       "line": 30.5,
-      "p_model": 0.5622274305555556,
+      "p_model": 0.5607899305555556,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 More in 3 of last 4 (37, 21, 36, 38)",
       "reasons": [
@@ -1415,11 +1697,13 @@
       "stat": "pass_rush_yds",
       "side": "under",
       "line": 237.5,
-      "p_model": 0.5586024305555556,
+      "p_model": 0.5579774305555556,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 Less in 3 of last 4 (195, 207, 227, 356)",
       "reasons": [
-       "For: HOU have the 10th best pass defense (EPA per dropback allowed)"
+       "For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): a hard night to throw",
+       "For: HOU have the 10th best pass defense (EPA per dropback allowed)",
+       "Against: News: Houston S/DB Jalen Pitre is out and books list him at 225-228.5, above this line; but Jacksonville lost LT Anton Harrison to IR"
       ]
      }
     ],
@@ -1431,11 +1715,11 @@
     "stake": 2,
     "game": "HOU at JAX",
     "basis": "Guesser method",
-    "p_all": 0.3440790692425009,
-    "p_paid": 0.3440790692425009,
-    "best_ev": 1.0322372077275026,
+    "p_all": 0.34896843480239687,
+    "p_paid": 0.34896843480239687,
+    "best_ev": 1.0469053044071905,
     "recommended": true,
-    "min_power_mult": 2.9063087220083634,
+    "min_power_mult": 2.865588690181246,
     "legs": [
      {
       "player": "Bhayshul Tuten",
@@ -1444,11 +1728,12 @@
       "stat": "rush_yds",
       "side": "over",
       "line": 63.5,
-      "p_model": 0.607501736111111,
+      "p_model": 0.6152517361111112,
       "game_id": "2026_06_HOU_JAX",
       "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
       "reasons": [
-       "Against: HOU have the 4th best run defense (EPA per rush allowed)"
+       "Against: HOU have the 4th best run defense (EPA per rush allowed)",
+       "For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5"
       ]
      },
      {
@@ -1458,7 +1743,7 @@
       "stat": "rec_yds",
       "side": "under",
       "line": 30.5,
-      "p_model": 0.5663836805555555,
+      "p_model": 0.5671961805555557,
       "game_id": "2026_06_HOU_JAX",
       "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
       "reasons": [
@@ -1470,10 +1755,10 @@
     "entry": "C"
    }
   ],
-  "expected_back": 20.89173017936772,
-  "p_profit": 0.43013669790046627,
-  "p_lose_all": 0.28526147727705614,
-  "p_any_back": 0.7147385227229439,
+  "expected_back": 21.010229688277725,
+  "p_profit": 0.4340357395889415,
+  "p_lose_all": 0.2833945090696038,
+  "p_any_back": 0.7166054909303962,
   "rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)"
  }
 }

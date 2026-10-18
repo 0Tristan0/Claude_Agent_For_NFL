@@ -8,8 +8,8 @@
  "kickoff_utc": "2026-10-18 17:00:00+00:00",
  "home_spread": -7.0,
  "total": 44.5,
- "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
- "built_at": "2026-10-13 19:23:56.556911+00:00",
+ "injury_note": "injury report week 6",
+ "built_at": "2026-10-18 00:05:25.663399+00:00",
  "units": [
   {
    "offense": "TEN",
@@ -42,10 +42,10 @@
    "offense": "TEN",
    "defense": "IND",
    "stat": "Pressure rate (PFR)",
-   "off_value": 0.2464945314787752,
-   "def_value": 0.1988558770326807,
-   "off_rank": 26,
-   "def_rank": 26
+   "off_value": 0.264134445572416,
+   "def_value": 0.18658839008983652,
+   "off_rank": 28,
+   "def_rank": 30
   },
   {
    "offense": "TEN",
@@ -62,7 +62,7 @@
    "stat": "EPA per dropback",
    "off_value": -0.026198167009652194,
    "def_value": 0.24970871247064708,
-   "off_rank": 23,
+   "off_rank": 22,
    "def_rank": 30
   },
   {
@@ -71,7 +71,7 @@
    "stat": "EPA per rush",
    "off_value": 0.03744204379711114,
    "def_value": -0.060314017479282,
-   "off_rank": 6,
+   "off_rank": 5,
    "def_rank": 17
   },
   {
@@ -87,10 +87,10 @@
    "offense": "IND",
    "defense": "TEN",
    "stat": "Pressure rate (PFR)",
-   "off_value": 0.19694900170175797,
-   "def_value": 0.21989545447150669,
-   "off_rank": 5,
-   "def_rank": 19
+   "off_value": 0.18324198176065018,
+   "def_value": 0.20079158862362442,
+   "off_rank": 3,
+   "def_rank": 23
   },
   {
    "offense": "IND",
@@ -99,9 +99,72 @@
    "off_value": 0.6428960987233573,
    "def_value": 0.6473142512408074,
    "off_rank": 7,
-   "def_rank": 26
+   "def_rank": 25
   }
  ],
+ "news": [
+  {
+   "game_id": "2026_06_TEN_IND",
+   "player": "Jonathan Taylor",
+   "team": "IND",
+   "stat": "rush_yds",
+   "more_adj": 0.02,
+   "reason": "Indianapolis is a 7-point favorite and Tennessee DT Jordan Elliott is out",
+   "source": "Titans Friday report; Fanatics odds",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_TEN_IND",
+   "player": "Jonathan Taylor",
+   "team": "IND",
+   "stat": "rush_yds",
+   "more_adj": -0.02,
+   "reason": "Books list him at 88.5-89.5, below this line, and he is at a career-low 3.9 yards per carry",
+   "source": "BetMGM; Colts.com",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_TEN_IND",
+   "player": "Daniel Jones",
+   "team": "IND",
+   "stat": "pass_yds",
+   "more_adj": -0.02,
+   "reason": "Thin receiving group: Alec Pierce on IR, Ashton Dulin out, top target TE Tyler Warren questionable (groin)",
+   "source": "Colts Friday report; Yahoo",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_TEN_IND",
+   "player": "Cam Ward",
+   "team": "TEN",
+   "stat": "pass_yds",
+   "more_adj": 0.03,
+   "reason": "Books list him at 200.5, well above this line, and Tennessee is a 7-point underdog likely to be throwing",
+   "source": "Football Nation; Fanatics",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_TEN_IND",
+   "player": "Tony Pollard",
+   "team": "TEN",
+   "stat": "rush_yds",
+   "more_adj": -0.02,
+   "reason": "Tennessee is a 7-point underdog and ran only 17 times in Week 5",
+   "source": "FantasyPros; Fanatics",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_TEN_IND",
+   "player": "Tony Pollard",
+   "team": "TEN",
+   "stat": "rush_yds",
+   "more_adj": 0.02,
+   "reason": "Tyjae Spears (knee) was downgraded to no practice Thursday and is questionable",
+   "source": "Titans Friday report (Oct 16)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  }
+ ],
+ "overrides": [],
  "picks": [
   {
    "game_id": "2026_06_TEN_IND",
@@ -122,12 +185,14 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5599305556,
+   "market_src": "50%: no price",
+   "p_model": 0.5618055556,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00875,
+   "p_matchup": 0.0125,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": [
-    "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): fewer reasons to run"
+    "For: TEN pressure QBs on 20% of dropbacks (the 10th least); IND's line allows pressure on 18% (the 3rd least): fewer reasons to run"
    ]
   },
   {
@@ -149,9 +214,11 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5555555556,
+   "market_src": "50%: no price",
+   "p_model": 0.5561805556,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.0,
+   "p_matchup": 0.00125,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": []
   },
@@ -174,13 +241,17 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
+   "market_src": "50%: no price",
    "p_model": 0.5547586806,
    "captured_at": "2026-10-13 01:01:37+00:00",
    "p_matchup": -0.00159375,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": [
     "Against: TEN underdog by 7: may abandon the run if behind",
-    "For: IND have the 7th worst run defense (EPA per rush allowed)"
+    "For: IND have the 7th worst run defense (EPA per rush allowed)",
+    "Against: News: Tennessee is a 7-point underdog and ran only 17 times in Week 5",
+    "For: News: Tyjae Spears (knee) was downgraded to no practice Thursday and is questionable"
    ]
   },
   {
@@ -202,12 +273,16 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
+   "market_src": "50%: no price",
    "p_model": 0.5500711806,
    "captured_at": "2026-10-13 01:01:37+00:00",
    "p_matchup": -0.01096875,
+   "p_news": 0.0,
    "tier": "Medium",
    "reasons": [
-    "Against: IND favored by 7: more carries to close it out"
+    "Against: IND favored by 7: more carries to close it out",
+    "Against: News: Indianapolis is a 7-point favorite and Tennessee DT Jordan Elliott is out",
+    "For: News: Books list him at 88.5-89.5, below this line, and he is at a career-low 3.9 yards per carry"
    ]
   },
   {
@@ -229,13 +304,16 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5449149306,
+   "market_src": "50%: no price",
+   "p_model": 0.5292899306,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.02128125,
+   "p_matchup": -0.02253125,
+   "p_news": -0.03,
    "tier": "Lean",
    "reasons": [
     "Against: IND have the 5th worst pass defense (EPA per dropback allowed)",
-    "Against: TEN underdog by 7: likely throwing to catch up"
+    "Against: TEN underdog by 7: likely throwing to catch up",
+    "Against: News: Books list him at 200.5, well above this line, and Tennessee is a 7-point underdog likely to be throwing"
    ]
   },
   {
@@ -246,7 +324,7 @@
    "position": "QB",
    "stat": "pass_yds",
    "line": 211.5,
-   "side": "over",
+   "side": "under",
    "hits": 2,
    "games": 4,
    "log": [
@@ -257,14 +335,17 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.505453125,
+   "market_src": "50%: no price",
+   "p_model": 0.502671875,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.01090625,
+   "p_matchup": -0.01465625,
+   "p_news": 0.02,
    "tier": "Coin flip",
    "reasons": [
-    "For: TEN have the 3rd worst pass defense (EPA per dropback allowed)",
-    "Against: IND favored by 7: may lean on the run late",
-    "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): a clean pocket"
+    "Against: TEN have the 3rd worst pass defense (EPA per dropback allowed)",
+    "Against: TEN pressure QBs on 20% of dropbacks (the 10th least); IND's line allows pressure on 18% (the 3rd least): a clean pocket",
+    "For: IND favored by 7: may lean on the run late",
+    "For: News: Thin receiving group: Alec Pierce on IR, Ashton Dulin out, top target TE Tyler Warren questionable (groin)"
    ]
   }
  ],
@@ -277,12 +358,12 @@
     "basis": "Guesser method",
     "play_as": "Flex",
     "game": "TEN at IND",
-    "p_all": 0.17257018677929956,
-    "p_independent": 0.17257018677929956,
-    "power_ev": 0.8628509338964978,
-    "flex_ev": 0.9035173873838573,
-    "best_ev": 0.9035173873838573,
-    "min_power_mult": 5.7947436846603315,
+    "p_all": 0.17334285197283375,
+    "p_independent": 0.17334285197283375,
+    "power_ev": 0.8667142598641687,
+    "flex_ev": 0.9058330043939032,
+    "best_ev": 0.9058330043939032,
+    "min_power_mult": 5.768913968005555,
     "legs": [
      {
       "player": "Daniel Jones",
@@ -291,11 +372,11 @@
       "stat": "rush_yds",
       "side": "under",
       "line": 7.5,
-      "p_model": 0.5599305555555556,
+      "p_model": 0.5618055555555556,
       "game_id": "2026_06_TEN_IND",
       "note": "Medium \u00b7 Less in 3 of last 4 (10, 5, 2, 4)",
       "reasons": [
-       "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): fewer reasons to run"
+       "For: TEN pressure QBs on 20% of dropbacks (the 10th least); IND's line allows pressure on 18% (the 3rd least): fewer reasons to run"
       ]
      },
      {
@@ -305,7 +386,7 @@
       "stat": "rush_yds",
       "side": "under",
       "line": 11.5,
-      "p_model": 0.5555555555555556,
+      "p_model": 0.5561805555555556,
       "game_id": "2026_06_TEN_IND",
       "note": "Medium \u00b7 Less in 3 of last 4 (7, 2, 27, 2)",
       "reasons": []
@@ -322,7 +403,9 @@
       "note": "Medium \u00b7 More in 3 of last 4 (64, 74, 48, 52)",
       "reasons": [
        "Against: TEN underdog by 7: may abandon the run if behind",
-       "For: IND have the 7th worst run defense (EPA per rush allowed)"
+       "For: IND have the 7th worst run defense (EPA per rush allowed)",
+       "Against: News: Tennessee is a 7-point underdog and ran only 17 times in Week 5",
+       "For: News: Tyjae Spears (knee) was downgraded to no practice Thursday and is questionable"
       ]
      }
     ]
@@ -336,12 +419,12 @@
     "basis": "Guesser method",
     "play_as": "Power",
     "game": "TEN at IND",
-    "p_all": 0.09492588637038205,
-    "p_independent": 0.09492588637038205,
-    "power_ev": 0.9492588637038204,
-    "flex_ev": 0.9311946403821066,
-    "best_ev": 0.9492588637038204,
-    "min_power_mult": 10.534534237565058,
+    "p_all": 0.09535090722556358,
+    "p_independent": 0.09535090722556358,
+    "power_ev": 0.9535090722556359,
+    "flex_ev": 0.9342221598754697,
+    "best_ev": 0.9535090722556359,
+    "min_power_mult": 10.487577193517252,
     "legs": [
      {
       "player": "Daniel Jones",
@@ -350,11 +433,11 @@
       "stat": "rush_yds",
       "side": "under",
       "line": 7.5,
-      "p_model": 0.5599305555555556,
+      "p_model": 0.5618055555555556,
       "game_id": "2026_06_TEN_IND",
       "note": "Medium \u00b7 Less in 3 of last 4 (10, 5, 2, 4)",
       "reasons": [
-       "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): fewer reasons to run"
+       "For: TEN pressure QBs on 20% of dropbacks (the 10th least); IND's line allows pressure on 18% (the 3rd least): fewer reasons to run"
       ]
      },
      {
@@ -364,7 +447,7 @@
       "stat": "rush_yds",
       "side": "under",
       "line": 11.5,
-      "p_model": 0.5555555555555556,
+      "p_model": 0.5561805555555556,
       "game_id": "2026_06_TEN_IND",
       "note": "Medium \u00b7 Less in 3 of last 4 (7, 2, 27, 2)",
       "reasons": []
@@ -381,7 +464,9 @@
       "note": "Medium \u00b7 More in 3 of last 4 (64, 74, 48, 52)",
       "reasons": [
        "Against: TEN underdog by 7: may abandon the run if behind",
-       "For: IND have the 7th worst run defense (EPA per rush allowed)"
+       "For: IND have the 7th worst run defense (EPA per rush allowed)",
+       "Against: News: Tennessee is a 7-point underdog and ran only 17 times in Week 5",
+       "For: News: Tyjae Spears (knee) was downgraded to no practice Thursday and is questionable"
       ]
      },
      {
@@ -395,7 +480,9 @@
       "game_id": "2026_06_TEN_IND",
       "note": "Medium \u00b7 Less in 3 of last 4 (92, 68, 95, 45)",
       "reasons": [
-       "Against: IND favored by 7: more carries to close it out"
+       "Against: IND favored by 7: more carries to close it out",
+       "Against: News: Indianapolis is a 7-point favorite and Tennessee DT Jordan Elliott is out",
+       "For: News: Books list him at 88.5-89.5, below this line, and he is at a career-low 3.9 yards per carry"
       ]
      }
     ]
@@ -411,11 +498,11 @@
     "stake": 20,
     "game": "TEN at IND",
     "basis": "Guesser method",
-    "p_all": 0.17257018677929956,
-    "p_paid": 0.5847577604836462,
-    "best_ev": 0.9035173873838575,
+    "p_all": 0.17334285197283375,
+    "p_paid": 0.5859921219368556,
+    "best_ev": 0.9058330043939034,
     "recommended": false,
-    "min_power_mult": 5.7947436846603315,
+    "min_power_mult": 5.768913968005555,
     "legs": [
      {
       "player": "Daniel Jones",
@@ -424,11 +511,11 @@
       "stat": "rush_yds",
       "side": "under",
       "line": 7.5,
-      "p_model": 0.5599305555555556,
+      "p_model": 0.5618055555555556,
       "game_id": "2026_06_TEN_IND",
       "note": "Medium \u00b7 Less in 3 of last 4 (10, 5, 2, 4)",
       "reasons": [
-       "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): fewer reasons to run"
+       "For: TEN pressure QBs on 20% of dropbacks (the 10th least); IND's line allows pressure on 18% (the 3rd least): fewer reasons to run"
       ]
      },
      {
@@ -438,7 +525,7 @@
       "stat": "rush_yds",
       "side": "under",
       "line": 11.5,
-      "p_model": 0.5555555555555556,
+      "p_model": 0.5561805555555556,
       "game_id": "2026_06_TEN_IND",
       "note": "Medium \u00b7 Less in 3 of last 4 (7, 2, 27, 2)",
       "reasons": []
@@ -455,17 +542,19 @@
       "note": "Medium \u00b7 More in 3 of last 4 (64, 74, 48, 52)",
       "reasons": [
        "Against: TEN underdog by 7: may abandon the run if behind",
-       "For: IND have the 7th worst run defense (EPA per rush allowed)"
+       "For: IND have the 7th worst run defense (EPA per rush allowed)",
+       "Against: News: Tennessee is a 7-point underdog and ran only 17 times in Week 5",
+       "For: News: Tyjae Spears (knee) was downgraded to no practice Thursday and is questionable"
       ]
      }
     ],
     "entry": "A"
    }
   ],
-  "expected_back": 18.07034774767715,
-  "p_profit": 0.5847577604836462,
-  "p_lose_all": 0.4152422395163537,
-  "p_any_back": 0.5847577604836462,
+  "expected_back": 18.116660087878067,
+  "p_profit": 0.5859921219368556,
+  "p_lose_all": 0.4140078780631443,
+  "p_any_back": 0.5859921219368556,
   "rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)"
  }
 }

@@ -6,10 +6,10 @@
  "away": "CAR",
  "home": "PHI",
  "kickoff_utc": "2026-10-18 17:00:00+00:00",
- "home_spread": -1.5,
- "total": 41.5,
- "injury_note": "week 6 injury report not published yet: using week 5 Out/Doubtful players who missed their last game",
- "built_at": "2026-10-13 19:23:56.556911+00:00",
+ "home_spread": 3.0,
+ "total": 39.5,
+ "injury_note": "injury report week 6",
+ "built_at": "2026-10-18 00:04:52.624111+00:00",
  "units": [
   {
    "offense": "CAR",
@@ -17,8 +17,8 @@
    "stat": "EPA per dropback",
    "off_value": 0.13334943707998947,
    "def_value": 0.03081816406409623,
-   "off_rank": 9,
-   "def_rank": 13
+   "off_rank": 10,
+   "def_rank": 12
   },
   {
    "offense": "CAR",
@@ -35,15 +35,15 @@
    "stat": "Explosive pass rate",
    "off_value": 0.08886145921768222,
    "def_value": 0.07150233806820244,
-   "off_rank": 10,
-   "def_rank": 13
+   "off_rank": 9,
+   "def_rank": 12
   },
   {
    "offense": "CAR",
    "defense": "PHI",
    "stat": "Pressure rate (PFR)",
    "off_value": 0.29844546659127413,
-   "def_value": 0.170967860636746,
+   "def_value": 0.18628467872962395,
    "off_rank": 32,
    "def_rank": 31
   },
@@ -53,7 +53,7 @@
    "stat": "Red-zone TD rate",
    "off_value": 0.616794679143101,
    "def_value": 0.5124643603806828,
-   "off_rank": 11,
+   "off_rank": 12,
    "def_rank": 9
   },
   {
@@ -62,7 +62,7 @@
    "stat": "EPA per dropback",
    "off_value": -0.00679418609480721,
    "def_value": 0.13556096635038256,
-   "off_rank": 19,
+   "off_rank": 18,
    "def_rank": 27
   },
   {
@@ -81,16 +81,16 @@
    "off_value": 0.059097722677792376,
    "def_value": 0.07380230440490759,
    "off_rank": 30,
-   "def_rank": 14
+   "def_rank": 13
   },
   {
    "offense": "PHI",
    "defense": "CAR",
    "stat": "Pressure rate (PFR)",
-   "off_value": 0.21569999994197317,
+   "off_value": 0.2377010496420272,
    "def_value": 0.19258903025253413,
-   "off_rank": 11,
-   "def_rank": 28
+   "off_rank": 23,
+   "def_rank": 27
   },
   {
    "offense": "PHI",
@@ -99,37 +99,112 @@
    "off_value": 0.6258567469017976,
    "def_value": 0.6300689257634957,
    "off_rank": 10,
-   "def_rank": 22
+   "def_rank": 21
+  }
+ ],
+ "news": [
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "stat": "pass_yds",
+   "more_adj": 0.03,
+   "reason": "287+ passing yards in all four starts (~40 attempts a game); Philadelphia edge Jalyx Hunt unlikely, Jonathan Greenard limited, slot CB Michael Carter II missed practice",
+   "source": "FantasySP; Eagles practice reports (Oct 14-15)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "stat": "pass_att",
+   "more_adj": 0.03,
+   "reason": "287+ passing yards in all four starts (~40 attempts a game); Philadelphia edge Jalyx Hunt unlikely, Jonathan Greenard limited, slot CB Michael Carter II missed practice",
+   "source": "FantasySP; Eagles practice reports (Oct 14-15)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "stat": "pass_rush_yds",
+   "more_adj": 0.03,
+   "reason": "287+ passing yards in all four starts (~40 attempts a game); Philadelphia edge Jalyx Hunt unlikely, Jonathan Greenard limited, slot CB Michael Carter II missed practice",
+   "source": "FantasySP; Eagles practice reports (Oct 14-15)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "stat": "pass_yds",
+   "more_adj": -0.02,
+   "reason": "Total is just 38.5 and Carolina is now a 3.5-point favorite with Hurts out, which can mean more running",
+   "source": "FanDuel, DraftKings via Inquirer",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "stat": "pass_att",
+   "more_adj": -0.02,
+   "reason": "Total is just 38.5 and Carolina is now a 3.5-point favorite with Hurts out, which can mean more running",
+   "source": "FanDuel, DraftKings via Inquirer",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "stat": "pass_rush_yds",
+   "more_adj": -0.02,
+   "reason": "Total is just 38.5 and Carolina is now a 3.5-point favorite with Hurts out, which can mean more running",
+   "source": "FanDuel, DraftKings via Inquirer",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player": "Chuba Hubbard",
+   "team": "CAR",
+   "stat": "rush_att",
+   "more_adj": 0.03,
+   "reason": "Carolina is a 3.5-point favorite with Hurts out, and backup RB AJ Dillon (ankle) missed practice",
+   "source": "Inquirer odds; Panthers practice report",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player": "Chuba Hubbard",
+   "team": "CAR",
+   "stat": "rush_yds",
+   "more_adj": 0.03,
+   "reason": "Carolina is a 3.5-point favorite with Hurts out, and backup RB AJ Dillon (ankle) missed practice",
+   "source": "Inquirer odds; Panthers practice report",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player": "Darren Waller",
+   "team": "CAR",
+   "stat": "*",
+   "more_adj": -0.02,
+   "reason": "Toe injury: limited Wednesday and Thursday",
+   "source": "The Fantasy Footballers (Oct 15)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  }
+ ],
+ "overrides": [
+  {
+   "player": "Jalen Hurts",
+   "team": "PHI",
+   "status": "out",
+   "game_id": "2026_06_CAR_PHI",
+   "source": "ESPN, NBC Sports Philadelphia (Oct 15)",
+   "note": "Ruled out Thursday: blood clot in his calf; Tanner McKee starts"
   }
  ],
  "picks": [
-  {
-   "game_id": "2026_06_CAR_PHI",
-   "player_id": "00-0036389",
-   "player": "Jalen Hurts",
-   "team": "PHI",
-   "position": "QB",
-   "stat": "rush_yds",
-   "line": 25.5,
-   "side": "under",
-   "hits": 4,
-   "games": 4,
-   "log": [
-    16.0,
-    25.0,
-    18.0,
-    2.0
-   ],
-   "recent": 0.7222222222,
-   "market": 0.5,
-   "p_model": 0.6164236111,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.010625,
-   "tier": "High",
-   "reasons": [
-    "For: CAR pressure QBs on 19% of dropbacks (the 5th least); PHI's line allows pressure on 22% (the 11th least): fewer reasons to run"
-   ]
-  },
   {
    "game_id": "2026_06_CAR_PHI",
    "player_id": "00-0039150",
@@ -149,11 +224,76 @@
    ],
    "recent": 0.7222222222,
    "market": 0.5,
-   "p_model": 0.6111111111,
+   "market_src": "50%: no price",
+   "p_model": 0.6138611111,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.0,
+   "p_matchup": -0.0045,
+   "p_news": 0.01,
    "tier": "High",
-   "reasons": []
+   "reasons": [
+    "For: News: 287+ passing yards in all four starts (~40 attempts a game); Philadelphia edge Jalyx Hunt unlikely, Jonathan Greenard limited, slot CB Michael Carter II missed practice",
+    "Against: News: Total is just 38.5 and Carolina is now a 3.5-point favorite with Hurts out, which can mean more running"
+   ]
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0039150",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "position": "QB",
+   "stat": "pass_rush_yds",
+   "line": 248.5,
+   "side": "over",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    371.0,
+    293.0,
+    291.0,
+    332.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.6136892361,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00484375,
+   "p_news": 0.01,
+   "tier": "High",
+   "reasons": [
+    "For: News: 287+ passing yards in all four starts (~40 attempts a game); Philadelphia edge Jalyx Hunt unlikely, Jonathan Greenard limited, slot CB Michael Carter II missed practice",
+    "Against: News: Total is just 38.5 and Carolina is now a 3.5-point favorite with Hurts out, which can mean more running"
+   ]
+  },
+  {
+   "game_id": "2026_06_CAR_PHI",
+   "player_id": "00-0039150",
+   "player": "Bryce Young",
+   "team": "CAR",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 232.5,
+   "side": "over",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    361.0,
+    287.0,
+    291.0,
+    329.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.6114392361,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00934375,
+   "p_news": 0.01,
+   "tier": "High",
+   "reasons": [
+    "For: News: 287+ passing yards in all four starts (~40 attempts a game); Philadelphia edge Jalyx Hunt unlikely, Jonathan Greenard limited, slot CB Michael Carter II missed practice",
+    "Against: News: Total is just 38.5 and Carolina is now a 3.5-point favorite with Hurts out, which can mean more running"
+   ]
   },
   {
    "game_id": "2026_06_CAR_PHI",
@@ -174,9 +314,11 @@
    ],
    "recent": 0.7222222222,
    "market": 0.5,
+   "market_src": "50%: no price",
    "p_model": 0.6107986111,
    "captured_at": "2026-10-13 01:01:37+00:00",
    "p_matchup": -0.000625,
+   "p_news": 0.0,
    "tier": "High",
    "reasons": []
   },
@@ -199,61 +341,15 @@
    ],
    "recent": 0.7222222222,
    "market": 0.5,
-   "p_model": 0.6094704861,
+   "market_src": "50%: no price",
+   "p_model": 0.5972517361,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.00328125,
-   "tier": "High",
-   "reasons": []
-  },
-  {
-   "game_id": "2026_06_CAR_PHI",
-   "player_id": "00-0039150",
-   "player": "Bryce Young",
-   "team": "CAR",
-   "position": "QB",
-   "stat": "pass_rush_yds",
-   "line": 248.5,
-   "side": "over",
-   "hits": 4,
-   "games": 4,
-   "log": [
-    371.0,
-    293.0,
-    291.0,
-    332.0
-   ],
-   "recent": 0.7222222222,
-   "market": 0.5,
-   "p_model": 0.6091579861,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.00390625,
-   "tier": "High",
-   "reasons": []
-  },
-  {
-   "game_id": "2026_06_CAR_PHI",
-   "player_id": "00-0039150",
-   "player": "Bryce Young",
-   "team": "CAR",
-   "position": "QB",
-   "stat": "pass_yds",
-   "line": 232.5,
-   "side": "over",
-   "hits": 4,
-   "games": 4,
-   "log": [
-    361.0,
-    287.0,
-    291.0,
-    329.0
-   ],
-   "recent": 0.7222222222,
-   "market": 0.5,
-   "p_model": 0.6091579861,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.00390625,
-   "tier": "High",
-   "reasons": []
+   "p_matchup": -0.00771875,
+   "p_news": -0.02,
+   "tier": "Med-High",
+   "reasons": [
+    "Against: News: Toe injury: limited Wednesday and Thursday"
+   ]
   },
   {
    "game_id": "2026_06_CAR_PHI",
@@ -274,38 +370,14 @@
    ],
    "recent": 0.6111111111,
    "market": 0.5,
-   "p_model": 0.5539149306,
+   "market_src": "50%: no price",
+   "p_model": 0.5416961806,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.00328125,
-   "tier": "Medium",
-   "reasons": []
-  },
-  {
-   "game_id": "2026_06_CAR_PHI",
-   "player_id": "00-0036389",
-   "player": "Jalen Hurts",
-   "team": "PHI",
-   "position": "QB",
-   "stat": "pass_rush_yds",
-   "line": 242.5,
-   "side": "under",
-   "hits": 3,
-   "games": 4,
-   "log": [
-    280.0,
-    178.0,
-    111.0,
-    222.0
-   ],
-   "recent": 0.6111111111,
-   "market": 0.5,
-   "p_model": 0.5453211806,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": -0.02046875,
+   "p_matchup": -0.00771875,
+   "p_news": -0.02,
    "tier": "Lean",
    "reasons": [
-    "Against: CAR pressure QBs on 19% of dropbacks (the 5th least); PHI's line allows pressure on 22% (the 11th least): a clean pocket",
-    "Against: CAR have the 6th worst pass defense (EPA per dropback allowed)"
+    "Against: News: Toe injury: limited Wednesday and Thursday"
    ]
   },
   {
@@ -326,9 +398,11 @@
    ],
    "recent": 0.5625,
    "market": 0.5,
-   "p_model": 0.534609375,
+   "market_src": "50%: no price",
+   "p_model": 0.533015625,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00671875,
+   "p_matchup": 0.00353125,
+   "p_news": 0.0,
    "tier": "Lean",
    "reasons": [
     "For: PHI allow the 8th most receiving yds to WRs (172 a game)"
@@ -352,40 +426,14 @@
    ],
    "recent": 0.5625,
    "market": 0.5,
-   "p_model": 0.534609375,
+   "market_src": "50%: no price",
+   "p_model": 0.533015625,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00671875,
+   "p_matchup": 0.00353125,
+   "p_news": 0.0,
    "tier": "Lean",
    "reasons": [
     "For: PHI allow the 8th most receiving yds to WRs (172 a game)"
-   ]
-  },
-  {
-   "game_id": "2026_06_CAR_PHI",
-   "player_id": "00-0036389",
-   "player": "Jalen Hurts",
-   "team": "PHI",
-   "position": "QB",
-   "stat": "pass_yds",
-   "line": 206.5,
-   "side": "over",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    264.0,
-    153.0,
-    93.0,
-    220.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.510234375,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.02046875,
-   "tier": "Coin flip",
-   "reasons": [
-    "For: CAR pressure QBs on 19% of dropbacks (the 5th least); PHI's line allows pressure on 22% (the 11th least): a clean pocket",
-    "For: CAR have the 6th worst pass defense (EPA per dropback allowed)"
    ]
   },
   {
@@ -396,7 +444,7 @@
    "position": "RB",
    "stat": "rush_att",
    "line": 16.5,
-   "side": "under",
+   "side": "over",
    "hits": 2,
    "games": 4,
    "log": [
@@ -407,12 +455,15 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.503046875,
+   "market_src": "50%: no price",
+   "p_model": 0.514203125,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00609375,
+   "p_matchup": -0.00159375,
+   "p_news": 0.03,
    "tier": "Coin flip",
    "reasons": [
-    "For: PHI have the 10th best run defense (EPA per rush allowed)"
+    "Against: PHI have the 10th best run defense (EPA per rush allowed)",
+    "For: News: Carolina is a 3.5-point favorite with Hurts out, and backup RB AJ Dillon (ankle) missed practice"
    ]
   },
   {
@@ -423,7 +474,7 @@
    "position": "RB",
    "stat": "rush_yds",
    "line": 71.5,
-   "side": "under",
+   "side": "over",
    "hits": 2,
    "games": 4,
    "log": [
@@ -434,12 +485,15 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.503046875,
+   "market_src": "50%: no price",
+   "p_model": 0.514203125,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00609375,
+   "p_matchup": -0.00159375,
+   "p_news": 0.03,
    "tier": "Coin flip",
    "reasons": [
-    "For: PHI have the 10th best run defense (EPA per rush allowed)"
+    "Against: PHI have the 10th best run defense (EPA per rush allowed)",
+    "For: News: Carolina is a 3.5-point favorite with Hurts out, and backup RB AJ Dillon (ankle) missed practice"
    ]
   },
   {
@@ -461,9 +515,11 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.502890625,
+   "market_src": "50%: no price",
+   "p_model": 0.503984375,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00578125,
+   "p_matchup": 0.00796875,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": []
   },
@@ -486,34 +542,11 @@
    ],
    "recent": 0.5,
    "market": 0.5,
-   "p_model": 0.502890625,
+   "market_src": "50%: no price",
+   "p_model": 0.503984375,
    "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.00578125,
-   "tier": "Coin flip",
-   "reasons": []
-  },
-  {
-   "game_id": "2026_06_CAR_PHI",
-   "player_id": "00-0036389",
-   "player": "Jalen Hurts",
-   "team": "PHI",
-   "position": "QB",
-   "stat": "pass_att",
-   "line": 33.5,
-   "side": "over",
-   "hits": 2,
-   "games": 4,
-   "log": [
-    37.0,
-    25.0,
-    27.0,
-    40.0
-   ],
-   "recent": 0.5,
-   "market": 0.5,
-   "p_model": 0.5,
-   "captured_at": "2026-10-13 01:01:37+00:00",
-   "p_matchup": 0.0,
+   "p_matchup": 0.00796875,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": []
   },
@@ -536,243 +569,15 @@
    ],
    "recent": 0.5,
    "market": 0.5,
+   "market_src": "50%: no price",
    "p_model": 0.5,
    "captured_at": "2026-10-13 01:01:37+00:00",
    "p_matchup": 0.0,
+   "p_news": 0.0,
    "tier": "Coin flip",
    "reasons": []
   }
  ],
- "lineups": {
-  "3": [
-   {
-    "n": 3,
-    "entry": "A",
-    "recommended": true,
-    "basis": "Guesser method",
-    "play_as": "Flex",
-    "game": "CAR at PHI",
-    "p_all": 0.22958955428093386,
-    "p_independent": 0.22958955428093386,
-    "power_ev": 1.1479477714046693,
-    "flex_ev": 1.0616775457939494,
-    "best_ev": 1.0616775457939494,
-    "min_power_mult": 4.35559885610634,
-    "legs": [
-     {
-      "player": "Jalen Hurts",
-      "player_id": "00-0036389",
-      "team": "PHI",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 25.5,
-      "p_model": 0.6164236111111111,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "High \u00b7 Less in 4 of last 4 (16, 25, 18, 2)",
-      "reasons": [
-       "For: CAR pressure QBs on 19% of dropbacks (the 5th least); PHI's line allows pressure on 22% (the 11th least): fewer reasons to run"
-      ]
-     },
-     {
-      "player": "Bryce Young",
-      "player_id": "00-0039150",
-      "team": "CAR",
-      "stat": "pass_att",
-      "side": "over",
-      "line": 33.5,
-      "p_model": 0.6111111111111112,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "High \u00b7 More in 4 of last 4 (37, 36, 48, 41)",
-      "reasons": []
-     },
-     {
-      "player": "Darren Waller",
-      "player_id": "00-0031610",
-      "team": "CAR",
-      "stat": "rec_yds",
-      "side": "over",
-      "line": 25.5,
-      "p_model": 0.6094704861111111,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "High \u00b7 More in 4 of last 4 (28, 33, 51, 36)",
-      "reasons": []
-     }
-    ]
-   }
-  ],
-  "4": [
-   {
-    "n": 4,
-    "entry": "B",
-    "recommended": true,
-    "basis": "Guesser method",
-    "play_as": "Power",
-    "game": "CAR at PHI",
-    "p_all": 0.12274072812065864,
-    "p_independent": 0.12274072812065864,
-    "power_ev": 1.2274072812065864,
-    "flex_ev": 1.1236762369680524,
-    "best_ev": 1.2274072812065864,
-    "min_power_mult": 8.147254911319765,
-    "legs": [
-     {
-      "player": "Jalen Hurts",
-      "player_id": "00-0036389",
-      "team": "PHI",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 25.5,
-      "p_model": 0.6164236111111111,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "High \u00b7 Less in 4 of last 4 (16, 25, 18, 2)",
-      "reasons": [
-       "For: CAR pressure QBs on 19% of dropbacks (the 5th least); PHI's line allows pressure on 22% (the 11th least): fewer reasons to run"
-      ]
-     },
-     {
-      "player": "Bryce Young",
-      "player_id": "00-0039150",
-      "team": "CAR",
-      "stat": "pass_att",
-      "side": "over",
-      "line": 33.5,
-      "p_model": 0.6111111111111112,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "High \u00b7 More in 4 of last 4 (37, 36, 48, 41)",
-      "reasons": []
-     },
-     {
-      "player": "Darren Waller",
-      "player_id": "00-0031610",
-      "team": "CAR",
-      "stat": "rec_yds",
-      "side": "over",
-      "line": 25.5,
-      "p_model": 0.6094704861111111,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "High \u00b7 More in 4 of last 4 (28, 33, 51, 36)",
-      "reasons": []
-     },
-     {
-      "player": "Jalen Coker",
-      "player_id": "00-0039491",
-      "team": "CAR",
-      "stat": "receptions",
-      "side": "over",
-      "line": 4.5,
-      "p_model": 0.534609375,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "Lean \u00b7 More in 2 of last 3 (8, 8, 2)",
-      "reasons": [
-       "For: PHI allow the 8th most receiving yds to WRs (172 a game)"
-      ]
-     }
-    ]
-   }
-  ]
- },
- "plan": {
-  "budget": 20,
-  "entries": [
-   {
-    "n": 3,
-    "play_as": "Flex",
-    "stake": 18,
-    "game": "CAR at PHI",
-    "basis": "Guesser method",
-    "p_all": 0.22958955428093386,
-    "p_paid": 0.6656703932104124,
-    "best_ev": 1.0616775457939494,
-    "recommended": true,
-    "min_power_mult": 4.35559885610634,
-    "legs": [
-     {
-      "player": "Jalen Hurts",
-      "player_id": "00-0036389",
-      "team": "PHI",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 25.5,
-      "p_model": 0.6164236111111111,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "High \u00b7 Less in 4 of last 4 (16, 25, 18, 2)",
-      "reasons": [
-       "For: CAR pressure QBs on 19% of dropbacks (the 5th least); PHI's line allows pressure on 22% (the 11th least): fewer reasons to run"
-      ]
-     },
-     {
-      "player": "Bryce Young",
-      "player_id": "00-0039150",
-      "team": "CAR",
-      "stat": "pass_att",
-      "side": "over",
-      "line": 33.5,
-      "p_model": 0.6111111111111112,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "High \u00b7 More in 4 of last 4 (37, 36, 48, 41)",
-      "reasons": []
-     },
-     {
-      "player": "Darren Waller",
-      "player_id": "00-0031610",
-      "team": "CAR",
-      "stat": "rec_yds",
-      "side": "over",
-      "line": 25.5,
-      "p_model": 0.6094704861111111,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "High \u00b7 More in 4 of last 4 (28, 33, 51, 36)",
-      "reasons": []
-     }
-    ],
-    "entry": "A"
-   },
-   {
-    "n": 2,
-    "play_as": "Power",
-    "stake": 2,
-    "game": "CAR at PHI",
-    "basis": "Guesser method",
-    "p_all": 0.37670331790123457,
-    "p_paid": 0.37670331790123457,
-    "best_ev": 1.1301099537037038,
-    "recommended": true,
-    "min_power_mult": 2.6546089521361305,
-    "legs": [
-     {
-      "player": "Jalen Hurts",
-      "player_id": "00-0036389",
-      "team": "PHI",
-      "stat": "rush_yds",
-      "side": "under",
-      "line": 25.5,
-      "p_model": 0.6164236111111111,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "High \u00b7 Less in 4 of last 4 (16, 25, 18, 2)",
-      "reasons": [
-       "For: CAR pressure QBs on 19% of dropbacks (the 5th least); PHI's line allows pressure on 22% (the 11th least): fewer reasons to run"
-      ]
-     },
-     {
-      "player": "Bryce Young",
-      "player_id": "00-0039150",
-      "team": "CAR",
-      "stat": "pass_att",
-      "side": "over",
-      "line": 33.5,
-      "p_model": 0.6111111111111112,
-      "game_id": "2026_06_CAR_PHI",
-      "note": "High \u00b7 More in 4 of last 4 (37, 36, 48, 41)",
-      "reasons": []
-     }
-    ],
-    "entry": "B"
-   }
-  ],
-  "expected_back": 21.370415731698493,
-  "p_profit": 0.6656703932104124,
-  "p_lose_all": 0.33432960678958756,
-  "p_any_back": 0.6656703932104124,
-  "rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)"
- }
+ "lineups": {},
+ "plan": {}
 }

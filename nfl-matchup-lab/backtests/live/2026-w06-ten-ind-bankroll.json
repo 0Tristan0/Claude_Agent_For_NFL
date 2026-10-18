@@ -2,7 +2,7 @@
   "game": "2026_06_TEN_IND",
   "label": "TEN at IND",
   "kickoff_utc": "2026-10-18 17:00 UTC",
-  "frozen_at": "2026-10-13 19:23 UTC",
+  "frozen_at": "2026-10-18 00:05 UTC",
   "bankroll": 20.0,
   "reserve_not_bet": 0.0,
   "paper_money": true,
@@ -26,11 +26,11 @@
           "stat": "rush_yds",
           "side": "under",
           "line": 7.5,
-          "p_model": 0.5599305555555556,
+          "p_model": 0.5618055555555556,
           "game_id": "2026_06_TEN_IND",
           "note": "Medium \u00b7 Less in 3 of last 4 (10, 5, 2, 4)",
           "reasons": [
-            "For: TEN pressure QBs on 22% of dropbacks (the 14th least); IND's line allows pressure on 20% (the 5th least): fewer reasons to run"
+            "For: TEN pressure QBs on 20% of dropbacks (the 10th least); IND's line allows pressure on 18% (the 3rd least): fewer reasons to run"
           ]
         },
         {
@@ -40,7 +40,7 @@
           "stat": "rush_yds",
           "side": "under",
           "line": 11.5,
-          "p_model": 0.5555555555555556,
+          "p_model": 0.5561805555555556,
           "game_id": "2026_06_TEN_IND",
           "note": "Medium \u00b7 Less in 3 of last 4 (7, 2, 27, 2)",
           "reasons": []
@@ -57,7 +57,9 @@
           "note": "Medium \u00b7 More in 3 of last 4 (64, 74, 48, 52)",
           "reasons": [
             "Against: TEN underdog by 7: may abandon the run if behind",
-            "For: IND have the 7th worst run defense (EPA per rush allowed)"
+            "For: IND have the 7th worst run defense (EPA per rush allowed)",
+            "Against: News: Tennessee is a 7-point underdog and ran only 17 times in Week 5",
+            "For: News: Tyjae Spears (knee) was downgraded to no practice Thursday and is questionable"
           ]
         }
       ],
@@ -69,11 +71,11 @@
   ],
   "expected_return_per_dollar": {
     "A_flex3": {
-      "estimate": 0.904
+      "estimate": 0.906
     }
   },
-  "expected_back": 18.07,
-  "p_profit": 0.585,
-  "p_lose_all": 0.415,
+  "expected_back": 18.12,
+  "p_profit": 0.586,
+  "p_lose_all": 0.414,
   "result": null
 }
