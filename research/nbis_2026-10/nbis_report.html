@@ -1,0 +1,752 @@
+<title>Nebius NBIS Initiation</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: equity-research note — sticky rating bar, left contents rail on wide screens, single reading column with full-width data tables */
+:root {
+  --bg: #f6f7f9;
+  --paper: #ffffff;
+  --ink: #12161d;
+  --ink-2: #4a505c;
+  --ink-3: #7a808c;
+  --rule: #dfe2e8;
+  --accent: #1f4fbf;
+  --accent-soft: #e6edfb;
+  --sell: #c23a3a;
+  --sell-soft: #fbeaea;
+  --good: #1d7f3a;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a;
+  --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1216; --paper: #161a20; --ink: #eceef2; --ink-2: #b5bac4; --ink-3: #868c98;
+    --rule: #2a3039; --accent: #7aa2ff; --accent-soft: #1b2640; --sell: #ef7070; --sell-soft: #3a1c1e;
+    --good: #5cc77d; --s1: #3987e5; --s2: #d95926; --s3: #199e70; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1216; --paper: #161a20; --ink: #eceef2; --ink-2: #b5bac4; --ink-3: #868c98;
+  --rule: #2a3039; --accent: #7aa2ff; --accent-soft: #1b2640; --sell: #ef7070; --sell-soft: #3a1c1e;
+  --good: #5cc77d; --s1: #3987e5; --s2: #d95926; --s3: #199e70; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--paper); border-bottom: 1px solid var(--rule);
+  padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.bar-in { max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; font-family: var(--f-display); }
+.tick { font-weight: 800; font-stretch: 80%; font-size: 18px; letter-spacing: .02em; }
+.tick span { font-weight: 500; color: var(--ink-3); font-size: 14px; letter-spacing: .04em; margin-left: 6px; }
+.chip { font-family: var(--f-display); font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; }
+.chip.sell { background: var(--sell-soft); color: var(--sell); border: 1px solid var(--sell); }
+.kv { display: flex; gap: 6px; align-items: baseline; font-size: 14px; color: var(--ink-2); }
+.kv b { font-family: var(--f-data); font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 32px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 48px; }
+nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 64px); align-self: start; font-family: var(--f-display); font-size: 14px; }
+nav.toc p { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; font-weight: 600; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: s; }
+nav.toc li { counter-increment: s; }
+nav.toc a { color: var(--ink-2); text-decoration: none; display: grid; grid-template-columns: 22px 1fr; }
+nav.toc a::before { content: counter(s); color: var(--ink-3); font-family: var(--f-data); font-size: 12px; }
+nav.toc a:hover { color: var(--accent); }
+@media (max-width: 900px) { .wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; } nav.toc { display: none; } }
+
+main { min-width: 0; display: grid; gap: 56px; }
+header.hero { display: grid; gap: 18px; }
+.eyebrow { font-family: var(--f-display); font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); margin: 0; }
+h1 { font-family: var(--f-display); font-stretch: 78%; font-weight: 800; font-size: clamp(34px, 6vw, 58px); line-height: 1.02; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.dek { font-size: 20px; line-height: 1.5; color: var(--ink-2); max-width: 64ch; margin: 0; }
+.verdict { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--rule); background: var(--paper); border-radius: 4px; }
+.verdict div { padding: 14px 16px; border-right: 1px solid var(--rule); display: grid; gap: 2px; }
+.verdict div:last-child { border-right: 0; }
+.verdict span { font-family: var(--f-display); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
+.verdict b { font-family: var(--f-display); font-stretch: 80%; font-size: 30px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.verdict b.neg { color: var(--sell); }
+.verdict small { font-size: 13px; color: var(--ink-2); }
+@media (max-width: 640px) { .verdict { grid-template-columns: repeat(2, minmax(0, 1fr)); } .verdict div:nth-child(2) { border-right: 0; } .verdict div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); } }
+
+section { display: grid; gap: 16px; scroll-margin-top: 80px; }
+h2 { font-family: var(--f-display); font-stretch: 85%; font-weight: 800; font-size: 28px; line-height: 1.15; margin: 0; text-wrap: balance; display: flex; gap: 12px; align-items: baseline; }
+h2 i { font-style: normal; font-family: var(--f-data); font-weight: 400; font-size: 14px; color: var(--ink-3); }
+h3 { font-family: var(--f-display); font-weight: 700; font-size: 18px; margin: 8px 0 0; letter-spacing: .01em; }
+p, ul, ol { margin: 0; max-width: 68ch; }
+ul, ol { padding-left: 1.2em; display: grid; gap: 6px; }
+.lead { font-size: 19px; }
+.callout { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 14px 18px; max-width: 72ch; }
+.callout p { max-width: none; }
+.tag { font-family: var(--f-data); font-size: 11.5px; color: var(--ink-3); letter-spacing: .02em; white-space: nowrap; }
+.note { font-size: 14px; color: var(--ink-2); max-width: 72ch; }
+
+.tbl { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; line-height: 1.4; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; }
+thead th { font-family: var(--f-display); font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); background: var(--bg); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+td.n, th.n { text-align: right; font-family: var(--f-data); font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 13.5px; }
+tr.hl td { background: var(--accent-soft); font-weight: 600; }
+tr.sub td { color: var(--ink-3); font-style: italic; }
+td.neg { color: var(--sell); }
+
+.figure { background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 16px; display: grid; gap: 10px; }
+.figure h4 { margin: 0; font-family: var(--f-display); font-size: 15px; font-weight: 700; }
+.figure .cap { font-size: 13px; color: var(--ink-2); max-width: none; }
+.chart { width: 100%; overflow-x: auto; }
+.chart svg { display: block; width: 100%; min-width: 560px; height: auto; font-family: var(--f-display); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--f-display); font-size: 13px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+.legend i.dot { width: 9px; height: 9px; border-radius: 50%; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 760px) { .two { grid-template-columns: minmax(0, 1fr); } }
+.case { background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.case h3 { margin: 0; }
+.case ol { font-size: 15.5px; }
+#tip { position: fixed; pointer-events: none; z-index: 20; background: var(--ink); color: var(--paper); font-family: var(--f-display); font-size: 13px; padding: 6px 9px; border-radius: 3px; max-width: 260px; line-height: 1.35; }
+.src li { font-size: 14px; overflow-wrap: anywhere; }
+footer { font-size: 13px; color: var(--ink-3); border-top: 1px solid var(--rule); padding-top: 16px; max-width: 72ch; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="bar"><div class="bar-in">
+  <div class="tick">NBIS<span>NASDAQ · Nebius Group N.V.</span></div>
+  <span class="chip sell">Sell · Underweight</span>
+  <div class="kv">Price <b>$165.47</b></div>
+  <div class="kv">Fair value <b>$120</b></div>
+  <div class="kv">12m target <b>$135</b></div>
+  <div class="kv">Data as of <b>18 Oct 2026</b></div>
+</div></div>
+
+<div class="wrap">
+<nav class="toc" aria-label="Contents">
+  <p>Contents</p>
+  <ol>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#business">Business</a></li>
+    <li><a href="#industry">Industry</a></li>
+    <li><a href="#contracts">Contracts &amp; financing</a></li>
+    <li><a href="#capacity">Capacity &amp; capex</a></li>
+    <li><a href="#financials">Financials</a></li>
+    <li><a href="#economics">Unit economics</a></li>
+    <li><a href="#forecast">Forecasts</a></li>
+    <li><a href="#valuation">Valuation</a></li>
+    <li><a href="#consensus">Street view</a></li>
+    <li><a href="#risks">Risks</a></li>
+    <li><a href="#thesis">Thesis &amp; catalysts</a></li>
+    <li><a href="#call">Recommendation</a></li>
+    <li><a href="#sources">Sources</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <p class="eyebrow">Initiation of coverage · AI infrastructure · 18 October 2026</p>
+  <h1>A great business priced for economics no GPU cloud has shown</h1>
+  <p class="dek">Nebius is the best-funded independent GPU cloud and is growing 454% a year. At $165, the stock needs long-run margins of about 70% or a cost of capital near 9%. My base case delivers neither, so I rate it Sell.</p>
+  <div class="verdict">
+    <div><span>Rating</span><b class="neg">SELL</b><small>Medium conviction</small></div>
+    <div><span>Fair value</span><b>$120</b><small>Probability-weighted</small></div>
+    <div><span>12-month target</span><b>$135</b><small>−18% from $165.47</small></div>
+    <div><span>3–5 yr expected return</span><b>2–10%</b><small>a year, vs 13.7% cost of equity</small></div>
+  </div>
+  <p class="note">Labels: <span class="tag">[F]</span> confirmed fact · <span class="tag">[G]</span> management guidance · <span class="tag">[C]</span> consensus or third-party data · <span class="tag">[A]</span> my assumption · <span class="tag">[I]</span> my interpretation. The reproducible Python model, workbook and full tables are in <code>research/nbis_2026-10/</code> on branch <code>claude/nifty-euler-9xeoed</code>.</p>
+</header>
+
+<section id="summary">
+  <h2><i>01</i>Summary</h2>
+  <p class="lead">The operating story is excellent: Q2-26 revenue of $582m (+454% YoY), $3.0bn of ARR, and more than $40bn of committed backlog with Microsoft and Meta <span class="tag">[F]</span>. The equity story depends on three numbers the market rarely discusses: capex per dollar of ARR, mature EBITDA margin, and how many years a GPU earns.</p>
+  <div class="callout"><p>At about $2.70 of capex per $1 of ARR, a 60% EBITDA margin and a 6-year GPU life, each new megawatt earns an unlevered pre-tax IRR of about 8–10%. That is below an 11.3% WACC, so growth adds revenue but little value per share <span class="tag">[I]</span>.</p></div>
+
+  <div class="figure">
+    <h4>Valuation range by method, $ per share</h4>
+    <div class="chart" id="ff"></div>
+    <div class="legend"><span><i style="background:var(--s1)"></i>Range (bear to bull, or low to high)</span><span><i class="dot" style="background:var(--ink)"></i>Weighted or midpoint value</span><span><i style="background:var(--sell)"></i>Price $165</span><span><i style="background:var(--accent)"></i>Fair value $120</span></div>
+    <p class="cap">DCF ranges run from the bear to the bull case, weighted 25/50/25. Comps apply 5.5–10x to my 2027 EBITDA. Analyst range per ChartMill; the dot is the ~$290 average of TipRanks and ChartMill.</p>
+  </div>
+
+  <h3>Three reasons for Sell</h3>
+  <ol>
+    <li><strong>The unit economics do not clear the cost of capital at base-case assumptions.</strong> The "22-month payback" for Q2 contracts and a BNP-linked "1.3-year payback" both count customer prepayments as cash inflows. Prepayments are financing, not return.</li>
+    <li><strong>Dilution and debt-like items are understated.</strong> Fully diluted shares are 343m, not the ~272m that quote screens show. There are $13.45bn of convertibles converting at $51–$325, $6.0bn of prepaid service still owed, and a base-case funding gap of about $49bn by 2029.</li>
+    <li><strong>Consensus sits near my bull case, and sector credit is cracking.</strong> Street 2030 revenue is about $45bn against my $32bn base. CoreWeave's 5-year CDS hit about 1,195bp on 15 Oct, and Gartner expects more than 80% of neoclouds to lose independence by 2030.</li>
+  </ol>
+  <h3>What would make me a buyer</h3>
+  <ul>
+    <li>A price below about $95, a 20% discount to fair value.</li>
+    <li>Disclosed capex of $2.40 or less per $1 of ARR with mature margins of 62% or more.</li>
+    <li>Older GPUs (H100/H200) re-contracting at 70% or more of their original rates, which would point to a 7-year-plus economic life.</li>
+  </ul>
+</section>
+
+<section id="business">
+  <h2><i>02</i>Business</h2>
+  <p>Nebius is the international remainder of Yandex N.V. after the 2024 sale of its Russian assets. It is headquartered in Amsterdam with large engineering hubs in Europe and Israel.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Segment or asset</th><th>What it is</th><th>Weight</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Nebius AI Cloud</strong></td><td>Full-stack GPU cloud: bare metal, managed Kubernetes and Slurm, storage, AI Studio, Token Factory inference. Sells on-demand, reserved and multi-year dedicated clusters.</td><td>~98% of revenue; $574.9m in Q2-26; ~50% segment EBITDA margin <span class="tag">[F]</span></td></tr>
+      <tr><td><strong>Avride</strong> (~83%)</td><td>Autonomous driving and delivery robots; Uber partnership with up to $375m of Uber and Nebius commitments (Oct-25)</td><td>Adj. EBITDA loss $82.7m in 2025, $34.1m in Q1-26 <span class="tag">[F]</span></td></tr>
+      <tr><td><strong>TripleTen</strong></td><td>Developer bootcamps</td><td>Small <span class="tag">[C]</span></td></tr>
+      <tr><td><strong>ClickHouse stake</strong> (~25–28%)</td><td>Open-source analytics database; $15bn Series D in Jan-26; ARR reportedly above $350m</td><td>~$3.4–4.2bn, about $10–13 a share <span class="tag">[C]</span></td></tr>
+      <tr><td><strong>Toloka</strong></td><td>Data labelling, deconsolidated</td><td>Immaterial</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Competitive position</h3>
+  <p><strong>Real advantages:</strong> deep ex-Yandex infrastructure engineering with its own server and rack designs; a near-net-cash corporate balance sheet against CoreWeave's ~$52bn of debt; customer-funded capex (Microsoft ~$6.96bn of upfront payments, $4.4bn of advance payments in H1-26 <span class="tag">[F]</span>); 5 GW of contracted power targeted by year-end <span class="tag">[G]</span>; and NVIDIA as a 7% holder with a &gt;5 GW partnership.</p>
+  <p><strong>Limits:</strong> GPU capacity is a largely commoditised input bought from the same supplier as everyone else. The biggest customers are also the biggest competitors; reports on Meta's own cloud plans cut the stock about 14% on 1 Jul. Training workloads move to the cheapest capacity, and the software layer is not yet a material share of revenue <span class="tag">[I]</span>.</p>
+  <h3>Management and governance</h3>
+  <p>Co-founder and CEO Arkady Volozh and CFO Dado Alonso have executed exceptionally: year-end 2025 active power was ~170 MW against a 100 MW target, and ARR was $1.25bn against $0.9–1.1bn guidance <span class="tag">[F]</span>. Class B shares carry 10 votes, and Volozh's trust holds 28.66m of the 33.46m Class B shares, giving him roughly half of all votes <span class="tag">[F/I]</span>. Discounts: dual-class control, SBC at 18% of Q2 revenue, and a 4-to-5-year depreciation change that flatters EBIT.</p>
+</section>
+
+<section id="industry">
+  <h2><i>03</i>Industry</h2>
+  <p>Demand comes from frontier-model training, fast-growing inference, enterprise and sovereign AI, and hyperscalers renting outside capacity because power is their bottleneck. NVIDIA puts its own revenue opportunity at about $25bn per GW for Blackwell and $40bn per GW for Vera Rubin, and expects neocloud capacity of about 8 GW by late 2026 <span class="tag">[C]</span>. Nebius's 0.8–1.0 GW of connected power would be roughly 10–12% of that <span class="tag">[I]</span>.</p>
+  <p>2026 is a seller's market. H100 one-year rental rates rose about 40% from their Oct-25 low, Nebius's first mid-term capacity auction cleared about 15% above any prior rate, and on-demand prices rose on 1 Oct (reported at 17–21%, single source) <span class="tag">[C/G]</span>. I read this as a cyclical peak: prices fell sharply in 2024–25 when supply caught up, and the 2026–27 build wave (CoreWeave $35–39bn of capex, Nebius $20–25bn, IREN $25–30bn, plus Lambda and Crusoe) is still to be energised <span class="tag">[I]</span>.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Competitor</th><th>Recent data</th></tr></thead>
+    <tbody>
+      <tr><td>Hyperscalers (AWS, Azure, GCP, OCI)</td><td>Both customers and competitors</td></tr>
+      <tr><td>CoreWeave</td><td>Q2-26 revenue $2.6bn; backlog $104bn ($129bn with early-Q3 commitments); FY26 adj. operating margin ~8% <span class="tag">[F]</span></td></tr>
+      <tr><td>Lambda (private)</td><td>Reported pre-IPO round at $12–14.5bn; 2026 revenue ~$1.5bn <span class="tag">[C]</span></td></tr>
+      <tr><td>IREN</td><td>$9.7bn Microsoft contract; FY27 capex guide $25–30bn <span class="tag">[C]</span></td></tr>
+    </tbody>
+  </table></div>
+  <p>Gartner (14 Oct 2026) estimates AI data-centre owners need about $8.5tn of revenue through 2030 to earn a 12% return on announced capex, against no more than $3.6tn forecast. It puts more than $3.5tn of spending at risk of impairment <span class="tag">[C]</span>. Nebius is more likely a survivor or acquirer than a casualty, but the sector's cost of capital is rising.</p>
+</section>
+
+<section id="contracts">
+  <h2><i>04</i>Contracts &amp; financing</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Agreement</th><th>Terms</th><th>My assessment</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Microsoft</strong> (Sep-25), Vineland NJ</td><td>5 years; committed fees up to $17.4bn through 2031 ($19.4bn with options); ~$6.96bn upfront; nine tranches; Microsoft can take service credits or end tranches on delays <span class="tag">[F]</span></td><td>~$3.5bn a year at run-rate. Upfront payments roughly halve the equity needed. Five-year EBITDA roughly equals capex, so profit relies on residual GPU value. Latest tranche delivered Jul-26.</td></tr>
+      <tr><td><strong>Meta I</strong> (Nov-25)</td><td>~$3bn over 5 years <span class="tag">[F]</span></td><td>Small; validates the platform</td></tr>
+      <tr><td><strong>Meta II</strong> (Mar-26)</td><td>$12bn firm orders deploying from 2027, plus Meta's obligation to buy up to $15bn of unsold residual capacity; "up to ~$27bn" <span class="tag">[F]</span></td><td>Only $12bn is firm. The backstop is a valuable put, not backlog, and deepens reliance on a customer building rival capacity.</td></tr>
+      <tr><td><strong>NVIDIA</strong> (Mar-26)</td><td>$2bn for a pre-funded warrant on 21.07m shares (about $95 a share implied); exercisable from 11 Sep 2026 <span class="tag">[F]</span></td><td>Allocation priority and validation; low sale overhang</td></tr>
+      <tr><td><strong>Secured facility</strong> (Jul-26)</td><td>$775m, SOFR+250 (~6.8%), due Oct-2030, secured on GPUs and an investment-grade contract <span class="tag">[F]</span></td><td>Opens cheaper asset-backed funding for the build-out</td></tr>
+      <tr><td><strong>AIB Data Centers</strong> (Sep-26)</td><td>Nebius leases 50 MW for 12 years <span class="tag">[F]</span></td><td>Long lease against shorter GPU contracts</td></tr>
+      <tr><td><strong>Prepayments</strong></td><td>More than $9bn expected in 2026 <span class="tag">[G]</span>; deferred revenue $5.98bn at 30 Jun <span class="tag">[F]</span></td><td>98% of H1-26 operating cash flow was advance payments. A liability, not earnings power.</td></tr>
+      <tr><td><strong>Concentration</strong></td><td>Top three customers were 24%, 21% and 14% of Q2-26 revenue; Microsoft and Meta firm commitments are ~$32bn of ~$40bn investment-grade backlog <span class="tag">[C]</span></td><td>High. In-sourcing by either is the largest risk to 2028+ renewals.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="capacity">
+  <h2><i>05</i>Capacity &amp; capex</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Active power, year-end 2025</td><td>~170 MW (target was 100 MW) <span class="tag">[F]</span></td></tr>
+      <tr><td>Connected power, year-end 2026</td><td>800 MW–1 GW <span class="tag">[G]</span></td></tr>
+      <tr><td>Contracted power, year-end 2026</td><td>5 GW, raised from &gt;4 GW <span class="tag">[G]</span></td></tr>
+      <tr><td>Build pace</td><td>"More than 1 GW of new capacity a year starting 2027" <span class="tag">[G]</span></td></tr>
+      <tr><td>Capex</td><td>FY25 $4.1bn; Q1-26 $2.47bn; Q2-26 ~$5.7bn <span class="tag">[F]</span>; FY26 guide $20–25bn <span class="tag">[G]</span></td></tr>
+      <tr><td>Main sites</td><td>Independence MO (up to 1.2 GW); Schuylkill County PA (1.2 GW; 260 MW by Oct-27); Birmingham AL (~300 MW); Vineland NJ (leased); Lappeenranta FI (310 MW) and Mäntsälä FI (75 MW); Béthune FR (240 MW); leased UK and Israel</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Calibration</strong> <span class="tag">[I]</span>: ARR per active MW was about $7.4m at year-end 2025 on a Hopper-heavy fleet. A GB300-class megawatt of IT load holds about 470 GPUs. At $4 per GPU-hour and 95% use that is about $15.6m a year. Compute costs about $29m per IT-MW and an owned shell about $12–15m more, so capex runs about 2.7–2.8x ARR on owned sites and 1.9x on leased sites, where rent moves into operating costs. Nebius's own numbers point the same way. I use 2.7x in the base case.</p>
+</section>
+
+<section id="financials">
+  <h2><i>06</i>Financials</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>$m</th><th class="n">Q1-25</th><th class="n">Q2-25</th><th class="n">Q3-25*</th><th class="n">Q4-25</th><th class="n">FY25</th><th class="n">Q1-26</th><th class="n">Q2-26</th></tr></thead>
+    <tbody>
+      <tr><td>Revenue</td><td class="n">50.9</td><td class="n">105.1</td><td class="n">146.1</td><td class="n">227.7</td><td class="n">529.8</td><td class="n">399.0</td><td class="n">582.3</td></tr>
+      <tr><td>Adj. EBITDA</td><td class="n">(53.7)</td><td class="n">(21.0)</td><td class="n">(5.2)</td><td class="n">15.0</td><td class="n">(64.9)</td><td class="n">129.5</td><td class="n">236.2</td></tr>
+      <tr><td>Adj. EBITDA margin</td><td class="n">n.m.</td><td class="n">n.m.</td><td class="n">n.m.</td><td class="n">7%</td><td class="n">n.m.</td><td class="n">32%</td><td class="n">41%</td></tr>
+      <tr><td>D&amp;A</td><td class="n"></td><td class="n">75.2</td><td class="n"></td><td class="n"></td><td class="n"></td><td class="n">212.0</td><td class="n">259.7</td></tr>
+      <tr><td>Net income (loss), continuing</td><td class="n">(104.3)</td><td class="n">502.5**</td><td class="n"></td><td class="n"></td><td class="n"></td><td class="n">621.2**</td><td class="n">(190.4)</td></tr>
+      <tr><td>ARR, period end</td><td class="n"></td><td class="n"></td><td class="n"></td><td class="n">1,250</td><td class="n">1,250</td><td class="n">1,900</td><td class="n">3,000</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">* Derived as FY25 minus other quarters. ** Includes large ClickHouse revaluation gains ($780.6m in Q1-26). Source: company releases and 6-K exhibits <span class="tag">[F]</span>. Operating profit has not arrived: Q2 D&amp;A ($260m) exceeded adj. EBITDA ($236m) even after the life extension, and SBC added 18% of revenue.</p>
+
+  <div class="two">
+    <div class="tbl"><table>
+      <thead><tr><th>Balance sheet, $bn</th><th class="n">Pro forma</th></tr></thead>
+      <tbody>
+        <tr><td>Cash (8.04 at 30 Jun + Aug converts + Jul facility)</td><td class="n">14.42</td></tr>
+        <tr><td>Convertible notes, principal</td><td class="n">13.45</td></tr>
+        <tr><td>Secured GPU facility</td><td class="n">0.78</td></tr>
+        <tr><td>Leases and other (derived)</td><td class="n">1.50</td></tr>
+        <tr class="hl"><td>Net debt</td><td class="n">~1.3</td></tr>
+        <tr><td>Deferred revenue (service owed)</td><td class="n">5.98</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Share count, m</th><th class="n">Shares</th></tr></thead>
+      <tbody>
+        <tr><td>Class A + B, 30 Jun 2026</td><td class="n">271.9</td></tr>
+        <tr><td>+ August exchange shares</td><td class="n">15.8</td></tr>
+        <tr><td>+ NVIDIA pre-funded warrant</td><td class="n">21.1</td></tr>
+        <tr><td>+ Unvested awards (estimate)</td><td class="n">8.0</td></tr>
+        <tr><td>+ In-the-money converts at $165</td><td class="n">26.7</td></tr>
+        <tr class="hl"><td>Fully diluted at $165</td><td class="n">343.4</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <h3>The convertible stack dilutes more as the stock rises</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Series</th><th class="n">Principal $bn</th><th class="n">Conversion price</th><th class="n">Shares m</th></tr></thead>
+    <tbody>
+      <tr><td>1.00% 2029 / 2.75% 2031 (Jun-25), after exchange</td><td class="n">0.20</td><td class="n">$51.45</td><td class="n">3.9</td></tr>
+      <tr><td>1.00% 2030 / 2.75% 2032 (Sep-25)</td><td class="n">3.16</td><td class="n">$138.75</td><td class="n">22.8</td></tr>
+      <tr><td>1.25% 2031 (Mar-26)</td><td class="n">2.59</td><td class="n">$183.22</td><td class="n">14.1</td></tr>
+      <tr><td>2.625% 2033 (Mar-26)</td><td class="n">1.75</td><td class="n">$180.31</td><td class="n">9.7</td></tr>
+      <tr><td>0.50% 2030 / 4.50% 2034 (Aug-26)†</td><td class="n">5.75</td><td class="n">$313–325</td><td class="n">18.1</td></tr>
+      <tr class="hl"><td>Total</td><td class="n">13.45</td><td class="n"></td><td class="n">68.6</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">† Total of $5.75bn confirmed; the split between series is my assumption. Long-dated, low-coupon debt with no maintenance covenants is a real strength against CoreWeave.</p>
+</section>
+
+<section id="economics">
+  <h2><i>07</i>Unit economics</h2>
+  <p>Unlevered pre-tax IRR per $1 of new ARR. Capex is spent up front, year one earns 60% of run-rate, compute retires at the end of its life, and the undepreciated data-centre value is recovered. Margins are after stock compensation.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>GPU life · margin</th><th class="n">2.0x</th><th class="n">2.4x</th><th class="n">2.7x</th><th class="n">3.0x</th><th class="n">3.4x</th></tr></thead>
+    <tbody>
+      <tr><td>5 yrs · 55%</td><td class="n">12.2%</td><td class="n">6.9%</td><td class="n">3.8%</td><td class="n">1.2%</td><td class="n neg">−1.6%</td></tr>
+      <tr><td>5 yrs · 60%</td><td class="n">15.0%</td><td class="n">9.4%</td><td class="n">6.1%</td><td class="n">3.3%</td><td class="n">0.3%</td></tr>
+      <tr class="hl"><td>6 yrs · 55% (base)</td><td class="n">15.9%</td><td class="n">10.7%</td><td class="n">7.6%</td><td class="n">5.1%</td><td class="n">2.3%</td></tr>
+      <tr><td>6 yrs · 60%</td><td class="n">18.6%</td><td class="n">13.1%</td><td class="n">9.8%</td><td class="n">7.1%</td><td class="n">4.2%</td></tr>
+      <tr><td>7 yrs · 60%</td><td class="n">21.0%</td><td class="n">15.6%</td><td class="n">12.4%</td><td class="n">9.8%</td><td class="n">6.9%</td></tr>
+      <tr><td>7 yrs · 65%</td><td class="n">23.6%</td><td class="n">17.9%</td><td class="n">14.6%</td><td class="n">11.8%</td><td class="n">8.8%</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>Value is created only with capex of about $2.40 or less per $1 of ARR and margins of 60% or more, or with GPU lives of 7 years or more.</li>
+    <li>Payback figures that count prepayments as returns are misleading. A prepayment is a customer loan repaid in service: it lowers the equity needed but not the project's return. The BNP-linked figure implies about $30bn of yearly revenue per GW, roughly twice what GPU-hour arithmetic supports.</li>
+    <li>CoreWeave, at about $13bn of revenue, guides FY26 adjusted operating income to only $0.96–1.15bn <span class="tag">[F]</span>. That is the clearest real-world read of mature neocloud returns.</li>
+  </ul>
+</section>
+
+<section id="forecast">
+  <h2><i>08</i>Forecasts</h2>
+  <div class="figure">
+    <h4>Revenue by scenario vs consensus, $bn</h4>
+    <div class="chart" id="rev"></div>
+    <div class="legend"><span><i style="background:var(--s3)"></i>Bull (25%)</span><span><i style="background:var(--s1)"></i>Base (50%)</span><span><i style="background:var(--s2)"></i>Bear (25%)</span><span><i class="dot" style="background:var(--ink)"></i>Consensus</span></div>
+    <p class="cap">Consensus points: 2026 ~$3.2bn, 2027 $12.3bn, 2028 ~$21bn, 2030 ~$45bn (aggregators disagree beyond 2027). The bear case is a run-off after contracted builds finish.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Base case, $bn</th><th class="n">2026</th><th class="n">2027</th><th class="n">2028</th><th class="n">2029</th><th class="n">2030</th><th class="n">2032</th><th class="n">2035</th></tr></thead>
+    <tbody>
+      <tr><td>Exit ARR</td><td class="n">7.5</td><td class="n">15.5</td><td class="n">24.0</td><td class="n">31.5</td><td class="n">38.0</td><td class="n">47.0</td><td class="n">54.5</td></tr>
+      <tr class="hl"><td>Revenue</td><td class="n">3.15</td><td class="n">10.6</td><td class="n">18.2</td><td class="n">25.5</td><td class="n">32.0</td><td class="n">41.4</td><td class="n">49.2</td></tr>
+      <tr class="sub"><td>Consensus revenue</td><td class="n">~3.2</td><td class="n">12.3</td><td class="n">~21</td><td class="n"></td><td class="n">~45</td><td class="n"></td><td class="n"></td></tr>
+      <tr><td>Adj. EBITDA</td><td class="n">1.3</td><td class="n">5.3</td><td class="n">10.0</td><td class="n">14.8</td><td class="n">19.2</td><td class="n">24.8</td><td class="n">29.5</td></tr>
+      <tr><td>Adj. EBITDA margin</td><td class="n">40%</td><td class="n">50%</td><td class="n">55%</td><td class="n">58%</td><td class="n">60%</td><td class="n">60%</td><td class="n">60%</td></tr>
+      <tr><td>EBIT after SBC</td><td class="n">(1.8)</td><td class="n">(1.6)</td><td class="n">(0.6)</td><td class="n">0.8</td><td class="n">2.6</td><td class="n">7.5</td><td class="n">10.9</td></tr>
+      <tr><td>Capex, growth + refresh</td><td class="n">22.0</td><td class="n">22.1</td><td class="n">22.0</td><td class="n">19.5</td><td class="n">16.7</td><td class="n">23.9</td><td class="n">17.5</td></tr>
+      <tr><td>Unlevered FCF</td><td class="n neg">(21.1)</td><td class="n neg">(17.4)</td><td class="n neg">(12.8)</td><td class="n neg">(5.6)</td><td class="n">1.5</td><td class="n neg">(2.0)</td><td class="n">8.1</td></tr>
+    </tbody>
+  </table></div>
+  <div class="figure">
+    <h4>Base-case unlevered free cash flow, $bn</h4>
+    <div class="chart" id="fcf"></div>
+    <p class="cap">2026 is the full year. The 2032–34 dip is the replacement wave for GPUs bought in 2026–28, about $14bn a year.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Driver</th><th>Bear (25%)</th><th>Base (50%)</th><th>Bull (25%)</th></tr></thead>
+    <tbody>
+      <tr><td>Exit ARR 2027 / 2030 / 2035</td><td>11.5 / 11.0 / 1.5 (run-off)</td><td>15.5 / 38 / 54.5</td><td>20 / 50 / 75</td></tr>
+      <tr><td>Capex per $1 of new ARR</td><td>3.2x</td><td>2.7x</td><td>2.4x</td></tr>
+      <tr><td>Long-run adj. EBITDA margin</td><td>48% falling to 40%</td><td>60%</td><td>64%</td></tr>
+      <tr><td>GPU economic life</td><td>5 yrs, no refresh</td><td>6 yrs</td><td>7 yrs</td></tr>
+      <tr><td>Terminal return on new capital</td><td>Site sale, $6bn</td><td>12%</td><td>16%</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Why I sit below consensus</strong> <span class="tag">[I]</span>: connected power takes months to earn revenue; Hopper-era contracts re-price lower as they roll; the base case needs $45–50bn of outside capital by 2029 at a rising cost; and Street 2030 revenue assumes all of today's contracted power is earning on schedule.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Funding (base)</th><th class="n">2026 H2</th><th class="n">2027</th><th class="n">2028</th><th class="n">2029</th><th class="n">2030</th></tr></thead>
+    <tbody>
+      <tr><td>Unlevered FCF, $bn</td><td class="n neg">(13.1)</td><td class="n neg">(17.4)</td><td class="n neg">(12.8)</td><td class="n neg">(5.6)</td><td class="n">1.5</td></tr>
+      <tr><td>Cumulative funding need, $bn</td><td class="n">13.1</td><td class="n">30.5</td><td class="n">43.4</td><td class="n">49.0</td><td class="n">47.4</td></tr>
+      <tr><td>New shares if half is equity at $165, m</td><td class="n">40</td><td class="n">92</td><td class="n">131</td><td class="n">148</td><td class="n">143</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="valuation">
+  <h2><i>09</i>Valuation</h2>
+  <p>WACC is 11.3% in the explicit period (cost of equity 13.65% with beta 1.8, risk-free 4.65%, equity premium 5%, debt 7.5% pre-tax at 30% weight) and 9.5% in the terminal stage (beta 1.3 for a mature business). Terminal growth is 3%.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>$bn unless stated</th><th class="n">Bear</th><th class="n">Base</th><th class="n">Bull</th></tr></thead>
+    <tbody>
+      <tr><td>PV of free cash flow, 2026 H2–2035</td><td class="n">(5.8)</td><td class="n">(34.9)</td><td class="n">(18.4)</td></tr>
+      <tr><td>PV of terminal value</td><td class="n">2.4</td><td class="n">49.3</td><td class="n">102.0</td></tr>
+      <tr><td>Core enterprise value</td><td class="n">(3.4)</td><td class="n">14.4</td><td class="n">83.6</td></tr>
+      <tr><td>+ Stakes (ClickHouse, Avride, other)</td><td class="n">3.1</td><td class="n">4.8</td><td class="n">8.5</td></tr>
+      <tr><td>+ Cash</td><td class="n">14.4</td><td class="n">14.4</td><td class="n">14.4</td></tr>
+      <tr><td>− Converts as debt</td><td class="n">(13.5)</td><td class="n">(13.5)</td><td class="n">(5.8)</td></tr>
+      <tr><td>− Secured facility and leases</td><td class="n">(2.3)</td><td class="n">(2.3)</td><td class="n">(2.3)</td></tr>
+      <tr><td>− PV of deferred revenue</td><td class="n">(4.6)</td><td class="n">(4.6)</td><td class="n">(4.6)</td></tr>
+      <tr><td>Diluted shares, m</td><td class="n">316.7</td><td class="n">316.7</td><td class="n">367.2</td></tr>
+      <tr class="hl"><td>Value per share</td><td class="n">$11*</td><td class="n">$42</td><td class="n">$256</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">* Bear intrinsic value is negative; equity is valued as an option on the assets because the converts do not mature until 2029–34. In the bull case the $51–$183 series convert.</p>
+  <p><strong>Terminal value decides the answer.</strong> The value-driver method charges the cost of replacing GPUs, about half of EBITDA, which works out to about 4x EBITDA. An exit at 7x EBITDA, a premium to CoreWeave's ~5.7x, adds about $100 a share in the base case. I weight the two methods equally.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Terminal method</th><th class="n">Bear</th><th class="n">Base</th><th class="n">Bull</th><th class="n">Weighted</th></tr></thead>
+    <tbody>
+      <tr><td>Value-driver</td><td class="n">$11</td><td class="n">$42</td><td class="n">$256</td><td class="n">$88</td></tr>
+      <tr><td>5x EBITDA exit</td><td class="n">$11</td><td class="n">$70</td><td class="n">$210</td><td class="n"></td></tr>
+      <tr><td>7x EBITDA exit</td><td class="n">$11</td><td class="n">$142</td><td class="n">$303</td><td class="n">$150</td></tr>
+      <tr><td>9x EBITDA exit</td><td class="n">$11</td><td class="n">$208</td><td class="n">$393</td><td class="n"></td></tr>
+      <tr class="hl"><td>50/50 blend</td><td class="n">$11</td><td class="n">$92</td><td class="n">$280</td><td class="n">$119</td></tr>
+      <tr><td>12-month target (at cost of equity)</td><td class="n">$12</td><td class="n">$105</td><td class="n">$318</td><td class="n">$135</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Sensitivity, base value per share (value-driver)</h3>
+  <div class="two">
+    <div class="tbl"><table>
+      <thead><tr><th>Margin \ capex/ARR</th><th class="n">2.1x</th><th class="n">2.4x</th><th class="n">2.7x</th><th class="n">3.0x</th></tr></thead>
+      <tbody>
+        <tr><td>55%</td><td class="n">$87</td><td class="n">$41</td><td class="n">$0</td><td class="n">$0</td></tr>
+        <tr class="hl"><td>60%</td><td class="n">$136</td><td class="n">$89</td><td class="n">$42</td><td class="n">$0</td></tr>
+        <tr><td>65%</td><td class="n">$181</td><td class="n">$137</td><td class="n">$90</td><td class="n">$44</td></tr>
+        <tr><td>70%</td><td class="n">$223</td><td class="n">$182</td><td class="n">$139</td><td class="n">$92</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl"><table>
+      <thead><tr><th>GPU life \ 2035 ARR</th><th class="n">$36bn</th><th class="n">$54bn</th><th class="n">$78bn</th></tr></thead>
+      <tbody>
+        <tr><td>5 yrs</td><td class="n">$1</td><td class="n">$1</td><td class="n">$1</td></tr>
+        <tr class="hl"><td>6 yrs</td><td class="n">$29</td><td class="n">$42</td><td class="n">$58</td></tr>
+        <tr><td>7 yrs</td><td class="n">$51</td><td class="n">$76</td><td class="n">$106</td></tr>
+        <tr><td>8 yrs</td><td class="n">$71</td><td class="n">$106</td><td class="n">$148</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>WACC \ terminal growth</th><th class="n">2%</th><th class="n">3%</th><th class="n">4%</th></tr></thead>
+    <tbody>
+      <tr><td>9.5%</td><td class="n">$111</td><td class="n">$133</td><td class="n">$164</td></tr>
+      <tr><td>10.5%</td><td class="n">$63</td><td class="n">$75</td><td class="n">$91</td></tr>
+      <tr class="hl"><td>11.3%</td><td class="n">$35</td><td class="n">$42</td><td class="n">$51</td></tr>
+      <tr><td>12.0%</td><td class="n">$15</td><td class="n">$19</td><td class="n">$25</td></tr>
+      <tr><td>13.0%</td><td class="n">$0</td><td class="n">$0</td><td class="n">$0</td></tr>
+    </tbody>
+  </table></div>
+  <p>At a 5-year GPU life the equity is worth roughly nothing at any scale; at 6 years, doubling the business adds only about $30 a share. How long a GPU earns matters more than how fast ARR grows <span class="tag">[I]</span>.</p>
+
+  <h3>What $165 implies</h3>
+  <p>Holding my base ARR and WACC, the price needs long-run EBITDA margins of 65% at 2.2x capex per $ of ARR, 68% at 2.4x, 71% at 2.6x, or 76% at 2.9x. CoreWeave runs at 59%. Alternatively, the price discounts my base case at about 9.1%.</p>
+
+  <h3>Comparables</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Company</th><th class="n">EV $bn</th><th class="n">EV/2026E rev</th><th class="n">EV/2027E rev</th><th class="n">EV/2027E EBITDA</th></tr></thead>
+    <tbody>
+      <tr><td>CoreWeave (credit-stressed; CDS ~1,195bp)</td><td class="n">79.9</td><td class="n">6.2x</td><td class="n">3.0x</td><td class="n">~5.7x</td></tr>
+      <tr><td>Lambda (private, reported round)</td><td class="n">≤14.5</td><td class="n">~9.7x</td><td class="n">n/a</td><td class="n">n/a</td></tr>
+      <tr class="hl"><td>NBIS at $165, consensus</td><td class="n">54.8</td><td class="n">17.1x</td><td class="n">4.5x</td><td class="n">8.3x</td></tr>
+      <tr><td>NBIS at $165, my base</td><td class="n">54.8</td><td class="n">17.4x</td><td class="n">5.2x</td><td class="n">10.4x</td></tr>
+    </tbody>
+  </table></div>
+  <p>A 20–40% premium to CoreWeave for the balance sheet means about 7–8x 2027 EBITDA. Applying 5.5–10x to my base 2027 EBITDA, discounted one year, gives $79–145 a share.</p>
+
+  <h3>Sum of the parts (base)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Component</th><th class="n">$bn</th><th class="n">$/share</th></tr></thead>
+    <tbody>
+      <tr><td>AI cloud, DCF enterprise value</td><td class="n">14.4</td><td class="n">46</td></tr>
+      <tr><td>ClickHouse (~27% of $15bn, less 15%)</td><td class="n">3.4</td><td class="n">11</td></tr>
+      <tr><td>Avride (~83%)</td><td class="n">1.0</td><td class="n">3</td></tr>
+      <tr><td>TripleTen and Toloka</td><td class="n">0.4</td><td class="n">1</td></tr>
+      <tr><td>Cash</td><td class="n">14.4</td><td class="n">46</td></tr>
+      <tr><td>Convertibles</td><td class="n">(13.5)</td><td class="n">(42)</td></tr>
+      <tr><td>Secured facility and leases</td><td class="n">(2.3)</td><td class="n">(7)</td></tr>
+      <tr><td>PV of deferred revenue</td><td class="n">(4.6)</td><td class="n">(14)</td></tr>
+      <tr class="hl"><td>Equity</td><td class="n">13.3</td><td class="n">42</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="consensus">
+  <h2><i>10</i>Street view</h2>
+  <p>TipRanks shows a Moderate Buy with a $300 average target (high $410); ChartMill averages $297 across 25 analysts (range $145–$431); Benzinga's consensus is $234; Koyfin counts 7 of 9 at Buy or better, one Hold and one Sell <span class="tag">[C]</span>. BNP Paribas upgraded to Outperform with a $399 target on 24 Sep, seeing about $22bn of ARR by end-2027; Rosenblatt started at Buy, $304, on 8 Oct.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Issue</th><th>Street</th><th>This report</th></tr></thead>
+    <tbody>
+      <tr><td>Valuation anchor</td><td>EV/ARR, EV/backlog, EV/2027–28 EBITDA</td><td>Cash flow after GPU replacement and stock compensation</td></tr>
+      <tr><td>Capex</td><td>Growth capex creates value</td><td>Replacement capex is about half of mature EBITDA; growth adds value only if returns beat WACC</td></tr>
+      <tr><td>Prepayments</td><td>Proof of demand and fast payback</td><td>A $6bn liability; I subtract its $4.6bn present value</td></tr>
+      <tr><td>Share count</td><td>Often basic shares</td><td>343m diluted at $165, rising with price</td></tr>
+      <tr><td>2030 revenue</td><td>~$45bn</td><td>$32bn base; the Street figure is my bull case</td></tr>
+      <tr><td>Discount rate</td><td>Often 9–10%</td><td>11.3% explicit, 9.5% terminal</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="risks">
+  <h2><i>11</i>Risks</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Comment</th></tr></thead>
+    <tbody>
+      <tr><td>GPU pricing reset as the 2026–27 build wave lands</td><td>High</td><td>High</td><td>Spot rates are cyclical; Hopper contracts re-price lower</td></tr>
+      <tr><td>Financing and dilution</td><td>Very high</td><td>Med–high</td><td>~$49bn base-case gap; 12.3m shares left on the at-the-market program</td></tr>
+      <tr><td>Customer concentration and in-sourcing</td><td>Medium</td><td>High</td><td>Top three customers are 59% of Q2 revenue; Meta builds its own cloud</td></tr>
+      <tr><td>Technology obsolescence</td><td>High</td><td>High</td><td>Sets GPU economic life, the biggest value driver</td></tr>
+      <tr><td>Commissioning delays at GW campuses</td><td>Medium</td><td>Medium</td><td>FY26 ARR guide needs a steep Q4</td></tr>
+      <tr><td>CoreWeave credit event spreading</td><td>Medium</td><td>High</td><td>NBIS fell 12% in sympathy on 16 Oct</td></tr>
+      <tr><td>Dual-class control</td><td>Certain</td><td>Low–med</td><td>Limits activism and takeover premiums</td></tr>
+      <tr><td>Avride cash burn</td><td>High</td><td>Low</td><td>~$130–150m a year of losses</td></tr>
+      <tr><td><strong>Upside risk to Sell</strong></td><td>Medium</td><td>High</td><td>Better economics, a strategic bid, a big 2027 guide, or a squeeze with ~22% short interest</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="thesis">
+  <h2><i>12</i>Thesis &amp; catalysts</h2>
+  <div class="two">
+    <div class="case">
+      <h3>Bull case</h3>
+      <ol>
+        <li>Power, not GPUs, limits supply through 2028, and 5 GW of contracted power is scarce. Auction and price-list increases show pricing power.</li>
+        <li>Microsoft and Meta prepayments plus investment-grade debt let Nebius grow 3–4x with limited dilution; Meta's backstop protects unsold capacity.</li>
+        <li>Software and inference could lift mature margins above 65% and stretch GPU lives to 7–8 years.</li>
+        <li>NVIDIA owns ~7%; a hyperscaler could buy Nebius for power and talent.</li>
+      </ol>
+    </div>
+    <div class="case">
+      <h3>Bear case</h3>
+      <ol>
+        <li>GPU rental earns about its cost of capital over a cycle; CoreWeave's ~8% operating margin at $13bn revenue is the evidence.</li>
+        <li>The compute base must be re-bought every 5–7 years, eating about half of mature EBITDA.</li>
+        <li>The largest buyers set prices, own the demand, and build their own capacity.</li>
+        <li>Growth needs ~$50bn of outside capital: equity works at $165 and becomes punitive at $80.</li>
+      </ol>
+    </div>
+  </div>
+  <h3>What the market may be missing</h3>
+  <ul>
+    <li>About 98% of H1-26 operating cash flow was customer prepayments, so "positive operating cash flow" overstates cash generation.</li>
+    <li>True diluted shares are about 26% above what quote screens show, and the convertibles add about 68m more as the stock rises.</li>
+    <li>Moving servers from 4- to 5-year depreciation adds about $168m to 2026 EBIT (company estimate); peers on 6 years are flattered more.</li>
+    <li>Meta's backstop insures unsold capacity, but part of the 2027–28 demand signal is Meta's own planning.</li>
+    <li>The 5 GW power portfolio has value to hyperscalers even in the bear case, so I do not model the equity at zero.</li>
+    <li>ClickHouse is a real asset worth about $11–20 a share, but it is not a thesis driver and it inflates GAAP earnings through revaluation gains.</li>
+  </ul>
+  <h3>Catalysts, next 12 months</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>When</th><th>Event</th><th>Likely effect</th></tr></thead>
+    <tbody>
+      <tr><td>~Nov 2026 (date unconfirmed; ~11 Nov estimated)</td><td>Q3 results: ARR path to $7–9bn, Q4 ramp, 2027 capex comments</td><td>Volatile; an ARR shortfall is the main downside trigger</td></tr>
+      <tr><td>Q4 2026 – Q1 2027</td><td>New equity, convertible or asset-backed issuance</td><td>Negative unless done through secured debt</td></tr>
+      <tr><td>Feb 2027</td><td>FY27 guidance</td><td>Upside risk: an ARR guide of $20bn+ would challenge my base case</td></tr>
+      <tr><td>2027</td><td>Meta firm deployments, Rubin ramp, Microsoft tranches</td><td>Execution test</td></tr>
+      <tr><td>Rolling</td><td>CoreWeave credit, AI-capex scepticism</td><td>Negative skew</td></tr>
+      <tr><td>Rolling</td><td>ClickHouse funding or IPO; Avride milestones</td><td>Modestly positive</td></tr>
+    </tbody>
+  </table></div>
+  <h3>My predictions</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Prediction</th><th class="n">Probability</th></tr></thead>
+    <tbody>
+      <tr><td>FY26 revenue of $3.0bn or more</td><td class="n">75%</td></tr>
+      <tr><td>Year-end 2026 ARR of $7.0bn or more / $9.0bn or more</td><td class="n">65% / 15%</td></tr>
+      <tr><td>FY27 revenue at or above consensus $12.3bn</td><td class="n">35%</td></tr>
+      <tr><td>$5bn+ of new equity or convertibles within 12 months</td><td class="n">85%</td></tr>
+      <tr><td>Diluted shares of 375m or more by end-2027</td><td class="n">60%</td></tr>
+      <tr><td>New contract of $10bn+ within 12 months</td><td class="n">50%</td></tr>
+      <tr><td>Positive GAAP operating income in FY28</td><td class="n">35%</td></tr>
+      <tr><td>Acquired or merged by 2030</td><td class="n">15%</td></tr>
+      <tr><td>Below $165 on 18 Oct 2027</td><td class="n">60%</td></tr>
+    </tbody>
+  </table></div>
+  <h3>What would prove me wrong</h3>
+  <ol>
+    <li>AI-cloud EBIT margins of 25% or more on 5-year depreciation by 2028.</li>
+    <li>2022–24 GPUs re-contracting at 70% or more of their original rates.</li>
+    <li>Software and inference above ~20% of revenue at premium margins.</li>
+    <li>A $20bn+ ARR guide for end-2027 funded mostly by prepayments and secured debt.</li>
+    <li>A takeover offer.</li>
+  </ol>
+</section>
+
+<section id="call">
+  <h2><i>13</i>Recommendation</h2>
+  <div class="callout">
+    <p><strong>Sell (Underweight). Fair value $120; 12-month target $135, about 18% below $165.47. Medium conviction.</strong></p>
+  </div>
+  <p>In my base case Nebius reaches about $32bn of revenue and $19bn of EBITDA in 2030, a remarkable outcome. After funding a ~$49bn gap (about 148m new shares if half is equity), each share is worth about $194 in 2030 at 5x EBITDA (≈4% a year) or $281 at 7x (≈13% a year). Weighted across scenarios, the expected return is about 2–10% a year, below a 13.7% cost of equity. The bear case loses most of the investment; the bull case compounds at about 23%.</p>
+  <ol>
+    <li>Returns on new capacity are roughly equal to the cost of capital, so growth alone does not create value per share.</li>
+    <li>Dilution, prepaid obligations and the funding gap are larger than headline figures suggest.</li>
+    <li>The price assumes the bull case, at a ~45% EBITDA-multiple premium to CoreWeave, while sector credit stress rises.</li>
+  </ol>
+  <p>This is a call on valuation, not on business quality. I would revisit below about $95 or on the evidence listed above.</p>
+  <footer>Independent analysis for information only; not personalised investment advice. Figures as of 18 October 2026. Direct downloads from sec.gov and nebius.com were blocked in the research environment, so filing figures came from search extracts and were cross-checked. Not confirmed: the Q3 date, the 1 Oct price increase (single source), the August convertible split, and lease balances.</footer>
+</section>
+
+<section id="sources">
+  <h2><i>14</i>Sources</h2>
+  <p class="note">Accessed 18 October 2026.</p>
+  <h3>Company filings and releases</h3>
+  <ul class="src">
+    <li><a href="https://www.sec.gov/Archives/edgar/data/1513845/000110465926094568/tm2622968d1_ex99-2.htm">Q2-26 shareholder letter, 12 Aug 2026 (SEC 6-K)</a></li>
+    <li><a href="https://www.morningstar.com/news/business-wire/20260812963359/nebius-reports-second-quarter-2026-financial-results">Q2-26 results press release</a></li>
+    <li><a href="https://www.sec.gov/Archives/edgar/data/0001513845/000110465926094844/nbis-20260812xex99d2.htm">Q2-26 interim financial statements (6-K)</a></li>
+    <li><a href="https://www.businesswire.com/news/home/20260513568820/en/Nebius-reports-first-quarter-2026-financial-results">Q1-26 results, 13 May 2026</a> · <a href="https://www.sec.gov/Archives/edgar/data/0001513845/000110465926064092/nbis-20260331xex99d2.htm">Q1-26 interim statements</a></li>
+    <li><a href="https://www.businesswire.com/news/home/20260212534404/en/">Q4-25 results, 12 Feb 2026</a> · <a href="https://www.sec.gov/Archives/edgar/data/1513845/000110465926013946/tm266173d1_ex99-2.htm">Q4-25 letter</a> · <a href="https://www.sec.gov/Archives/edgar/data/1513845/000110465926052948/nbis-20251231x20f.htm">2025 Form 20-F</a></li>
+    <li><a href="https://nebius.com/newsroom/nebius-signs-new-ai-infrastructure-agreement-with-meta">Meta agreement, 16 Mar 2026</a> · <a href="https://www.sec.gov/Archives/edgar/data/1513845/000110465926027886/tm268879d1_6k.htm">6-K</a></li>
+    <li><a href="https://nebius.com/newsroom/nebius-announces-multi-billion-dollar-agreement-with-microsoft-for-ai-infrastructure">Microsoft agreement, 8 Sep 2025</a> · <a href="https://www.sec.gov/Archives/edgar/data/1513845/000110465925088860/tm2525580d2_ex99-2.htm">6-K</a> · <a href="https://www.theenergymag.com/news/2026-05-04/microsoft-nebius-ai">Upfront payments</a></li>
+    <li><a href="https://www.datacenterdynamics.com/en/news/nebius-signs-3bn-deal-with-meta-says-current-available-capacity-is-sold-out-as-it-targets-25gw-by-end-of-2026/">Meta ~$3bn deal (DCD)</a></li>
+    <li><a href="https://nebius.com/newsroom/nebius-group-announces-pricing-of-upsized-private-offering-of-4-0-billion-of-convertible-senior-notes">$4.0bn converts, Mar 2026</a> · <a href="https://nebius.com/newsroom/nebius-group-announces-pricing-of-upsized-private-offering-of-5-0-billion-of-convertible-senior-notes">$5.0bn converts, Aug 2026</a> · <a href="https://www.sec.gov/Archives/edgar/data/0001513845/000110465926098924/tm2623617d1_ex99-1.htm">Aug 6-K</a></li>
+    <li><a href="https://www.streetinsider.com/Equity+Offerings/Nebius+Group+prices+%242.75+billion+convertible+notes+offering/25322193.html">$2.75bn converts, Sep 2025</a> · <a href="https://www.sec.gov/Archives/edgar/data/1513845/000110465925055197/tm2516825d1_ex99-1.htm">$1bn converts, Jun 2025</a></li>
+    <li><a href="https://nebius.com/newsroom/nebius-raises-775-million-in-first-secured-debt-financing-to-accelerate-global-buildout">$775m secured facility, 17 Jul 2026</a></li>
+    <li><a href="https://www.sec.gov/Archives/edgar/data/0001513845/000110465926101076/tm2624077d1_ex99-1.htm">AGM results and share count</a> · <a href="https://www.sec.gov/Archives/edgar/data/0001513845/000151384526000030/form3.xml">Volozh Form 3</a></li>
+    <li><a href="https://nebius.com/newsroom/avride-secures-strategic-investment-and-other-commitments-of-up-to-375-million-backed-by-uber-and-nebius">Avride $375m</a> · <a href="https://nebius.com/newsroom/nebius-to-construct-310-mw-ai-factory-in-finland">Finland AI factory</a> · <a href="https://www.globenewswire.com/news-release/2026/09/30/3371855/0/en/aib-data-centers-signs-contract-with-nebius-for-ai-data-center-capacity.html">AIB Data Centers lease</a></li>
+  </ul>
+  <h3>Earnings calls</h3>
+  <ul class="src">
+    <li><a href="https://www.investing.com/news/transcripts/earnings-call-transcript-nebius-beats-q2-2026-forecasts-shares-jump-165-93CH-4855076">Investing.com Q2-26 transcript</a> · <a href="https://www.fool.com/earnings/call-transcripts/2026/08/19/nebius-nbis-q2-2026-earnings-call-transcript/">Motley Fool transcript</a> · <a href="https://finance.yahoo.com/technology/ai/articles/nebius-group-q2-earnings-call-150444472.html">Yahoo call highlights</a></li>
+    <li><a href="https://finsee.ai/earnings/nbis/2026/q2/en/">Finsee Q2 review</a> · <a href="https://www.tikr.com/blog/nebius-grew-revenue-684-in-q1-sold-out-its-entire-capacity-and-raised-its-capex-target-to-25-billion">TIKR Q1 review</a></li>
+  </ul>
+  <h3>Market, consensus and peers</h3>
+  <ul class="src">
+    <li><a href="https://www.gurufocus.com/news/9128275/nebius-group-nbis-shares-plunge-nearly-12-amid-sector-selloff-on-october-16-2026">Price on 16 Oct (GuruFocus)</a> · <a href="https://247wallst.com/investing/2026/10/16/coreweave-and-nebius-sink-9-as-sentiment-index-closes-in-on-extreme-fear/">24/7 Wall St.</a></li>
+    <li><a href="https://www.tipranks.com/stocks/nbis/forecast">TipRanks</a> · <a href="https://www.chartmill.com/stock/quote/NBIS/analyst-ratings">ChartMill</a> · <a href="https://www.benzinga.com/quote/NBIS/price-targets">Benzinga</a> · <a href="https://finance.yahoo.com/quote/NBIS/analysis/">Yahoo estimates</a> · <a href="https://www.marketscreener.com/quote/stock/NEBIUS-GROUP-8037501/finances/">MarketScreener</a></li>
+    <li><a href="https://cryptobriefing.com/nebius-stock-jumps-bnp-paribas-price-target/">BNP Paribas upgrade</a> · <a href="https://www.nasdaq.com/articles/do-nebius-mega-deals-increase-customer-concentration-risk">Customer concentration</a> · <a href="https://www.fool.com/investing/2026/10/17/is-nebius-a-buy-its-22-month-payback-offers-a-clue/">22-month payback</a> · <a href="https://www.tikr.com/blog/nebius-stock-fell-12-in-a-day-as-coreweaves-debt-scare-spread-heres-why-its-balance-sheet-isnt-coreweaves-yet">Balance-sheet comparison</a></li>
+    <li><a href="https://www.benzinga.com/quote/NBIS/sentiment">Short interest</a> · <a href="https://beta.earningswhispers.com/go/w/NBIS">Earnings date estimate</a></li>
+    <li><a href="https://investors.coreweave.com/news/news-details/2026/CoreWeave-Reports-Strong-Second-Quarter-2026-Results/default.aspx">CoreWeave Q2-26</a> · <a href="https://stockanalysis.com/stocks/crwv/statistics/">CoreWeave EV</a> · <a href="https://www.marketscreener.com/news/coreweave-shares-bonds-slide-further-as-ai-debt-fears-mount-ce785dd3dd8cf522">CoreWeave credit stress</a> · <a href="https://www.fool.com/investing/2026/10/17/coreweave-is-projected-to-have-a-63x-gross-leverag/">CoreWeave leverage</a></li>
+    <li><a href="https://www.datacenterdynamics.com/en/news/lambda-seeks-4bn-funding-round-ahead-of-planned-ipo-report">Lambda funding</a> · <a href="https://www.zacks.com/stock/news/2854563/iren-aims-for-34b-ai-cloud-arr-by-2026-can-it-hit-the-target">IREN</a></li>
+  </ul>
+  <h3>Industry</h3>
+  <ul class="src">
+    <li><a href="https://www.gartner.com/en/newsroom/press-releases/2026-10-14-gartner-says-over-us-dollars-three-and-a-half-trillion-of-artificial-intelligence-infrastructure-spending-could-be-exposed-to-impairment-by-the-end-of-2030">Gartner, 14 Oct 2026</a> · <a href="https://www.techtimes.com/articles/328295/20260930/nvidia-per-gigawatt-revenue-hits-40b-vera-rubin-anthropic-locks-25-gw.htm">NVIDIA per-GW economics</a> · <a href="https://thebuildout.ai/intel/04bb5450-a326-43c0-a0a6-ce3cd03d192f">Neocloud capacity</a></li>
+    <li><a href="https://www.mercatus-ai.com/blog/gpu-rental-prices">GPU rental prices</a> · <a href="https://gpusmith.com/articles/en/h100-rental-price-history-trends">H100 price history</a> · <a href="https://exencialrp.substack.com/p/scarce-compute-is-repricing-nebius">BNP-linked unit economics</a> · <a href="https://shattered.io/nebius-ai-cloud-price-hike-memory-2026/">Price increase (single source)</a></li>
+    <li><a href="https://www.datacenterdynamics.com/en/news/nebius-breaks-ground-on-400-acre-data-center-campus-in-independence-missouri/">Independence MO</a> · <a href="https://www.datacenterdynamics.com/en/news/nebius-details-plans-for-12gw-data-center-campus-in-pennsylvania/">Pennsylvania</a> · <a href="https://www.datacenterdynamics.com/en/news/nebius-targets-data-center-development-in-birmingham-alabama/">Birmingham</a> · <a href="https://www.datacenterdynamics.com/en/news/nebius-plans-240mw-data-center-in-b%C3%A9thune-france/">Béthune</a></li>
+    <li><a href="https://thenextweb.com/news/nvidia-invests-2-billion-in-nebius">NVIDIA $2bn investment</a> · <a href="https://ad-hoc-news.de/boerse/news/corporate-news/nebius-acquires-inferize-nebius-stock-trades-at-eur-150-07/70355330">Inferize acquisition</a> · <a href="https://sacra.com/c/clickhouse/">ClickHouse</a> · <a href="https://www.nasdaq.com/articles/can-nebius-monetize-its-bets-clickhouse-avride-and-toloka">Non-core stakes</a></li>
+  </ul>
+</section>
+</main>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+(function () {
+  var NS = "http://www.w3.org/2000/svg";
+  var tip = document.getElementById("tip");
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function text(parent, x, y, str, attrs) {
+    var t = el("text", Object.assign({ x: x, y: y, fill: "var(--ink-2)", "font-size": 12 }, attrs || {}), parent);
+    t.textContent = str;
+    return t;
+  }
+  function hover(node, msg) {
+    node.style.cursor = "default";
+    node.addEventListener("mousemove", function (ev) {
+      tip.textContent = msg; tip.hidden = false;
+      var x = Math.min(ev.clientX + 14, window.innerWidth - tip.offsetWidth - 8);
+      tip.style.left = x + "px"; tip.style.top = (ev.clientY + 14) + "px";
+    });
+    node.addEventListener("mouseleave", function () { tip.hidden = true; });
+  }
+
+  // 1. Football field
+  (function () {
+    var rows = [
+      { name: "DCF, value-driver", lo: 11, hi: 256, mid: 88, note: "Bear $11 · base $42 · bull $256 · weighted $88" },
+      { name: "DCF, 7x EBITDA exit", lo: 11, hi: 303, mid: 150, note: "Bear $11 · base $142 · bull $303 · weighted $150" },
+      { name: "Comps, 5.5–10x 2027E EBITDA", lo: 79, hi: 145, mid: 112, note: "$79 to $145 on my base 2027 EBITDA" },
+      { name: "Analyst price targets", lo: 145, hi: 430, mid: 290, note: "$145 to $430; average about $290" },
+      { name: "52-week trading range", lo: 74, hi: 300, mid: null, note: "$73.52 to $299.86" }
+    ];
+    var W = 760, L = 200, R = 24, top = 30, rowH = 40, H = top + rows.length * rowH + 30;
+    var max = 450, sx = function (v) { return L + (v / max) * (W - L - R); };
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Valuation range by method versus the $165 price and $120 fair value" }, document.getElementById("ff"));
+    for (var v = 0; v <= max; v += 50) {
+      el("line", { x1: sx(v), x2: sx(v), y1: top - 8, y2: H - 24, stroke: "var(--rule)", "stroke-width": 1 }, svg);
+      text(svg, sx(v), H - 8, "$" + v, { "text-anchor": "middle", fill: "var(--ink-3)", "font-size": 11 });
+    }
+    rows.forEach(function (r, i) {
+      var y = top + i * rowH + rowH / 2;
+      text(svg, L - 12, y + 4, r.name, { "text-anchor": "end", fill: "var(--ink)", "font-size": 12.5 });
+      var b = el("rect", { x: sx(r.lo), y: y - 8, width: sx(r.hi) - sx(r.lo), height: 16, rx: 4, fill: "var(--s1)", "fill-opacity": 0.85 }, svg);
+      hover(b, r.name + ": " + r.note);
+      if (r.mid != null) {
+        var c = el("circle", { cx: sx(r.mid), cy: y, r: 5, fill: "var(--ink)", stroke: "var(--paper)", "stroke-width": 2 }, svg);
+        hover(c, r.name + ": " + r.note);
+      }
+    });
+    [[165, "var(--sell)", "Price $165"], [120, "var(--accent)", "Fair value $120"]].forEach(function (m) {
+      el("line", { x1: sx(m[0]), x2: sx(m[0]), y1: top - 12, y2: H - 24, stroke: m[1], "stroke-width": 2, "stroke-dasharray": m[0] === 120 ? "5 4" : "none" }, svg);
+      text(svg, sx(m[0]) + (m[0] === 165 ? 5 : -5), top - 16, m[2], { "text-anchor": m[0] === 165 ? "start" : "end", fill: "var(--ink)", "font-size": 12, "font-weight": 600 });
+    });
+  })();
+
+  // 2. Revenue scenarios
+  (function () {
+    var years = [2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035];
+    var series = [
+      { name: "Bull", color: "var(--s3)", d: [3.35, 13.1, 23.5, 33.1, 41.9, 49.2, 55.2, 60.3, 64.4, 67.6] },
+      { name: "Base", color: "var(--s1)", d: [3.15, 10.6, 18.2, 25.5, 32.0, 37.3, 41.4, 44.6, 47.1, 49.2] },
+      { name: "Bear", color: "var(--s2)", d: [2.95, 8.4, 11.3, 11.7, 10.8, 9.2, 7.1, 4.8, 3.0, 1.8] }
+    ];
+    var cons = [[2026, 3.2], [2027, 12.3], [2028, 21], [2030, 45]];
+    var W = 760, H = 320, L = 44, R = 60, T = 16, B = 30, max = 70;
+    var sx = function (y) { return L + (y - 2026) / 9 * (W - L - R); };
+    var sy = function (v) { return T + (1 - v / max) * (H - T - B); };
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Revenue by scenario 2026 to 2035 versus consensus" }, document.getElementById("rev"));
+    for (var v = 0; v <= max; v += 10) {
+      el("line", { x1: L, x2: W - R, y1: sy(v), y2: sy(v), stroke: "var(--rule)", "stroke-width": 1 }, svg);
+      text(svg, L - 8, sy(v) + 4, "$" + v, { "text-anchor": "end", fill: "var(--ink-3)", "font-size": 11 });
+    }
+    years.forEach(function (y) { text(svg, sx(y), H - 10, y, { "text-anchor": "middle", fill: "var(--ink-3)", "font-size": 11 }); });
+    series.forEach(function (s) {
+      var pts = s.d.map(function (v, i) { return sx(years[i]) + "," + sy(v); }).join(" ");
+      el("polyline", { points: pts, fill: "none", stroke: s.color, "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+      s.d.forEach(function (v, i) {
+        var hit = el("circle", { cx: sx(years[i]), cy: sy(v), r: 9, fill: "transparent" }, svg);
+        el("circle", { cx: sx(years[i]), cy: sy(v), r: 3, fill: s.color, stroke: "var(--paper)", "stroke-width": 1.5, "pointer-events": "none" }, svg);
+        hover(hit, s.name + " " + years[i] + ": $" + v.toFixed(1) + "bn");
+      });
+      text(svg, sx(2035) + 8, sy(s.d[9]) + 4, s.name, { fill: "var(--ink)", "font-size": 12, "font-weight": 600 });
+    });
+    cons.forEach(function (c) {
+      var d = el("rect", { x: sx(c[0]) - 5, y: sy(c[1]) - 5, width: 10, height: 10, fill: "var(--ink)", stroke: "var(--paper)", "stroke-width": 2, transform: "rotate(45 " + sx(c[0]) + " " + sy(c[1]) + ")" }, svg);
+      hover(d, "Consensus " + c[0] + ": ~$" + c[1] + "bn");
+    });
+    text(svg, sx(2030) + 10, sy(45) - 8, "Consensus 2030 ~$45bn", { fill: "var(--ink)", "font-size": 12 });
+  })();
+
+  // 3. Base FCF bars
+  (function () {
+    var years = [2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035];
+    var d = [-21.1, -17.4, -12.8, -5.6, 1.5, 5.5, -2.0, 1.7, 4.3, 8.1];
+    var W = 760, H = 260, L = 44, R = 16, T = 14, B = 30, lo = -25, hi = 10;
+    var band = (W - L - R) / years.length;
+    var sy = function (v) { return T + (hi - v) / (hi - lo) * (H - T - B); };
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Base-case unlevered free cash flow 2026 to 2035" }, document.getElementById("fcf"));
+    for (var v = lo; v <= hi; v += 5) {
+      el("line", { x1: L, x2: W - R, y1: sy(v), y2: sy(v), stroke: v === 0 ? "var(--ink-3)" : "var(--rule)", "stroke-width": 1 }, svg);
+      text(svg, L - 8, sy(v) + 4, (v < 0 ? "−$" + (-v) : "$" + v), { "text-anchor": "end", fill: "var(--ink-3)", "font-size": 11 });
+    }
+    d.forEach(function (v, i) {
+      var x = L + i * band + band * 0.2, w = band * 0.6;
+      var y0 = sy(0), y1 = sy(v);
+      var r = el("rect", { x: x, y: Math.min(y0, y1), width: w, height: Math.max(Math.abs(y1 - y0), 1), rx: 3, fill: v < 0 ? "var(--sell)" : "var(--s1)", "fill-opacity": 0.9 }, svg);
+      hover(r, years[i] + ": " + (v < 0 ? "−$" + (-v).toFixed(1) : "$" + v.toFixed(1)) + "bn");
+      text(svg, x + w / 2, H - 10, years[i], { "text-anchor": "middle", fill: "var(--ink-3)", "font-size": 11 });
+      text(svg, x + w / 2, v < 0 ? y1 + 14 : y1 - 5, v.toFixed(1), { "text-anchor": "middle", fill: "var(--ink-2)", "font-size": 11 });
+    });
+  })();
+})();
+</script>
