@@ -455,7 +455,8 @@ def slip(b):
     page = os.path.basename(b["_path"]).replace("-bankroll.json", ".html")
     open_link = (f'<a class="more" href="games/{e(page)}">{"Original report" if legacy else "Open game"} &rarr;</a>'
                  if os.path.exists(os.path.join(SITE, "games", page)) else "")
-    tag = ('<span class="tag">Waiting on the game</span>' if pending else
+    wait = "Waiting on stats" if res and res.get("legs") else "Waiting on the game"
+    tag = (f'<span class="tag">{wait}</span>' if pending else
            f'<span class="tag pos">Up {money(profit)}</span>' if profit > 0 else
            f'<span class="tag neg">Down {money(-profit)}</span>' if profit < 0 else '<span class="tag">Even</span>')
     final = f' · Final {e(res["final"])}' if res and res.get("final") else ""
