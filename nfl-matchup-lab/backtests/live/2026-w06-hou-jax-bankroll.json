@@ -224,5 +224,32 @@
   "expected_back": 21.01,
   "p_profit": 0.434,
   "p_lose_all": 0.283,
-  "result": null
+  "result": {
+    "final": "HOU 34, JAX 31",
+    "graded_at": "2026-10-18 20:15 UTC",
+    "provisional": true,
+    "source": "box scores via web search (Fox Sports box score, AP recap, NBC/Rotowire and CBS player news); official nflverse grading Monday",
+    "legs": {
+      "Bhayshul Tuten rush yds more 63.5": {
+        "actual": 39,
+        "hit": false
+      },
+      "Dalton Schultz rec yds less 30.5": {
+        "actual": 33,
+        "hit": false
+      },
+      "C.J. Stroud pass+rush yds more 265.5": {
+        "actual": 317,
+        "hit": true
+      },
+      "Kayshon Boutte rec yds more 30.5": {
+        "actual": 16,
+        "hit": false
+      },
+      "Trevor Lawrence pass+rush yds less 237.5": {
+        "actual": 317,
+        "hit": false
+      }
+    }
+  }
 }
