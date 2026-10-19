@@ -98,12 +98,42 @@ def test_grade_week(tmp_path, monkeypatch):
     if "d" in used:
         assert guesser.grade_week(2026, 6, stats) == []                  # d has no stats yet: wait
     stats = pd.concat([stats, pd.DataFrame([dict(player_id="d", week=6, receiving_yards=5)])])
-    assert guesser.grade_week(2026, 6, stats) == ["2026_06_BBB_AAA"]
+    assert guesser.grade_week(2026, 6, stats, {"2026_06_BBB_AAA": "AAA 24, BBB 20"}) == ["2026_06_BBB_AAA"]
     d = json.loads(next(tmp_path.glob("*.json")).read_text())
     want = {"a": True, "b": True, "c": False, "d": True}                 # all "under 40.5"
     for en in d["entries"]:
         for t, l in zip(en["legs"], en["legs_detail"]):
             assert d["result"]["legs"][t]["hit"] == want[l["player_id"]]
+    assert d["result"]["final"] == "AAA 24, BBB 20" and d["result"]["provisional"] is False
+    assert guesser.grade_week(2026, 6, stats) == []                      # official results are never regraded
+
+
+def test_a_player_with_snaps_but_no_stat_row_is_graded_at_zero(tmp_path, monkeypatch):
+    monkeypatch.setattr(guesser, "LIVE_DIR", tmp_path)
+    ko = pd.Timestamp("2026-10-18 17:00", tz="UTC")
+    guesser.write_bankroll(_game(ko), guesser.plan(_picks4()), ko - pd.Timedelta(hours=5))
+    stats = pd.DataFrame([dict(player_id=k, week=6, receiving_yards=10) for k in "abc"])   # "d" had no catches
+    no_snaps = pd.DataFrame([dict(week=6, team="KC", player="D", offense_snaps=0, defense_snaps=0, st_snaps=0)])
+    assert guesser.grade_week(2026, 6, stats, snaps=no_snaps) == []                    # would be a void: wait
+    snaps = no_snaps.assign(offense_snaps=6)
+    assert guesser.grade_week(2026, 6, stats, snaps=snaps) == ["2026_06_BBB_AAA"]
+    d = json.loads(next(tmp_path.glob("*.json")).read_text())
+    assert d["result"]["legs"][guesser.leg_text(dict(player="D", stat="rec_yds", side="under", line=40.5))] == \
+        dict(actual=0.0, hit=True)
+
+
+def test_official_grade_keeps_a_provisional_final_score(tmp_path, monkeypatch):
+    monkeypatch.setattr(guesser, "LIVE_DIR", tmp_path)
+    ko = pd.Timestamp("2026-10-18 17:00", tz="UTC")
+    guesser.write_bankroll(_game(ko), guesser.plan(_picks4()), ko - pd.Timedelta(hours=5))
+    path = next(tmp_path.glob("*.json"))
+    d = json.loads(path.read_text())
+    d["result"] = dict(final="AAA 24, BBB 20", provisional=True, legs={})
+    path.write_text(json.dumps(d))
+    stats = pd.DataFrame([dict(player_id=k, week=6, receiving_yards=10) for k in "abcd"])
+    assert guesser.grade_week(2026, 6, stats) == ["2026_06_BBB_AAA"]
+    r = json.loads(path.read_text())["result"]
+    assert r["final"] == "AAA 24, BBB 20" and r["provisional"] is False
 
 
 def test_the_play_shows_each_entry_with_its_stake_and_each_pick_once():

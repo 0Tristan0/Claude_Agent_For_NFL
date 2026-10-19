@@ -163,5 +163,32 @@
   "expected_back": 22.51,
   "p_profit": 0.357,
   "p_lose_all": 0.256,
-  "result": null
+  "result": {
+    "final": "GB 23, DAL 13",
+    "graded_at": "2026-10-19 15:02 UTC",
+    "provisional": false,
+    "source": "nflverse stats_player_week_2026",
+    "legs": {
+      "Jordan Love rush yds less 6.5": {
+        "actual": 12.0,
+        "hit": false
+      },
+      "Dak Prescott pass+rush yds more 290.5": {
+        "actual": 265.0,
+        "hit": false
+      },
+      "MarShawn Lloyd rush attempts less 10.5": {
+        "actual": 8.0,
+        "hit": true
+      },
+      "Jake Ferguson receptions less 3.5": {
+        "actual": 2.0,
+        "hit": true
+      },
+      "Javonte Williams rush yds less 67.5": {
+        "actual": 41.0,
+        "hit": true
+      }
+    }
+  }
 }

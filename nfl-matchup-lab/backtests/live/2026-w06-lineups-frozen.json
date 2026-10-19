@@ -195,7 +195,37 @@
           "p_model": 0.514
         }
       ],
-      "result": null
+      "result": {
+        "hits": 3,
+        "of": 5,
+        "returned": 0.0,
+        "play_as": "Power",
+        "final": "GB 23, DAL 13",
+        "legs": {
+          "Jordan Love pass_att under 35.5": {
+            "actual": "41",
+            "hit": false
+          },
+          "Jake Ferguson rec_yds under 29.5": {
+            "actual": "13",
+            "hit": true
+          },
+          "Dak Prescott pass_yds under 281.5": {
+            "actual": "258",
+            "hit": true
+          },
+          "Javonte Williams rush_yds under 67.5": {
+            "actual": "41",
+            "hit": true
+          },
+          "George Pickens rec_yds under 68.5": {
+            "actual": "73",
+            "hit": false
+          }
+        },
+        "graded_at": "2026-10-19 15:04 UTC",
+        "source": "nflverse stats_player_week_2026"
+      }
     },
     "6": {
       "game": "HOU at JAX",
@@ -261,7 +291,41 @@
           "p_model": 0.51
         }
       ],
-      "result": null
+      "result": {
+        "hits": 1,
+        "of": 6,
+        "returned": 0.0,
+        "play_as": "Power",
+        "final": "HOU 34, JAX 31",
+        "legs": {
+          "Dalton Schultz rec_yds under 30.5": {
+            "actual": "33",
+            "hit": false
+          },
+          "C.J. Stroud pass_att under 35.5": {
+            "actual": "34",
+            "hit": true
+          },
+          "Bhayshul Tuten rush_rec_yds under 75.5": {
+            "actual": "87",
+            "hit": false
+          },
+          "Brenton Strange rec_yds under 37.5": {
+            "actual": "44",
+            "hit": false
+          },
+          "Trevor Lawrence pass_rush_yds under 237.5": {
+            "actual": "317",
+            "hit": false
+          },
+          "Parker Washington rec_yds under 61.5": {
+            "actual": "64",
+            "hit": false
+          }
+        },
+        "graded_at": "2026-10-19 15:04 UTC",
+        "source": "nflverse stats_player_week_2026"
+      }
     }
   },
   "superseded_by": "2026-w06-*-bankroll.json (Guesser method). This simulation-era record is kept for comparison only."

@@ -173,5 +173,32 @@
   "expected_back": 19.77,
   "p_profit": 0.52,
   "p_lose_all": 0.3,
-  "result": null
+  "result": {
+    "final": "KC 22, LAC 6",
+    "graded_at": "2026-10-19 15:02 UTC",
+    "provisional": false,
+    "source": "nflverse stats_player_week_2026",
+    "legs": {
+      "Patrick Mahomes pass TDs more 1.5": {
+        "actual": 0.0,
+        "hit": false
+      },
+      "Kenneth Walker III rush yds more 90.5": {
+        "actual": 128.0,
+        "hit": true
+      },
+      "Justin Herbert pass yds less 203.5": {
+        "actual": 204.0,
+        "hit": false
+      },
+      "Emmett Johnson rush yds more 14.5": {
+        "actual": 6.0,
+        "hit": false
+      },
+      "Omarion Hampton rush yds more 38.5": {
+        "actual": 18.0,
+        "hit": false
+      }
+    }
+  }
 }

@@ -125,20 +125,20 @@
   "p_lose_all": 0.402,
   "result": {
     "final": "CLE 13, BAL 10",
-    "graded_at": "2026-10-18 20:15 UTC",
-    "provisional": true,
-    "source": "box scores via web search (NBC Sports/PFT recap, NBC player news, Dawgs By Nature, CBS GameTracker); official nflverse grading Monday",
+    "graded_at": "2026-10-19 15:02 UTC",
+    "provisional": false,
+    "source": "nflverse stats_player_week_2026",
     "legs": {
       "Rashod Bateman rec yds more 30.5": {
-        "actual": 0,
+        "actual": 0.0,
         "hit": false
       },
       "Deshaun Watson rush attempts more 6.5": {
-        "actual": 8,
+        "actual": 8.0,
         "hit": true
       },
       "Derrick Henry rush yds less 90.5": {
-        "actual": 58,
+        "actual": 58.0,
         "hit": true
       }
     }

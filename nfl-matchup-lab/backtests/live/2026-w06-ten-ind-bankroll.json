@@ -79,20 +79,20 @@
   "p_lose_all": 0.414,
   "result": {
     "final": "TEN 26, IND 20",
-    "graded_at": "2026-10-18 20:54 UTC",
-    "provisional": true,
-    "source": "box scores via web search (Yahoo Sports box score and recap, Yahoo player news, PFT, WSMV); official nflverse grading Monday",
+    "graded_at": "2026-10-19 15:02 UTC",
+    "provisional": false,
+    "source": "nflverse stats_player_week_2026",
     "legs": {
       "Daniel Jones rush yds less 7.5": {
-        "actual": 30,
+        "actual": 30.0,
         "hit": false
       },
       "Cam Ward rush yds less 11.5": {
-        "actual": 7,
+        "actual": 7.0,
         "hit": true
       },
       "Tony Pollard rush yds more 49.5": {
-        "actual": 76,
+        "actual": 76.0,
         "hit": true
       }
     }

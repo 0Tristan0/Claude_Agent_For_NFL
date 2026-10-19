@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import itertools
 import json
+import logging
 from pathlib import Path
 
 import numpy as np
@@ -417,19 +418,28 @@ def unit_table(ctx: dict, g) -> list[dict]:
     return rows
 
 
-def grade_week(season: int, week: int, stats: pd.DataFrame) -> list[str]:
-    """Fill in results for this week's Guesser bets whose games have official stats. Returns graded game ids."""
+def grade_week(season: int, week: int, stats: pd.DataFrame, finals: dict[str, str] | None = None,
+               snaps: pd.DataFrame | None = None) -> list[str]:
+    """Fill in results for this week's Guesser bets whose games have official stats. Returns graded game ids.
+    finals: {game_id: final score text}; without one, a provisional result's final score is kept.
+    snaps: nflverse snap counts. A player with no stat row who still played a snap is graded at 0 (PrizePicks
+    keeps the pick); one with no snaps would be a void, so that game waits and is logged."""
     from .backtest import retro
     done = []
     for path in sorted(LIVE_DIR.glob(f"{season}-w{week:02d}-*-bankroll.json")):
         d = json.loads(path.read_text())
         if d.get("result") and not d["result"].get("provisional"):
             continue
-        legs, missing = {}, False
+        legs, missing, waiting = {}, False, set()
         for en in d["entries"]:
             for x, text in zip(en.get("legs_detail", []), en["legs"]):
                 v = retro.actual(stats, x["player_id"], week, x["stat"])
+                if v is None and retro.played(snaps, week, x["player"], x["team"]):
+                    v = 0.0
                 if v is None:
+                    if not missing or text not in waiting:
+                        logging.getLogger(__name__).warning("%s: no stats or snaps yet for %s", d["game"], text)
+                    waiting.add(text)
                     missing = True
                     continue
                 hit = v > x["line"] if x["side"] == "over" else v < x["line"]
@@ -437,7 +447,8 @@ def grade_week(season: int, week: int, stats: pd.DataFrame) -> list[str]:
                 legs[text] = dict(actual=shown, hit=bool(hit))
         if not legs or missing:
             continue
-        d["result"] = dict(final="", graded_at=f"{pd.Timestamp.now(tz='UTC'):%Y-%m-%d %H:%M} UTC", provisional=False,
+        final = (finals or {}).get(d["game"]) or (d.get("result") or {}).get("final", "")
+        d["result"] = dict(final=final, graded_at=f"{pd.Timestamp.now(tz='UTC'):%Y-%m-%d %H:%M} UTC", provisional=False,
                            source=f"nflverse stats_player_week_{season}", legs=legs)
         path.write_text(json.dumps(d, indent=2, default=str))
         done.append(d["game"])

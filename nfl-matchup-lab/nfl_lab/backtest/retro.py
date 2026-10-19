@@ -37,6 +37,46 @@ def fetch_stats(season: int) -> pd.DataFrame:
         return pd.read_parquet(f.name)
 
 
+def fetch_finals(season: int, week: int) -> dict[str, str]:
+    """{game_id: "DEN 17, SEA 14 (OT)"} for that week's finished games, winner first, from nflverse's schedule."""
+    import io
+    import requests
+    from ..data import sources
+    r = requests.get(sources.SOURCES["schedules"].url(), timeout=60)
+    r.raise_for_status()
+    g = pd.read_parquet(io.BytesIO(r.content))
+    g = g[(g["season"] == season) & (g["week"] == week) & g["home_score"].notna() & g["away_score"].notna()]
+    out = {}
+    for x in g.itertuples():
+        a, h = ("LAR" if x.away_team == "LA" else x.away_team), ("LAR" if x.home_team == "LA" else x.home_team)
+        (w, ws), (l, ls) = sorted([(a, int(x.away_score)), (h, int(x.home_score))], key=lambda t: -t[1])
+        out[x.game_id] = f"{w} {ws}, {l} {ls}" + (" (OT)" if x.overtime == 1 else "")
+    return out
+
+
+def fetch_snaps(season: int) -> pd.DataFrame:
+    import io
+    import requests
+    from ..data import sources
+    r = requests.get(sources.SOURCES["snap_counts"].url(season), timeout=60)
+    r.raise_for_status()
+    return pd.read_parquet(io.BytesIO(r.content))
+
+
+def _name(s: str) -> str:
+    return "".join(c for c in str(s).lower() if c.isalnum())
+
+
+def played(snaps: pd.DataFrame | None, week: int, player: str, team: str) -> bool:
+    """Did the player take at least one offense, defense or special-teams snap that week (nflverse/PFR snap counts)?"""
+    if snaps is None or snaps.empty:
+        return False
+    t = "LA" if team == "LAR" else team
+    row = snaps[(snaps["week"] == week) & (snaps["team"] == t) & (snaps["player"].map(_name) == _name(player))]
+    n = sum(row[c].fillna(0) for c in ("offense_snaps", "defense_snaps", "st_snaps") if c in row)
+    return bool((n > 0).any()) if len(row) else False
+
+
 def actual(stats: pd.DataFrame, player_id: str, week: int, stat: str):
     row = stats[(stats["player_id"] == player_id) & (stats["week"] == week)]
     if row.empty:

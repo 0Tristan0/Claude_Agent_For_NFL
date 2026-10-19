@@ -281,7 +281,8 @@ def cmd_guesser(a):
 def cmd_guesser_grade(a):
     from . import guesser
     from .backtest import retro
-    done = guesser.grade_week(a.season, a.week, retro.fetch_stats(a.season))
+    done = guesser.grade_week(a.season, a.week, retro.fetch_stats(a.season), retro.fetch_finals(a.season, a.week),
+                              retro.fetch_snaps(a.season))
     print("graded:", ", ".join(done) or "nothing new (games not played yet or stats not posted)")
     return 0
 

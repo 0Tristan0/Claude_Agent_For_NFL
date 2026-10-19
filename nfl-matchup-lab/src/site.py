@@ -405,7 +405,8 @@ def leg_html(leg, result, shown=None):
         mark, actual = '<span class="mk" title="Not graded yet">&#9675;</span>', ""
     else:
         mark = '<span class="mk hit" title="Hit">&#10003;</span>' if g["hit"] else '<span class="mk miss" title="Missed">&#10005;</span>'
-        actual = f'<span class="act">{e(str(g.get("actual")))}</span>' if g.get("actual") is not None else ""
+        v = g.get("actual")
+        actual = f'<span class="act">{e(f"{v:g}" if isinstance(v, (int, float)) else str(v))}</span>' if v is not None else ""
     return f"<li>{mark}<span>{shown or e(leg)}</span>{actual}</li>"
 
 
