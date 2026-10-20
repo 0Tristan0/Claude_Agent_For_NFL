@@ -172,5 +172,33 @@
   "expected_back": 22.75,
   "p_profit": 0.357,
   "p_lose_all": 0.257,
-  "result": null
+  "result": {
+    "final": "SF 23, WAS 17",
+    "graded_at": "2026-10-20 15:04 UTC",
+    "provisional": false,
+    "source": "nflverse stats_player_week_2026",
+    "legs": {
+      "Brock Purdy pass attempts less 30.5": {
+        "actual": 29.0,
+        "hit": true
+      },
+      "Christian McCaffrey receptions less 4.5": {
+        "actual": 9.0,
+        "hit": false
+      },
+      "Jayden Daniels pass yds less 205.5": {
+        "actual": 300.0,
+        "hit": false
+      },
+      "Jacory Croskey-Merritt rush yds less 45.5": {
+        "actual": "DNP",
+        "hit": null,
+        "void": true
+      },
+      "George Kittle rec yds more 61.5": {
+        "actual": 69.0,
+        "hit": true
+      }
+    }
+  }
 }

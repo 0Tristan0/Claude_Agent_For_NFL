@@ -384,25 +384,24 @@ def bankrolls():
 
 
 def grade_entry(entry, result):
-    """(status, amount returned or None). Status: pending, won, lost."""
+    """(status, amount returned or None, note). Status: pending, won, lost. Voids are handled by guesser.entry_return."""
+    from nfl_lab import guesser
     over = ((result or {}).get("entries") or {}).get(entry["id"], {})
     if "returned" in over:
         r = float(over["returned"])
-        return ("won" if r > 0 else "lost"), r
-    legs = (result or {}).get("legs") or {}
-    if not all(l in legs for l in entry["legs"]):
-        return "pending", None
-    k = sum(bool(legs[l]["hit"]) for l in entry["legs"])
-    n = len(entry["legs"])
-    mult = float(entry["pays"].get(str(k), 0)) if entry["type"] == "flex" else (float(entry["pays"][str(n)]) if k == n else 0.0)
-    r = entry["stake"] * mult
-    return ("won" if r > 0 else "lost"), r
+        return ("won" if r > 0 else "lost"), r, ""
+    r, note = guesser.entry_return(entry, (result or {}).get("legs") or {})
+    if r is None:
+        return "pending", None, ""
+    return ("won" if r > 0 else "lost"), r, note
 
 
 def leg_html(leg, result, shown=None):
     g = ((result or {}).get("legs") or {}).get(leg)
     if g is None:
         mark, actual = '<span class="mk" title="Not graded yet">&#9675;</span>', ""
+    elif g.get("void"):
+        mark, actual = '<span class="mk" title="Void: did not play">&#8212;</span>', '<span class="act">Void, did not play</span>'
     else:
         mark = '<span class="mk hit" title="Hit">&#10003;</span>' if g["hit"] else '<span class="mk miss" title="Missed">&#10005;</span>'
         v = g.get("actual")
@@ -429,7 +428,7 @@ def slip(b):
     ev = {k.split("_")[0]: v for k, v in b.get("expected_return_per_dollar", {}).items() if isinstance(v, dict)}
     entries_html, staked, back, pending = [], 0.0, 0.0, False
     for en in b["entries"]:
-        status, r = grade_entry(en, res)
+        status, r, note = grade_entry(en, res)
         staked += en["stake"]
         pending |= status == "pending"
         back += r or 0.0
@@ -451,7 +450,7 @@ def slip(b):
         entries_html.append(f'<article class="entry"><header><div><h3>Entry {e(en["id"])}</h3><span class="kind">{n}-pick '
                             f'{en["type"].title()}</span></div><span class="stake">{money(en["stake"])}</span></header>'
                             f'<ul class="legs">{legs}</ul>'
-                            f'<footer><span class="fine">Pays {pays}{exp}</span>{outcome}</footer></article>')
+                            f'<footer><span class="fine">Pays {pays}{exp}{" · " + e(note) if note else ""}</span>{outcome}</footer></article>')
     profit = None if pending else back - staked
     page = os.path.basename(b["_path"]).replace("-bankroll.json", ".html")
     open_link = (f'<a class="more" href="games/{e(page)}">{"Original report" if legacy else "Open game"} &rarr;</a>'
@@ -662,10 +661,10 @@ def with_results(p):
     if not res:
         return rec
     for L, en in zip(rec["plan"]["entries"], b["entries"]):
-        status, r = grade_entry(en, res)
+        status, r, note = grade_entry(en, res)
         if status != "pending":
-            hits = sum(bool(res["legs"][t]["hit"]) for t in en["legs"])
-            L["outcome"] = dict(returned=r, hits=hits, of=len(en["legs"]))
+            played = [res["legs"][t] for t in en["legs"] if not res["legs"][t].get("void")]
+            L["outcome"] = dict(returned=r, hits=sum(bool(x["hit"]) for x in played), of=len(played), note=note)
         for x, t in zip(L["legs"], en["legs"]):
             if t in res.get("legs", {}):
                 x["result"] = res["legs"][t]

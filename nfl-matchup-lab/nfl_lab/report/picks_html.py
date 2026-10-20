@@ -115,7 +115,7 @@ def lineup_cards(best_json: dict, prefix: str = "../", no_lines_msg: str = "") -
                 f"{e(stat_name(x['stat']))}" + (f"<span class='vs-lbl'>{e(x['note'])}</span>" if x.get("note") else "")
                 + "".join(f"<span class='vs-lbl why'>{e(w)}</span>" for w in x.get("reasons", []))
                 + (f"<span class='vs-lbl res {'hit' if x['result']['hit'] else 'miss'}'>{'Hit' if x['result']['hit'] else 'Missed'}: "
-                   f"{e(str(x['result']['actual']))}</span>" if x.get("result") else "")
+                   f"{e(_num(x['result']['actual']))}</span>" if x.get("result") else "")
                 + f"</span><span class='pp'>{x['p_model']:.0%}</span></li>" for x in L["legs"])
             old = L.get("basis") in ("old model", "Guesser method")
             hit_rows = (f"<div><dt>All hit (legs multiplied)</dt><dd>{L['p_all']:.1%}</dd></div>" if old else
@@ -217,6 +217,11 @@ def _range(nums: list[int]) -> str:
     return f"picks {nums[0]}-{nums[-1]}" if nums == list(range(1, len(nums) + 1)) else "picks " + ", ".join(map(str, nums))
 
 
+def _num(v) -> str:
+    """An actual stat for display: 29.0 -> "29", 2.5 -> "2.5", text as is."""
+    return f"{v:g}" if isinstance(v, (int, float)) else str(v)
+
+
 def _key(x: dict):
     return (x.get("player_id") or x["player"], x["stat"], x["line"], x["side"])
 
@@ -230,7 +235,8 @@ def _pick_li(i: int, x: dict, prefix: str, tag: str = "", reasons: bool = True) 
             + (f"<span class='in'>{e(tag)}</span>" if tag else "")
             + (f"<span class='sub2'>{e(sub)}</span>" if sub else "")
             + ("".join(f"<span class='why'>{e(w)}</span>" for w in x.get("reasons", [])) if reasons else "")
-            + (f"<span class='res {'hit' if res['hit'] else 'miss'}'>{'Hit' if res['hit'] else 'Missed'}: {e(str(res['actual']))}</span>"
+            + ("<span class='res'>Void: did not play</span>" if res and res.get("void") else
+               f"<span class='res {'hit' if res['hit'] else 'miss'}'>{'Hit' if res['hit'] else 'Missed'}: {e(_num(res['actual']))}</span>"
                if res else "")
             + f"</span><span class='pc'>{x['p_model']:.0%}<small>{e(tier[0])}</small></span></li>")
 
@@ -246,8 +252,9 @@ def _pays(L: dict) -> str:
 
 def _slip_leg(x: dict, prefix: str) -> str:
     res = x.get("result")
-    mark = ("" if not res else f"<span class='res {'hit' if res['hit'] else 'miss'}'>{'&#10003;' if res['hit'] else '&#10005;'} "
-            f"{e(str(res['actual']))}</span>")
+    mark = ("" if not res else "<span class='res'>Void: did not play</span>" if res.get("void") else
+            f"<span class='res {'hit' if res['hit'] else 'miss'}'>{'&#10003;' if res['hit'] else '&#10005;'} "
+            f"{e(_num(res['actual']))}</span>")
     return (f"<li>{theme.logo(x['team'], 18, prefix)}<span><b>{e(x['player'])}</b> {side_chip(x['side'])} "
             f"<span class='ln'>{x['line']:g}</span> {e(stat_name(x['stat']))}{mark}</span><span class='pc'>{x['p_model']:.0%}</span></li>")
 
@@ -257,7 +264,7 @@ def entry_slip(L: dict, prefix: str = "../") -> str:
     o = L.get("outcome")
     if o:
         foot = (f"<b class='ok'>Won ${o['returned']:,.2f}</b>" if o["returned"] > 0 else "<b class='no'>Lost</b>") + \
-               f" · {o['hits']} of {o['of']} hit"
+               f" · {o['hits']} of {o['of']} hit" + (f" · {e(o['note'])}" if o.get("note") else "")
     else:
         foot = f"{_pays(L)} · pays something {L['p_paid']:.0%} of the time"
     return (f"<article class='slp'><header><span><b>Entry {e(L['entry'])}</b> · {L['n']}-pick {e(L['play_as'])}</span>"

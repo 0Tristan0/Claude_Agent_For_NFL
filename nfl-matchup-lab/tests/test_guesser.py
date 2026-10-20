@@ -122,6 +122,34 @@ def test_a_player_with_snaps_but_no_stat_row_is_graded_at_zero(tmp_path, monkeyp
         dict(actual=0.0, hit=True)
 
 
+def test_a_void_leg_comes_off_and_the_entry_pays_at_the_smaller_size():
+    power, flex = guesser.payouts.tables()
+    hit, miss, void = dict(hit=True), dict(hit=False), dict(actual="DNP", hit=None, void=True)
+    f5 = dict(type="flex", stake=10, legs=list("abcde"), pays={str(k): v for k, v in flex[5].items()})
+    assert guesser.entry_return(f5, dict(a=hit, b=hit, c=hit, d=hit, e=miss)) == (10 * flex[5][4], "")
+    r, note = guesser.entry_return(f5, dict(a=hit, b=hit, c=hit, d=void, e=miss))
+    assert r == 10 * flex[4][3] and note == "1 void, so it paid as a 4-pick Flex"
+    f3 = dict(type="flex", stake=10, legs=list("abc"), pays={str(k): v for k, v in flex[3].items()})
+    assert guesser.entry_return(f3, dict(a=hit, b=void, c=hit)) == (10 * power[2], "1 void, so it paid as a 2-pick Power")
+    assert guesser.entry_return(f3, dict(a=hit, b=void, c=miss))[0] == 0
+    p2 = dict(type="power", stake=4, legs=list("ab"), pays={"2": power[2]})
+    assert guesser.entry_return(p2, dict(a=miss, b=void)) == (4.0, "1 void, so the stake came back")
+    assert guesser.entry_return(p2, dict(a=hit)) == (None, "")
+
+
+def test_a_player_who_sat_out_a_finished_game_is_a_void(tmp_path, monkeypatch):
+    monkeypatch.setattr(guesser, "LIVE_DIR", tmp_path)
+    ko = pd.Timestamp("2026-10-18 17:00", tz="UTC")
+    guesser.write_bankroll(_game(ko), guesser.plan(_picks4()), ko - pd.Timedelta(hours=5))
+    stats = pd.DataFrame([dict(player_id=k, week=6, team=t, receiving_yards=10) for k, t in (("a", "BUF"), ("b", "KC"), ("c", "BUF"))])
+    snaps = pd.DataFrame([dict(week=6, team="KC", player="B", offense_snaps=40, defense_snaps=0, st_snaps=0)])
+    assert guesser.grade_week(2026, 6, stats, snaps=snaps.assign(team="BUF")) == []   # KC snaps not posted: wait
+    assert guesser.grade_week(2026, 6, stats, snaps=snaps) == ["2026_06_BBB_AAA"]
+    d = json.loads(next(tmp_path.glob("*.json")).read_text())
+    text = guesser.leg_text(dict(player="D", stat="rec_yds", side="under", line=40.5))
+    assert d["result"]["legs"][text] == dict(actual="DNP", hit=None, void=True)
+
+
 def test_official_grade_keeps_a_provisional_final_score(tmp_path, monkeypatch):
     monkeypatch.setattr(guesser, "LIVE_DIR", tmp_path)
     ko = pd.Timestamp("2026-10-18 17:00", tz="UTC")

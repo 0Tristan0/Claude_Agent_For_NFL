@@ -418,12 +418,34 @@ def unit_table(ctx: dict, g) -> list[dict]:
     return rows
 
 
+def entry_return(en: dict, legs: dict) -> tuple[float | None, str]:
+    """(dollars back, note) for one frozen entry given its graded legs; None while a leg is ungraded. A void leg
+    (player did not play) comes off and the entry pays at the smaller size, as config/payouts.toml says: a Flex cut
+    to 2 picks pays as a 2-pick Power, and under 2 picks the stake comes back."""
+    if not all(l in legs for l in en["legs"]):
+        return None, ""
+    live_ = [legs[l] for l in en["legs"] if not legs[l].get("void")]
+    n, k = len(live_), sum(bool(x["hit"]) for x in live_)
+    if n == len(en["legs"]):
+        mult = en["pays"].get(str(k), 0) if en["type"] == "flex" else (en["pays"][str(n)] if k == n else 0)
+        return en["stake"] * float(mult), ""
+    rules = config.load("payouts")["rules"]
+    voids = len(en["legs"]) - n
+    if n < rules["min_entry_size"]:
+        return float(en["stake"]), f"{voids} void, so the stake came back"
+    power, flex = payouts.tables()
+    as_power = en["type"] == "power" or (n == 2 and rules["flex_reduced_to_2"] == "power")
+    mult = (power[n] if k == n else 0.0) if as_power else flex[n].get(k, 0.0)
+    return en["stake"] * mult, f"{voids} void, so it paid as a {n}-pick {'Power' if as_power else 'Flex'}"
+
+
 def grade_week(season: int, week: int, stats: pd.DataFrame, finals: dict[str, str] | None = None,
                snaps: pd.DataFrame | None = None) -> list[str]:
     """Fill in results for this week's Guesser bets whose games have official stats. Returns graded game ids.
     finals: {game_id: final score text}; without one, a provisional result's final score is kept.
     snaps: nflverse snap counts. A player with no stat row who still played a snap is graded at 0 (PrizePicks
-    keeps the pick); one with no snaps would be a void, so that game waits and is logged."""
+    keeps the pick); one with no snap once his team's snaps are posted is a void (see entry_return). Until then
+    the game waits and the leg is logged."""
     from .backtest import retro
     done = []
     for path in sorted(LIVE_DIR.glob(f"{season}-w{week:02d}-*-bankroll.json")):
@@ -436,6 +458,9 @@ def grade_week(season: int, week: int, stats: pd.DataFrame, finals: dict[str, st
                 v = retro.actual(stats, x["player_id"], week, x["stat"])
                 if v is None and retro.played(snaps, week, x["player"], x["team"]):
                     v = 0.0
+                if v is None and retro.sat_out(stats, snaps, week, x["player"], x["team"]):
+                    legs[text] = dict(actual="DNP", hit=None, void=True)
+                    continue
                 if v is None:
                     if not missing or text not in waiting:
                         logging.getLogger(__name__).warning("%s: no stats or snaps yet for %s", d["game"], text)

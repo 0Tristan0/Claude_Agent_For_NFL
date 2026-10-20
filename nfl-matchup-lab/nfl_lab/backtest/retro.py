@@ -77,6 +77,16 @@ def played(snaps: pd.DataFrame | None, week: int, player: str, team: str) -> boo
     return bool((n > 0).any()) if len(row) else False
 
 
+def sat_out(stats: pd.DataFrame, snaps: pd.DataFrame | None, week: int, player: str, team: str) -> bool:
+    """True once both the stats and the snap counts for the player's team that week are posted and he took no snap:
+    on PrizePicks that pick is void."""
+    if snaps is None or snaps.empty or "team" not in stats:
+        return False
+    t = "LA" if team == "LAR" else team
+    posted = ((stats["week"] == week) & (stats["team"] == t)).any() and ((snaps["week"] == week) & (snaps["team"] == t)).any()
+    return bool(posted) and not played(snaps, week, player, team)
+
+
 def actual(stats: pd.DataFrame, player_id: str, week: int, stat: str):
     row = stats[(stats["player_id"] == player_id) & (stats["week"] == week)]
     if row.empty:
