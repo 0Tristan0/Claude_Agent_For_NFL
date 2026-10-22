@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_06_NYJ_NE",
+ "season": 2026,
+ "week": 6,
+ "away": "NYJ",
+ "home": "NE",
+ "kickoff_et": "Sun Oct 18, 1:00 PM ET",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": -7.0,
+ "total": 43.5,
+ "away_implied": 18.2,
+ "home_implied": 25.2,
+ "home_win": 0.702,
+ "median_score": [
+  16.9,
+  24.95
+ ]
+}

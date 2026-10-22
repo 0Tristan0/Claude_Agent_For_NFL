@@ -1,0 +1,332 @@
+{
+  "season": 2026,
+  "week": 6,
+  "frozen_at": "2026-10-13 15:30 UTC",
+  "model": "sim + recent form + matchups (picks/combined.py), same-game lineups",
+  "board": "PrizePicks board saved 2026-10-13 ~01:00 UTC (standard lines only)",
+  "lineups": {
+    "3": {
+      "game": "SEA at DEN",
+      "game_id": "2026_06_SEA_DEN",
+      "kickoff_et": "Thu Oct 15, 8:15 PM ET",
+      "play_as": "Power",
+      "p_all": 0.2443,
+      "power_ev": 1.221,
+      "flex_ev": 0.929,
+      "legs": [
+        {
+          "player": "Jaylen Waddle",
+          "player_id": "00-0036613",
+          "team": "DEN",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 49.5,
+          "p_model": 0.589
+        },
+        {
+          "player": "Sam Darnold",
+          "player_id": "00-0034869",
+          "team": "SEA",
+          "stat": "pass_yds",
+          "side": "under",
+          "line": 218.5,
+          "p_model": 0.548
+        },
+        {
+          "player": "Jaxon Smith-Njigba",
+          "player_id": "00-0038543",
+          "team": "SEA",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 89.5,
+          "p_model": 0.51
+        }
+      ],
+      "result": {
+        "hits": 1,
+        "of": 3,
+        "returned": 0.0,
+        "play_as": "Power",
+        "final": "DEN 17, SEA 14 (OT)",
+        "legs": {
+          "Jaylen Waddle rec_yds under 49.5": {
+            "actual": "24",
+            "hit": true
+          },
+          "Sam Darnold pass_yds under 218.5": {
+            "actual": "278",
+            "hit": false
+          },
+          "Jaxon Smith-Njigba rec_yds under 89.5": {
+            "actual": "134",
+            "hit": false
+          }
+        },
+        "graded_at": "2026-10-16 14:05 UTC",
+        "source": "nflverse stats_player_week_2026"
+      }
+    },
+    "4": {
+      "game": "SEA at DEN",
+      "game_id": "2026_06_SEA_DEN",
+      "kickoff_et": "Thu Oct 15, 8:15 PM ET",
+      "play_as": "Power",
+      "p_all": 0.1514,
+      "power_ev": 1.514,
+      "flex_ev": 1.159,
+      "legs": [
+        {
+          "player": "Jaylen Waddle",
+          "player_id": "00-0036613",
+          "team": "DEN",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 49.5,
+          "p_model": 0.589
+        },
+        {
+          "player": "Sam Darnold",
+          "player_id": "00-0034869",
+          "team": "SEA",
+          "stat": "pass_yds",
+          "side": "under",
+          "line": 218.5,
+          "p_model": 0.548
+        },
+        {
+          "player": "Rashid Shaheed",
+          "player_id": "00-0037545",
+          "team": "SEA",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 22.5,
+          "p_model": 0.534
+        },
+        {
+          "player": "Jaxon Smith-Njigba",
+          "player_id": "00-0038543",
+          "team": "SEA",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 89.5,
+          "p_model": 0.51
+        }
+      ],
+      "result": {
+        "hits": 1,
+        "of": 4,
+        "returned": 0.0,
+        "play_as": "Power",
+        "final": "DEN 17, SEA 14 (OT)",
+        "legs": {
+          "Jaylen Waddle rec_yds under 49.5": {
+            "actual": "24",
+            "hit": true
+          },
+          "Sam Darnold pass_yds under 218.5": {
+            "actual": "278",
+            "hit": false
+          },
+          "Rashid Shaheed rec_yds under 22.5": {
+            "actual": "66",
+            "hit": false
+          },
+          "Jaxon Smith-Njigba rec_yds under 89.5": {
+            "actual": "134",
+            "hit": false
+          }
+        },
+        "graded_at": "2026-10-16 14:05 UTC",
+        "source": "nflverse stats_player_week_2026"
+      }
+    },
+    "5": {
+      "game": "DAL at GB",
+      "game_id": "2026_06_DAL_GB",
+      "kickoff_et": "Sun Oct 18, 8:20 PM ET",
+      "play_as": "Power",
+      "p_all": 0.0881,
+      "power_ev": 1.761,
+      "flex_ev": 1.398,
+      "legs": [
+        {
+          "player": "Jordan Love",
+          "player_id": "00-0036264",
+          "team": "GB",
+          "stat": "pass_att",
+          "side": "under",
+          "line": 35.5,
+          "p_model": 0.568
+        },
+        {
+          "player": "Jake Ferguson",
+          "player_id": "00-0038041",
+          "team": "DAL",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 29.5,
+          "p_model": 0.567
+        },
+        {
+          "player": "Dak Prescott",
+          "player_id": "00-0033077",
+          "team": "DAL",
+          "stat": "pass_yds",
+          "side": "under",
+          "line": 281.5,
+          "p_model": 0.531
+        },
+        {
+          "player": "Javonte Williams",
+          "player_id": "00-0036997",
+          "team": "DAL",
+          "stat": "rush_yds",
+          "side": "under",
+          "line": 67.5,
+          "p_model": 0.523
+        },
+        {
+          "player": "George Pickens",
+          "player_id": "00-0037247",
+          "team": "DAL",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 68.5,
+          "p_model": 0.514
+        }
+      ],
+      "result": {
+        "hits": 3,
+        "of": 5,
+        "returned": 0.0,
+        "play_as": "Power",
+        "final": "GB 23, DAL 13",
+        "legs": {
+          "Jordan Love pass_att under 35.5": {
+            "actual": "41",
+            "hit": false
+          },
+          "Jake Ferguson rec_yds under 29.5": {
+            "actual": "13",
+            "hit": true
+          },
+          "Dak Prescott pass_yds under 281.5": {
+            "actual": "258",
+            "hit": true
+          },
+          "Javonte Williams rush_yds under 67.5": {
+            "actual": "41",
+            "hit": true
+          },
+          "George Pickens rec_yds under 68.5": {
+            "actual": "73",
+            "hit": false
+          }
+        },
+        "graded_at": "2026-10-19 15:04 UTC",
+        "source": "nflverse stats_player_week_2026"
+      }
+    },
+    "6": {
+      "game": "HOU at JAX",
+      "game_id": "2026_06_HOU_JAX",
+      "kickoff_et": "Sun Oct 18, 9:30 AM ET",
+      "play_as": "Power",
+      "p_all": 0.0568,
+      "power_ev": 2.13,
+      "flex_ev": 1.817,
+      "legs": [
+        {
+          "player": "Dalton Schultz",
+          "player_id": "00-0034383",
+          "team": "HOU",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 30.5,
+          "p_model": 0.565
+        },
+        {
+          "player": "C.J. Stroud",
+          "player_id": "00-0039163",
+          "team": "HOU",
+          "stat": "pass_att",
+          "side": "under",
+          "line": 35.5,
+          "p_model": 0.536
+        },
+        {
+          "player": "Bhayshul Tuten",
+          "player_id": "00-0040719",
+          "team": "JAX",
+          "stat": "rush_rec_yds",
+          "side": "under",
+          "line": 75.5,
+          "p_model": 0.529
+        },
+        {
+          "player": "Brenton Strange",
+          "player_id": "00-0038935",
+          "team": "JAX",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 37.5,
+          "p_model": 0.517
+        },
+        {
+          "player": "Trevor Lawrence",
+          "player_id": "00-0036971",
+          "team": "JAX",
+          "stat": "pass_rush_yds",
+          "side": "under",
+          "line": 237.5,
+          "p_model": 0.516
+        },
+        {
+          "player": "Parker Washington",
+          "player_id": "00-0038606",
+          "team": "JAX",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 61.5,
+          "p_model": 0.51
+        }
+      ],
+      "result": {
+        "hits": 1,
+        "of": 6,
+        "returned": 0.0,
+        "play_as": "Power",
+        "final": "HOU 34, JAX 31",
+        "legs": {
+          "Dalton Schultz rec_yds under 30.5": {
+            "actual": "33",
+            "hit": false
+          },
+          "C.J. Stroud pass_att under 35.5": {
+            "actual": "34",
+            "hit": true
+          },
+          "Bhayshul Tuten rush_rec_yds under 75.5": {
+            "actual": "87",
+            "hit": false
+          },
+          "Brenton Strange rec_yds under 37.5": {
+            "actual": "44",
+            "hit": false
+          },
+          "Trevor Lawrence pass_rush_yds under 237.5": {
+            "actual": "317",
+            "hit": false
+          },
+          "Parker Washington rec_yds under 61.5": {
+            "actual": "64",
+            "hit": false
+          }
+        },
+        "graded_at": "2026-10-19 15:04 UTC",
+        "source": "nflverse stats_player_week_2026"
+      }
+    }
+  },
+  "superseded_by": "2026-w06-*-bankroll.json (Guesser method). This simulation-era record is kept for comparison only."
+}

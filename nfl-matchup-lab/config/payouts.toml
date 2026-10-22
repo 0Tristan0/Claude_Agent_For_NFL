@@ -1,0 +1,41 @@
+# PrizePicks payout multipliers. Update these when the app changes them.
+# Source: PrizePicks "Payouts explained" help article (linked on the report footer).
+
+[power]          # every pick must hit
+"2" = 3.0
+"3" = 5.0
+"4" = 10.0
+"5" = 20.0
+"6" = 37.5
+
+[flex."3"]       # number of hits -> multiplier
+"3" = 2.25
+"2" = 1.25
+
+[flex."4"]
+"4" = 5.0
+"3" = 1.5
+
+[flex."5"]
+"5" = 10.0
+"4" = 2.0
+"3" = 0.4
+
+[flex."6"]
+"6" = 25.0
+"5" = 2.0
+"4" = 0.4
+
+[rules]
+min_teams = 2                 # an entry needs players from at least 2 teams
+one_leg_per_player = true
+# A void (player did not play) or a push removes the leg and the entry is paid at the smaller size.
+void_rule = "reduce"
+min_entry_size = 2            # below this the entry is refunded
+flex_reduced_to_2 = "power"   # a Flex entry reduced to 2 picks pays as a 2-pick Power (check the app)
+
+[same_game]
+# Same-game entries can get lower multipliers. Fill these in when the app shows them,
+# e.g. power = { "3" = 4.5 }. Empty means unknown, so reports show the minimum multiplier needed.
+power = {}
+flex = {}

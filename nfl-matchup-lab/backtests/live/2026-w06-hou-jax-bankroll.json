@@ -1,0 +1,255 @@
+{
+  "game": "2026_06_HOU_JAX",
+  "label": "HOU at JAX",
+  "kickoff_utc": "2026-10-18 13:30 UTC",
+  "frozen_at": "2026-10-18 00:04 UTC",
+  "bankroll": 20.0,
+  "reserve_not_bet": 0.0,
+  "paper_money": true,
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game; stakes from guesser.plan",
+  "split_rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)",
+  "entries": [
+    {
+      "id": "A",
+      "type": "flex",
+      "stake": 12.0,
+      "legs": [
+        "Bhayshul Tuten rush yds more 63.5",
+        "Dalton Schultz rec yds less 30.5",
+        "C.J. Stroud pass+rush yds more 265.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Bhayshul Tuten",
+          "player_id": "00-0040719",
+          "team": "JAX",
+          "stat": "rush_yds",
+          "side": "over",
+          "line": 63.5,
+          "p_model": 0.6152517361111112,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
+          "reasons": [
+            "Against: HOU have the 4th best run defense (EPA per rush allowed)",
+            "For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5"
+          ]
+        },
+        {
+          "player": "Dalton Schultz",
+          "player_id": "00-0034383",
+          "team": "HOU",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 30.5,
+          "p_model": 0.5671961805555557,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
+          "reasons": [
+            "For: JAX allow the 5th fewest receiving yds to TEs (34 a game)",
+            "For: JAX have the 7th best pass defense (EPA per dropback allowed)"
+          ]
+        },
+        {
+          "player": "C.J. Stroud",
+          "player_id": "00-0039163",
+          "team": "HOU",
+          "stat": "pass_rush_yds",
+          "side": "over",
+          "line": 265.5,
+          "p_model": 0.5611024305555556,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "Medium \u00b7 More in 3 of last 4 (382, 177, 359, 266)",
+          "reasons": [
+            "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+            "For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed"
+          ]
+        }
+      ],
+      "pays": {
+        "3": 2.25,
+        "2": 1.25
+      }
+    },
+    {
+      "id": "B",
+      "type": "flex",
+      "stake": 6.0,
+      "legs": [
+        "Bhayshul Tuten rush yds more 63.5",
+        "Dalton Schultz rec yds less 30.5",
+        "C.J. Stroud pass+rush yds more 265.5",
+        "Kayshon Boutte rec yds more 30.5",
+        "Trevor Lawrence pass+rush yds less 237.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Bhayshul Tuten",
+          "player_id": "00-0040719",
+          "team": "JAX",
+          "stat": "rush_yds",
+          "side": "over",
+          "line": 63.5,
+          "p_model": 0.6152517361111112,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
+          "reasons": [
+            "Against: HOU have the 4th best run defense (EPA per rush allowed)",
+            "For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5"
+          ]
+        },
+        {
+          "player": "Dalton Schultz",
+          "player_id": "00-0034383",
+          "team": "HOU",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 30.5,
+          "p_model": 0.5671961805555557,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
+          "reasons": [
+            "For: JAX allow the 5th fewest receiving yds to TEs (34 a game)",
+            "For: JAX have the 7th best pass defense (EPA per dropback allowed)"
+          ]
+        },
+        {
+          "player": "C.J. Stroud",
+          "player_id": "00-0039163",
+          "team": "HOU",
+          "stat": "pass_rush_yds",
+          "side": "over",
+          "line": 265.5,
+          "p_model": 0.5611024305555556,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "Medium \u00b7 More in 3 of last 4 (382, 177, 359, 266)",
+          "reasons": [
+            "Against: JAX have the 7th best pass defense (EPA per dropback allowed)",
+            "For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed"
+          ]
+        },
+        {
+          "player": "Kayshon Boutte",
+          "player_id": "00-0038608",
+          "team": "HOU",
+          "stat": "rec_yds",
+          "side": "over",
+          "line": 30.5,
+          "p_model": 0.5607899305555556,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "Medium \u00b7 More in 3 of last 4 (37, 21, 36, 38)",
+          "reasons": [
+            "For: JAX allow the 1st most receiving yds to WRs (204 a game)",
+            "Against: JAX have the 7th best pass defense (EPA per dropback allowed)"
+          ]
+        },
+        {
+          "player": "Trevor Lawrence",
+          "player_id": "00-0036971",
+          "team": "JAX",
+          "stat": "pass_rush_yds",
+          "side": "under",
+          "line": 237.5,
+          "p_model": 0.5579774305555556,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "Medium \u00b7 Less in 3 of last 4 (195, 207, 227, 356)",
+          "reasons": [
+            "For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX's line allows pressure on 23% (the 13th most): a hard night to throw",
+            "For: HOU have the 10th best pass defense (EPA per dropback allowed)",
+            "Against: News: Houston S/DB Jalen Pitre is out and books list him at 225-228.5, above this line; but Jacksonville lost LT Anton Harrison to IR"
+          ]
+        }
+      ],
+      "pays": {
+        "5": 10.0,
+        "4": 2.0,
+        "3": 0.4
+      }
+    },
+    {
+      "id": "C",
+      "type": "power",
+      "stake": 2.0,
+      "legs": [
+        "Bhayshul Tuten rush yds more 63.5",
+        "Dalton Schultz rec yds less 30.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Bhayshul Tuten",
+          "player_id": "00-0040719",
+          "team": "JAX",
+          "stat": "rush_yds",
+          "side": "over",
+          "line": 63.5,
+          "p_model": 0.6152517361111112,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "High \u00b7 More in 4 of last 4 (65, 73, 73, 72)",
+          "reasons": [
+            "Against: HOU have the 4th best run defense (EPA per rush allowed)",
+            "For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5"
+          ]
+        },
+        {
+          "player": "Dalton Schultz",
+          "player_id": "00-0034383",
+          "team": "HOU",
+          "stat": "rec_yds",
+          "side": "under",
+          "line": 30.5,
+          "p_model": 0.5671961805555557,
+          "game_id": "2026_06_HOU_JAX",
+          "note": "Medium \u00b7 Less in 3 of last 4 (140, 30, 9, 30)",
+          "reasons": [
+            "For: JAX allow the 5th fewest receiving yds to TEs (34 a game)",
+            "For: JAX have the 7th best pass defense (EPA per dropback allowed)"
+          ]
+        }
+      ],
+      "pays": {
+        "2": 3.0
+      }
+    }
+  ],
+  "expected_return_per_dollar": {
+    "A_flex3": {
+      "estimate": 0.972
+    },
+    "B_flex5": {
+      "estimate": 1.209
+    },
+    "C_power2": {
+      "estimate": 1.047
+    }
+  },
+  "expected_back": 21.01,
+  "p_profit": 0.434,
+  "p_lose_all": 0.283,
+  "result": {
+    "final": "HOU 34, JAX 31",
+    "graded_at": "2026-10-19 15:02 UTC",
+    "provisional": false,
+    "source": "nflverse stats_player_week_2026",
+    "legs": {
+      "Bhayshul Tuten rush yds more 63.5": {
+        "actual": 39.0,
+        "hit": false
+      },
+      "Dalton Schultz rec yds less 30.5": {
+        "actual": 33.0,
+        "hit": false
+      },
+      "C.J. Stroud pass+rush yds more 265.5": {
+        "actual": 317.0,
+        "hit": true
+      },
+      "Kayshon Boutte rec yds more 30.5": {
+        "actual": 16.0,
+        "hit": false
+      },
+      "Trevor Lawrence pass+rush yds less 237.5": {
+        "actual": 317.0,
+        "hit": false
+      }
+    }
+  }
+}

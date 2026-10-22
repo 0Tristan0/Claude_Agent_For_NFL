@@ -1,0 +1,1939 @@
+{
+ "game_id": "2026_06_SEA_DEN",
+ "season": 2026,
+ "week": 6,
+ "label": "SEA at DEN",
+ "away": "SEA",
+ "home": "DEN",
+ "kickoff_utc": "2026-10-16 00:15:00+00:00",
+ "home_spread": 2.5,
+ "total": 40.5,
+ "injury_note": "injury report week 6",
+ "built_at": "2026-10-14 23:04:15.576897+00:00",
+ "units": [
+  {
+   "offense": "SEA",
+   "defense": "DEN",
+   "stat": "EPA per dropback",
+   "off_value": 0.03725131917528595,
+   "def_value": -0.05229104629899771,
+   "off_rank": 17,
+   "def_rank": 5
+  },
+  {
+   "offense": "SEA",
+   "defense": "DEN",
+   "stat": "EPA per rush",
+   "off_value": -0.2519529878936292,
+   "def_value": -0.04768908226159511,
+   "off_rank": 32,
+   "def_rank": 20
+  },
+  {
+   "offense": "SEA",
+   "defense": "DEN",
+   "stat": "Explosive pass rate",
+   "off_value": 0.09392184521335306,
+   "def_value": 0.06714922037462026,
+   "off_rank": 8,
+   "def_rank": 7
+  },
+  {
+   "offense": "SEA",
+   "defense": "DEN",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.28196710099090583,
+   "def_value": 0.24427411257037537,
+   "off_rank": 29,
+   "def_rank": 10
+  },
+  {
+   "offense": "SEA",
+   "defense": "DEN",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5609636951766139,
+   "def_value": 0.4857789582997384,
+   "off_rank": 18,
+   "def_rank": 4
+  },
+  {
+   "offense": "DEN",
+   "defense": "SEA",
+   "stat": "EPA per dropback",
+   "off_value": -0.01877120239129606,
+   "def_value": -0.1180002901054893,
+   "off_rank": 22,
+   "def_rank": 3
+  },
+  {
+   "offense": "DEN",
+   "defense": "SEA",
+   "stat": "EPA per rush",
+   "off_value": -0.04974222421872247,
+   "def_value": -0.2478376744721851,
+   "off_rank": 16,
+   "def_rank": 1
+  },
+  {
+   "offense": "DEN",
+   "defense": "SEA",
+   "stat": "Explosive pass rate",
+   "off_value": 0.07029810178976957,
+   "def_value": 0.0551175175089466,
+   "off_rank": 25,
+   "def_rank": 1
+  },
+  {
+   "offense": "DEN",
+   "defense": "SEA",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.21037576531845256,
+   "def_value": 0.27403209586177957,
+   "off_rank": 13,
+   "def_rank": 2
+  },
+  {
+   "offense": "DEN",
+   "defense": "SEA",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5370529644115183,
+   "def_value": 0.6482531453668864,
+   "off_rank": 21,
+   "def_rank": 26
+  }
+ ],
+ "news": [
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "RJ Harvey",
+   "team": "DEN",
+   "stat": "*",
+   "more_adj": -0.04,
+   "reason": "Week 5, Payton's first game calling plays: 3 carries for 7 yards and 1 target (no catch) while Dobbins got 18 carries; he still ran the two-minute drill",
+   "source": "DraftSharks; The Fantasy Footballers (Oct 12)",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "J.K. Dobbins",
+   "team": "DEN",
+   "stat": "rush_yds",
+   "more_adj": 0.04,
+   "reason": "Lead back in Payton's run-first plan: 18 carries for 68 yards and a TD in Week 5 (Harvey had 3)",
+   "source": "RotoBaller; DraftSharks (Oct 12)",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "J.K. Dobbins",
+   "team": "DEN",
+   "stat": "rush_att",
+   "more_adj": 0.04,
+   "reason": "Lead back in Payton's run-first plan: 18 carries for 68 yards and a TD in Week 5 (Harvey had 3)",
+   "source": "RotoBaller; DraftSharks (Oct 12)",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "J.K. Dobbins",
+   "team": "DEN",
+   "stat": "rush_rec_yds",
+   "more_adj": 0.04,
+   "reason": "Lead back in Payton's run-first plan: 18 carries for 68 yards and a TD in Week 5 (Harvey had 3)",
+   "source": "RotoBaller; DraftSharks (Oct 12)",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Bo Nix",
+   "team": "DEN",
+   "stat": "pass_yds",
+   "more_adj": -0.03,
+   "reason": "Payton took back play-calling and Denver ran more than it passed in Week 5 (29 runs, 27 passes; Nix 123 yards); 5.2 air yards per attempt, fewest in the league",
+   "source": "DraftSharks; CBS Sports (Oct 12)",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Bo Nix",
+   "team": "DEN",
+   "stat": "pass_att",
+   "more_adj": -0.03,
+   "reason": "Payton took back play-calling and Denver ran more than it passed in Week 5 (29 runs, 27 passes; Nix 123 yards); 5.2 air yards per attempt, fewest in the league",
+   "source": "DraftSharks; CBS Sports (Oct 12)",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Bo Nix",
+   "team": "DEN",
+   "stat": "pass_rush_yds",
+   "more_adj": -0.03,
+   "reason": "Payton took back play-calling and Denver ran more than it passed in Week 5 (29 runs, 27 passes; Nix 123 yards); 5.2 air yards per attempt, fewest in the league",
+   "source": "DraftSharks; CBS Sports (Oct 12)",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Courtland Sutton",
+   "team": "DEN",
+   "stat": "rec_yds",
+   "more_adj": -0.02,
+   "reason": "Played 81% of snaps but saw only 3 targets (2 for 18 and a TD) as Denver's passing game shrank",
+   "source": "DraftSharks (Oct 12)",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Jaylen Waddle",
+   "team": "DEN",
+   "stat": "rec_yds",
+   "more_adj": -0.02,
+   "reason": "2 catches on 5 targets for 19 yards in Week 5, 2 or fewer catches in 3 of 5 games; Denver now leans on the run. The walking-boot report was from Week 3 and he is healthy",
+   "source": "The Fantasy Footballers; NBC Sports/Rotoworld",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Jaylen Waddle",
+   "team": "DEN",
+   "stat": "receptions",
+   "more_adj": -0.02,
+   "reason": "2 catches on 5 targets for 19 yards in Week 5, 2 or fewer catches in 3 of 5 games; Denver now leans on the run. The walking-boot report was from Week 3 and he is healthy",
+   "source": "The Fantasy Footballers; NBC Sports/Rotoworld",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Evan Engram",
+   "team": "DEN",
+   "stat": "rec_yds",
+   "more_adj": 0.03,
+   "reason": "Seattle ruled out linebackers Drake Thomas and Chazz Surratt on Wednesday; Engram caught 4 of 4 for 55 yards in Week 5",
+   "source": "Seattle Sports, Field Gulls, SI (Oct 14)",
+   "captured_at": "2026-10-14T23:05:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Marvin Mims Jr.",
+   "team": "DEN",
+   "stat": "*",
+   "more_adj": -0.02,
+   "reason": "With Pat Bryant on IR, Troy Franklin (not Mims) took the WR3 snaps; Mims played 27% of snaps in Week 4",
+   "source": "RotoBaller (Oct 10); DraftSharks",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Cooper Kupp",
+   "team": "SEA",
+   "stat": "rec_yds",
+   "more_adj": 0.05,
+   "reason": "Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); Kupp's snaps rose to 81% in Week 5",
+   "source": "Denver Gazette, NBC/PFT, denverbroncos.com (Oct 14); SI snap counts",
+   "captured_at": "2026-10-14T23:05:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Jaxon Smith-Njigba",
+   "team": "SEA",
+   "stat": "rec_yds",
+   "more_adj": 0.05,
+   "reason": "Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation and leads the NFL in receiving yards; books list him at 91.5-93.5, above this line",
+   "source": "Denver Gazette, NBC/PFT, denverbroncos.com (Oct 14); SI, Heavy (Oct 14); OddsShopper",
+   "captured_at": "2026-10-14T23:05:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Jaxon Smith-Njigba",
+   "team": "SEA",
+   "stat": "receptions",
+   "more_adj": 0.04,
+   "reason": "Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation",
+   "source": "Denver Gazette, NBC/PFT, denverbroncos.com (Oct 14); SI, Heavy (Oct 14)",
+   "captured_at": "2026-10-14T23:05:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Tory Horton",
+   "team": "SEA",
+   "stat": "*",
+   "more_adj": -0.02,
+   "reason": "Played 17% of snaps in Week 5, the fewest of his season",
+   "source": "SI, Yahoo snap counts (Oct 12)",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Sam Darnold",
+   "team": "SEA",
+   "stat": "pass_yds",
+   "more_adj": 0.04,
+   "reason": "Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable)",
+   "source": "Denver Gazette, NBC/PFT, denverbroncos.com (Oct 14)",
+   "captured_at": "2026-10-14T23:05:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Sam Darnold",
+   "team": "SEA",
+   "stat": "pass_rush_yds",
+   "more_adj": 0.04,
+   "reason": "Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable)",
+   "source": "Denver Gazette, NBC/PFT, denverbroncos.com (Oct 14)",
+   "captured_at": "2026-10-14T23:05:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Sam Darnold",
+   "team": "SEA",
+   "stat": "pass_yds",
+   "more_adj": -0.02,
+   "reason": "Seattle's line allowed 5 sacks in Week 5 with its right guard on IR, and the total fell from 42.5 to 40.5",
+   "source": "FantasyData box score; Covers, SportsBettingDime",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Sam Darnold",
+   "team": "SEA",
+   "stat": "pass_rush_yds",
+   "more_adj": -0.02,
+   "reason": "Seattle's line allowed 5 sacks in Week 5 with its right guard on IR, and the total fell from 42.5 to 40.5",
+   "source": "FantasyData box score; Covers, SportsBettingDime",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Emanuel Wilson",
+   "team": "SEA",
+   "stat": "rush_yds",
+   "more_adj": 0.03,
+   "reason": "Lead back: Seattle ruled out Zach Charbonnet on Wednesday and Jadarian Price is on IR; Wilson had 20 carries in Week 5",
+   "source": "Heavy, Field Gulls (Oct 14); SI",
+   "captured_at": "2026-10-14T23:05:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Emanuel Wilson",
+   "team": "SEA",
+   "stat": "rush_att",
+   "more_adj": 0.03,
+   "reason": "Lead back: Seattle ruled out Zach Charbonnet on Wednesday and Jadarian Price is on IR; Wilson had 20 carries in Week 5",
+   "source": "Heavy, Field Gulls (Oct 14); SI",
+   "captured_at": "2026-10-14T23:05:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "Emanuel Wilson",
+   "team": "SEA",
+   "stat": "rush_rec_yds",
+   "more_adj": 0.03,
+   "reason": "Lead back: Seattle ruled out Zach Charbonnet on Wednesday and Jadarian Price is on IR; Wilson had 20 carries in Week 5",
+   "source": "Heavy, Field Gulls (Oct 14); SI",
+   "captured_at": "2026-10-14T23:05:00.000Z"
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player": "George Holani",
+   "team": "SEA",
+   "stat": "rush_yds",
+   "more_adj": -0.02,
+   "reason": "Passing-down back: Wilson had about 21 of Seattle's 26 runs in Week 5",
+   "source": "PFF via research excerpts (Oct 12)",
+   "captured_at": "2026-10-14T19:30:00.000Z"
+  }
+ ],
+ "overrides": [],
+ "picks": [
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0038976",
+   "player": "Marvin Mims Jr.",
+   "team": "DEN",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 13.5,
+   "side": "under",
+   "hits": 3,
+   "games": 3,
+   "log": [
+    0.0,
+    10.0,
+    6.0
+   ],
+   "recent": 0.6875,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.618515625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.02953125,
+   "p_news": 0.02,
+   "tier": "High",
+   "reasons": [
+    "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+    "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+    "For: News: With Pat Bryant on IR, Troy Franklin (not Mims) took the WR3 snaps; Mims played 27% of snaps in Week 4"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0039732",
+   "player": "Bo Nix",
+   "team": "DEN",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 13.5,
+   "side": "under",
+   "hits": 4,
+   "games": 4,
+   "log": [
+    6.0,
+    7.0,
+    10.0,
+    10.0
+   ],
+   "recent": 0.7222222222,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.6076736111,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.006875,
+   "p_news": 0.0,
+   "tier": "High",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0034348",
+   "player": "Courtland Sutton",
+   "team": "DEN",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 31.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    25.0,
+    46.0,
+    4.0,
+    18.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5837586806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.03640625,
+   "p_news": 0.02,
+   "tier": "Med-High",
+   "reasons": [
+    "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+    "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+    "For: News: Played 81% of snaps but saw only 3 targets (2 for 18 and a TD) as Denver's passing game shrank"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0036613",
+   "player": "Jaylen Waddle",
+   "team": "DEN",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 49.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    138.0,
+    10.0,
+    35.0,
+    19.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "no-vig sportsgambler",
+   "p_model": 0.5803211806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.02953125,
+   "p_news": 0.02,
+   "tier": "Med-High",
+   "reasons": [
+    "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+    "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+    "For: News: 2 catches on 5 targets for 19 yards in Week 5, 2 or fewer catches in 3 of 5 games; Denver now leans on the run. The walking-boot report was from Week 3 and he is healthy"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0039732",
+   "player": "Bo Nix",
+   "team": "DEN",
+   "position": "QB",
+   "stat": "pass_att",
+   "line": 34.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    31.0,
+    34.0,
+    42.0,
+    27.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5705555556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "p_news": 0.03,
+   "tier": "Medium",
+   "reasons": [
+    "For: News: Payton took back play-calling and Denver ran more than it passed in Week 5 (29 runs, 27 passes; Nix 123 yards); 5.2 air yards per attempt, fewest in the league"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0038543",
+   "player": "Jaxon Smith-Njigba",
+   "team": "SEA",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 89.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    155.0,
+    128.0,
+    76.0,
+    102.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5679774306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.02515625,
+   "p_news": 0.05,
+   "tier": "Medium",
+   "reasons": [
+    "Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+    "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+    "For: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation and leads the NFL in receiving yards; books list him at 91.5-93.5, above this line"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0034869",
+   "player": "Sam Darnold",
+   "team": "SEA",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 4.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    0.0,
+    5.0,
+    6.0,
+    5.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5097706032,
+   "market_src": "no-vig sportsgamblingpodcast",
+   "p_model": 0.5663783572,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.011875,
+   "p_news": 0.0,
+   "tier": "Medium",
+   "reasons": [
+    "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): more scrambles"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0039299",
+   "player": "George Holani",
+   "team": "SEA",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 14.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    13.0,
+    10.0,
+    18.0,
+    7.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5639149306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00328125,
+   "p_news": 0.02,
+   "tier": "Medium",
+   "reasons": [
+    "For: News: Passing-down back: Wilson had about 21 of Seattle's 26 runs in Week 5"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0036158",
+   "player": "J.K. Dobbins",
+   "team": "DEN",
+   "position": "RB",
+   "stat": "rec_yds",
+   "line": 6.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    0.0,
+    4.0,
+    12.0,
+    6.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5581336806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00515625,
+   "p_news": 0.0,
+   "tier": "Medium",
+   "reasons": [
+    "For: SEA have the 3rd best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0034869",
+   "player": "Sam Darnold",
+   "team": "SEA",
+   "position": "QB",
+   "stat": "pass_rush_yds",
+   "line": 223.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    13.0,
+    384.0,
+    174.0,
+    200.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5568836806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.02265625,
+   "p_news": -0.02,
+   "tier": "Medium",
+   "reasons": [
+    "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): a hard night to throw",
+    "For: DEN have the 5th best pass defense (EPA per dropback allowed)",
+    "Against: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable)",
+    "For: News: Seattle's line allowed 5 sacks in Week 5 with its right guard on IR, and the total fell from 42.5 to 40.5"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0034869",
+   "player": "Sam Darnold",
+   "team": "SEA",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 218.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    13.0,
+    379.0,
+    168.0,
+    195.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5568836806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.02265625,
+   "p_news": -0.02,
+   "tier": "Medium",
+   "reasons": [
+    "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): a hard night to throw",
+    "For: DEN have the 5th best pass defense (EPA per dropback allowed)",
+    "Against: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable)",
+    "For: News: Seattle's line allowed 5 sacks in Week 5 with its right guard on IR, and the total fell from 42.5 to 40.5"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0034869",
+   "player": "Sam Darnold",
+   "team": "SEA",
+   "position": "QB",
+   "stat": "pass_att",
+   "line": 29.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    2.0,
+    45.0,
+    22.0,
+    29.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5555555556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "p_news": 0.0,
+   "tier": "Medium",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0034869",
+   "player": "Sam Darnold",
+   "team": "SEA",
+   "position": "QB",
+   "stat": "rush_att",
+   "line": 2.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    0.0,
+    1.0,
+    3.0,
+    1.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5555555556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.0,
+   "p_news": 0.0,
+   "tier": "Medium",
+   "reasons": []
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0033881",
+   "player": "Evan Engram",
+   "team": "DEN",
+   "position": "TE",
+   "stat": "rec_yds",
+   "line": 21.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    17.0,
+    0.0,
+    6.0,
+    55.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5525086806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.02390625,
+   "p_news": -0.03,
+   "tier": "Medium",
+   "reasons": [
+    "For: SEA allow the 2nd fewest receiving yds to TEs (28 a game)",
+    "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+    "Against: News: Seattle ruled out linebackers Drake Thomas and Chazz Surratt on Wednesday; Engram caught 4 of 4 for 55 yards in Week 5"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0033908",
+   "player": "Cooper Kupp",
+   "team": "SEA",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 20.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    20.0,
+    46.0,
+    13.0,
+    15.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5431336806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.02515625,
+   "p_news": -0.05,
+   "tier": "Lean",
+   "reasons": [
+    "For: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+    "For: DEN have the 5th best pass defense (EPA per dropback allowed)",
+    "Against: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); Kupp's snaps rose to 81% in Week 5"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0040730",
+   "player": "RJ Harvey",
+   "team": "DEN",
+   "position": "RB",
+   "stat": "receptions",
+   "line": 3.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    4.0,
+    6.0,
+    10.0,
+    0.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5329774306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00515625,
+   "p_news": -0.04,
+   "tier": "Lean",
+   "reasons": [
+    "Against: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+    "Against: News: Week 5, Payton's first game calling plays: 3 carries for 7 yards and 1 target (no catch) while Dobbins got 18 carries; he still ran the two-minute drill"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0040730",
+   "player": "RJ Harvey",
+   "team": "DEN",
+   "position": "RB",
+   "stat": "rush_rec_yds",
+   "line": 39.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    41.0,
+    47.0,
+    93.0,
+    7.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5329774306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00515625,
+   "p_news": -0.04,
+   "tier": "Lean",
+   "reasons": [
+    "Against: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+    "Against: News: Week 5, Payton's first game calling plays: 3 carries for 7 yards and 1 target (no catch) while Dobbins got 18 carries; he still ran the two-minute drill"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0040730",
+   "player": "RJ Harvey",
+   "team": "DEN",
+   "position": "RB",
+   "stat": "rec_yds",
+   "line": 21.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    23.0,
+    41.0,
+    68.0,
+    0.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5329774306,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.00515625,
+   "p_news": -0.04,
+   "tier": "Lean",
+   "reasons": [
+    "Against: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+    "Against: News: Week 5, Payton's first game calling plays: 3 carries for 7 yards and 1 target (no catch) while Dobbins got 18 carries; he still ran the two-minute drill"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0040648",
+   "player": "Tory Horton",
+   "team": "SEA",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 5.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    0.0,
+    48.0,
+    6.0,
+    0.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.528515625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.03703125,
+   "p_news": 0.02,
+   "tier": "Lean",
+   "reasons": [
+    "For: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+    "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): less time for deep throws (his targets travel 12 yds)",
+    "For: DEN have the 5th best pass defense (EPA per dropback allowed)",
+    "For: News: Played 17% of snaps in Week 5, the fewest of his season"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0038543",
+   "player": "Jaxon Smith-Njigba",
+   "team": "SEA",
+   "position": "WR",
+   "stat": "receptions",
+   "line": 6.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    9.0,
+    10.0,
+    5.0,
+    5.0
+   ],
+   "recent": 0.5,
+   "market": 0.5411827691,
+   "market_src": "no-vig bet365, oddsshopper",
+   "p_model": 0.5280132596,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.02515625,
+   "p_news": 0.04,
+   "tier": "Lean",
+   "reasons": [
+    "Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+    "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+    "For: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0040730",
+   "player": "RJ Harvey",
+   "team": "DEN",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 15.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    18.0,
+    6.0,
+    25.0,
+    7.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.527265625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01453125,
+   "p_news": 0.04,
+   "tier": "Lean",
+   "reasons": [
+    "For: SEA have the 1st best run defense (EPA per rush allowed)",
+    "For: News: Week 5, Payton's first game calling plays: 3 carries for 7 yards and 1 target (no catch) while Dobbins got 18 carries; he still ran the two-minute drill"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0036613",
+   "player": "Jaylen Waddle",
+   "team": "DEN",
+   "position": "WR",
+   "stat": "receptions",
+   "line": 4.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    8.0,
+    2.0,
+    5.0,
+    2.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.524765625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.02953125,
+   "p_news": 0.02,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+    "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+    "For: News: 2 catches on 5 targets for 19 yards in Week 5, 2 or fewer catches in 3 of 5 games; Denver now leans on the run. The walking-boot report was from Week 3 and he is healthy"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0039732",
+   "player": "Bo Nix",
+   "team": "DEN",
+   "position": "QB",
+   "stat": "pass_rush_yds",
+   "line": 223.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    294.0,
+    193.0,
+    224.0,
+    133.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.524765625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01953125,
+   "p_news": 0.03,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+    "For: News: Payton took back play-calling and Denver ran more than it passed in Week 5 (29 runs, 27 passes; Nix 123 yards); 5.2 air yards per attempt, fewest in the league"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0039732",
+   "player": "Bo Nix",
+   "team": "DEN",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 202.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    288.0,
+    186.0,
+    214.0,
+    123.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.524765625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01953125,
+   "p_news": 0.03,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+    "For: News: Payton took back play-calling and Denver ran more than it passed in Week 5 (29 runs, 27 passes; Nix 123 yards); 5.2 air yards per attempt, fewest in the league"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0038797",
+   "player": "Emanuel Wilson",
+   "team": "SEA",
+   "position": "RB",
+   "stat": "rush_rec_yds",
+   "line": 80.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    92.0,
+    14.0,
+    120.0,
+    72.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.522109375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01421875,
+   "p_news": 0.03,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: DEN allow the 5th most receiving yds to RBs (40 a game)",
+    "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): more quick checkdowns",
+    "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+    "For: News: Lead back: Seattle ruled out Zach Charbonnet on Wednesday and Jadarian Price is on IR; Wilson had 20 carries in Week 5"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0039868",
+   "player": "Troy Franklin",
+   "team": "DEN",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 17.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    27.0,
+    21.0,
+    0.0,
+    16.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.518203125,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.03640625,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+    "For: SEA have the 3rd best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0038797",
+   "player": "Emanuel Wilson",
+   "team": "SEA",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 66.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    92.0,
+    14.0,
+    81.0,
+    61.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.516640625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00328125,
+   "p_news": 0.03,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: News: Lead back: Seattle ruled out Zach Charbonnet on Wednesday and Jadarian Price is on IR; Wilson had 20 carries in Week 5"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0036158",
+   "player": "J.K. Dobbins",
+   "team": "DEN",
+   "position": "RB",
+   "stat": "rush_att",
+   "line": 13.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    10.0,
+    17.0,
+    11.0,
+    18.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.512734375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01453125,
+   "p_news": 0.04,
+   "tier": "Coin flip",
+   "reasons": [
+    "Against: SEA have the 1st best run defense (EPA per rush allowed)",
+    "For: News: Lead back in Payton's run-first plan: 18 carries for 68 yards and a TD in Week 5 (Harvey had 3)"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0037545",
+   "player": "Rashid Shaheed",
+   "team": "SEA",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 22.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    35.0,
+    14.0,
+    20.0,
+    23.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.512578125,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.02515625,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+    "For: DEN have the 5th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0038797",
+   "player": "Emanuel Wilson",
+   "team": "SEA",
+   "position": "RB",
+   "stat": "rec_yds",
+   "line": 9.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    0.0,
+    0.0,
+    39.0,
+    11.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.507109375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01421875,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: DEN allow the 5th most receiving yds to RBs (40 a game)",
+    "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): more quick checkdowns",
+    "Against: DEN have the 5th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0039299",
+   "player": "George Holani",
+   "team": "SEA",
+   "position": "RB",
+   "stat": "rec_yds",
+   "line": 9.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    2.0,
+    48.0,
+    2.0,
+    24.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.507109375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01421875,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: DEN allow the 5th most receiving yds to RBs (40 a game)",
+    "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): more quick checkdowns",
+    "Against: DEN have the 5th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0039299",
+   "player": "George Holani",
+   "team": "SEA",
+   "position": "RB",
+   "stat": "rush_rec_yds",
+   "line": 26.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    15.0,
+    58.0,
+    20.0,
+    31.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.507109375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01421875,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: DEN allow the 5th most receiving yds to RBs (40 a game)",
+    "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): more quick checkdowns",
+    "Against: DEN have the 5th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0038797",
+   "player": "Emanuel Wilson",
+   "team": "SEA",
+   "position": "RB",
+   "stat": "receptions",
+   "line": 1.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    0.0,
+    0.0,
+    3.0,
+    2.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.507109375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01421875,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: DEN allow the 5th most receiving yds to RBs (40 a game)",
+    "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): more quick checkdowns",
+    "Against: DEN have the 5th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0036158",
+   "player": "J.K. Dobbins",
+   "team": "DEN",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 47.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    36.0,
+    49.0,
+    40.0,
+    68.0
+   ],
+   "recent": 0.5,
+   "market": 0.4881495493,
+   "market_src": "no-vig betmgm",
+   "p_model": 0.5068091497,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01453125,
+   "p_news": 0.04,
+   "tier": "Coin flip",
+   "reasons": [
+    "Against: SEA have the 1st best run defense (EPA per rush allowed)",
+    "For: News: Lead back in Payton's run-first plan: 18 carries for 68 yards and a TD in Week 5 (Harvey had 3)"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0039793",
+   "player": "AJ Barner",
+   "team": "SEA",
+   "position": "TE",
+   "stat": "rec_yds",
+   "line": 19.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    8.0,
+    69.0,
+    12.0,
+    20.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.505859375,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01171875,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): more quick checkdowns",
+    "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+    "For: DEN allow the 8th most receiving yds to TEs (63 a game)"
+   ]
+  },
+  {
+   "game_id": "2026_06_SEA_DEN",
+   "player_id": "00-0038797",
+   "player": "Emanuel Wilson",
+   "team": "SEA",
+   "position": "RB",
+   "stat": "anytime_td",
+   "line": 0.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    0.0,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.494140625,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01171875,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "Against: DEN allow touchdowns on 49% of red-zone trips (the 4th fewest)"
+   ]
+  }
+ ],
+ "lineups": {
+  "3": [
+   {
+    "n": 3,
+    "entry": "A",
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Flex",
+    "game": "SEA at DEN",
+    "p_all": 0.21347751122291003,
+    "p_independent": 0.21347751122291003,
+    "power_ev": 1.06738755611455,
+    "flex_ev": 1.0201630270077153,
+    "best_ev": 1.0201630270077153,
+    "min_power_mult": 4.684334168369683,
+    "legs": [
+     {
+      "player": "Marvin Mims Jr.",
+      "player_id": "00-0038976",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.618515625,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "High \u00b7 Less in 3 of last 3 (0, 10, 6)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: With Pat Bryant on IR, Troy Franklin (not Mims) took the WR3 snaps; Mims played 27% of snaps in Week 4"
+      ]
+     },
+     {
+      "player": "Bo Nix",
+      "player_id": "00-0039732",
+      "team": "DEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6076736111111112,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "High \u00b7 Less in 4 of last 4 (6, 7, 10, 10)",
+      "reasons": []
+     },
+     {
+      "player": "Jaxon Smith-Njigba",
+      "player_id": "00-0038543",
+      "team": "SEA",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 89.5,
+      "p_model": 0.5679774305555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Medium \u00b7 More in 3 of last 4 (155, 128, 76, 102)",
+      "reasons": [
+       "Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+       "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+       "For: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation and leads the NFL in receiving yards; books list him at 91.5-93.5, above this line"
+      ]
+     }
+    ]
+   }
+  ],
+  "4": [
+   {
+    "n": 4,
+    "entry": "B",
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Power",
+    "game": "SEA at DEN",
+    "p_all": 0.12461935027976977,
+    "p_independent": 0.12461935027976977,
+    "power_ev": 1.2461935027976976,
+    "flex_ev": 1.1345465741752834,
+    "best_ev": 1.2461935027976976,
+    "min_power_mult": 8.024435994530588,
+    "legs": [
+     {
+      "player": "Marvin Mims Jr.",
+      "player_id": "00-0038976",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.618515625,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "High \u00b7 Less in 3 of last 3 (0, 10, 6)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: With Pat Bryant on IR, Troy Franklin (not Mims) took the WR3 snaps; Mims played 27% of snaps in Week 4"
+      ]
+     },
+     {
+      "player": "Bo Nix",
+      "player_id": "00-0039732",
+      "team": "DEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6076736111111112,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "High \u00b7 Less in 4 of last 4 (6, 7, 10, 10)",
+      "reasons": []
+     },
+     {
+      "player": "Courtland Sutton",
+      "player_id": "00-0034348",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 31.5,
+      "p_model": 0.5837586805555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Med-High \u00b7 Less in 3 of last 4 (25, 46, 4, 18)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: Played 81% of snaps but saw only 3 targets (2 for 18 and a TD) as Denver's passing game shrank"
+      ]
+     },
+     {
+      "player": "Jaxon Smith-Njigba",
+      "player_id": "00-0038543",
+      "team": "SEA",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 89.5,
+      "p_model": 0.5679774305555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Medium \u00b7 More in 3 of last 4 (155, 128, 76, 102)",
+      "reasons": [
+       "Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+       "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+       "For: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation and leads the NFL in receiving yards; books list him at 91.5-93.5, above this line"
+      ]
+     }
+    ]
+   }
+  ],
+  "5": [
+   {
+    "n": 5,
+    "entry": null,
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Power",
+    "game": "SEA at DEN",
+    "p_all": 0.0723192484744223,
+    "p_independent": 0.0723192484744223,
+    "power_ev": 1.4463849694884459,
+    "flex_ev": 1.361795475184597,
+    "best_ev": 1.4463849694884459,
+    "min_power_mult": 13.827577319939625,
+    "legs": [
+     {
+      "player": "Marvin Mims Jr.",
+      "player_id": "00-0038976",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.618515625,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "High \u00b7 Less in 3 of last 3 (0, 10, 6)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: With Pat Bryant on IR, Troy Franklin (not Mims) took the WR3 snaps; Mims played 27% of snaps in Week 4"
+      ]
+     },
+     {
+      "player": "Bo Nix",
+      "player_id": "00-0039732",
+      "team": "DEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6076736111111112,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "High \u00b7 Less in 4 of last 4 (6, 7, 10, 10)",
+      "reasons": []
+     },
+     {
+      "player": "Courtland Sutton",
+      "player_id": "00-0034348",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 31.5,
+      "p_model": 0.5837586805555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Med-High \u00b7 Less in 3 of last 4 (25, 46, 4, 18)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: Played 81% of snaps but saw only 3 targets (2 for 18 and a TD) as Denver's passing game shrank"
+      ]
+     },
+     {
+      "player": "Jaylen Waddle",
+      "player_id": "00-0036613",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 49.5,
+      "p_model": 0.5803211805555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Med-High \u00b7 Less in 3 of last 4 (138, 10, 35, 19)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: 2 catches on 5 targets for 19 yards in Week 5, 2 or fewer catches in 3 of 5 games; Denver now leans on the run. The walking-boot report was from Week 3 and he is healthy"
+      ]
+     },
+     {
+      "player": "Jaxon Smith-Njigba",
+      "player_id": "00-0038543",
+      "team": "SEA",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 89.5,
+      "p_model": 0.5679774305555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Medium \u00b7 More in 3 of last 4 (155, 128, 76, 102)",
+      "reasons": [
+       "Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+       "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+       "For: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation and leads the NFL in receiving yards; books list him at 91.5-93.5, above this line"
+      ]
+     }
+    ]
+   }
+  ],
+  "6": [
+   {
+    "n": 6,
+    "entry": null,
+    "recommended": true,
+    "basis": "Guesser method",
+    "play_as": "Power",
+    "game": "SEA at DEN",
+    "p_all": 0.04096005714269997,
+    "p_independent": 0.04096005714269997,
+    "power_ev": 1.536002142851249,
+    "flex_ev": 1.4918024111264363,
+    "best_ev": 1.536002142851249,
+    "min_power_mult": 24.414028440344183,
+    "legs": [
+     {
+      "player": "Marvin Mims Jr.",
+      "player_id": "00-0038976",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.618515625,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "High \u00b7 Less in 3 of last 3 (0, 10, 6)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: With Pat Bryant on IR, Troy Franklin (not Mims) took the WR3 snaps; Mims played 27% of snaps in Week 4"
+      ]
+     },
+     {
+      "player": "Bo Nix",
+      "player_id": "00-0039732",
+      "team": "DEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6076736111111112,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "High \u00b7 Less in 4 of last 4 (6, 7, 10, 10)",
+      "reasons": []
+     },
+     {
+      "player": "Courtland Sutton",
+      "player_id": "00-0034348",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 31.5,
+      "p_model": 0.5837586805555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Med-High \u00b7 Less in 3 of last 4 (25, 46, 4, 18)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: Played 81% of snaps but saw only 3 targets (2 for 18 and a TD) as Denver's passing game shrank"
+      ]
+     },
+     {
+      "player": "Jaylen Waddle",
+      "player_id": "00-0036613",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 49.5,
+      "p_model": 0.5803211805555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Med-High \u00b7 Less in 3 of last 4 (138, 10, 35, 19)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: 2 catches on 5 targets for 19 yards in Week 5, 2 or fewer catches in 3 of 5 games; Denver now leans on the run. The walking-boot report was from Week 3 and he is healthy"
+      ]
+     },
+     {
+      "player": "Jaxon Smith-Njigba",
+      "player_id": "00-0038543",
+      "team": "SEA",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 89.5,
+      "p_model": 0.5679774305555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Medium \u00b7 More in 3 of last 4 (155, 128, 76, 102)",
+      "reasons": [
+       "Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+       "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+       "For: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation and leads the NFL in receiving yards; books list him at 91.5-93.5, above this line"
+      ]
+     },
+     {
+      "player": "Sam Darnold",
+      "player_id": "00-0034869",
+      "team": "SEA",
+      "stat": "rush_yds",
+      "side": "over",
+      "line": 4.5,
+      "p_model": 0.5663783571698291,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Medium \u00b7 More in 3 of last 4 (0, 5, 6, 5)",
+      "reasons": [
+       "For: DEN pressure QBs on 24% of dropbacks (the 10th most); SEA's line allows pressure on 28% (the 4th most): more scrambles"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "plan": {
+  "budget": 20,
+  "entries": [
+   {
+    "n": 3,
+    "play_as": "Flex",
+    "stake": 11,
+    "game": "SEA at DEN",
+    "basis": "Guesser method",
+    "p_all": 0.21347751122291003,
+    "p_paid": 0.6453484126278441,
+    "best_ev": 1.0201630270077153,
+    "recommended": true,
+    "min_power_mult": 4.684334168369683,
+    "legs": [
+     {
+      "player": "Marvin Mims Jr.",
+      "player_id": "00-0038976",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.618515625,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "High \u00b7 Less in 3 of last 3 (0, 10, 6)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: With Pat Bryant on IR, Troy Franklin (not Mims) took the WR3 snaps; Mims played 27% of snaps in Week 4"
+      ]
+     },
+     {
+      "player": "Bo Nix",
+      "player_id": "00-0039732",
+      "team": "DEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6076736111111112,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "High \u00b7 Less in 4 of last 4 (6, 7, 10, 10)",
+      "reasons": []
+     },
+     {
+      "player": "Jaxon Smith-Njigba",
+      "player_id": "00-0038543",
+      "team": "SEA",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 89.5,
+      "p_model": 0.5679774305555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Medium \u00b7 More in 3 of last 4 (155, 128, 76, 102)",
+      "reasons": [
+       "Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+       "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+       "For: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation and leads the NFL in receiving yards; books list him at 91.5-93.5, above this line"
+      ]
+     }
+    ],
+    "entry": "A"
+   },
+   {
+    "n": 5,
+    "play_as": "Flex",
+    "stake": 9,
+    "game": "SEA at DEN",
+    "basis": "Guesser method",
+    "p_all": 0.0723192484744223,
+    "p_paid": 0.6681458774911673,
+    "best_ev": 1.3617954751845973,
+    "recommended": true,
+    "min_power_mult": 13.827577319939625,
+    "legs": [
+     {
+      "player": "Marvin Mims Jr.",
+      "player_id": "00-0038976",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.618515625,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "High \u00b7 Less in 3 of last 3 (0, 10, 6)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: With Pat Bryant on IR, Troy Franklin (not Mims) took the WR3 snaps; Mims played 27% of snaps in Week 4"
+      ]
+     },
+     {
+      "player": "Bo Nix",
+      "player_id": "00-0039732",
+      "team": "DEN",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 13.5,
+      "p_model": 0.6076736111111112,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "High \u00b7 Less in 4 of last 4 (6, 7, 10, 10)",
+      "reasons": []
+     },
+     {
+      "player": "Courtland Sutton",
+      "player_id": "00-0034348",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 31.5,
+      "p_model": 0.5837586805555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Med-High \u00b7 Less in 3 of last 4 (25, 46, 4, 18)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: Played 81% of snaps but saw only 3 targets (2 for 18 and a TD) as Denver's passing game shrank"
+      ]
+     },
+     {
+      "player": "Jaylen Waddle",
+      "player_id": "00-0036613",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 49.5,
+      "p_model": 0.5803211805555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Med-High \u00b7 Less in 3 of last 4 (138, 10, 35, 19)",
+      "reasons": [
+       "For: SEA allow the 3rd fewest receiving yds to WRs (109 a game)",
+       "For: SEA have the 3rd best pass defense (EPA per dropback allowed)",
+       "For: News: 2 catches on 5 targets for 19 yards in Week 5, 2 or fewer catches in 3 of 5 games; Denver now leans on the run. The walking-boot report was from Week 3 and he is healthy"
+      ]
+     },
+     {
+      "player": "Jaxon Smith-Njigba",
+      "player_id": "00-0038543",
+      "team": "SEA",
+      "stat": "rec_yds",
+      "side": "over",
+      "line": 89.5,
+      "p_model": 0.5679774305555556,
+      "game_id": "2026_06_SEA_DEN",
+      "note": "Medium \u00b7 More in 3 of last 4 (155, 128, 76, 102)",
+      "reasons": [
+       "Against: DEN allow the 5th fewest receiving yds to WRs (118 a game)",
+       "Against: DEN have the 5th best pass defense (EPA per dropback allowed)",
+       "For: News: Denver ruled out CB Pat Surtain II and S Talanoa Hufanga on Wednesday (Riley Moss questionable); he was upgraded to full practice with no designation and leads the NFL in receiving yards; books list him at 91.5-93.5, above this line"
+      ]
+     }
+    ],
+    "entry": "B"
+   }
+  ],
+  "expected_back": 23.477952573746244,
+  "p_profit": 0.35978134832809144,
+  "p_lose_all": 0.2564116029241033,
+  "p_any_back": 0.7435883970758969,
+  "rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)"
+ }
+}

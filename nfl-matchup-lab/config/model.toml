@@ -1,0 +1,38 @@
+# Model settings. Values marked "tuned" are set by the Phase 7 loop on 2023-2024 only.
+
+[seasons]
+first = 2018                  # earliest season ingested and used for fitting
+validate = [2023, 2024]
+test = 2025                   # procedural holdout: scored once, by backtest --final-2025 only
+live = 2026
+
+# Hours after kickoff before a game's data counts as available (game length 4h + publication lag).
+[lags_hours]
+pbp = 16
+snaps = 28
+stats = 16
+pfr = 76
+ftn = 76
+depth = 76
+
+[neutral]
+wp_low = 0.10
+wp_high = 0.90
+pace_min_half_seconds = 120
+pace_max_gap_seconds = 60    # longer gaps are timeouts/reviews/injuries and are dropped
+
+[explosive]
+pass_yards = 20
+rush_yards = 10
+
+[garbage]
+quarter = 4
+score_diff = 17
+
+[sims]
+n_live = 20000
+n_tune = 2000
+base_seed = 20261012
+
+[weather]
+enabled = false               # needs api.open-meteo.com and historical-forecast-api.open-meteo.com allowed

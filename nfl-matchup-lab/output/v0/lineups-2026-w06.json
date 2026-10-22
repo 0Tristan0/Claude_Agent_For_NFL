@@ -1,0 +1,388 @@
+{
+ "season": 2026,
+ "week": 6,
+ "built_at": "2026-10-13 15:18:03.472974+00:00",
+ "games": {
+  "2026_06_SEA_DEN": {
+   "slug": "2026-w06-sea-den",
+   "pp_lines": 342
+  },
+  "2026_06_HOU_JAX": {
+   "slug": "2026-w06-hou-jax",
+   "pp_lines": 302
+  },
+  "2026_06_BAL_CLE": {
+   "slug": "2026-w06-bal-cle",
+   "pp_lines": 107
+  },
+  "2026_06_CAR_PHI": {
+   "slug": "2026-w06-car-phi",
+   "pp_lines": 144
+  },
+  "2026_06_CHI_ATL": {
+   "slug": "2026-w06-chi-atl",
+   "pp_lines": 92
+  },
+  "2026_06_NO_NYG": {
+   "slug": "2026-w06-no-nyg",
+   "pp_lines": 188
+  },
+  "2026_06_NYJ_NE": {
+   "slug": "2026-w06-nyj-ne",
+   "pp_lines": 76
+  },
+  "2026_06_PIT_TB": {
+   "slug": "2026-w06-pit-tb",
+   "pp_lines": 29
+  },
+  "2026_06_TEN_IND": {
+   "slug": "2026-w06-ten-ind",
+   "pp_lines": 37
+  },
+  "2026_06_ARI_LA": {
+   "slug": "2026-w06-ari-lar",
+   "pp_lines": 3
+  },
+  "2026_06_BUF_LV": {
+   "slug": "2026-w06-buf-lv",
+   "pp_lines": 1
+  },
+  "2026_06_LAC_KC": {
+   "slug": "2026-w06-lac-kc",
+   "pp_lines": 86
+  },
+  "2026_06_DAL_GB": {
+   "slug": "2026-w06-dal-gb",
+   "pp_lines": 191
+  },
+  "2026_06_WAS_SF": {
+   "slug": "2026-w06-was-sf",
+   "pp_lines": 167
+  }
+ },
+ "best": {
+  "3": [
+   {
+    "n": 3,
+    "recommended": true,
+    "basis": "sim + form + matchups",
+    "play_as": "Power",
+    "p_all": 0.24426159131846173,
+    "p_independent": 0.16441423705552752,
+    "power_ev": 1.2213079565923086,
+    "flex_ev": 0.9291729651863885,
+    "best_ev": 1.2213079565923086,
+    "min_power_mult": 4.093971527010265,
+    "legs": [
+     {
+      "player": "Jaylen Waddle",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 49.5,
+      "p_model": 0.5885664697788064,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0036613",
+      "note": "sim 57%, recent form 56% (Less in 3 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: SEA allow 109 receiving yds a game to WRs (30th most)",
+       "For: SEA's pass defense ranks 3rd of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Sam Darnold",
+      "team": "SEA",
+      "stat": "pass_yds",
+      "side": "under",
+      "line": 218.5,
+      "p_model": 0.5475810985236491,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0034869",
+      "note": "sim 49%, recent form 56% (Less in 3 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: DEN pressure QBs on 25% of dropbacks (11th); SEA's line allows 26% (3rd most): a hard night to throw",
+       "For: DEN's pass defense ranks 5th of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Jaxon Smith-Njigba",
+      "team": "SEA",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 89.5,
+      "p_model": 0.5101472116042564,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0038543",
+      "note": "sim 52%, recent form 44% (Less in 1 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: DEN allow 118 receiving yds a game to WRs (28th most)",
+       "For: DEN's pass defense ranks 5th of 32 by EPA per dropback allowed"
+      ]
+     }
+    ],
+    "game": "SEA at DEN"
+   }
+  ],
+  "4": [
+   {
+    "n": 4,
+    "recommended": true,
+    "basis": "sim + form + matchups",
+    "play_as": "Power",
+    "p_all": 0.15144224525301345,
+    "p_independent": 0.08786505473845786,
+    "power_ev": 1.5144224525301344,
+    "flex_ev": 1.1593251583795894,
+    "best_ev": 1.5144224525301344,
+    "min_power_mult": 6.603177325648516,
+    "legs": [
+     {
+      "player": "Jaylen Waddle",
+      "team": "DEN",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 49.5,
+      "p_model": 0.5885664697788064,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0036613",
+      "note": "sim 57%, recent form 56% (Less in 3 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: SEA allow 109 receiving yds a game to WRs (30th most)",
+       "For: SEA's pass defense ranks 3rd of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Sam Darnold",
+      "team": "SEA",
+      "stat": "pass_yds",
+      "side": "under",
+      "line": 218.5,
+      "p_model": 0.5475810985236491,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0034869",
+      "note": "sim 49%, recent form 56% (Less in 3 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: DEN pressure QBs on 25% of dropbacks (11th); SEA's line allows 26% (3rd most): a hard night to throw",
+       "For: DEN's pass defense ranks 5th of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Rashid Shaheed",
+      "team": "SEA",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 22.5,
+      "p_model": 0.5344127013738557,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0037545",
+      "note": "sim 51%, recent form 50% (Less in 2 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: DEN allow 118 receiving yds a game to WRs (28th most)",
+       "For: DEN's pass defense ranks 5th of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Jaxon Smith-Njigba",
+      "team": "SEA",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 89.5,
+      "p_model": 0.5101472116042564,
+      "game_id": "2026_06_SEA_DEN",
+      "player_id": "00-0038543",
+      "note": "sim 52%, recent form 44% (Less in 1 of last 4), matchup +3 pts",
+      "reasons": [
+       "For: DEN allow 118 receiving yds a game to WRs (28th most)",
+       "For: DEN's pass defense ranks 5th of 32 by EPA per dropback allowed"
+      ]
+     }
+    ],
+    "game": "SEA at DEN"
+   }
+  ],
+  "5": [
+   {
+    "n": 5,
+    "recommended": true,
+    "basis": "sim + form + matchups",
+    "play_as": "Power",
+    "p_all": 0.08806981366226878,
+    "p_independent": 0.04598839529864379,
+    "power_ev": 1.7613962732453756,
+    "flex_ev": 1.3981645683550183,
+    "best_ev": 1.7613962732453756,
+    "min_power_mult": 11.354628316063124,
+    "legs": [
+     {
+      "player": "Jordan Love",
+      "team": "GB",
+      "stat": "pass_att",
+      "side": "under",
+      "line": 35.5,
+      "p_model": 0.5680927716821459,
+      "game_id": "2026_06_DAL_GB",
+      "player_id": "00-0036264",
+      "note": "sim 58%, recent form 56% (Less in 3 of last 4), matchup even"
+     },
+     {
+      "player": "Jake Ferguson",
+      "team": "DAL",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 29.5,
+      "p_model": 0.5674071369531286,
+      "game_id": "2026_06_DAL_GB",
+      "player_id": "00-0038041",
+      "note": "sim 56%, recent form 56% (Less in 3 of last 4), matchup +1 pts",
+      "reasons": [
+       "For: GB allow 32 receiving yds a game to TEs (29th most)",
+       "Against: GB pressure QBs on 25% of dropbacks (8th); DAL's line allows 24% (11th most): more quick checkdowns"
+      ]
+     },
+     {
+      "player": "Dak Prescott",
+      "team": "DAL",
+      "stat": "pass_yds",
+      "side": "under",
+      "line": 281.5,
+      "p_model": 0.5314842892931794,
+      "game_id": "2026_06_DAL_GB",
+      "player_id": "00-0033077",
+      "note": "sim 54%, recent form 50% (Less in 2 of last 4), matchup +1 pts",
+      "reasons": [
+       "For: GB pressure QBs on 25% of dropbacks (8th); DAL's line allows 24% (11th most): a hard night to throw"
+      ]
+     },
+     {
+      "player": "Javonte Williams",
+      "team": "DAL",
+      "stat": "rush_yds",
+      "side": "under",
+      "line": 67.5,
+      "p_model": 0.522701727548238,
+      "game_id": "2026_06_DAL_GB",
+      "player_id": "00-0036997",
+      "note": "sim 50%, recent form 56% (Less in 3 of last 4), matchup -1 pts"
+     },
+     {
+      "player": "George Pickens",
+      "team": "DAL",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 68.5,
+      "p_model": 0.5135583693180372,
+      "game_id": "2026_06_DAL_GB",
+      "player_id": "00-0037247",
+      "note": "sim 55%, recent form 44% (Less in 1 of last 4), matchup +2 pts",
+      "reasons": [
+       "For: GB pressure QBs on 25% of dropbacks (8th); DAL's line allows 24% (11th most): less time for deep throws (his targets travel 11 yds)",
+       "For: GB allow 132 receiving yds a game to WRs (22nd most)"
+      ]
+     }
+    ],
+    "game": "DAL at GB"
+   }
+  ],
+  "6": [
+   {
+    "n": 6,
+    "recommended": true,
+    "basis": "sim + form + matchups",
+    "play_as": "Power",
+    "p_all": 0.05679819050733195,
+    "p_independent": 0.021803104190453112,
+    "power_ev": 2.129932144024948,
+    "flex_ev": 1.8170966854228336,
+    "best_ev": 2.129932144024948,
+    "min_power_mult": 17.606194688031692,
+    "legs": [
+     {
+      "player": "Dalton Schultz",
+      "team": "HOU",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 30.5,
+      "p_model": 0.5649639564869374,
+      "game_id": "2026_06_HOU_JAX",
+      "player_id": "00-0034383",
+      "note": "sim 53%, recent form 56% (Less in 3 of last 4), matchup +2 pts",
+      "reasons": [
+       "For: JAX allow 34 receiving yds a game to TEs (28th most)",
+       "For: JAX's pass defense ranks 7th of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "C.J. Stroud",
+      "team": "HOU",
+      "stat": "pass_att",
+      "side": "under",
+      "line": 35.5,
+      "p_model": 0.5356755519093422,
+      "game_id": "2026_06_HOU_JAX",
+      "player_id": "00-0039163",
+      "note": "sim 52%, recent form 56% (Less in 3 of last 4), matchup even"
+     },
+     {
+      "player": "Bhayshul Tuten",
+      "team": "JAX",
+      "stat": "rush_rec_yds",
+      "side": "under",
+      "line": 75.5,
+      "p_model": 0.5291663490221054,
+      "game_id": "2026_06_HOU_JAX",
+      "player_id": "00-0040719",
+      "note": "sim 57%, recent form 44% (Less in 1 of last 4), matchup +2 pts",
+      "reasons": [
+       "For: HOU allow 17 receiving yds a game to RBs (30th most)",
+       "For: HOU's pass defense ranks 10th of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Brenton Strange",
+      "team": "JAX",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 37.5,
+      "p_model": 0.5174330263020237,
+      "game_id": "2026_06_HOU_JAX",
+      "player_id": "00-0038935",
+      "note": "sim 51%, recent form 50% (Less in 2 of last 4), matchup +1 pts",
+      "reasons": [
+       "For: HOU's pass defense ranks 10th of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Trevor Lawrence",
+      "team": "JAX",
+      "stat": "pass_rush_yds",
+      "side": "under",
+      "line": 237.5,
+      "p_model": 0.5161491535935697,
+      "game_id": "2026_06_HOU_JAX",
+      "player_id": "00-0036971",
+      "note": "sim 46%, recent form 56% (Less in 3 of last 4), matchup +1 pts",
+      "reasons": [
+       "For: HOU's pass defense ranks 10th of 32 by EPA per dropback allowed"
+      ]
+     },
+     {
+      "player": "Parker Washington",
+      "team": "JAX",
+      "stat": "rec_yds",
+      "side": "under",
+      "line": 61.5,
+      "p_model": 0.5097698061994537,
+      "game_id": "2026_06_HOU_JAX",
+      "player_id": "00-0038606",
+      "note": "sim 54%, recent form 50% (Less in 2 of last 4), matchup -1 pts",
+      "reasons": [
+       "Against: HOU allow 191 receiving yds a game to WRs (3rd most)",
+       "For: HOU's pass defense ranks 10th of 32 by EPA per dropback allowed"
+      ]
+     }
+    ],
+    "game": "HOU at JAX"
+   }
+  ]
+ }
+}

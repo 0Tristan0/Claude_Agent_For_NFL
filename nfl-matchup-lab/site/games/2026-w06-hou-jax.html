@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>HOU at JAX, Week 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
+<style id="lab-theme">
+/* Layout: a quiet scoreboard. Near-black and neutral grays, white type, hairlines instead of boxes;
+   team logos are the only color on the page. One family (Archivo), narrowed for numbers and team codes. */
+:root{
+  color-scheme:dark;
+  --bg:#0A0A0B; --surface:#111113; --raise:#18181B; --line:#222226; --line-2:#2F2F34;
+  --text:#EDEDEF; --muted:#8C8C93; --faint:#5F5F66;
+  --pos:#86C29C; --neg:#DE8A80; --warn:#D2B87C;
+  --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  /* token names the older report pages use */
+  --fg:var(--text); --track:#26262B; --display:var(--sans); --body:var(--sans);
+  --t1:#8FC9A3; --t1bg:#16221A; --t2:#B8C493; --t2bg:#1D2118; --t3:#D3BA7E; --t3bg:#25201A; --t4:#DE8A80; --t4bg:#291A18;
+  --buf:#93A6C9; --lar:#CDB97F; --lar-strong:#CDB97F;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-variant-numeric:tabular-nums}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:0 72px;display:grid;gap:56px}
+@media (min-width:760px){.wrap{padding-inline:32px}}
+h1,h2,h3{margin:0;line-height:1.1;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,5vw,2.75rem);font-weight:750;font-stretch:88%}
+h2{font-size:1.15rem;font-weight:650}
+h3{font-size:1rem;font-weight:650}
+p{margin:0}
+.sub{color:var(--muted);margin-top:6px;max-width:68ch;font-size:.93rem}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+section{display:grid;gap:16px;min-width:0}
+a{color:var(--text);text-underline-offset:3px;text-decoration-color:var(--line-2)}
+a:hover{text-decoration-color:var(--text)}
+code{font-size:.88em;color:var(--text)}
+:focus-visible{outline:2px solid var(--text);outline-offset:2px;border-radius:2px}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+
+/* top navigation */
+.site{display:flex;justify-content:space-between;align-items:center;gap:8px 20px;flex-wrap:wrap;min-height:60px;border-bottom:1px solid var(--line)}
+.brand{font-weight:800;font-stretch:80%;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:var(--text)}
+.tabs{display:flex;gap:22px}
+.tabs a{font-size:.88rem;font-weight:500;color:var(--muted);text-decoration:none;padding-block:19px;border-bottom:1px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--text)}
+.tabs a[aria-current="page"]{color:var(--text);border-bottom-color:var(--text)}
+.back{font-size:.85rem;color:var(--muted);text-decoration:none;justify-self:start}
+.back:hover{color:var(--text)}
+
+/* section tabs inside a game page (built by TAB_JS from section.pane; without script every section shows) */
+.subtabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;
+  background:var(--bg);border-bottom:1px solid var(--line);margin-bottom:-28px}
+.subtabs::-webkit-scrollbar{display:none}
+.subtabs button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--muted);
+  font:inherit;font-size:.88rem;font-weight:550;padding:12px 12px 11px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;cursor:pointer}
+.subtabs button:first-child{padding-left:0}
+.subtabs button:hover{color:var(--text)}
+.subtabs button[aria-selected="true"]{color:var(--text);border-bottom-color:var(--text)}
+
+/* logos */
+.lg{display:inline-block;width:var(--s,24px);height:var(--s,24px);border-radius:calc(var(--s,24px) * .22);vertical-align:middle;flex:none;object-fit:cover;background:var(--raise)}
+
+/* game header */
+.head{display:grid;gap:22px}
+.head .meta{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--muted);font-size:.85rem}
+.head .meta .v0tag{color:var(--text)}
+.match{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.ms{display:flex;align-items:center;gap:14px;min-width:0}
+.ms.home{flex-direction:row-reverse;text-align:right}
+.ms .who{display:grid;gap:2px;min-width:0}
+.ms .code{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;font-stretch:80%;line-height:1;letter-spacing:.01em}
+.ms .nm{color:var(--muted);font-size:.9rem}
+.vsat{color:var(--faint);font-size:.9rem}
+.wp{display:grid;gap:6px}
+.wpbar{display:flex;height:4px;border-radius:2px;overflow:hidden;gap:2px}
+.wpbar span{display:block;height:100%}
+.wpbar .a{background:var(--faint)} .wpbar .h{background:var(--text)}
+.wp .lbl{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:14px 24px;border-top:1px solid var(--line);padding-top:18px;margin:0}
+.facts div{display:grid;gap:2px;min-width:0}
+.facts dt{font-size:.72rem;color:var(--muted)}
+.facts dd{margin:0;font-weight:550}
+.facts .wide{grid-column:1/-1}
+@media (max-width:560px){.match{grid-template-columns:1fr}.ms.home{flex-direction:row;text-align:left}.vsat{display:none}}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border-top:1px solid var(--line-2)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-variant-numeric:tabular-nums}
+caption{text-align:left;padding:0 0 12px;font-weight:650;font-size:1rem;caption-side:top}
+caption .lg{margin-right:10px;vertical-align:-6px}
+thead th{font-size:.72rem;font-weight:500;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody th{text-align:left;font-weight:550;padding:9px 12px;vertical-align:top}
+tbody td{padding:9px 12px;vertical-align:middle}
+tbody tr+tr>*{border-top:1px solid var(--line)}
+tbody tr:hover>*{background:var(--surface)}
+th:first-child,td:first-child{padding-left:0}
+.vs-lbl{display:block;font-weight:400;font-size:.76rem;color:var(--muted)}
+.pt td,.pt th{white-space:nowrap}
+.pt .num{text-align:right}
+.pt thead th:not(:first-child){text-align:right}
+.pt thead th.l,.pt td.l{text-align:left}
+.rng{color:var(--faint);font-size:.78rem;margin-left:6px}
+.jn{display:inline-block;width:2.3em;color:var(--faint);font-weight:600;font-stretch:80%}
+.pos{color:var(--muted);font-size:.78rem;margin-left:8px;font-weight:400}
+.q-yes{color:var(--pos);font-weight:650}
+.q-no{color:var(--muted)}
+.small{font-size:.85rem;color:var(--muted)}
+
+/* report pieces shared with the older Bills-Rams page */
+.board{display:grid;gap:18px}
+.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+.team{display:grid;gap:4px;justify-items:start;min-width:0}
+.team.home{justify-items:end;text-align:right}
+.team .tm{display:flex;align-items:center;gap:12px}
+.team.home .tm{flex-direction:row-reverse}
+.team .ab{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;font-stretch:80%;line-height:1}
+.team .nm{font-weight:550}
+.team .rec{color:var(--muted);font-size:.85rem}
+.at{color:var(--faint)}
+.board .facts{display:flex;flex-wrap:wrap}
+.board .facts dl{display:contents}
+.side{white-space:nowrap}
+.side .v{display:inline-block;min-width:4.6em;font-weight:600}
+.pill{display:inline-block;min-width:3.2em;text-align:center;font-size:.74rem;font-weight:650;padding:1px 7px;border-radius:4px;margin-right:10px}
+.t1{color:var(--t1);background:var(--t1bg)} .t2{color:var(--t2);background:var(--t2bg)}
+.t3{color:var(--t3);background:var(--t3bg)} .t4{color:var(--t4);background:var(--t4bg)}
+.bar{display:inline-block;width:72px;height:4px;background:var(--track);border-radius:2px;vertical-align:middle;overflow:hidden}
+.fill{display:block;height:100%}
+.fill.buf{background:var(--buf)} .fill.lar{background:var(--lar)}
+.edge{display:inline-block;font-weight:650;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;border:1px solid currentColor}
+.edge.buf{color:var(--buf)} .edge.lar{color:var(--lar)} .edge.even{color:var(--muted)}
+.tchip{font-weight:750;font-stretch:80%}
+.tchip.buf{color:var(--buf)} .tchip.lar{color:var(--lar)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:.82rem;color:var(--muted);align-items:center}
+.legend .pill{margin-right:4px}
+.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px}
+.take{border-top:1px solid var(--line-2);padding-top:12px;min-width:0}
+.take b{display:block;font-weight:650}
+.take p{margin-top:6px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:10px;align-content:start;min-width:0}
+.card header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card h3{font-size:1.05rem}
+.card .pos{font-size:.74rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.line{font-weight:550;font-size:.92rem}
+.vsbox{display:grid;gap:2px;padding:10px 12px;background:var(--bg);border-radius:6px;font-size:.92rem}
+.vsbox .k{font-size:.7rem;color:var(--muted)}
+.verdict{font-weight:650;letter-spacing:.06em;text-transform:uppercase;font-size:.74rem}
+.verdict.big{color:var(--t1)} .verdict.mid{color:var(--t3)} .verdict.low{color:var(--t4)}
+
+/* lineups */
+.lus{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
+.lu{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:12px;align-content:start;min-width:0}
+.lu header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.lu h3{font-size:1.05rem}
+.lu .rec{font-size:.85rem;color:var(--muted)} .lu .rec b{color:var(--text)}
+.lu ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+.lu .pp{color:var(--muted);font-size:.84rem}
+.lustats{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin:0;border-top:1px solid var(--line);padding-top:12px}
+.lustats div{display:grid} .lustats dt{font-size:.72rem;color:var(--muted)} .lustats dd{margin:0;font-weight:650}
+.lul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.lul li{display:grid;grid-template-columns:18px 1fr auto;gap:10px;align-items:center}
+.lul b{font-weight:600}
+.lu.dim{opacity:.8}
+.lu .tag{font-size:.72rem;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:1px 9px;white-space:nowrap}
+.lu .tag.ok{color:var(--pos);border-color:color-mix(in srgb,var(--pos) 45%,transparent)}
+.res.hit{color:var(--pos)} .res.miss{color:var(--neg)}
+.vs-lbl.why{color:var(--text);opacity:.82}
+.retro{border:1px solid var(--line-2);border-radius:8px;padding:12px 14px;color:var(--muted);font-size:.9rem}
+.retro b{color:var(--text)}
+
+.notes{color:var(--faint);font-size:.82rem;display:grid;gap:8px;max-width:78ch;border-top:1px solid var(--line);padding-top:20px}
+.notes a{color:inherit}
+.notes ul{margin:0;padding-left:1.2em}
+@media (max-width:520px){.bar{width:44px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>.board2 td.why{white-space:normal;min-width:300px;max-width:520px;font-size:.84rem;color:var(--muted)}
+.board2 td.why span{display:block}
+.board2 td.pk2{white-space:nowrap}
+.tier{font-size:.78rem;font-weight:600}
+.tier.High{color:var(--pos)} .tier.Med-High{color:var(--t2)} .tier.Medium{color:var(--t3)}
+.tier.Lean,.tier.Coin{color:var(--muted)}
+.ut td,.ut th{white-space:nowrap}
+.adv{font-size:.78rem;color:var(--muted)}
+.adv.o{color:var(--pos)} .adv.d{color:var(--neg)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.how summary{cursor:pointer;color:var(--muted);font-size:.85rem}
+@media (max-width:560px){.match{grid-template-columns:1fr auto 1fr}.ms.home{flex-direction:row-reverse;text-align:right}
+  .vsat{display:block}.match .lg{--s:40px!important;width:40px;height:40px}.ms{gap:10px}}
+.how[open] summary{margin-bottom:6px}
+.news{margin:0;padding-left:18px;display:grid;gap:6px;font-size:.88rem}
+.news .src{color:var(--muted);font-size:.8rem}
+.board2 tr.inplay th,.board2 tr.inplay td{background:var(--surface)}
+.board2 tr.inplay th{box-shadow:inset 3px 0 0 var(--text)}
+.inp{color:var(--text);font-weight:600}.gl{display:grid;gap:16px}
+.side{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:750;letter-spacing:.04em;text-transform:uppercase;
+  border-radius:4px;padding:1px 7px;line-height:1.5;white-space:nowrap;vertical-align:1px}
+.side.more{background:color-mix(in srgb,var(--pos) 20%,transparent);color:var(--pos)}
+.side.less{background:color-mix(in srgb,var(--neg) 20%,transparent);color:var(--neg)}
+.play{border:1px solid color-mix(in srgb,var(--text) 35%,transparent);border-radius:10px;background:var(--surface);display:grid}
+.play>header{display:flex;justify-content:space-between;align-items:baseline;gap:6px 14px;flex-wrap:wrap;padding:14px 16px 10px;
+  border-bottom:1px solid var(--line)}
+.play h3{font-size:1.05rem;display:flex;align-items:center;gap:8px}
+.play h3 .star{color:var(--pos)}
+.play .stakes{font-size:.85rem;color:var(--muted)}
+.play .stakes b{color:var(--text)}
+.pl{list-style:none;margin:0;padding:4px 16px;display:grid}
+.pl>li{display:grid;grid-template-columns:22px 1fr auto;gap:2px 12px;align-items:start;padding:10px 0;border-bottom:1px solid var(--line)}
+.pl>li:last-child{border-bottom:0}
+.pl .lg{margin-top:3px}
+.pl .what{font-size:1rem;line-height:1.35}
+.pl .what b{font-weight:700}
+.pl .ln{font-weight:700}
+.pl .sub2{display:block;font-size:.8rem;color:var(--muted);margin-top:2px}
+.pl .why{display:block;font-size:.8rem;color:var(--muted)}
+.pl .in{display:inline-block;font-size:.7rem;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:0 7px;margin-left:6px;vertical-align:1px}
+.pl .pc{font-weight:750;font-size:1.05rem;text-align:right;line-height:1.2}
+.pl .pc small{display:block;font-weight:500;font-size:.72rem;color:var(--muted)}
+.pl .res{display:block;font-size:.8rem;font-weight:600}
+.pl .res.hit{color:var(--pos)} .pl .res.miss{color:var(--neg)}
+.play>footer{display:flex;flex-wrap:wrap;gap:6px 18px;padding:10px 16px 14px;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}
+.play>footer b{color:var(--text)}
+.play>footer .ok{color:var(--pos)} .play>footer .no{color:var(--neg)}
+.play .warn{margin:0;padding:0 16px 12px;font-size:.8rem;color:var(--muted)}
+.ents{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px}
+.ent{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;display:grid;gap:4px;align-content:start}
+.ent .eh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ent .eh b{font-size:.92rem}
+.ent .ek,.ent .ef{font-size:.78rem;color:var(--muted)}
+.ent .ef b{color:var(--text);font-weight:600}
+.ents-h{font-size:.78rem;color:var(--muted);margin:0}
+.slips{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px;padding:12px 16px 16px}
+.slp{border:1px solid var(--line-2);border-radius:8px;background:var(--bg);display:grid;align-content:start}
+.slp header{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:10px 12px 6px}
+.slp header b{font-size:.95rem}
+.slp header span{font-size:.85rem;color:var(--muted)}
+.slp header span b{color:var(--text)}
+.slp .amt{font-size:1.35rem;font-weight:750;font-stretch:88%;color:var(--text)}
+.sl{list-style:none;margin:0;padding:2px 12px 8px;display:grid;gap:6px}
+.sl li{display:grid;grid-template-columns:18px 1fr auto;gap:8px;align-items:start;font-size:.92rem;line-height:1.35}
+.sl .lg{margin-top:2px}
+.sl .ln{font-weight:700}
+.sl .pc{color:var(--muted);font-size:.82rem}
+.sl .res{display:block;font-size:.8rem;font-weight:600}
+.sl .res.hit{color:var(--pos)} .sl .res.miss{color:var(--neg)}
+.slp footer{padding:8px 12px 10px;border-top:1px solid var(--line);font-size:.78rem;color:var(--muted)}
+.slp footer .ok,.play .stakes .ok{color:var(--pos)} .slp footer .no,.play .stakes .no{color:var(--neg)}
+.whyh{font-size:.85rem;color:var(--muted);font-weight:600;margin:0 0 6px}
+.oth summary{cursor:pointer;color:var(--muted);font-size:.85rem}
+.oth[open] summary{margin-bottom:8px}
+.ent b{font-size:.9rem}</style>
+</head>
+<body>
+<main class="wrap">
+<nav class="site" aria-label="Site"><a class="brand" href="../index.html">Matchup Lab</a><div class="tabs"><a href="../index.html" aria-current="page">Home</a><a href="../lineups.html">Lineups</a><a href="../guesser.html">Guesser</a></div></nav>
+<header class="head"><a class="back" href="../index.html">&larr; All games</a>
+<div class="meta"><span>Week 6</span><span>Sun Oct 18, 9:30 AM ET</span></div>
+<div class="match"><div class="ms away"><img class="lg" src="../logos/HOU.png" alt="" width="64" height="64" style="--s:64px" loading="lazy"><div class="who"><span class="code">HOU</span></div></div>
+<span class="vsat">at</span><div class="ms home"><img class="lg" src="../logos/JAX.png" alt="" width="64" height="64" style="--s:64px" loading="lazy"><div class="who"><span class="code">JAX</span></div></div></div>
+<dl class="facts"><div class="wide"><dt>Line</dt><dd>JAX -2.5 · O/U 42.5 · implied HOU 20.0, JAX 22.5</dd></div>
+<div class="wide"><dt>Injuries</dt><dd>injury report week 6</dd></div></dl></header>
+
+<section class="pane" id="play" data-tab="The play" aria-labelledby="h-lu"><h2 id="h-lu" class="sr-only">The play</h2>
+<div class='gl'><article class='play'><header><h3><span class='star' aria-hidden='true'>&#9733;</span>The play: $20</h3><span class='stakes'><b class='no'>$0.00 back</b> on $20</span></header><div class='slips'><article class='slp'><header><span><b>Entry A</b> · 3-pick Flex</span><span class='amt'>$12</span></header><ol class='sl'><li><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>Bhayshul Tuten</b> <span class='side more'>&#9650; More</span> <span class='ln'>63.5</span> Rush Yards<span class='res miss'>&#10005; 39</span></span><span class='pc'>62%</span></li><li><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>Dalton Schultz</b> <span class='side less'>&#9660; Less</span> <span class='ln'>30.5</span> Receiving Yards<span class='res miss'>&#10005; 33</span></span><span class='pc'>57%</span></li><li><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>C.J. Stroud</b> <span class='side more'>&#9650; More</span> <span class='ln'>265.5</span> Pass+Rush Yds<span class='res hit'>&#10003; 317</span></span><span class='pc'>56%</span></li></ol><footer><b class='no'>Lost</b> · 1 of 3 hit</footer></article><article class='slp'><header><span><b>Entry B</b> · 5-pick Flex</span><span class='amt'>$6</span></header><ol class='sl'><li><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>Bhayshul Tuten</b> <span class='side more'>&#9650; More</span> <span class='ln'>63.5</span> Rush Yards<span class='res miss'>&#10005; 39</span></span><span class='pc'>62%</span></li><li><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>Dalton Schultz</b> <span class='side less'>&#9660; Less</span> <span class='ln'>30.5</span> Receiving Yards<span class='res miss'>&#10005; 33</span></span><span class='pc'>57%</span></li><li><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>C.J. Stroud</b> <span class='side more'>&#9650; More</span> <span class='ln'>265.5</span> Pass+Rush Yds<span class='res hit'>&#10003; 317</span></span><span class='pc'>56%</span></li><li><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>Kayshon Boutte</b> <span class='side more'>&#9650; More</span> <span class='ln'>30.5</span> Receiving Yards<span class='res miss'>&#10005; 16</span></span><span class='pc'>56%</span></li><li><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>Trevor Lawrence</b> <span class='side less'>&#9660; Less</span> <span class='ln'>237.5</span> Pass+Rush Yds<span class='res miss'>&#10005; 317</span></span><span class='pc'>56%</span></li></ol><footer><b class='no'>Lost</b> · 1 of 5 hit</footer></article><article class='slp'><header><span><b>Entry C</b> · 2-pick Power</span><span class='amt'>$2</span></header><ol class='sl'><li><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>Bhayshul Tuten</b> <span class='side more'>&#9650; More</span> <span class='ln'>63.5</span> Rush Yards<span class='res miss'>&#10005; 39</span></span><span class='pc'>62%</span></li><li><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span><b>Dalton Schultz</b> <span class='side less'>&#9660; Less</span> <span class='ln'>30.5</span> Receiving Yards<span class='res miss'>&#10005; 33</span></span><span class='pc'>57%</span></li></ol><footer><b class='no'>Lost</b> · 0 of 2 hit</footer></article></div></article><div><h4 class='whyh'>Why these picks</h4><ol class='pl'><li><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span class='what'><b>Bhayshul Tuten</b> <span class='side more'>&#9650; More</span> <span class='ln'>63.5</span> Rush Yards<span class='in'>in A B C</span><span class='sub2'>More in 4 of last 4 (65, 73, 73, 72)</span><span class='why'>Against: HOU have the 4th best run defense (EPA per rush allowed)</span><span class='why'>For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5</span></span><span class='pc'>62%<small>High</small></span></li><li><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span class='what'><b>Dalton Schultz</b> <span class='side less'>&#9660; Less</span> <span class='ln'>30.5</span> Receiving Yards<span class='in'>in A B C</span><span class='sub2'>Less in 3 of last 4 (140, 30, 9, 30)</span><span class='why'>For: JAX allow the 5th fewest receiving yds to TEs (34 a game)</span><span class='why'>For: JAX have the 7th best pass defense (EPA per dropback allowed)</span></span><span class='pc'>57%<small>Medium</small></span></li><li><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span class='what'><b>C.J. Stroud</b> <span class='side more'>&#9650; More</span> <span class='ln'>265.5</span> Pass+Rush Yds<span class='in'>in A B</span><span class='sub2'>More in 3 of last 4 (382, 177, 359, 266)</span><span class='why'>Against: JAX have the 7th best pass defense (EPA per dropback allowed)</span><span class='why'>For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed</span></span><span class='pc'>56%<small>Medium</small></span></li><li><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span class='what'><b>Kayshon Boutte</b> <span class='side more'>&#9650; More</span> <span class='ln'>30.5</span> Receiving Yards<span class='in'>in B</span><span class='sub2'>More in 3 of last 4 (37, 21, 36, 38)</span><span class='why'>For: JAX allow the 1st most receiving yds to WRs (204 a game)</span><span class='why'>Against: JAX have the 7th best pass defense (EPA per dropback allowed)</span></span><span class='pc'>56%<small>Medium</small></span></li><li><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"><span class='what'><b>Trevor Lawrence</b> <span class='side less'>&#9660; Less</span> <span class='ln'>237.5</span> Pass+Rush Yds<span class='in'>in B</span><span class='sub2'>Less in 3 of last 4 (195, 207, 227, 356)</span><span class='why'>For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX&#x27;s line allows pressure on 23% (the 13th most): a hard night to throw</span><span class='why'>For: HOU have the 10th best pass defense (EPA per dropback allowed)</span><span class='why'>Against: News: Houston S/DB Jalen Pitre is out and books list him at 225-228.5, above this line; but Jacksonville lost LT Anton Harrison to IR</span></span><span class='pc'>56%<small>Medium</small></span></li></ol></div><details class='oth'><summary>Other lineup sizes (not played)</summary><div class='ents'><div class='ent'><b>3-pick Flex</b><span class='ef'>$0.97 expected back per $1 · all hit 19.6%</span></div><div class='ent'><b>4-pick Power</b><span class='ef'>$1.10 expected back per $1 · all hit 11.0%</span></div><div class='ent'><b>5-pick Power</b><span class='ef'>$1.23 expected back per $1 · all hit 6.1%</span></div><div class='ent'><b>6-pick Flex</b><span class='ef'>$1.27 expected back per $1 · all hit 3.4%</span></div></div></details></div>
+<details class='how' open><summary>Latest news used (as of 2026-10-17 23:30 UTC)</summary><ul class='news'><li><b>Woody Marks</b> (Receiving Yards, Receptions, Rush+Rec Yds, leans More by 2.0 pts): Lead back with David Montgomery out (did not travel to London): played 85% of snaps after Montgomery left last game, 15 carries for 62 and 4 of 4 catches for 23 <span class=src>(Houston Chronicle, Yahoo snap counts (Oct 14-16))</span></li><li><b>Woody Marks</b> (Rush Yards, leans More by 1.0 pts): Lead back with Montgomery out, but Jacksonville has been stout against the run <span class=src>(Houston Chronicle; Sportsbook Review)</span></li><li><b>Marvin Harrison Jr.</b> (all his props, leans Less by 2.5 pts): Texans debut after the trade: Ryans says he gets a limited package and won&#x27;t play all 60 snaps <span class=src>(ESPN, RotoBaller (Oct 15-16))</span></li><li><b>Nico Collins</b> (Receiving Yards, leans More by 1.5 pts): Jacksonville CB Montaric Brown is out and CB Jaylon Jones questionable; books have him at 72.5-74.5, above this line <span class=src>(Jaguars Friday report; FanDuel, DraftKings, BetMGM via Football Nation)</span></li><li><b>C.J. Stroud</b> (Pass+Rush Yds, Pass Yards, leans More by 1.0 pts): Jacksonville is short at corner (Brown out) and 30th in pass yards allowed <span class=src>(Covers, NBC Sports previews)</span></li><li><b>Trevor Lawrence</b> (Pass+Rush Yds, Pass Yards, leans More by 0.5 pts): Houston S/DB Jalen Pitre is out and books list him at 225-228.5, above this line; but Jacksonville lost LT Anton Harrison to IR <span class=src>(Texans Friday report; Covers; News4Jax)</span></li><li><b>Parker Washington</b> (Receiving Yards, Receptions, leans More by 1.5 pts): Jacksonville&#x27;s clear No. 1 receiver now: 82% of snaps, 9 targets, 6 for 124 and 2 TDs in Week 5; Houston&#x27;s Pitre is out <span class=src>(New Era Prep snap counts; Yahoo (Oct 12-14))</span></li><li><b>Brian Thomas Jr.</b> (Receiving Yards, Receptions, leans Less by 1.5 pts): Role cut: 51% of snaps and no catches in Week 5 as Jacksonville uses more two-TE sets (coach Coen) <span class=src>(Yahoo, CBS Sports, RotoBaller (Oct 12-14))</span></li><li><b>Bhayshul Tuten</b> (Rush+Rec Yds, Rush Yards, leans More by 1.0 pts): Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5 <span class=src>(DraftSharks, Yahoo snap counts)</span></li><li><b>Chris Rodriguez Jr.</b> (Rush Yards, leans Less by 1.0 pts): Tuten is taking over the backfield (68% of snaps in Week 5) <span class=src>(DraftSharks, Yahoo snap counts)</span></li></ul></details>
+<details class="how"><summary>How the play is made</summary><p class="sub">Each standard PrizePicks line gets an estimate the way
+the original Bills-Rams report did it: (recent + matchup + market) / 2, where recent is his last 4 games at the line pulled toward
+50%, matchup is this game's matchups, and market is 50% when the board has no price. The best line per player (3+ games, 52.5% or
+better) is a pick; entries are the top picks from this game only, both teams. The Guesser then splits $20 across up to 3 entries
+(2 to 6 picks, Power or Flex) to grow a pretend bankroll fastest, which puts most of it on the entry most likely to pay. Chances
+multiply the picks' estimates as if independent.</p></details></section>
+
+<section class="pane" id="props" data-tab="Props board" aria-labelledby="h-pb"><div><h2 id="h-pb">Props board</h2>
+<p class="sub">Every standard PrizePicks line for this game, rated with the original formula: (recent + matchup + market) / 2.
+Recent is his last 4 games at the line pulled toward 50%; matchup is this game's matchups (up to 8 points before halving);
+market is 50% when there is no sportsbook price. High is 60% or more, Med-High 57.5%, Medium 55%, Lean 52.5%. Rows marked &#9733; are in the play.</p></div><div class='tbl-wrap'><table class='pt board2'><thead><tr><th scope='col'>Player</th><th scope='col' class='l'>Pick</th><th scope='col' class='l'>Chance</th><th scope='col' class='l'>Last 4</th><th scope='col' class='l'>Why</th></tr></thead><tbody><tr class=inplay><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Bhayshul Tuten<span class='vs-lbl'>RB · <span class='inp'>&#9733; In the play</span></span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>63.5</b> Rush Yards</td><td class='l'><b>62%</b><span class='vs-lbl tier High'>High</span></td><td class='l'>More in 4 of 4<span class='vs-lbl'>65, 73, 73, 72</span></td><td class='why'><span>Against: HOU have the 4th best run defense (EPA per rush allowed)</span><span>For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Bhayshul Tuten<span class='vs-lbl'>RB</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>1.5</b> Receptions</td><td class='l'><b>60%</b><span class='vs-lbl tier High'>High</span></td><td class='l'>More in 4 of 4<span class='vs-lbl'>2, 2, 2, 2</span></td><td class='why'><span>Against: HOU allow the 3rd fewest receiving yds to RBs (17 a game)</span><span>For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX&#x27;s line allows pressure on 23% (the 13th most): more quick checkdowns</span><span>Against: HOU have the 10th best pass defense (EPA per dropback allowed)</span></td></tr><tr class=inplay><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Dalton Schultz<span class='vs-lbl'>TE · <span class='inp'>&#9733; In the play</span></span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>30.5</b> Receiving Yards</td><td class='l'><b>57%</b><span class='vs-lbl tier Medium'>Medium</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>140, 30, 9, 30</span></td><td class='why'><span>For: JAX allow the 5th fewest receiving yds to TEs (34 a game)</span><span>For: JAX have the 7th best pass defense (EPA per dropback allowed)</span></td></tr><tr class=inplay><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> C.J. Stroud<span class='vs-lbl'>QB · <span class='inp'>&#9733; In the play</span></span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>265.5</b> Pass+Rush Yds</td><td class='l'><b>56%</b><span class='vs-lbl tier Medium'>Medium</span></td><td class='l'>More in 3 of 4<span class='vs-lbl'>382, 177, 359, 266</span></td><td class='why'><span>Against: JAX have the 7th best pass defense (EPA per dropback allowed)</span><span>For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> C.J. Stroud<span class='vs-lbl'>QB</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>255.5</b> Pass Yards</td><td class='l'><b>56%</b><span class='vs-lbl tier Medium'>Medium</span></td><td class='l'>More in 3 of 4<span class='vs-lbl'>353, 167, 347, 261</span></td><td class='why'><span>Against: JAX have the 7th best pass defense (EPA per dropback allowed)</span><span>For: News: Jacksonville is short at corner (Brown out) and 30th in pass yards allowed</span></td></tr><tr class=inplay><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Kayshon Boutte<span class='vs-lbl'>WR · <span class='inp'>&#9733; In the play</span></span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>30.5</b> Receiving Yards</td><td class='l'><b>56%</b><span class='vs-lbl tier Medium'>Medium</span></td><td class='l'>More in 3 of 4<span class='vs-lbl'>37, 21, 36, 38</span></td><td class='why'><span>For: JAX allow the 1st most receiving yds to WRs (204 a game)</span><span>Against: JAX have the 7th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Bhayshul Tuten<span class='vs-lbl'>RB</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>75.5</b> Rush+Rec Yds</td><td class='l'><b>56%</b><span class='vs-lbl tier Medium'>Medium</span></td><td class='l'>More in 3 of 4<span class='vs-lbl'>62, 90, 91, 96</span></td><td class='why'><span>Against: HOU allow the 3rd fewest receiving yds to RBs (17 a game)</span><span>For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX&#x27;s line allows pressure on 23% (the 13th most): more quick checkdowns</span><span>Against: HOU have the 10th best pass defense (EPA per dropback allowed)</span><span>For: News: Snap share rising each week: 49% in Week 1, 59% in Week 4, 68% in Week 5</span></td></tr><tr class=inplay><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Trevor Lawrence<span class='vs-lbl'>QB · <span class='inp'>&#9733; In the play</span></span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>237.5</b> Pass+Rush Yds</td><td class='l'><b>56%</b><span class='vs-lbl tier Medium'>Medium</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>195, 207, 227, 356</span></td><td class='why'><span>For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX&#x27;s line allows pressure on 23% (the 13th most): a hard night to throw</span><span>For: HOU have the 10th best pass defense (EPA per dropback allowed)</span><span>Against: News: Houston S/DB Jalen Pitre is out and books list him at 225-228.5, above this line; but Jacksonville lost LT Anton Harrison to IR</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Trevor Lawrence<span class='vs-lbl'>QB</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>3.5</b> Rush Attempts</td><td class='l'><b>56%</b><span class='vs-lbl tier Medium'>Medium</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>2, 4, 3, 3</span></td><td class='why'><span>No strong matchup signal.</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> C.J. Stroud<span class='vs-lbl'>QB</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>9.5</b> Rush Yards</td><td class='l'><b>56%</b><span class='vs-lbl tier Medium'>Medium</span></td><td class='l'>More in 3 of 4<span class='vs-lbl'>29, 10, 12, 5</span></td><td class='why'><span>No strong matchup signal.</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Trevor Lawrence<span class='vs-lbl'>QB</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>31.5</b> Pass Attempts</td><td class='l'><b>56%</b><span class='vs-lbl tier Medium'>Medium</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>29, 29, 23, 39</span></td><td class='why'><span>No strong matchup signal.</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> C.J. Stroud<span class='vs-lbl'>QB</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>35.5</b> Pass Attempts</td><td class='l'><b>56%</b><span class='vs-lbl tier Medium'>Medium</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>55, 27, 31, 34</span></td><td class='why'><span>No strong matchup signal.</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Woody Marks<span class='vs-lbl'>RB</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>47.5</b> Rush Yards</td><td class='l'><b>55%</b><span class='vs-lbl tier Medium'>Medium</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>8, 15, 22, 62</span></td><td class='why'><span>For: JAX have the 3rd best run defense (EPA per rush allowed)</span><span>Against: News: Lead back with Montgomery out, but Jacksonville has been stout against the run</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Nico Collins<span class='vs-lbl'>WR</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>71.5</b> Receiving Yards</td><td class='l'><b>55%</b><span class='vs-lbl tier Medium'>Medium</span></td><td class='l'>More in 2 of 3<span class='vs-lbl'>75, 118, 56</span></td><td class='why'><span>For: JAX allow the 1st most receiving yds to WRs (204 a game)</span><span>Against: JAX have the 7th best pass defense (EPA per dropback allowed)</span><span>For: News: Jacksonville CB Montaric Brown is out and CB Jaylon Jones questionable; books have him at 72.5-74.5, above this line</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Bhayshul Tuten<span class='vs-lbl'>RB</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>7.5</b> Receiving Yards</td><td class='l'><b>55%</b><span class='vs-lbl tier Lean'>Lean</span></td><td class='l'>More in 3 of 4<span class='vs-lbl'>-3, 17, 18, 24</span></td><td class='why'><span>Against: HOU allow the 3rd fewest receiving yds to RBs (17 a game)</span><span>For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX&#x27;s line allows pressure on 23% (the 13th most): more quick checkdowns</span><span>Against: HOU have the 10th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Woody Marks<span class='vs-lbl'>RB</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>64.5</b> Rush+Rec Yds</td><td class='l'><b>53%</b><span class='vs-lbl tier Lean'>Lean</span></td><td class='l'>Less in 3 of 4<span class='vs-lbl'>35, 21, 22, 85</span></td><td class='why'><span>Against: JAX allow the 7th most receiving yds to RBs (40 a game)</span><span>For: JAX have the 7th best pass defense (EPA per dropback allowed)</span><span>Against: News: Lead back with David Montgomery out (did not travel to London): played 85% of snaps after Montgomery left last game, 15 carries for 62 and 4 of 4 catches for 23</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Woody Marks<span class='vs-lbl'>RB</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>2.5</b> Receptions</td><td class='l'><b>52%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>5, 1, 0, 4</span></td><td class='why'><span>For: JAX allow the 7th most receiving yds to RBs (40 a game)</span><span>Against: JAX have the 7th best pass defense (EPA per dropback allowed)</span><span>For: News: Lead back with David Montgomery out (did not travel to London): played 85% of snaps after Montgomery left last game, 15 carries for 62 and 4 of 4 catches for 23</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Woody Marks<span class='vs-lbl'>RB</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>12.5</b> Receiving Yards</td><td class='l'><b>52%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>27, 6, 0, 23</span></td><td class='why'><span>For: JAX allow the 7th most receiving yds to RBs (40 a game)</span><span>Against: JAX have the 7th best pass defense (EPA per dropback allowed)</span><span>For: News: Lead back with David Montgomery out (did not travel to London): played 85% of snaps after Montgomery left last game, 15 carries for 62 and 4 of 4 catches for 23</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Marvin Harrison Jr.<span class='vs-lbl'>WR</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>23.5</b> Receiving Yards</td><td class='l'><b>52%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>33, 0, 40, 12</span></td><td class='why'><span>Against: JAX allow the 1st most receiving yds to WRs (204 a game)</span><span>For: JAX have the 7th best pass defense (EPA per dropback allowed)</span><span>For: News: Texans debut after the trade: Ryans says he gets a limited package and won&#x27;t play all 60 snaps</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Parker Washington<span class='vs-lbl'>WR</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>4.5</b> Receptions</td><td class='l'><b>52%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>7, 3, 1, 6</span></td><td class='why'><span>For: HOU allow the 3rd most receiving yds to WRs (191 a game)</span><span>Against: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX&#x27;s line allows pressure on 23% (the 13th most): less time for deep throws (his targets travel 13 yds)</span><span>Against: HOU have the 10th best pass defense (EPA per dropback allowed)</span><span>For: News: Jacksonville&#x27;s clear No. 1 receiver now: 82% of snaps, 9 targets, 6 for 124 and 2 TDs in Week 5; Houston&#x27;s Pitre is out</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Parker Washington<span class='vs-lbl'>WR</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>61.5</b> Receiving Yards</td><td class='l'><b>52%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>98, 40, 7, 124</span></td><td class='why'><span>For: HOU allow the 3rd most receiving yds to WRs (191 a game)</span><span>Against: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX&#x27;s line allows pressure on 23% (the 13th most): less time for deep throws (his targets travel 13 yds)</span><span>Against: HOU have the 10th best pass defense (EPA per dropback allowed)</span><span>For: News: Jacksonville&#x27;s clear No. 1 receiver now: 82% of snaps, 9 targets, 6 for 124 and 2 TDs in Week 5; Houston&#x27;s Pitre is out</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Chris Rodriguez Jr.<span class='vs-lbl'>RB</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>18.5</b> Rush Yards</td><td class='l'><b>52%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>13, 37, 35, 5</span></td><td class='why'><span>For: HOU have the 4th best run defense (EPA per rush allowed)</span><span>For: News: Tuten is taking over the backfield (68% of snaps in Week 5)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Brian Thomas Jr.<span class='vs-lbl'>WR</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>14.5</b> Receiving Yards</td><td class='l'><b>51%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>40, 8, 17, 0</span></td><td class='why'><span>Against: HOU allow the 3rd most receiving yds to WRs (191 a game)</span><span>For: HOU have the 10th best pass defense (EPA per dropback allowed)</span><span>For: News: Role cut: 51% of snaps and no catches in Week 5 as Jacksonville uses more two-TE sets (coach Coen)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Brian Thomas Jr.<span class='vs-lbl'>WR</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>1.5</b> Receptions</td><td class='l'><b>51%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>3, 1, 2, 0</span></td><td class='why'><span>Against: HOU allow the 3rd most receiving yds to WRs (191 a game)</span><span>For: HOU have the 10th best pass defense (EPA per dropback allowed)</span><span>For: News: Role cut: 51% of snaps and no catches in Week 5 as Jacksonville uses more two-TE sets (coach Coen)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Josh Cameron<span class='vs-lbl'>WR</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>16.5</b> Receiving Yards</td><td class='l'><b>51%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>0, 12, 42, 43</span></td><td class='why'><span>For: HOU allow the 3rd most receiving yds to WRs (191 a game)</span><span>Against: HOU have the 10th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Jakobi Meyers<span class='vs-lbl'>WR</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>34.5</b> Receiving Yards</td><td class='l'><b>51%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>28, 64, 33, 37</span></td><td class='why'><span>For: HOU allow the 3rd most receiving yds to WRs (191 a game)</span><span>Against: HOU have the 10th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/HOU.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> C.J. Stroud<span class='vs-lbl'>QB</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>21.5</b> Pass Completions</td><td class='l'><b>50%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>30, 16, 21, 26</span></td><td class='why'><span>For: JAX have the 7th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Trevor Lawrence<span class='vs-lbl'>QB</span></th><td class='l pk2'><span class='side more'>&#9650; More</span> <b>12.5</b> Rush Yards</td><td class='l'><b>50%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>More in 2 of 4<span class='vs-lbl'>6, 25, 0, 25</span></td><td class='why'><span>For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX&#x27;s line allows pressure on 23% (the 13th most): more scrambles</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Trevor Lawrence<span class='vs-lbl'>QB</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>223.5</b> Pass Yards</td><td class='l'><b>50%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>189, 182, 227, 331</span></td><td class='why'><span>For: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX&#x27;s line allows pressure on 23% (the 13th most): a hard night to throw</span><span>For: HOU have the 10th best pass defense (EPA per dropback allowed)</span><span>Against: News: Houston S/DB Jalen Pitre is out and books list him at 225-228.5, above this line; but Jacksonville lost LT Anton Harrison to IR</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Nate Boerkircher<span class='vs-lbl'>TE</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>5.5</b> Receiving Yards</td><td class='l'><b>50%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>0, 0, 15, 20</span></td><td class='why'><span>Against: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX&#x27;s line allows pressure on 23% (the 13th most): more quick checkdowns</span><span>For: HOU have the 10th best pass defense (EPA per dropback allowed)</span></td></tr><tr><th scope='row'><img class="lg" src="../logos/JAX.png" alt="" width="18" height="18" style="--s:18px" loading="lazy"> Brenton Strange<span class='vs-lbl'>TE</span></th><td class='l pk2'><span class='side less'>&#9660; Less</span> <b>37.5</b> Receiving Yards</td><td class='l'><b>50%</b><span class='vs-lbl tier Coin'>Coin flip</span></td><td class='l'>Less in 2 of 4<span class='vs-lbl'>17, 32, 95, 68</span></td><td class='why'><span>Against: HOU pressure QBs on 25% of dropbacks (the 6th most); JAX&#x27;s line allows pressure on 23% (the 13th most): more quick checkdowns</span><span>For: HOU have the 10th best pass defense (EPA per dropback allowed)</span></td></tr></tbody></table></div></section>
+
+<section class="pane" id="units" data-tab="Unit vs unit" aria-labelledby="h-uu"><div><h2 id="h-uu">Unit vs unit</h2>
+<p class="sub">Each offense against the defense it faces tonight, recency weighted (this season counts most).</p></div>
+<div class='legend'><span><span class='pill t1'>1-8</span>Top quarter</span><span><span class='pill t2'>9-16</span>Above avg</span><span><span class='pill t3'>17-24</span>Below avg</span><span><span class='pill t4'>25-32</span>Bottom quarter</span><span>Ranks out of 32; 1 = best for that unit. Pressure: the line's rank is pressure allowed, the defense's is pressure created.</span></div><div class='tbl-wrap'><table class='pt ut'><caption><img class="lg" src="../logos/HOU.png" alt="" width="22" height="22" style="--s:22px" loading="lazy"> HOU offense vs <img class="lg" src="../logos/JAX.png" alt="" width="22" height="22" style="--s:22px" loading="lazy"> JAX defense</caption><thead><tr><th scope='col'>Stat</th><th scope='col' class='l'>HOU offense</th><th scope='col' class='l'>JAX defense</th><th scope='col' class='l'>Edge</th></tr></thead><tbody><tr><th scope='row'>EPA per dropback</th><td class='l'><span class='pill t2'>14</span>+0.091</td><td class='l'><span class='pill t1'>7</span>-0.030</td><td class='l'><span class='adv d'>Defense</span></td></tr><tr><th scope='row'>EPA per rush</th><td class='l'><span class='pill t4'>28</span>-0.187</td><td class='l'><span class='pill t1'>3</span>-0.178</td><td class='l'><span class='adv d'>Defense</span></td></tr><tr><th scope='row'>Explosive pass rate</th><td class='l'><span class='pill t1'>8</span>9%</td><td class='l'><span class='pill t1'>7</span>7%</td><td class='l'><span class='adv'>Even</span></td></tr><tr><th scope='row'>Pressure rate (PFR)</th><td class='l'><span class='pill t2'>12</span>21%</td><td class='l'><span class='pill t2'>12</span>24%</td><td class='l'><span class='adv'>Even</span></td></tr><tr><th scope='row'>Red-zone TD rate</th><td class='l'><span class='pill t4'>29</span>49%</td><td class='l'><span class='pill t1'>2</span>45%</td><td class='l'><span class='adv d'>Defense</span></td></tr></tbody></table></div><div class='tbl-wrap'><table class='pt ut'><caption><img class="lg" src="../logos/JAX.png" alt="" width="22" height="22" style="--s:22px" loading="lazy"> JAX offense vs <img class="lg" src="../logos/HOU.png" alt="" width="22" height="22" style="--s:22px" loading="lazy"> HOU defense</caption><thead><tr><th scope='col'>Stat</th><th scope='col' class='l'>JAX offense</th><th scope='col' class='l'>HOU defense</th><th scope='col' class='l'>Edge</th></tr></thead><tbody><tr><th scope='row'>EPA per dropback</th><td class='l'><span class='pill t1'>7</span>+0.165</td><td class='l'><span class='pill t2'>10</span>-0.016</td><td class='l'><span class='adv'>Even</span></td></tr><tr><th scope='row'>EPA per rush</th><td class='l'><span class='pill t2'>15</span>-0.039</td><td class='l'><span class='pill t1'>4</span>-0.174</td><td class='l'><span class='adv d'>Defense</span></td></tr><tr><th scope='row'>Explosive pass rate</th><td class='l'><span class='pill t1'>7</span>10%</td><td class='l'><span class='pill t3'>22</span>9%</td><td class='l'><span class='adv o'>Offense</span></td></tr><tr><th scope='row'>Pressure rate (PFR)</th><td class='l'><span class='pill t3'>20</span>23%</td><td class='l'><span class='pill t1'>6</span>25%</td><td class='l'><span class='adv d'>Defense</span></td></tr><tr><th scope='row'>Red-zone TD rate</th><td class='l'><span class='pill t2'>9</span>64%</td><td class='l'><span class='pill t2'>14</span>57%</td><td class='l'><span class='adv'>Even</span></td></tr></tbody></table></div></section>
+
+<footer class="notes"><p>Method: nfl_lab/guesser.py. Data: nflverse play-by-play, snap counts, rosters and injuries
+(CC-BY 4.0); pressure rates from PFR via nflverse; lines from the PrizePicks board saved before kickoff. Only stats from before
+kickoff are used. Estimates with real uncertainty, not betting advice.</p></footer>
+</main>
+<script>
+(function(){
+  var panes=[].slice.call(document.querySelectorAll('section.pane'));
+  if(panes.length<2) return;
+  var bar=document.createElement('div');
+  bar.className='subtabs'; bar.setAttribute('role','tablist'); bar.setAttribute('aria-label','Sections');
+  panes[0].parentNode.insertBefore(bar,panes[0]);
+  var tabs=panes.map(function(p,i){
+    var b=document.createElement('button');
+    b.type='button'; b.id='tab-'+p.id; b.setAttribute('role','tab'); b.setAttribute('aria-controls',p.id);
+    if(p.dataset.logo){var im=document.createElement('img'); im.src=p.dataset.logo; im.alt=''; im.className='lg'; im.style.setProperty('--s','18px'); b.appendChild(im);}
+    var h=p.querySelector('h2');
+    b.appendChild(document.createTextNode(p.dataset.tab||(h?h.textContent:'Section '+(i+1))));
+    p.setAttribute('role','tabpanel'); p.setAttribute('aria-labelledby',b.id);
+    b.addEventListener('click',function(){show(i,true);});
+    b.addEventListener('keydown',function(ev){
+      var n=panes.length, j=ev.key==='ArrowRight'?(i+1)%n:ev.key==='ArrowLeft'?(i+n-1)%n:ev.key==='Home'?0:ev.key==='End'?n-1:-1;
+      if(j>=0){ev.preventDefault(); show(j,true); tabs[j].focus();}
+    });
+    bar.appendChild(b); return b;
+  });
+  function show(i,user){
+    panes.forEach(function(p,j){p.hidden=j!==i; tabs[j].setAttribute('aria-selected',j===i?'true':'false'); tabs[j].tabIndex=j===i?0:-1;});
+    if(!user) return;
+    try{history.replaceState(null,'','#'+panes[i].id);}catch(e){}
+    try{tabs[i].scrollIntoView({block:'nearest',inline:'nearest'});}catch(e){}
+    var top=bar.getBoundingClientRect().top;
+    if(top<=1){window.scrollTo(0,window.scrollY+panes[i].getBoundingClientRect().top-bar.offsetHeight-12);}
+  }
+  function fromHash(){var want=(location.hash||'').slice(1), k=-1; panes.forEach(function(p,j){if(p.id===want) k=j;}); return k;}
+  window.addEventListener('hashchange',function(){var k=fromHash(); if(k>=0) show(k,false);});
+  show(Math.max(0,fromHash()),false);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+{
+  "game": "2026_06_LAC_KC",
+  "label": "LAC at KC",
+  "kickoff_utc": "2026-10-18 20:25 UTC",
+  "frozen_at": "2026-10-13 19:23 UTC",
+  "bankroll": 20.0,
+  "reserve_not_bet": 0.0,
+  "paper_money": true,
+  "picks_source": "Guesser method (nfl_lab/guesser.py): recent form + market + matchups, same game; stakes from guesser.plan",
+  "split_rule": "split $20 to maximize expected log growth of a pretend $60 bankroll (up to 3 entries, $2+ each)",
+  "entries": [
+    {
+      "id": "A",
+      "type": "flex",
+      "stake": 15.0,
+      "legs": [
+        "Patrick Mahomes pass TDs more 1.5",
+        "Kenneth Walker III rush yds more 90.5",
+        "Justin Herbert pass yds less 203.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Patrick Mahomes",
+          "player_id": "00-0033873",
+          "team": "KC",
+          "stat": "pass_tds",
+          "side": "over",
+          "line": 1.5,
+          "p_model": 0.5957986111111111,
+          "game_id": "2026_06_LAC_KC",
+          "note": "Med-High \u00b7 More in 4 of last 4 (2, 3, 2, 2)",
+          "reasons": [
+            "Against: LAC allow touchdowns on 47% of red-zone trips (the 3rd fewest)",
+            "Against: LAC have the 4th best pass defense (EPA per dropback allowed)"
+          ]
+        },
+        {
+          "player": "Kenneth Walker III",
+          "player_id": "00-0038134",
+          "team": "KC",
+          "stat": "rush_yds",
+          "side": "over",
+          "line": 90.5,
+          "p_model": 0.5598211805555555,
+          "game_id": "2026_06_LAC_KC",
+          "note": "Medium \u00b7 More in 3 of last 4 (173, 117, 70, 177)",
+          "reasons": [
+            "For: KC favored by 8.5: more carries to close it out"
+          ]
+        },
+        {
+          "player": "Justin Herbert",
+          "player_id": "00-0036355",
+          "team": "LAC",
+          "stat": "pass_yds",
+          "side": "under",
+          "line": 203.5,
+          "p_model": 0.5531649305555556,
+          "game_id": "2026_06_LAC_KC",
+          "note": "Medium \u00b7 Less in 3 of last 4 (192, 226, 189, 121)",
+          "reasons": [
+            "Against: LAC underdog by 8.5: likely throwing to catch up",
+            "For: KC pressure QBs on 23% of dropbacks (the 16th most); LAC's line allows pressure on 29% (the 2nd most): a hard night to throw"
+          ]
+        }
+      ],
+      "pays": {
+        "3": 2.25,
+        "2": 1.25
+      }
+    },
+    {
+      "id": "B",
+      "type": "flex",
+      "stake": 5.0,
+      "legs": [
+        "Patrick Mahomes pass TDs more 1.5",
+        "Kenneth Walker III rush yds more 90.5",
+        "Emmett Johnson rush yds more 14.5",
+        "Justin Herbert pass yds less 203.5",
+        "Omarion Hampton rush yds more 38.5"
+      ],
+      "legs_detail": [
+        {
+          "player": "Patrick Mahomes",
+          "player_id": "00-0033873",
+          "team": "KC",
+          "stat": "pass_tds",
+          "side": "over",
+          "line": 1.5,
+          "p_model": 0.5957986111111111,
+          "game_id": "2026_06_LAC_KC",
+          "note": "Med-High \u00b7 More in 4 of last 4 (2, 3, 2, 2)",
+          "reasons": [
+            "Against: LAC allow touchdowns on 47% of red-zone trips (the 3rd fewest)",
+            "Against: LAC have the 4th best pass defense (EPA per dropback allowed)"
+          ]
+        },
+        {
+          "player": "Kenneth Walker III",
+          "player_id": "00-0038134",
+          "team": "KC",
+          "stat": "rush_yds",
+          "side": "over",
+          "line": 90.5,
+          "p_model": 0.5598211805555555,
+          "game_id": "2026_06_LAC_KC",
+          "note": "Medium \u00b7 More in 3 of last 4 (173, 117, 70, 177)",
+          "reasons": [
+            "For: KC favored by 8.5: more carries to close it out"
+          ]
+        },
+        {
+          "player": "Emmett Johnson",
+          "player_id": "00-0041013",
+          "team": "KC",
+          "stat": "rush_yds",
+          "side": "over",
+          "line": 14.5,
+          "p_model": 0.5598211805555555,
+          "game_id": "2026_06_LAC_KC",
+          "note": "Medium \u00b7 More in 3 of last 4 (24, 15, 17, 0)",
+          "reasons": [
+            "For: KC favored by 8.5: more carries to close it out"
+          ]
+        },
+        {
+          "player": "Justin Herbert",
+          "player_id": "00-0036355",
+          "team": "LAC",
+          "stat": "pass_yds",
+          "side": "under",
+          "line": 203.5,
+          "p_model": 0.5531649305555556,
+          "game_id": "2026_06_LAC_KC",
+          "note": "Medium \u00b7 Less in 3 of last 4 (192, 226, 189, 121)",
+          "reasons": [
+            "Against: LAC underdog by 8.5: likely throwing to catch up",
+            "For: KC pressure QBs on 23% of dropbacks (the 16th most); LAC's line allows pressure on 29% (the 2nd most): a hard night to throw"
+          ]
+        },
+        {
+          "player": "Omarion Hampton",
+          "player_id": "00-0040666",
+          "team": "LAC",
+          "stat": "rush_yds",
+          "side": "over",
+          "line": 38.5,
+          "p_model": 0.5447274305555556,
+          "game_id": "2026_06_LAC_KC",
+          "note": "Lean \u00b7 More in 3 of last 4 (94, 56, 45, 33)",
+          "reasons": [
+            "Against: LAC underdog by 8.5: may abandon the run if behind",
+            "Against: KC have the 7th best run defense (EPA per rush allowed)"
+          ]
+        }
+      ],
+      "pays": {
+        "5": 10.0,
+        "4": 2.0,
+        "3": 0.4
+      }
+    }
+  ],
+  "expected_return_per_dollar": {
+    "A_flex3": {
+      "estimate": 0.939
+    },
+    "B_flex5": {
+      "estimate": 1.137
+    }
+  },
+  "expected_back": 19.77,
+  "p_profit": 0.52,
+  "p_lose_all": 0.3,
+  "result": {
+    "final": "KC 22, LAC 6",
+    "graded_at": "2026-10-19 15:02 UTC",
+    "provisional": false,
+    "source": "nflverse stats_player_week_2026",
+    "legs": {
+      "Patrick Mahomes pass TDs more 1.5": {
+        "actual": 0.0,
+        "hit": false
+      },
+      "Kenneth Walker III rush yds more 90.5": {
+        "actual": 128.0,
+        "hit": true
+      },
+      "Justin Herbert pass yds less 203.5": {
+        "actual": 204.0,
+        "hit": false
+      },
+      "Emmett Johnson rush yds more 14.5": {
+        "actual": 6.0,
+        "hit": false
+      },
+      "Omarion Hampton rush yds more 38.5": {
+        "actual": 18.0,
+        "hit": false
+      }
+    }
+  }
+}

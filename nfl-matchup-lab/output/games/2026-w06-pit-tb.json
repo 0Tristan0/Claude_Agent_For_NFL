@@ -1,0 +1,232 @@
+{
+ "game_id": "2026_06_PIT_TB",
+ "season": 2026,
+ "week": 6,
+ "label": "PIT at TB",
+ "away": "PIT",
+ "home": "TB",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": 2.5,
+ "total": 38.5,
+ "injury_note": "injury report week 6",
+ "built_at": "2026-10-18 00:05:19.407541+00:00",
+ "units": [
+  {
+   "offense": "PIT",
+   "defense": "TB",
+   "stat": "EPA per dropback",
+   "off_value": -0.056680594140769855,
+   "def_value": 0.0776818978195887,
+   "off_rank": 25,
+   "def_rank": 18
+  },
+  {
+   "offense": "PIT",
+   "defense": "TB",
+   "stat": "EPA per rush",
+   "off_value": 0.06217079633882499,
+   "def_value": -0.18094774822538684,
+   "off_rank": 3,
+   "def_rank": 2
+  },
+  {
+   "offense": "PIT",
+   "defense": "TB",
+   "stat": "Explosive pass rate",
+   "off_value": 0.07310837644989672,
+   "def_value": 0.0801049830794651,
+   "off_rank": 24,
+   "def_rank": 16
+  },
+  {
+   "offense": "PIT",
+   "defense": "TB",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.19233776124768925,
+   "def_value": 0.20145187611016815,
+   "off_rank": 6,
+   "def_rank": 22
+  },
+  {
+   "offense": "PIT",
+   "defense": "TB",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5365116110803949,
+   "def_value": 0.6015036799584336,
+   "off_rank": 22,
+   "def_rank": 19
+  },
+  {
+   "offense": "TB",
+   "defense": "PIT",
+   "stat": "EPA per dropback",
+   "off_value": -0.0792588733170766,
+   "def_value": 0.07534800572055197,
+   "off_rank": 27,
+   "def_rank": 17
+  },
+  {
+   "offense": "TB",
+   "defense": "PIT",
+   "stat": "EPA per rush",
+   "off_value": 0.025903388033944593,
+   "def_value": 0.003903447066883287,
+   "off_rank": 7,
+   "def_rank": 27
+  },
+  {
+   "offense": "TB",
+   "defense": "PIT",
+   "stat": "Explosive pass rate",
+   "off_value": 0.0781096979631913,
+   "def_value": 0.10828980856945092,
+   "off_rank": 19,
+   "def_rank": 29
+  },
+  {
+   "offense": "TB",
+   "defense": "PIT",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.20431127555464382,
+   "def_value": 0.18884154600873027,
+   "off_rank": 7,
+   "def_rank": 29
+  },
+  {
+   "offense": "TB",
+   "defense": "PIT",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5362536723004927,
+   "def_value": 0.5216366340034063,
+   "off_rank": 24,
+   "def_rank": 10
+  }
+ ],
+ "news": [
+  {
+   "game_id": "2026_06_PIT_TB",
+   "player": "Bucky Irving",
+   "team": "TB",
+   "stat": "rush_yds",
+   "more_adj": 0.03,
+   "reason": "Baker Mayfield is out and undrafted rookie Jalon Daniels starts, so Tampa should lean on Irving; Sean Tucker is questionable",
+   "source": "Bucs.com (Oct 16)",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_PIT_TB",
+   "player": "Aaron Rodgers",
+   "team": "PIT",
+   "stat": "pass_yds",
+   "more_adj": 0.02,
+   "reason": "Tampa is without S Antoine Winfield Jr. (out) and CB Benjamin Morrison (doubtful)",
+   "source": "Bucs.com Friday report",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  },
+  {
+   "game_id": "2026_06_PIT_TB",
+   "player": "Aaron Rodgers",
+   "team": "PIT",
+   "stat": "pass_yds",
+   "more_adj": -0.02,
+   "reason": "DK Metcalf is questionable (illness) and WRs Roman Wilson and Ben Skowronek are out",
+   "source": "Steelers Friday report",
+   "captured_at": "2026-10-17T23:30:00.000Z"
+  }
+ ],
+ "overrides": [],
+ "picks": [
+  {
+   "game_id": "2026_06_PIT_TB",
+   "player_id": "00-0023459",
+   "player": "Aaron Rodgers",
+   "team": "PIT",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 223.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    187.0,
+    292.0,
+    299.0,
+    235.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5612586806,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.01140625,
+   "p_news": 0.0,
+   "tier": "Medium",
+   "reasons": [
+    "For: TB pressure QBs on 20% of dropbacks (the 11th least); PIT's line allows pressure on 19% (the 6th least): a clean pocket",
+    "For: News: Tampa is without S Antoine Winfield Jr. (out) and CB Benjamin Morrison (doubtful)",
+    "Against: News: DK Metcalf is questionable (illness) and WRs Roman Wilson and Ben Skowronek are out"
+   ]
+  },
+  {
+   "game_id": "2026_06_PIT_TB",
+   "player_id": "00-0023459",
+   "player": "Aaron Rodgers",
+   "team": "PIT",
+   "position": "QB",
+   "stat": "rush_yds",
+   "line": 0.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    5.0,
+    10.0,
+    0.0,
+    6.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5505555556,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": -0.01,
+   "p_news": 0.0,
+   "tier": "Medium",
+   "reasons": [
+    "Against: TB pressure QBs on 20% of dropbacks (the 11th least); PIT's line allows pressure on 19% (the 6th least): fewer reasons to run"
+   ]
+  },
+  {
+   "game_id": "2026_06_PIT_TB",
+   "player_id": "00-0039361",
+   "player": "Bucky Irving",
+   "team": "TB",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 63.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    89.0,
+    46.0,
+    61.0,
+    165.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.519921875,
+   "captured_at": "2026-10-13 01:01:37+00:00",
+   "p_matchup": 0.00984375,
+   "p_news": 0.03,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: PIT have the 6th worst run defense (EPA per rush allowed)",
+    "For: News: Baker Mayfield is out and undrafted rookie Jalon Daniels starts, so Tampa should lean on Irving; Sean Tucker is questionable"
+   ]
+  }
+ ],
+ "lineups": {},
+ "plan": {}
+}

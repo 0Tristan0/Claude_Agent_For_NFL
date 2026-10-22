@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_05_BUF_LA",
+ "season": 2026,
+ "week": 5,
+ "away": "BUF",
+ "home": "LAR",
+ "kickoff_et": "Mon Oct 12, 8:15 PM ET",
+ "kickoff_utc": "2026-10-13 00:15:00+00:00",
+ "home_spread": -3.5,
+ "total": 54.5,
+ "away_implied": 25.5,
+ "home_implied": 29.0,
+ "home_win": 0.601,
+ "median_score": [
+  25.9,
+  29.85
+ ]
+}

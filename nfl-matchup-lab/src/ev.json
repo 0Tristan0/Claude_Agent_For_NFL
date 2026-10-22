@@ -1,0 +1,162 @@
+{
+ "props": {
+  "allen_td": {
+   "label": "Allen Rush+Rec TDs O 0.5",
+   "est": 0.641,
+   "mkt": 0.52,
+   "note": "+100 to -124 at books, 52\u00a2 Polymarket",
+   "hits": "4/4"
+  },
+  "staff_py": {
+   "label": "Stafford Pass Yds O 274.5",
+   "est": 0.593,
+   "mkt": 0.545,
+   "note": "54\u00a2 Polymarket, 55% Kalshi",
+   "hits": "3/4"
+  },
+  "kyren_rec": {
+   "label": "K. Williams Rec Yds O 19.5",
+   "est": 0.581,
+   "mkt": 0.52,
+   "note": "-114 FanDuel",
+   "hits": "3/4"
+  },
+  "kinc_u": {
+   "label": "Kincaid Rec Yds U 57.5",
+   "est": 0.55,
+   "mkt": 0.52,
+   "note": "-115 bet365",
+   "hits": "2/4"
+  },
+  "allen_pu": {
+   "label": "Allen Pass Yds U 249.5",
+   "est": 0.55,
+   "mkt": 0.52,
+   "note": "48% over on Kalshi",
+   "hits": "2/4"
+  },
+  "kyren_ru": {
+   "label": "K. Williams Rush Yds O 69.5",
+   "est": 0.538,
+   "mkt": 0.475,
+   "note": "under 52-53% on Kalshi/Polymarket",
+   "hits": "3/4"
+  },
+  "kyren_td": {
+   "label": "K. Williams Rush+Rec TDs O 0.5",
+   "est": 0.616,
+   "mkt": 0.6,
+   "note": "-170 at books",
+   "hits": "3/4"
+  },
+  "nacua": {
+   "label": "Nacua Rec Yds O 94.5",
+   "est": 0.525,
+   "mkt": 0.52,
+   "note": "o90 at -140 Predictem",
+   "hits": "1/2"
+  },
+  "cook_ry": {
+   "label": "Cook Rush Yds O 75.5",
+   "est": 0.51,
+   "mkt": 0.5,
+   "note": "Covers projects 66",
+   "hits": "2/4"
+  },
+  "shakir_u": {
+   "label": "Shakir Rec Yds U 49.5",
+   "est": 0.53,
+   "mkt": 0.55,
+   "note": "45% over on Kalshi",
+   "hits": "2/4"
+  },
+  "cook_rec": {
+   "label": "Cook Receptions O 1.5",
+   "est": 0.515,
+   "mkt": 0.53,
+   "note": "53% on Kalshi",
+   "hits": "2/4"
+  },
+  "staff_ru": {
+   "label": "Stafford Rush Yds U 9.5",
+   "est": 0.5,
+   "mkt": 0.5,
+   "note": "no price found",
+   "hits": "2/4"
+  },
+  "park": {
+   "label": "Parkinson Rec Yds O 14.5",
+   "est": 0.53,
+   "mkt": 0.56,
+   "note": "56% on Kalshi",
+   "hits": "1/2"
+  }
+ },
+ "be": {
+  "power2": 0.5774,
+  "power3": 0.5848,
+  "power4": 0.5623,
+  "power5": 0.5493,
+  "power6": 0.5466,
+  "flex3": 0.5909,
+  "flex4": 0.5689,
+  "flex5": 0.5425,
+  "flex6": 0.5421
+ },
+ "lineups": {
+  "3": {
+   "legs": [
+    "allen_td",
+    "staff_py",
+    "kyren_rec"
+   ],
+   "p_all": 0.2208,
+   "power_mult": 5,
+   "power_ev": 1.104,
+   "min_mult": 4.5,
+   "flex_ev": 1.04
+  },
+  "4": {
+   "legs": [
+    "allen_td",
+    "staff_py",
+    "kyren_rec",
+    "kinc_u"
+   ],
+   "p_all": 0.1215,
+   "power_mult": 10,
+   "power_ev": 1.215,
+   "min_mult": 8.2,
+   "flex_ev": 1.115
+  },
+  "5": {
+   "legs": [
+    "allen_td",
+    "staff_py",
+    "kyren_rec",
+    "kinc_u",
+    "allen_pu"
+   ],
+   "p_all": 0.0668,
+   "power_mult": 20,
+   "power_ev": 1.336,
+   "min_mult": 15.0,
+   "flex_ev": 1.288
+  },
+  "6": {
+   "legs": [
+    "allen_td",
+    "staff_py",
+    "kyren_rec",
+    "kinc_u",
+    "allen_pu",
+    "kyren_ru"
+   ],
+   "p_all": 0.0359,
+   "power_mult": 37.5,
+   "power_ev": 1.348,
+   "min_mult": 27.8,
+   "flex_ev": 1.338
+  }
+ }
+}

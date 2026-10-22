@@ -1,0 +1,327 @@
+{
+ "game_id": "2026_07_NE_CHI",
+ "season": 2026,
+ "week": 7,
+ "label": "NE at CHI",
+ "away": "NE",
+ "home": "CHI",
+ "kickoff_utc": "2026-10-23 00:15:00+00:00",
+ "home_spread": -3.0,
+ "total": 50.5,
+ "injury_note": "injury report week 7",
+ "built_at": "2026-10-22 16:36:35.400746+00:00",
+ "units": [
+  {
+   "offense": "NE",
+   "defense": "CHI",
+   "stat": "EPA per dropback",
+   "off_value": 0.19789506606225207,
+   "def_value": -0.018203146207590493,
+   "off_rank": 4,
+   "def_rank": 6
+  },
+  {
+   "offense": "NE",
+   "defense": "CHI",
+   "stat": "EPA per rush",
+   "off_value": -0.11341597070426374,
+   "def_value": 0.028872182954181893,
+   "off_rank": 20,
+   "def_rank": 31
+  },
+  {
+   "offense": "NE",
+   "defense": "CHI",
+   "stat": "Explosive pass rate",
+   "off_value": 0.09125407363975722,
+   "def_value": 0.09355174210005034,
+   "off_rank": 7,
+   "def_rank": 25
+  },
+  {
+   "offense": "NE",
+   "defense": "CHI",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.23367851787506982,
+   "def_value": 0.2531690411968328,
+   "off_rank": 23,
+   "def_rank": 5
+  },
+  {
+   "offense": "NE",
+   "defense": "CHI",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.55428876621982,
+   "def_value": 0.6232831043874654,
+   "off_rank": 16,
+   "def_rank": 20
+  },
+  {
+   "offense": "CHI",
+   "defense": "NE",
+   "stat": "EPA per dropback",
+   "off_value": 0.15754412198332515,
+   "def_value": -0.017797198641672687,
+   "off_rank": 8,
+   "def_rank": 7
+  },
+  {
+   "offense": "CHI",
+   "defense": "NE",
+   "stat": "EPA per rush",
+   "off_value": -0.038887122084884006,
+   "def_value": -0.09442762456390787,
+   "off_rank": 16,
+   "def_rank": 12
+  },
+  {
+   "offense": "CHI",
+   "defense": "NE",
+   "stat": "Explosive pass rate",
+   "off_value": 0.09580184984544254,
+   "def_value": 0.06639075396122907,
+   "off_rank": 5,
+   "def_rank": 7
+  },
+  {
+   "offense": "CHI",
+   "defense": "NE",
+   "stat": "Pressure rate (PFR)",
+   "off_value": 0.22137450177411036,
+   "def_value": 0.2250951614689988,
+   "off_rank": 17,
+   "def_rank": 17
+  },
+  {
+   "offense": "CHI",
+   "defense": "NE",
+   "stat": "Red-zone TD rate",
+   "off_value": 0.5085699320751756,
+   "def_value": 0.48563058077594223,
+   "off_rank": 26,
+   "def_rank": 5
+  }
+ ],
+ "news": [
+  {
+   "game_id": "2026_07_NE_CHI",
+   "player": "Caleb Williams",
+   "team": "CHI",
+   "stat": "pass_yds",
+   "more_adj": 0.03,
+   "reason": "New England has three corners out, starter Carlton Davis III among them, on Wednesday's final report",
+   "source": "Patriots.com Week 7 injury report; Yahoo/SB Nation (Oct 21)",
+   "captured_at": "2026-10-22T16:45:00.000Z"
+  },
+  {
+   "game_id": "2026_07_NE_CHI",
+   "player": "Drake Maye",
+   "team": "NE",
+   "stat": "pass_yds",
+   "more_adj": -0.02,
+   "reason": "Both starting guards out (Vera-Tucker, Ben Brown) and RT Morgan Moses questionable: a patched line",
+   "source": "Patriots.com Week 7 injury report; Pats Pulpit (Oct 21)",
+   "captured_at": "2026-10-22T16:45:00.000Z"
+  },
+  {
+   "game_id": "2026_07_NE_CHI",
+   "player": "A.J. Brown",
+   "team": "NE",
+   "stat": "*",
+   "more_adj": 0.03,
+   "reason": "Romeo Doubs, the team's leading receiver, went on IR Oct 19; Brown led NE with 10 targets in Week 6",
+   "source": "ESPN; NBC Sports (Oct 19)",
+   "captured_at": "2026-10-22T16:45:00.000Z"
+  },
+  {
+   "game_id": "2026_07_NE_CHI",
+   "player": "D'Andre Swift",
+   "team": "CHI",
+   "stat": "rush_yds",
+   "more_adj": 0.02,
+   "reason": "Monangai out again; Swift took 19 of 26 RB chances in Week 6 and RG Jonah Jackson is cleared",
+   "source": "NBC Chicago final report; Rotowire Week 6 usage; NBC Sports (Oct 21)",
+   "captured_at": "2026-10-22T16:45:00.000Z"
+  }
+ ],
+ "overrides": [],
+ "picks": [
+  {
+   "game_id": "2026_07_NE_CHI",
+   "player_id": "00-0035676",
+   "player": "A.J. Brown",
+   "team": "NE",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 67.5,
+   "side": "under",
+   "hits": 2,
+   "games": 2,
+   "log": [
+    26.0,
+    27.0
+   ],
+   "recent": 0.6428571429,
+   "market": 0.4943009235,
+   "market_src": "no-vig sportsbettingdime",
+   "p_model": 0.5539384082,
+   "captured_at": "2026-10-22 16:45:00+00:00",
+   "p_matchup": 0.00071875,
+   "p_news": -0.03,
+   "tier": "Medium",
+   "reasons": [
+    "For: CHI have the 6th best pass defense (EPA per dropback allowed)",
+    "Against: News: Romeo Doubs, the team's leading receiver, went on IR Oct 19; Brown led NE with 10 targets in Week 6"
+   ]
+  },
+  {
+   "game_id": "2026_07_NE_CHI",
+   "player_id": "00-0040735",
+   "player": "Luther Burden III",
+   "team": "CHI",
+   "position": "WR",
+   "stat": "rec_yds",
+   "line": 55.5,
+   "side": "over",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    61.0,
+    63.0,
+    47.0,
+    95.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5097706032,
+   "market_src": "no-vig fanduel",
+   "p_model": 0.5526752322,
+   "captured_at": "2026-10-22 16:45:00+00:00",
+   "p_matchup": -0.01553125,
+   "p_news": 0.0,
+   "tier": "Medium",
+   "reasons": [
+    "Against: NE have the 7th best pass defense (EPA per dropback allowed)"
+   ]
+  },
+  {
+   "game_id": "2026_07_NE_CHI",
+   "player_id": "00-0039918",
+   "player": "Caleb Williams",
+   "team": "CHI",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 245.5,
+   "side": "over",
+   "hits": 2,
+   "games": 3,
+   "log": [
+    269.0,
+    138.0,
+    305.0
+   ],
+   "recent": 0.5625,
+   "market": 0.5118504507,
+   "market_src": "no-vig betmgm",
+   "p_model": 0.5454721003,
+   "captured_at": "2026-10-22 16:45:00+00:00",
+   "p_matchup": -0.01340625,
+   "p_news": 0.03,
+   "tier": "Lean",
+   "reasons": [
+    "Against: NE have the 7th best pass defense (EPA per dropback allowed)",
+    "For: News: New England has three corners out, starter Carlton Davis III among them, on Wednesday's final report"
+   ]
+  },
+  {
+   "game_id": "2026_07_NE_CHI",
+   "player_id": "00-0036275",
+   "player": "D'Andre Swift",
+   "team": "CHI",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 62.5,
+   "side": "under",
+   "hits": 3,
+   "games": 4,
+   "log": [
+    84.0,
+    58.0,
+    43.0,
+    44.0
+   ],
+   "recent": 0.6111111111,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.5454149306,
+   "captured_at": "2026-10-22 16:45:00+00:00",
+   "p_matchup": -0.00028125,
+   "p_news": -0.02,
+   "tier": "Lean",
+   "reasons": [
+    "Against: News: Monangai out again; Swift took 19 of 26 RB chances in Week 6 and RG Jonah Jackson is cleared"
+   ]
+  },
+  {
+   "game_id": "2026_07_NE_CHI",
+   "player_id": "00-0039851",
+   "player": "Drake Maye",
+   "team": "NE",
+   "position": "QB",
+   "stat": "pass_yds",
+   "line": 246.5,
+   "side": "under",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    199.0,
+    269.0,
+    374.0,
+    235.0
+   ],
+   "recent": 0.5,
+   "market": 0.5097706032,
+   "market_src": "no-vig fanduel",
+   "p_model": 0.5231821766,
+   "captured_at": "2026-10-22 16:45:00+00:00",
+   "p_matchup": 0.01659375,
+   "p_news": 0.02,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: CHI pressure QBs on 25% of dropbacks (the 5th most); NE's line allows pressure on 23% (the 10th most): a hard night to throw",
+    "For: CHI have the 6th best pass defense (EPA per dropback allowed)",
+    "For: News: Both starting guards out (Vera-Tucker, Ben Brown) and RT Morgan Moses questionable: a patched line"
+   ]
+  },
+  {
+   "game_id": "2026_07_NE_CHI",
+   "player_id": "00-0036875",
+   "player": "Rhamondre Stevenson",
+   "team": "NE",
+   "position": "RB",
+   "stat": "rush_yds",
+   "line": 43.5,
+   "side": "over",
+   "hits": 2,
+   "games": 4,
+   "log": [
+    22.0,
+    47.0,
+    64.0,
+    36.0
+   ],
+   "recent": 0.5,
+   "market": 0.5,
+   "market_src": "50%: no price",
+   "p_model": 0.504546875,
+   "captured_at": "2026-10-22 16:45:00+00:00",
+   "p_matchup": 0.00909375,
+   "p_news": 0.0,
+   "tier": "Coin flip",
+   "reasons": [
+    "For: CHI have the 2nd worst run defense (EPA per rush allowed)"
+   ]
+  }
+ ],
+ "lineups": {},
+ "plan": {}
+}

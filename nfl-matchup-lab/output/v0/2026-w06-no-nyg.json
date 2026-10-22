@@ -1,0 +1,18 @@
+{
+ "game_id": "2026_06_NO_NYG",
+ "season": 2026,
+ "week": 6,
+ "away": "NO",
+ "home": "NYG",
+ "kickoff_et": "Sun Oct 18, 1:00 PM ET",
+ "kickoff_utc": "2026-10-18 17:00:00+00:00",
+ "home_spread": 1.5,
+ "total": 45.5,
+ "away_implied": 23.5,
+ "home_implied": 22.0,
+ "home_win": 0.452,
+ "median_score": [
+  22.9,
+  20.85
+ ]
+}
