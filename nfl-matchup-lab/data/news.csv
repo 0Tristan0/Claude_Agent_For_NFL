@@ -82,3 +82,7 @@ game_id,player,team,stat,more_adj,reason,source,captured_at
 2026_06_CHI_ATL,Brian Robinson Jr.,ATL,rush_yds,-0.03,Fewest carries of his season (7 for 16) in Week 5 as Bijan takes the work,Fantasy Footballers,2026-10-17T23:30:00Z
 2026_06_CHI_ATL,Brian Robinson Jr.,ATL,rush_att,-0.03,Fewest carries of his season (7 for 16) in Week 5 as Bijan takes the work,Fantasy Footballers,2026-10-17T23:30:00Z
 2026_06_CHI_ATL,Jahan Dotson,ATL,rec_yds,-0.02,Only about 3.6 targets a game this season,"Fantasy Footballers, RotoWire",2026-10-17T23:30:00Z
+2026_07_NE_CHI,Caleb Williams,CHI,pass_yds,0.03,"New England has three corners out, starter Carlton Davis III among them, on Wednesday's final report",Patriots.com Week 7 injury report; Yahoo/SB Nation (Oct 21),2026-10-22T16:45:00Z
+2026_07_NE_CHI,Drake Maye,NE,pass_yds,-0.02,"Both starting guards out (Vera-Tucker, Ben Brown) and RT Morgan Moses questionable: a patched line",Patriots.com Week 7 injury report; Pats Pulpit (Oct 21),2026-10-22T16:45:00Z
+2026_07_NE_CHI,A.J. Brown,NE,*,0.03,"Romeo Doubs, the team's leading receiver, went on IR Oct 19; Brown led NE with 10 targets in Week 6",ESPN; NBC Sports (Oct 19),2026-10-22T16:45:00Z
+2026_07_NE_CHI,D'Andre Swift,CHI,rush_yds,0.02,Monangai out again; Swift took 19 of 26 RB chances in Week 6 and RG Jonah Jackson is cleared,NBC Chicago final report; Rotowire Week 6 usage; NBC Sports (Oct 21),2026-10-22T16:45:00Z

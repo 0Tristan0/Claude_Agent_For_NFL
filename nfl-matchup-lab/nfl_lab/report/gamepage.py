@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from .. import teams
 from . import picks_html, theme
 
 e = html.escape
@@ -122,11 +123,14 @@ def render(rec: dict, out_path: Path) -> Path:
         line = "No market line yet"
     lu = rec.get("lineups") or {}
     pl = rec.get("plan") or {}
-    n_lean = len({p["player_id"] for p in rec.get("picks") or [] if p["p_model"] >= 0.525 and p["games"] >= 3})
+    lean = {p["player_id"]: p["team"] for p in rec.get("picks") or [] if p["p_model"] >= 0.525 and p["games"] >= 3}
+    n_lean, lean_teams = len(lean), sorted(set(lean.values()))
+    one_team = (f", all from {teams.display(lean_teams[0])}: an entry needs players from both teams"
+                if len(lean_teams) == 1 and n_lean >= 2 else "")
     no_play = ("No standard PrizePicks lines for this game yet." if not rec.get("picks") else
                f"{len(rec['picks'])} line{'s' if len(rec['picks']) != 1 else ''} on file, but only {n_lean} player"
-               f"{'s' if n_lean != 1 else ''} rated Lean (52.5%) or better from both teams, so no play yet. A fresh "
-               "PrizePicks board closer to kickoff may add more.")
+               f"{'s' if n_lean != 1 else ''} rated Lean (52.5%) or better{one_team or ' from both teams'}, so no play "
+               "yet. A fresh PrizePicks board closer to kickoff may add more.")
     body = f"""<main class="wrap">
 {theme.nav("home", "../")}<header class="head"><a class="back" href="../index.html">&larr; All games</a>
 <div class="meta"><span>Week {rec['week']}</span><span>{kick:%a %b %-d, %-I:%M %p} ET</span></div>
